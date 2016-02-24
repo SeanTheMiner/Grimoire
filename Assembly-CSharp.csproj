@@ -413,8 +413,8 @@
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/New ClickRPG/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween.dll</HintPath>
+ <Reference Include="DOTween50">
+ <HintPath>C:/New ClickRPG/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween50.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
  <HintPath>C:/New ClickRPG/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween43.dll</HintPath>
@@ -422,8 +422,8 @@
  <Reference Include="DOTween46">
  <HintPath>C:/New ClickRPG/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween46.dll</HintPath>
  </Reference>
- <Reference Include="DOTween50">
- <HintPath>C:/New ClickRPG/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween50.dll</HintPath>
+ <Reference Include="DOTween">
+ <HintPath>C:/New ClickRPG/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

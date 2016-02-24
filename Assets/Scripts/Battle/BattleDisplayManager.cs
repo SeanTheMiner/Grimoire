@@ -10,6 +10,10 @@ public class BattleDisplayManager : MonoBehaviour {
     public Text enemyTwoHealthText;
     public Text enemyThreeHealthText;
 
+    public Text selectedHeroNameText;
+    public Text abilityOneText;
+    public Text abilityTwoText;
+
     public void UpdateHealthText() {
 
         enemyOneHealthText.text = battleManager.enemyObjectOne.currentHealth.ToString();
@@ -18,5 +22,20 @@ public class BattleDisplayManager : MonoBehaviour {
 
     }
 
+    public void UpdateSelectedHeroText() {
+
+        selectedHeroNameText.text = battleManager.selectedHero.heroName;
+        abilityOneText.text = battleManager.selectedHero.abilityOne.abilityName;
+        abilityTwoText.text = battleManager.selectedHero.abilityTwo.abilityName;
+
+    }
+
+    public void NoHeroSelected() {
+
+        selectedHeroNameText.text = "Press 1 or 2 to select a hero.";
+        abilityOneText.text = "";
+        abilityTwoText.text = "";
+
+    }
 
 }

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
+using Heroes;
 using Enemies;
 using Biomes;
 
@@ -14,8 +15,11 @@ public class BattleManager : MonoBehaviour {
     public Enemy enemyObjectOne;
     public Enemy enemyObjectTwo;
     public Enemy enemyObjectThree;
-
     private Enemy selectedEnemy;
+
+    public Hero heroObjectOne;
+    public Hero heroObjectTwo;
+    public Hero selectedHero;
 
     public List<Enemy> enemyList = new List<Enemy>();
     public Queue<GameObject> enemyQueue;
@@ -34,6 +38,7 @@ public class BattleManager : MonoBehaviour {
         enemyObjectThree.currentHealth = enemyObjectThree.maxHealth;
 
         battleDisplayManager.UpdateHealthText();
+        battleDisplayManager.NoHeroSelected();
 
         selecterActive = false;
 
@@ -44,8 +49,24 @@ public class BattleManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            selectedHero = heroObjectOne;
+            battleDisplayManager.UpdateSelectedHeroText();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            selectedHero = heroObjectTwo;
+            battleDisplayManager.UpdateSelectedHeroText();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            selectedHero = null;
+            battleDisplayManager.NoHeroSelected();
+        }
+
+
+
         if (Input.GetButtonDown("Ability One")) {
-            
             selecterActive = true;
         }
 
@@ -55,7 +76,6 @@ public class BattleManager : MonoBehaviour {
         }
 
         if(selectedEnemy != null) {
-
             selectedEnemy.currentHealth -= 100;
             CheckIfDead(selectedEnemy);
             selectedEnemy = null;
