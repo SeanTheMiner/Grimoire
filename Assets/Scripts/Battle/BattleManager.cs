@@ -15,10 +15,12 @@ public class BattleManager : MonoBehaviour {
     public Enemy enemyObjectOne;
     public Enemy enemyObjectTwo;
     public Enemy enemyObjectThree;
+
     private Enemy selectedEnemy;
 
     public Hero heroObjectOne;
     public Hero heroObjectTwo;
+
     public Hero selectedHero;
 
     public List<Enemy> enemyList = new List<Enemy>();
@@ -28,6 +30,9 @@ public class BattleManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+
+        heroObjectOne.currentHealth = heroObjectOne.maxHealth;
+        heroObjectTwo.currentHealth = heroObjectTwo.maxHealth;
 
         enemyList.Add(enemyObjectOne);
         enemyList.Add(enemyObjectTwo);
@@ -39,6 +44,8 @@ public class BattleManager : MonoBehaviour {
 
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.NoHeroSelected();
+
+        battleDisplayManager.initHealthText();
 
         selecterActive = false;
 

@@ -6,6 +6,12 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public BattleManager battleManager;
 
+    public Text heroOneNameText;
+    public Text heroTwoNameText;
+
+    public Text heroOneHealthText;
+    public Text heroTwoHealthText;
+
     public Text enemyOneHealthText;
     public Text enemyTwoHealthText;
     public Text enemyThreeHealthText;
@@ -14,7 +20,16 @@ public class BattleDisplayManager : MonoBehaviour {
     public Text abilityOneText;
     public Text abilityTwoText;
 
+    public void initHealthText() {
+
+        heroOneNameText.text = battleManager.heroObjectOne.heroName;
+        heroTwoNameText.text = battleManager.heroObjectTwo.heroName;
+    }
+
     public void UpdateHealthText() {
+
+        heroOneHealthText.text = battleManager.heroObjectOne.currentHealth.ToString();
+        heroTwoHealthText.text = battleManager.heroObjectTwo.currentHealth.ToString();
 
         enemyOneHealthText.text = battleManager.enemyObjectOne.currentHealth.ToString();
         enemyTwoHealthText.text = battleManager.enemyObjectTwo.currentHealth.ToString();
