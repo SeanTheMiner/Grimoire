@@ -5,12 +5,14 @@ namespace Abilities {
 
     public class Ability : MonoBehaviour {
 
-        //already inherits Name
 
         //Defining bools? List of procs?
 
         //Timers & durations
 
+        public string abilityName {
+            get; set;
+        }
 
         public float chargeDuration {
             get; set;

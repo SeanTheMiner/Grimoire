@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{5E1BF383-562B-BA61-A7F8-FF67E664924D}") = "New ClickRPG", "Assembly-CSharp.csproj", "{2A6FA88C-D0A8-57E8-3995-AC31284BEED7}"
 EndProject
+Project("{5E1BF383-562B-BA61-A7F8-FF67E664924D}") = "New ClickRPG", "Assembly-CSharp-Editor.csproj", "{C6556425-C092-E40A-62D5-4000606E74CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{2A6FA88C-D0A8-57E8-3995-AC31284BEED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A6FA88C-D0A8-57E8-3995-AC31284BEED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A6FA88C-D0A8-57E8-3995-AC31284BEED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6556425-C092-E40A-62D5-4000606E74CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6556425-C092-E40A-62D5-4000606E74CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6556425-C092-E40A-62D5-4000606E74CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6556425-C092-E40A-62D5-4000606E74CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

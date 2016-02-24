@@ -9,6 +9,10 @@ namespace Heroes {
 
         //Stats
 
+        public string heroName {
+            get; set;
+        }
+
         public float maxHealth {
             get; set;
         }
@@ -32,7 +36,11 @@ namespace Heroes {
 
         //Under the hood
 
-        public List<Ability> abilityList;
+        public Ability abilityOne;
+        public Ability abilityTwo;  
+
+        //Eventually 1-6 go here!
+
 
         public BattleState currentBattleState {
             get; set;
