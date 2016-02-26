@@ -21,6 +21,10 @@ namespace Heroes {
             get; set;
         }
 
+        public bool healthIsLocked {
+            get; set;
+        }
+
         public float healthRegen {
             get; set;
         }
@@ -35,6 +39,10 @@ namespace Heroes {
 
 
         //Under the hood
+
+        public Ability targetingAbility;
+        public Ability currentAbility;
+        public Ability defaultAbility;
 
         public Ability abilityOne;
         public Ability abilityTwo;  
@@ -63,6 +71,7 @@ namespace Heroes {
         public Hero() {
             maxHealth = 0;
             currentHealth = 0;
+            healthIsLocked = false;
             healthRegen = 0;
             armor = 0;
             spirit = 0;

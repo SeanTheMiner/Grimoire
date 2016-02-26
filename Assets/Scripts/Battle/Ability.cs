@@ -1,24 +1,86 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Heroes;
+using Enemies;
+
 namespace Abilities {
 
-    public class Ability : MonoBehaviour {
+    public abstract class Ability : MonoBehaviour {
 
-
-        //Defining bools? List of procs?
-
-        //Timers & durations
+        //Name and hero
 
         public string abilityName {
             get; set;
         }
 
+        public Hero abilityOwner;
+            
+
+        //Ability type-defining variables
+
+        public bool requiresCharge {
+            get; set;
+        }
+
+        public bool hasCharged {
+            get; set;
+        }
+
+        public DamageType primaryDamageType {
+            get; set;
+        }
+
+        public enum DamageType {
+            Null,
+            Physical,
+            Magical,
+            Healing
+        }
+
+        public bool requiresTarget {
+            get; set;
+        }
+
+        public TargetScope targetScope {
+            get; set;
+        }
+
+        public enum TargetScope {
+            Null,
+            Untargeted,
+            SingleHero,
+            SingleEnemy,
+            SingleHeroOrEnemy,
+            AllHeroes,
+            AllEnemies,
+            AllHeroesOrAllEnemies,
+            FreeTargetAOE
+        }
+
+
+        //Targeting
+
+        public bool targetSelected {
+            get; set;
+        }
+
+        public Enemy targetEnemy {
+            get; set;
+        }
+
+        public Hero targetHero {
+            get; set;
+        }
+
+
+        //Timekeeping
+
         public float chargeDuration {
             get; set;
         }
 
-        public float chargeStartTimer {
+        public float chargeEndTimer {
             get; set;
         }
 
@@ -26,11 +88,11 @@ namespace Abilities {
             get; set;
         }
 
-        public float abilityStartTimer {
+        public float abilityEndTimer {
             get; set;
         }
 
-        public float cooldown {
+        public float cooldownDuration {
             get; set;
         }
 
@@ -39,10 +101,13 @@ namespace Abilities {
         }
 
 
-        //Proc handlers
 
+        //Proc handlers 
+            //NOTE: useful for single-proc-type abilities, which will be MOST of them, 
+            //but abilities with multiple procs will have to create their own variables 
+            //and reflect this in the AbilityMap().
 
-        public float lastProcTimer {
+        public float nextProcTimer {
             get; set;
         }
 
@@ -78,50 +143,80 @@ namespace Abilities {
             get; set;
         }
 
-        public TargetScope targetScope {
-            get; set;
+        
+
+        //Virtual functions (to be overridden in each ability as needed)
+
+        public virtual void AbilityMap() { }
+
+        public virtual void InitCharge() {
+            if(requiresCharge) {
+                chargeEndTimer = Time.time + chargeDuration;
+            }
         }
 
-        public enum TargetScope {
-            Null,
-            Untargeted,
-            SingleHero,
-            SingleEnemy,
-            SingleHeroOrEnemy,
-            AllHeroes,
-            AllEnemies,
-            AllHeroesOrAllEnemies,
-            FreeTargetAOE
+        public virtual void CheckCharge() {
+            Debug.Log("Charge checked.");
+            if (chargeEndTimer <= Time.time) {
+                hasCharged = true;
+            }
         }
 
-        public DamageType primaryDamageType {
-            get; set;
+        public virtual void InitAbility() {
+            abilityEndTimer = Time.time + abilityDuration;
         }
 
-        public enum DamageType {
-            Null,
-            Physical,
-            Magical,
-            Healing
+        public virtual void ExitAbility() {
+            hasCharged = false;
+            targetSelected = false;
+            cooldownEndTimer = Time.time + cooldownDuration;
+            abilityOwner.currentAbility = null;
         }
+
+        public virtual void DamageProc(Hero attacker, Enemy defender) {
+            defender.currentHealth -= procDamage;
+        }
+
+        public virtual void HealingProc(Hero healer, Hero healee) {
+            healee.currentHealth += healer.currentAbility.procHeal;
+            if(healee.currentHealth >= healee.maxHealth) {
+                healee.currentHealth = healee.maxHealth;
+            }
+        }
+
+      
+        //Ability constructor
 
         public Ability() {
 
+            abilityOwner = null;
+
+            requiresCharge = true;
+            hasCharged = false;
+
+            requiresTarget = true;
+            targetScope = TargetScope.Null;
+            targetSelected = false;
+
             chargeDuration = 0.0f;
-            chargeStartTimer = 0.0f;
+            chargeEndTimer = 0.0f;
+
             abilityDuration = 0.0f;
-            abilityStartTimer = 0.0f;
-            cooldown = 0.0f;
+            abilityEndTimer = 0.0f;
+
+            cooldownDuration = 0.0f;
             cooldownEndTimer = 0.0f;
-            lastProcTimer = 0.0f;
+
+  
+            nextProcTimer = 0.0f;
             procCounter = 0;
             procLimit = 0;
             procSpacing = 0.0f;
             procDamage = 0.0f;
             procHeal = 0.0f;
+
             resource = "";
             cost = 0;
-            targetScope = TargetScope.Null;
             primaryDamageType = DamageType.Null;
 
         } //end constructor

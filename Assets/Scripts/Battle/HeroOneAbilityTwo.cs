@@ -6,10 +6,11 @@ public class HeroOneAbilityTwo : Ability {
 
     public HeroOneAbilityTwo() {
 
-        abilityName = "Long Charge";
-        chargeDuration = 5.0f;
-        cooldown = 5.0f;
-        procDamage = 200.0f;
+        abilityName = "Punch Barrage";
+        chargeDuration = 3.0f;
+        abilityDuration = 10.0f;
+        cooldownDuration = 5.0f;
+        procDamage = 12.0f;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
 

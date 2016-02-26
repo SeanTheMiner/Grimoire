@@ -8,7 +8,7 @@ public class HeroTwoAbilityTwo : Ability {
 
         abilityName = "Charge Heal";
         chargeDuration = 4.0f;
-        cooldown = 6.0f;
+        cooldownDuration = 6.0f;
         procHeal = 100.0f;
         targetScope = TargetScope.AllHeroes;
         primaryDamageType = DamageType.Healing;

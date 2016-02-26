@@ -7,7 +7,7 @@ public class HeroTwo : Hero {
 
     public HeroTwo() {
 
-        heroName = "Weeetch";
+        heroName = "Myshka";
         maxHealth = 600;
         healthRegen = 7;
         armor = 20;
