@@ -20,7 +20,7 @@ public class BattleDisplayManager : MonoBehaviour {
     public Text abilityOneText;
     public Text abilityTwoText;
 
-    public void initHealthText() {
+    public void InitNameText() {
 
         heroOneNameText.text = battleManager.heroObjectOne.heroName;
         heroTwoNameText.text = battleManager.heroObjectTwo.heroName;

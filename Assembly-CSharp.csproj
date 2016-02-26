@@ -384,10 +384,10 @@
      <Compile Include="Assets\NodeCanvas\Tasks\Conditions\Utility\DebugCondition.cs" />
      <Compile Include="Assets\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
      <Compile Include="Assets\Scripts\Battle\Ability.cs" />
-     <Compile Include="Assets\Scripts\Battle\AbilityProc.cs" />
      <Compile Include="Assets\Scripts\Battle\BattleDisplayManager.cs" />
      <Compile Include="Assets\Scripts\Battle\BattleManager.cs" />
      <Compile Include="Assets\Scripts\Battle\BlueEnemy.cs" />
+     <Compile Include="Assets\Scripts\Battle\DebugDisplayManager.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemy.cs" />
      <Compile Include="Assets\Scripts\Battle\EnemyController.cs" />
      <Compile Include="Assets\Scripts\Battle\Hero.cs" />

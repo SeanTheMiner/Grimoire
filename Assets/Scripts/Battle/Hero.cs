@@ -55,7 +55,6 @@ namespace Heroes {
         }
 
         public enum BattleState {
-            Null,
             Wait,
             Target,
             Charge,

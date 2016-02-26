@@ -15,4 +15,24 @@ public class HeroOneAbilityTwo : Ability {
         primaryDamageType = DamageType.Physical;
 
     }
+
+    //Basic barrage for now
+
+    public override void AbilityMap() {
+
+        if(nextProcTimer <= Time.time) {
+            Debug.Log("Owner:" + abilityOwner.heroName);
+            Debug.Log("Target:" + targetEnemy.name);
+
+            DamageProc(abilityOwner, targetEnemy);
+            nextProcTimer = Time.time + procSpacing;
+        }
+
+        if((abilityEndTimer <= Time.time) | (procCounter >= procLimit)) {
+            ExitAbility();
+        }
+
+    } //end AbilityMap
+
+
 }

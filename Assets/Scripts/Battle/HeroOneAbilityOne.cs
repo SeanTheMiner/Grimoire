@@ -16,25 +16,18 @@ public class HeroOneAbilityOne : Ability {
 
     } //end constructor
 
+    public override void InitAbility() {
+        base.InitAbility();
+        abilityOwner.currentBattleState = Heroes.Hero.BattleState.Burst;
+    }
+
 
     public override void AbilityMap() {
 
-        CheckCharge();
-        if (hasCharged == false) {
-            return;
-        } 
+        Debug.Log(targetEnemy.name);
 
-        if (nextProcTimer <= Time.time) {
-            Debug.Log("Owner:" + abilityOwner.heroName);
-            Debug.Log("Target:" + targetEnemy.name);
-
-            DamageProc(abilityOwner, targetEnemy);
-            nextProcTimer = Time.time + procSpacing;
-        }
-
-        if ((abilityEndTimer <= Time.time) | (procCounter >= procLimit)) {
-            ExitAbility();
-        }
+        DamageProc(abilityOwner, targetEnemy);
+        ExitAbility();
 
     } //end AbilityMap
 

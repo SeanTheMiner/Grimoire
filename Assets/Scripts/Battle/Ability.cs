@@ -23,10 +23,6 @@ namespace Abilities {
             get; set;
         }
 
-        public bool hasCharged {
-            get; set;
-        }
-
         public DamageType primaryDamageType {
             get; set;
         }
@@ -149,33 +145,38 @@ namespace Abilities {
 
         public virtual void AbilityMap() { }
 
+
         public virtual void InitCharge() {
-            if(requiresCharge) {
-                chargeEndTimer = Time.time + chargeDuration;
-            }
+            chargeEndTimer = Time.time + chargeDuration;
+            abilityOwner.currentBattleState = Hero.BattleState.Charge;
         }
 
+
         public virtual void CheckCharge() {
-            Debug.Log("Charge checked.");
             if (chargeEndTimer <= Time.time) {
-                hasCharged = true;
+                InitAbility();
             }
-        }
+        } //end CheckCharge()
+
 
         public virtual void InitAbility() {
             abilityEndTimer = Time.time + abilityDuration;
-        }
+            //Each ability needs to set a battlestate in here!
+        } //end InitAbility()
+
 
         public virtual void ExitAbility() {
-            hasCharged = false;
             targetSelected = false;
             cooldownEndTimer = Time.time + cooldownDuration;
             abilityOwner.currentAbility = null;
-        }
+            abilityOwner.currentBattleState = Hero.BattleState.Wait;
+        } //end ExitAbility()
+
 
         public virtual void DamageProc(Hero attacker, Enemy defender) {
             defender.currentHealth -= procDamage;
         }
+
 
         public virtual void HealingProc(Hero healer, Hero healee) {
             healee.currentHealth += healer.currentAbility.procHeal;
@@ -192,7 +193,6 @@ namespace Abilities {
             abilityOwner = null;
 
             requiresCharge = true;
-            hasCharged = false;
 
             requiresTarget = true;
             targetScope = TargetScope.Null;

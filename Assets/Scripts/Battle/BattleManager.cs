@@ -12,6 +12,8 @@ using Biomes;
 public class BattleManager : MonoBehaviour {
 
     public BattleDisplayManager battleDisplayManager = new BattleDisplayManager();
+    public DebugDisplayManager debugDisplayManager = new DebugDisplayManager();
+
     public float battleTimer = 0.0f;
 
     //Hero variables
@@ -36,6 +38,8 @@ public class BattleManager : MonoBehaviour {
     public GameObject[] allEnemies;
     public GameObject[] allHeroesAndEnemies;
 
+
+
     //LET'S GET IT STARTED IN HERE
     void Start() {
 
@@ -47,11 +51,14 @@ public class BattleManager : MonoBehaviour {
         
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.NoHeroSelected();
-        battleDisplayManager.initHealthText();
+        battleDisplayManager.InitNameText();
+
+        debugDisplayManager.InitDebugText();
+        debugDisplayManager.UpdateDebugText();
 
         abilityTargeterActive = false;
 
-    }
+    } //end Start()
 
 
     // Update is called once per frame. It does everything.
@@ -60,6 +67,7 @@ public class BattleManager : MonoBehaviour {
         //Every-frame maintenance
 
         battleDisplayManager.UpdateHealthText();
+        debugDisplayManager.UpdateDebugText();
         battleTimer += Time.deltaTime;
 
         //Checking for input
@@ -105,12 +113,19 @@ public class BattleManager : MonoBehaviour {
         if (hero.currentBattleState == Hero.BattleState.Wait) {
             return;
         }
+
         if(hero.currentBattleState == Hero.BattleState.Charge) {
             hero.currentAbility.CheckCharge();
         }
+
+        if(hero.currentBattleState == Hero.BattleState.Burst) {
+            hero.currentAbility.AbilityMap();
+        }
+
         if(hero.currentBattleState == Hero.BattleState.Barrage) {
             hero.currentAbility.AbilityMap();
         }
+
         if(hero.currentBattleState == Hero.BattleState.Dead) {
             return;
         }
@@ -185,28 +200,33 @@ public class BattleManager : MonoBehaviour {
         }
     } //end CheckForHeroSelectionInput()
 
+
     void CheckForAbilitySelectionInput() {
 
         if(Input.GetButtonDown("Ability One")) {
             if(selectedHero.abilityOne.requiresTarget == false) {
-
+                selectedHero.currentAbility = selectedHero.abilityOne;
+                ExecuteAbility();
             }
-
-            abilityTargeterActive = true;
-            selectedHero.targetingAbility = selectedHero.abilityOne;
-            selectedHero.currentAbility = selectedHero.abilityOne;
-
-            //in here, no-target abilities can just go, called from a function outside of Update.
-            //All the targeting stuff will eventually be handled by a targetingManager.
-
-        }
+            else {
+                abilityTargeterActive = true;
+                selectedHero.targetingAbility = selectedHero.abilityOne;
+            }
+          
+        } //end if Ability One
 
         if(Input.GetButtonDown("Ability Two")) {
-            abilityTargeterActive = true;
-            targetingAbility = selectedHero.abilityTwo;
-            selectedHero.currentAbility = selectedHero.abilityTwo;
+            if(selectedHero.abilityTwo.requiresTarget == false) {
+                selectedHero.currentAbility = selectedHero.abilityTwo;
+                ExecuteAbility();
+            }
+            else {
+                abilityTargeterActive = true;
+                selectedHero.targetingAbility = selectedHero.abilityTwo;
+            }
 
-        }
+        } //end if Ability One
+
     } //end CheckForHeroSelectionInput()
 
 
@@ -214,28 +234,24 @@ public class BattleManager : MonoBehaviour {
 
     void CastSelecterRay() {
 
-        Debug.Log("ray cast");
-
         RaycastHit objectHit;
         Ray selectingRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if(Physics.Raycast(selectingRay, out objectHit)) {
 
-            if((objectHit.collider.tag == "Enemy") && (selectedHero.currentAbility.targetScope == Ability.TargetScope.SingleEnemy)) {
-
-                Debug.Log("Ray finding enemy");
-
+            if((objectHit.collider.tag == "Enemy") && (selectedHero.targetingAbility.targetScope == Ability.TargetScope.SingleEnemy)) {
+                selectedHero.currentAbility = selectedHero.targetingAbility;
+                selectedHero.targetingAbility = null;
                 selectedHero.currentAbility.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
-                Debug.Log("Selected enemy: " + selectedHero.currentAbility.targetEnemy.name);
-                selectedHero.currentAbility.AbilityMap();
-
-            } //end if enemy
+                ExecuteAbility();
+            } //end if enemy & enemytargetable
 
             else if((objectHit.collider.tag == "Hero") && (selectedHero.currentAbility.targetScope == Ability.TargetScope.SingleHero)) {
-
+                selectedHero.currentAbility = selectedHero.targetingAbility;
+                selectedHero.targetingAbility = null;
                 selectedHero.currentAbility.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
-
-            }
+                ExecuteAbility();
+            } //end if hero & herotargetable
 
             abilityTargeterActive = false;
 
@@ -244,8 +260,17 @@ public class BattleManager : MonoBehaviour {
     } //end CastSelecterRay
 
 
+    void ExecuteAbility() {
+        if (selectedHero.currentAbility.requiresCharge) {
+            selectedHero.currentAbility.InitCharge();
+        }
+        else {
+            selectedHero.currentAbility.InitAbility();
+        }
+    }
+
+
     void CheckIfEnemyIsDead(Enemy enemy) {
-        Debug.Log("Checked if enemy is dead.");
         if(enemy.currentHealth <= 0) {
             RemoveEnemy(enemy);
         }
@@ -259,7 +284,6 @@ public class BattleManager : MonoBehaviour {
     }
 
     void CheckIfHeroIsDead(Hero hero) {
-        Debug.Log("Checked if hero is dead.");
         if(hero.currentHealth <= 0) {
             hero.currentHealth = 0;
             hero.currentBattleState = Hero.BattleState.Dead;
