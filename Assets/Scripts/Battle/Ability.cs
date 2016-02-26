@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 using Heroes;
 using Enemies;
@@ -34,10 +35,6 @@ namespace Abilities {
             Healing
         }
 
-        public bool requiresTarget {
-            get; set;
-        }
-
         public TargetScope targetScope {
             get; set;
         }
@@ -57,10 +54,6 @@ namespace Abilities {
 
         //Targeting
 
-        public bool targetSelected {
-            get; set;
-        }
-
         public Enemy targetEnemy {
             get; set;
         }
@@ -69,6 +62,8 @@ namespace Abilities {
             get; set;
         }
 
+        public List<Enemy> targetEnemyList = new List<Enemy>();
+        public List<Hero> targetHeroList = new List<Hero>();
 
         //Timekeeping
 
@@ -158,15 +153,17 @@ namespace Abilities {
             }
         } //end CheckCharge()
 
+        public virtual void SetBattleState() { }
+        public virtual void ClearTargeting() { }
 
         public virtual void InitAbility() {
             abilityEndTimer = Time.time + abilityDuration;
-            //Each ability needs to set a battlestate in here!
+            SetBattleState();
         } //end InitAbility()
 
 
         public virtual void ExitAbility() {
-            targetSelected = false;
+            ClearTargeting();
             cooldownEndTimer = Time.time + cooldownDuration;
             abilityOwner.currentAbility = null;
             abilityOwner.currentBattleState = Hero.BattleState.Wait;
@@ -176,9 +173,9 @@ namespace Abilities {
         public virtual void DamageProc(Hero attacker, Enemy defender) {
             defender.currentHealth -= procDamage;
         }
+        
 
-
-        public virtual void HealingProc(Hero healer, Hero healee) {
+        public virtual void HealProc(Hero healer, Hero healee) {
             healee.currentHealth += healer.currentAbility.procHeal;
             if(healee.currentHealth >= healee.maxHealth) {
                 healee.currentHealth = healee.maxHealth;
@@ -193,10 +190,8 @@ namespace Abilities {
             abilityOwner = null;
 
             requiresCharge = true;
-
-            requiresTarget = true;
+            
             targetScope = TargetScope.Null;
-            targetSelected = false;
 
             chargeDuration = 0.0f;
             chargeEndTimer = 0.0f;

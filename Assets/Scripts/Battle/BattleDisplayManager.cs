@@ -28,22 +28,41 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public void UpdateHealthText() {
 
-        heroOneHealthText.text = battleManager.heroObjectOne.currentHealth.ToString();
-        heroTwoHealthText.text = battleManager.heroObjectTwo.currentHealth.ToString();
+        heroOneHealthText.text = battleManager.heroObjectOne.currentHealth.ToString() + "  /  " + battleManager.heroObjectOne.maxHealth.ToString();
+        heroTwoHealthText.text = battleManager.heroObjectTwo.currentHealth.ToString() + "  /  " + battleManager.heroObjectTwo.maxHealth.ToString();
 
-        enemyOneHealthText.text = battleManager.enemyObjectOne.currentHealth.ToString();
-        enemyTwoHealthText.text = battleManager.enemyObjectTwo.currentHealth.ToString();
-        enemyThreeHealthText.text = battleManager.enemyObjectThree.currentHealth.ToString();
+        enemyOneHealthText.text = battleManager.enemyObjectOne.currentHealth.ToString() + "  /  " + battleManager.enemyObjectOne.maxHealth.ToString();
+        enemyTwoHealthText.text = battleManager.enemyObjectTwo.currentHealth.ToString() + "  /  " + battleManager.enemyObjectTwo.maxHealth.ToString();
+        enemyThreeHealthText.text = battleManager.enemyObjectThree.currentHealth.ToString() + "  /  " + battleManager.enemyObjectThree.maxHealth.ToString();
 
     }
 
     public void UpdateSelectedHeroText() {
 
-        selectedHeroNameText.text = battleManager.selectedHero.heroName;
-        abilityOneText.text = battleManager.selectedHero.abilityOne.abilityName;
-        abilityTwoText.text = battleManager.selectedHero.abilityTwo.abilityName;
+        if(battleManager.selectedHero != null) {
 
-    }
+            selectedHeroNameText.text = battleManager.selectedHero.heroName;
+
+            if(battleManager.selectedHero.abilityOne.cooldownEndTimer <= Time.time) {
+                abilityOneText.text = battleManager.selectedHero.abilityOne.abilityName;
+            }
+            else {
+                abilityOneText.text = (Mathf.Round(battleManager.selectedHero.abilityOne.cooldownEndTimer - Time.time)).ToString();
+            }
+
+            if(battleManager.selectedHero.abilityTwo.cooldownEndTimer <= Time.time) {
+                abilityTwoText.text = battleManager.selectedHero.abilityTwo.abilityName;
+            }
+            else {
+                abilityTwoText.text = (Mathf.Round(battleManager.selectedHero.abilityTwo.cooldownEndTimer - Time.time)).ToString();
+            }
+
+        } //end if there is a selected hero
+        else {
+            NoHeroSelected();
+        }
+
+    } //end UpdateSelectedHeroText()
 
     public void NoHeroSelected() {
 

@@ -57,6 +57,7 @@ namespace Heroes {
         public enum BattleState {
             Wait,
             Target,
+            ReTarget,
             Charge,
             Burst,
             Barrage,

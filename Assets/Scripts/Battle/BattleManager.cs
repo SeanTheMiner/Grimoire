@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,6 +16,7 @@ public class BattleManager : MonoBehaviour {
     public DebugDisplayManager debugDisplayManager = new DebugDisplayManager();
 
     public float battleTimer = 0.0f;
+    static System.Random randomer = new System.Random();
 
     //Hero variables
 
@@ -65,8 +67,9 @@ public class BattleManager : MonoBehaviour {
     void Update() {
 
         //Every-frame maintenance
-
+        
         battleDisplayManager.UpdateHealthText();
+        battleDisplayManager.UpdateSelectedHeroText();
         debugDisplayManager.UpdateDebugText();
         battleTimer += Time.deltaTime;
 
@@ -103,6 +106,16 @@ public class BattleManager : MonoBehaviour {
             BattleWon();
         }
 
+        //DEBUG FUNCTIONS
+
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            DebugAllHeroDamage();
+        }
+
+        if(Input.GetKeyDown(KeyCode.X)) {
+            DebugSelectedHeroDamage();
+        }
+
     } //end Update
 
 
@@ -112,6 +125,24 @@ public class BattleManager : MonoBehaviour {
 
         if (hero.currentBattleState == Hero.BattleState.Wait) {
             return;
+        }
+
+        if(hero.currentBattleState == Hero.BattleState.Target) {
+            if (hero.targetingAbility.targetScope == Ability.TargetScope.Untargeted) {
+                TargetRandomEnemy(hero);
+            }
+            if (hero.targetingAbility.targetScope == Ability.TargetScope.AllEnemies) {
+                TargetAllEnemies(hero);
+            }
+            if (hero.targetingAbility.targetScope == Ability.TargetScope.AllHeroes) {
+                TargetAllHeroes(hero);
+            }
+            //When you finally get around to making a TargetingManager, this should just call TargetingManager.Main(), 
+                //which can shoot off to diff functions depending on the targetScope.
+        }
+
+        if(hero.currentBattleState == Hero.BattleState.ReTarget) {
+            ReTargetRandomEnemy(hero); 
         }
 
         if(hero.currentBattleState == Hero.BattleState.Charge) {
@@ -186,51 +217,56 @@ public class BattleManager : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
             selectedHero = heroObjectOne;
-            battleDisplayManager.UpdateSelectedHeroText();
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)) {
             selectedHero = heroObjectTwo;
-            battleDisplayManager.UpdateSelectedHeroText();
         }
 
         if(Input.GetKeyDown(KeyCode.Space)) {
             selectedHero = null;
-            battleDisplayManager.NoHeroSelected();
         }
+
     } //end CheckForHeroSelectionInput()
 
 
     void CheckForAbilitySelectionInput() {
 
-        if(Input.GetButtonDown("Ability One")) {
-            if(selectedHero.abilityOne.requiresTarget == false) {
-                selectedHero.currentAbility = selectedHero.abilityOne;
-                ExecuteAbility();
+        if((Input.GetButtonDown("Ability One")) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
+            if(selectedHero.abilityOne.targetScope == Ability.TargetScope.Untargeted) {
+                TargetRandomEnemy(selectedHero);
             }
             else {
                 abilityTargeterActive = true;
                 selectedHero.targetingAbility = selectedHero.abilityOne;
+                selectedHero.currentBattleState = Hero.BattleState.Target;
             }
           
         } //end if Ability One
 
-        if(Input.GetButtonDown("Ability Two")) {
-            if(selectedHero.abilityTwo.requiresTarget == false) {
-                selectedHero.currentAbility = selectedHero.abilityTwo;
-                ExecuteAbility();
+        if((Input.GetButtonDown("Ability Two")) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
+            if(selectedHero.abilityTwo.targetScope == Ability.TargetScope.Untargeted) {
+                TargetRandomEnemy(selectedHero);
             }
             else {
                 abilityTargeterActive = true;
                 selectedHero.targetingAbility = selectedHero.abilityTwo;
+                selectedHero.currentBattleState = Hero.BattleState.Target;
             }
 
-        } //end if Ability One
+        } //end if Ability Two
 
     } //end CheckForHeroSelectionInput()
 
+    void ExecuteAbilitySelection(Ability ability) {
+        
+        //It seems like the redundancy up in CheckForAbilitySelectionInput() can be cleared up here,
+            //but passing in (hero, ability) doesn't really work, and selectedHero doesn't take just any old ability, as it turns out.
+            //This would be best if you could get it working, but it's really just ugly at the moment, not non-functional.
 
-    //Other functions
+    }
+
+    //Functions that should probably go on a targeter
 
     void CastSelecterRay() {
 
@@ -243,14 +279,14 @@ public class BattleManager : MonoBehaviour {
                 selectedHero.currentAbility = selectedHero.targetingAbility;
                 selectedHero.targetingAbility = null;
                 selectedHero.currentAbility.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
-                ExecuteAbility();
+                ExecuteAbility(selectedHero);
             } //end if enemy & enemytargetable
 
             else if((objectHit.collider.tag == "Hero") && (selectedHero.currentAbility.targetScope == Ability.TargetScope.SingleHero)) {
                 selectedHero.currentAbility = selectedHero.targetingAbility;
                 selectedHero.targetingAbility = null;
                 selectedHero.currentAbility.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
-                ExecuteAbility();
+                ExecuteAbility(selectedHero);
             } //end if hero & herotargetable
 
             abilityTargeterActive = false;
@@ -259,13 +295,48 @@ public class BattleManager : MonoBehaviour {
 
     } //end CastSelecterRay
 
+    void TargetToCurrent(Hero hero) {
+        hero.currentAbility = hero.targetingAbility;
+        hero.targetingAbility = null;
+    }
 
-    void ExecuteAbility() {
-        if (selectedHero.currentAbility.requiresCharge) {
-            selectedHero.currentAbility.InitCharge();
+    void TargetAllEnemies(Hero hero) {
+        TargetToCurrent(hero);
+        foreach(Enemy enemyTarget in enemyList) {
+            hero.currentAbility.targetEnemyList.Add(enemyTarget);
+        }
+        ExecuteAbility(hero);
+    }
+
+    void TargetAllHeroes(Hero hero) {
+        TargetToCurrent(hero);
+        foreach(Hero heroTarget in heroList) {
+            hero.currentAbility.targetHeroList.Add(heroTarget);
+        }
+        ExecuteAbility(hero);
+    }
+
+    void TargetRandomEnemy(Hero hero) {
+        TargetToCurrent(hero);
+        hero.currentAbility.targetEnemy = enemyList[randomer.Next(enemyList.Count)];
+        ExecuteAbility(hero);
+    }
+
+
+    void ReTargetRandomEnemy(Hero hero) {
+        hero.currentAbility.targetEnemy = enemyList[randomer.Next(enemyList.Count)];
+        hero.currentAbility.SetBattleState();
+    }
+
+
+    //Other functions
+
+    void ExecuteAbility(Hero hero) {
+        if (hero.currentAbility.requiresCharge) {
+            hero.currentAbility.InitCharge();
         }
         else {
-            selectedHero.currentAbility.InitAbility();
+            hero.currentAbility.InitAbility();
         }
     }
 
@@ -280,7 +351,6 @@ public class BattleManager : MonoBehaviour {
         enemy.currentHealth = 0;
         enemyList.Remove(enemy);
         Destroy(enemy.gameObject);
-        Destroy(enemy);
     }
 
     void CheckIfHeroIsDead(Hero hero) {
@@ -298,7 +368,20 @@ public class BattleManager : MonoBehaviour {
     void BattleLost() {
         SceneManager.LoadScene(sceneName: "Overworld");
     }
-}
+
+    void DebugAllHeroDamage() {
+        foreach(Hero hero in heroList) {
+            hero.currentHealth -= 100;
+        }
+    }
+
+    void DebugSelectedHeroDamage () {
+        if(selectedHero != null) {
+            selectedHero.currentHealth -= 100;
+        }
+    }
+    
+} //end BattleManager
 
 
     
