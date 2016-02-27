@@ -12,11 +12,12 @@ using Biomes;
 
 public class BattleManager : MonoBehaviour {
 
-    public BattleDisplayManager battleDisplayManager = new BattleDisplayManager();
-    public DebugDisplayManager debugDisplayManager = new DebugDisplayManager();
+    public BattleDisplayManager battleDisplayManager;
+    public DebugDisplayManager debugDisplayManager;
+    public TargetingManager targetingManager;
 
     public float battleTimer = 0.0f;
-    static System.Random randomer = new System.Random();
+    public static System.Random randomer;
 
     //Hero variables
 
@@ -27,14 +28,14 @@ public class BattleManager : MonoBehaviour {
     public Hero queuedHero;
 
     public Ability targetingAbility;
-    private bool abilityTargeterActive;
+    public bool abilityTargeterActive;
 
     public Enemy enemyObjectOne;
     public Enemy enemyObjectTwo;
     public Enemy enemyObjectThree;
 
-    public List<Hero> heroList = new List<Hero>();
-    public List<Enemy> enemyList = new List<Enemy>();
+    public List<Hero> heroList;
+    public List<Enemy> enemyList;
    
     public GameObject[] allHeroes;
     public GameObject[] allEnemies;
@@ -87,7 +88,7 @@ public class BattleManager : MonoBehaviour {
 
         //If we're targeting an ability, and the mouse is clicked, cast a selecter ray
         if ((abilityTargeterActive) && (Input.GetMouseButtonDown(0))) {
-            CastSelecterRay();
+            targetingManager.CastSelecterRay(selectedHero);
         }
 
 
@@ -129,20 +130,20 @@ public class BattleManager : MonoBehaviour {
 
         if(hero.currentBattleState == Hero.BattleState.Target) {
             if (hero.targetingAbility.targetScope == Ability.TargetScope.Untargeted) {
-                TargetRandomEnemy(hero);
+                targetingManager.TargetRandomEnemy(hero);
             }
             if (hero.targetingAbility.targetScope == Ability.TargetScope.AllEnemies) {
-                TargetAllEnemies(hero);
+                targetingManager.TargetAllEnemies(hero);
             }
             if (hero.targetingAbility.targetScope == Ability.TargetScope.AllHeroes) {
-                TargetAllHeroes(hero);
+                targetingManager.TargetAllHeroes(hero);
             }
             //When you finally get around to making a TargetingManager, this should just call TargetingManager.Main(), 
                 //which can shoot off to diff functions depending on the targetScope.
         }
 
         if(hero.currentBattleState == Hero.BattleState.ReTarget) {
-            ReTargetRandomEnemy(hero); 
+            targetingManager.ReTargetRandomEnemy(hero); 
         }
 
         if(hero.currentBattleState == Hero.BattleState.Charge) {
@@ -234,7 +235,7 @@ public class BattleManager : MonoBehaviour {
 
         if((Input.GetButtonDown("Ability One")) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
             if(selectedHero.abilityOne.targetScope == Ability.TargetScope.Untargeted) {
-                TargetRandomEnemy(selectedHero);
+                targetingManager.TargetRandomEnemy(selectedHero);
             }
             else {
                 abilityTargeterActive = true;
@@ -246,7 +247,7 @@ public class BattleManager : MonoBehaviour {
 
         if((Input.GetButtonDown("Ability Two")) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
             if(selectedHero.abilityTwo.targetScope == Ability.TargetScope.Untargeted) {
-                TargetRandomEnemy(selectedHero);
+                targetingManager.TargetRandomEnemy(selectedHero);
             }
             else {
                 abilityTargeterActive = true;
@@ -266,72 +267,16 @@ public class BattleManager : MonoBehaviour {
 
     }
 
-    //Functions that should probably go on a targeter
+    //Other functions
 
-    void CastSelecterRay() {
 
-        RaycastHit objectHit;
-        Ray selectingRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if(Physics.Raycast(selectingRay, out objectHit)) {
-
-            if((objectHit.collider.tag == "Enemy") && (selectedHero.targetingAbility.targetScope == Ability.TargetScope.SingleEnemy)) {
-                selectedHero.currentAbility = selectedHero.targetingAbility;
-                selectedHero.targetingAbility = null;
-                selectedHero.currentAbility.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
-                ExecuteAbility(selectedHero);
-            } //end if enemy & enemytargetable
-
-            else if((objectHit.collider.tag == "Hero") && (selectedHero.currentAbility.targetScope == Ability.TargetScope.SingleHero)) {
-                selectedHero.currentAbility = selectedHero.targetingAbility;
-                selectedHero.targetingAbility = null;
-                selectedHero.currentAbility.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
-                ExecuteAbility(selectedHero);
-            } //end if hero & herotargetable
-
-            abilityTargeterActive = false;
-
-        }  //end if objectHit
-
-    } //end CastSelecterRay
-
-    void TargetToCurrent(Hero hero) {
+    public void TargetToCurrent(Hero hero) {
         hero.currentAbility = hero.targetingAbility;
         hero.targetingAbility = null;
     }
 
-    void TargetAllEnemies(Hero hero) {
-        TargetToCurrent(hero);
-        foreach(Enemy enemyTarget in enemyList) {
-            hero.currentAbility.targetEnemyList.Add(enemyTarget);
-        }
-        ExecuteAbility(hero);
-    }
 
-    void TargetAllHeroes(Hero hero) {
-        TargetToCurrent(hero);
-        foreach(Hero heroTarget in heroList) {
-            hero.currentAbility.targetHeroList.Add(heroTarget);
-        }
-        ExecuteAbility(hero);
-    }
-
-    void TargetRandomEnemy(Hero hero) {
-        TargetToCurrent(hero);
-        hero.currentAbility.targetEnemy = enemyList[randomer.Next(enemyList.Count)];
-        ExecuteAbility(hero);
-    }
-
-
-    void ReTargetRandomEnemy(Hero hero) {
-        hero.currentAbility.targetEnemy = enemyList[randomer.Next(enemyList.Count)];
-        hero.currentAbility.SetBattleState();
-    }
-
-
-    //Other functions
-
-    void ExecuteAbility(Hero hero) {
+    public void ExecuteAbility(Hero hero) {
         if (hero.currentAbility.requiresCharge) {
             hero.currentAbility.InitCharge();
         }
