@@ -11,7 +11,21 @@ using Abilities;
 public class TargetingManager : MonoBehaviour {
 
     public BattleManager battleManager;
-    static System.Random randomer;
+    public static System.Random randomer;
+
+    public void SortUntargetedType(Hero hero) {
+
+        if (hero.targetingAbility.targetScope == Ability.TargetScope.AllEnemies) {
+            TargetAllEnemies(hero);
+        }
+
+        else if(hero.targetingAbility.targetScope == Ability.TargetScope.AllHeroes) {
+            TargetAllHeroes(hero);
+        }
+        
+
+    } //end SortUntargetedType()
+
 
     public void CastSelecterRay(Hero hero) {
 
@@ -21,26 +35,25 @@ public class TargetingManager : MonoBehaviour {
         if(Physics.Raycast(selectingRay, out objectHit)) {
 
             if((objectHit.collider.tag == "Enemy") && (hero.targetingAbility.targetScope == Ability.TargetScope.SingleEnemy)) {
-                battleManager.TargetToCurrent(hero);
+                battleManager.TargetingToCurrent(hero);
                 hero.currentAbility.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
                 battleManager.ExecuteAbility(hero);
             } //end if enemy & enemytargetable
 
             else if((objectHit.collider.tag == "Hero") && (hero.currentAbility.targetScope == Ability.TargetScope.SingleHero)) {
-                battleManager.TargetToCurrent(hero);
+                battleManager.TargetingToCurrent(hero);
                 hero.currentAbility.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
                 battleManager.ExecuteAbility(hero);
             } //end if hero & herotargetable
-
-            battleManager.abilityTargeterActive = false;
-
+            
         }  //end if objectHit
 
     } //end CastSelecterRay
     
+    //Initial unchosen targeting functions
 
     public void TargetAllEnemies(Hero hero) {
-        battleManager.TargetToCurrent(hero);
+        battleManager.TargetingToCurrent(hero);
         foreach(Enemy enemyTarget in battleManager.enemyList) {
             hero.currentAbility.targetEnemyList.Add(enemyTarget);
         }
@@ -49,20 +62,22 @@ public class TargetingManager : MonoBehaviour {
 
 
     public void TargetAllHeroes(Hero hero) {
-        battleManager.TargetToCurrent(hero);
+        battleManager.TargetingToCurrent(hero);
         foreach(Hero heroTarget in battleManager.heroList) {
             hero.currentAbility.targetHeroList.Add(heroTarget);
         }
-        battleManager. ExecuteAbility(hero);
+        battleManager.ExecuteAbility(hero);
     }
 
-
+    //Not used right now - not sure if we'll need a random enemy picker for an ABILITY - proc, sure.
     public void TargetRandomEnemy(Hero hero) {
-        battleManager.TargetToCurrent(hero);
+        battleManager.TargetingToCurrent(hero);
         hero.currentAbility.targetEnemy = battleManager.enemyList[randomer.Next(battleManager.enemyList.Count)];
         battleManager.ExecuteAbility(hero);
     }
 
+
+    //Other functions
 
     public void ReTargetRandomEnemy(Hero hero) {
         hero.currentAbility.targetEnemy = battleManager.enemyList[randomer.Next(battleManager.enemyList.Count)];

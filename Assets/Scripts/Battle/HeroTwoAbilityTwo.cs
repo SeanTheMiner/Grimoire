@@ -12,6 +12,7 @@ public class HeroTwoAbilityTwo : Ability {
         cooldownDuration = 4.0f;
         procHeal = 100.0f;
         targetScope = TargetScope.AllHeroes;
+        requiresTargeting = false;
         primaryDamageType = DamageType.Healing;
 
     }

@@ -24,6 +24,10 @@ namespace Abilities {
             get; set;
         }
 
+        public bool requiresTargeting {
+            get; set;
+        }
+
         public DamageType primaryDamageType {
             get; set;
         }
@@ -142,6 +146,7 @@ namespace Abilities {
 
 
         public virtual void InitCharge() {
+            abilityOwner.canTakeCommands = false;
             chargeEndTimer = Time.time + chargeDuration;
             abilityOwner.currentBattleState = Hero.BattleState.Charge;
         }
@@ -157,6 +162,7 @@ namespace Abilities {
         public virtual void ClearTargeting() { }
 
         public virtual void InitAbility() {
+            abilityOwner.canTakeCommands = false;
             abilityEndTimer = Time.time + abilityDuration;
             SetBattleState();
         } //end InitAbility()
@@ -166,6 +172,7 @@ namespace Abilities {
             ClearTargeting();
             cooldownEndTimer = Time.time + cooldownDuration;
             abilityOwner.currentAbility = null;
+            abilityOwner.canTakeCommands = true;
             abilityOwner.currentBattleState = Hero.BattleState.Wait;
         } //end ExitAbility()
 
@@ -190,6 +197,7 @@ namespace Abilities {
             abilityOwner = null;
 
             requiresCharge = true;
+            requiresTargeting = true;
             
             targetScope = TargetScope.Null;
 

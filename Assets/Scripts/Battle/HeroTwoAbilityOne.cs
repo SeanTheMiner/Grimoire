@@ -12,6 +12,7 @@ public class HeroTwoAbilityOne : Ability {
         cooldownDuration = 2.0f;
         procDamage = 50.0f;
         targetScope = TargetScope.AllEnemies;
+        requiresTargeting = false;
         primaryDamageType = DamageType.Magical;
 
     }

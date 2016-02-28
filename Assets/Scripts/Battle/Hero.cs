@@ -7,21 +7,29 @@ namespace Heroes {
 
     public class Hero : MonoBehaviour {
 
-        //Stats
+
+        //Business time
 
         public string heroName {
             get; set;
         }
 
+        public bool healthIsLocked {
+            get; set;
+        }
+
+        public bool canTakeCommands {
+            get; set;
+        }
+
+
+        //Stats
+        
         public float maxHealth {
             get; set;
         }
 
         public float currentHealth {
-            get; set;
-        }
-
-        public bool healthIsLocked {
             get; set;
         }
 
@@ -40,6 +48,7 @@ namespace Heroes {
 
         //Under the hood
 
+        public Ability selectedAbility;
         public Ability targetingAbility;
         public Ability currentAbility;
         public Ability defaultAbility;
@@ -71,6 +80,7 @@ namespace Heroes {
         public Hero() {
             maxHealth = 0;
             currentHealth = 0;
+            canTakeCommands = true;
             healthIsLocked = false;
             healthRegen = 0;
             armor = 0;

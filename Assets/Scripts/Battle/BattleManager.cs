@@ -28,7 +28,7 @@ public class BattleManager : MonoBehaviour {
     public Hero queuedHero;
 
     public Ability targetingAbility;
-    public bool abilityTargeterActive;
+
 
     public Enemy enemyObjectOne;
     public Enemy enemyObjectTwo;
@@ -59,8 +59,6 @@ public class BattleManager : MonoBehaviour {
         debugDisplayManager.InitDebugText();
         debugDisplayManager.UpdateDebugText();
 
-        abilityTargeterActive = false;
-
     } //end Start()
 
 
@@ -76,21 +74,14 @@ public class BattleManager : MonoBehaviour {
 
         //Checking for input
 
-        //Unless we're targeting an abilty, check for hero selection input
-        if(abilityTargeterActive == false) {
-            CheckForHeroSelectionInput();
-        }
+        
+        CheckForHeroSelectionInput();
+      
 
-        //Unless there's no hero selected, check for ability selection input
-        if(selectedHero != null) {
+        //Unless there's no hero selected, or the selected hero is charging an ability, check for ability selection input
+        if((selectedHero != null) && (selectedHero.canTakeCommands)) {
             CheckForAbilitySelectionInput();
         }
-
-        //If we're targeting an ability, and the mouse is clicked, cast a selecter ray
-        if ((abilityTargeterActive) && (Input.GetMouseButtonDown(0))) {
-            targetingManager.CastSelecterRay(selectedHero);
-        }
-
 
         //Hero BattleState switch
             //Figure out what each Hero is currently doing, and see if it needs to change
@@ -129,17 +120,9 @@ public class BattleManager : MonoBehaviour {
         }
 
         if(hero.currentBattleState == Hero.BattleState.Target) {
-            if (hero.targetingAbility.targetScope == Ability.TargetScope.Untargeted) {
-                targetingManager.TargetRandomEnemy(hero);
+           if(Input.GetMouseButtonDown(0)) {
+                targetingManager.CastSelecterRay(hero);
             }
-            if (hero.targetingAbility.targetScope == Ability.TargetScope.AllEnemies) {
-                targetingManager.TargetAllEnemies(hero);
-            }
-            if (hero.targetingAbility.targetScope == Ability.TargetScope.AllHeroes) {
-                targetingManager.TargetAllHeroes(hero);
-            }
-            //When you finally get around to making a TargetingManager, this should just call TargetingManager.Main(), 
-                //which can shoot off to diff functions depending on the targetScope.
         }
 
         if(hero.currentBattleState == Hero.BattleState.ReTarget) {
@@ -164,7 +147,97 @@ public class BattleManager : MonoBehaviour {
 
     } //end CheckBattleState()
 
+    
+    //Input checking functions
 
+    void CheckForHeroSelectionInput() {
+
+        if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            selectedHero = heroObjectOne;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2)) {
+            selectedHero = heroObjectTwo;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            CancelAbility(selectedHero);
+        }
+
+    } //end CheckForHeroSelectionInput()
+
+
+    void CheckForAbilitySelectionInput() {
+
+        if((Input.GetButtonDown("Ability One")) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
+            selectedHero.selectedAbility = selectedHero.abilityOne;
+            ExecuteAbilitySelection(selectedHero);
+        }
+
+        if((Input.GetButtonDown("Ability Two")) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
+            selectedHero.selectedAbility = selectedHero.abilityTwo;
+            ExecuteAbilitySelection(selectedHero);
+        }
+
+    } //end CheckForHeroSelectionInput()
+
+    void ExecuteAbilitySelection(Hero hero) {
+
+        if(hero.selectedAbility.requiresTargeting) {
+            SelectedToTargeting(hero);
+            hero.currentBattleState = Hero.BattleState.Target;
+        }
+        else {
+            SelectedToTargeting(hero);
+            targetingManager.SortUntargetedType(hero);
+        }
+
+    } //end ExecuteAbilitySelection()
+
+
+
+    public void ExecuteAbility(Hero hero) {
+
+        if(hero.currentAbility.requiresCharge) {
+            hero.currentAbility.InitCharge();
+        }
+        else {
+            hero.currentAbility.InitAbility();
+        }
+
+    } //end ExecuteAbility()
+
+    public void CancelAbility(Hero hero) {
+        hero.selectedAbility = null;
+        hero.targetingAbility = null;
+        if ((hero.currentBattleState != Hero.BattleState.Charge) && (hero.currentAbility != null)) {
+            hero.currentAbility.cooldownEndTimer = Time.time + hero.currentAbility.cooldownDuration;
+        }
+        hero.currentAbility = null;
+        hero.canTakeCommands = true;
+        hero.currentBattleState = Hero.BattleState.Wait;
+    }
+
+
+    //Ability shuffling functions
+
+    public void SelectedToTargeting(Hero hero) {
+
+        hero.targetingAbility = hero.selectedAbility;
+        hero.selectedAbility = null;
+    }
+
+    public void TargetingToCurrent(Hero hero) {
+
+        hero.currentAbility = hero.targetingAbility;
+        hero.targetingAbility = null;
+    }
+
+    public void SelectedToCurrent(Hero hero) {
+
+        hero.currentAbility = hero.selectedAbility;
+        hero.selectedAbility = null;
+    }
 
 
     //Initializing functions
@@ -211,94 +284,25 @@ public class BattleManager : MonoBehaviour {
         } //end foreach
     } //endResetEnemyHealth()
 
-    
-    //Input checking functions
-
-    void CheckForHeroSelectionInput() {
-
-        if(Input.GetKeyDown(KeyCode.Alpha1)) {
-            selectedHero = heroObjectOne;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Alpha2)) {
-            selectedHero = heroObjectTwo;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            selectedHero = null;
-        }
-
-    } //end CheckForHeroSelectionInput()
-
-
-    void CheckForAbilitySelectionInput() {
-
-        if((Input.GetButtonDown("Ability One")) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
-            if(selectedHero.abilityOne.targetScope == Ability.TargetScope.Untargeted) {
-                targetingManager.TargetRandomEnemy(selectedHero);
-            }
-            else {
-                abilityTargeterActive = true;
-                selectedHero.targetingAbility = selectedHero.abilityOne;
-                selectedHero.currentBattleState = Hero.BattleState.Target;
-            }
-          
-        } //end if Ability One
-
-        if((Input.GetButtonDown("Ability Two")) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
-            if(selectedHero.abilityTwo.targetScope == Ability.TargetScope.Untargeted) {
-                targetingManager.TargetRandomEnemy(selectedHero);
-            }
-            else {
-                abilityTargeterActive = true;
-                selectedHero.targetingAbility = selectedHero.abilityTwo;
-                selectedHero.currentBattleState = Hero.BattleState.Target;
-            }
-
-        } //end if Ability Two
-
-    } //end CheckForHeroSelectionInput()
-
-    void ExecuteAbilitySelection(Ability ability) {
-        
-        //It seems like the redundancy up in CheckForAbilitySelectionInput() can be cleared up here,
-            //but passing in (hero, ability) doesn't really work, and selectedHero doesn't take just any old ability, as it turns out.
-            //This would be best if you could get it working, but it's really just ugly at the moment, not non-functional.
-
-    }
 
     //Other functions
 
-
-    public void TargetToCurrent(Hero hero) {
-        hero.currentAbility = hero.targetingAbility;
-        hero.targetingAbility = null;
-    }
-
-
-    public void ExecuteAbility(Hero hero) {
-        if (hero.currentAbility.requiresCharge) {
-            hero.currentAbility.InitCharge();
-        }
-        else {
-            hero.currentAbility.InitAbility();
-        }
-    }
-
-
     void CheckIfEnemyIsDead(Enemy enemy) {
+
         if(enemy.currentHealth <= 0) {
             RemoveEnemy(enemy);
         }
     }
 
     void RemoveEnemy(Enemy enemy) {
+
         enemy.currentHealth = 0;
         enemyList.Remove(enemy);
         Destroy(enemy.gameObject);
     }
 
     void CheckIfHeroIsDead(Hero hero) {
+
         if(hero.currentHealth <= 0) {
             hero.currentHealth = 0;
             hero.currentBattleState = Hero.BattleState.Dead;
@@ -306,7 +310,6 @@ public class BattleManager : MonoBehaviour {
     }
 
     void BattleWon() {
-        Debug.Log("Battlewoncalled");
         SceneManager.LoadScene(sceneName: "Overworld");
     }
 
@@ -314,13 +317,19 @@ public class BattleManager : MonoBehaviour {
         SceneManager.LoadScene(sceneName: "Overworld");
     }
 
+
+
+    //Testing functions
+
     void DebugAllHeroDamage() {
+
         foreach(Hero hero in heroList) {
             hero.currentHealth -= 100;
         }
     }
 
     void DebugSelectedHeroDamage () {
+
         if(selectedHero != null) {
             selectedHero.currentHealth -= 100;
         }

@@ -17,5 +17,5 @@ public class HeroOne : Hero {
         abilityTwo = new HeroOneAbilityTwo();
 
     }
-	
+    
 }
