@@ -93,7 +93,7 @@ public class BattleManager : MonoBehaviour {
         foreach (Hero hero in heroList) {
             CheckBattleState(hero);
         }
-       
+
         foreach (Enemy enemy in enemyList) {
             CheckIfEnemyIsDead(enemy);
         }
@@ -101,6 +101,8 @@ public class BattleManager : MonoBehaviour {
         if (enemyList.Count <= 0) {
             BattleWon();
         }
+
+
 
         //DEBUG FUNCTIONS
 
@@ -110,6 +112,10 @@ public class BattleManager : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.X)) {
             DebugSelectedHeroDamage();
+        }
+
+        if(Input.GetKeyDown(KeyCode.M)) {
+            DebugAllEnemiesSpawnDamageText();
         }
 
     } //end Update
@@ -398,6 +404,14 @@ public class BattleManager : MonoBehaviour {
         }
     }
     
+    void DebugAllEnemiesSpawnDamageText() {
+
+        foreach (Enemy enemy in enemyList) {
+            enemy.SpawnDamageText(1337, Ability.DamageType.Null);
+        }
+
+    } //end DebugAllEnemiesSpawnDamageText()
+
 } //end BattleManager
 
 

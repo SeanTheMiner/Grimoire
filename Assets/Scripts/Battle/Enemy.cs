@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Abilities;
 
 namespace Enemies {
 
@@ -25,7 +26,6 @@ namespace Enemies {
             get; set;
         }
 
-
         public enum Biome
         {
             RedBiome,
@@ -37,7 +37,18 @@ namespace Enemies {
             maxHealth = 0;
             currentHealth = 0;
             healthRegen = 0;
+
         }
+
+        public virtual void SpawnDamageText(int damage, Ability.DamageType damageType) {
+
+            GameObject damageTextPrefab = Instantiate(Resources.Load("DamageTextPrefab"),
+                transform.position,
+                Quaternion.identity
+                ) as GameObject;
+            
+            
+        } //end TakeDamage
 
 
     }
