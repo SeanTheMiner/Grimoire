@@ -8,11 +8,11 @@ public class HeroTwoAbilityOne : Ability {
     public HeroTwoAbilityOne() {
 
         abilityName = "Charge Blast";
+        requiresTargeting = false;
         chargeDuration = 2.0f;
         cooldownDuration = 2.0f;
         procDamage = 50.0f;
         targetScope = TargetScope.AllEnemies;
-        requiresTargeting = false;
         primaryDamageType = DamageType.Magical;
 
     }

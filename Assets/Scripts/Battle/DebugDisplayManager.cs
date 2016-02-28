@@ -21,6 +21,8 @@ public class DebugDisplayManager : MonoBehaviour {
     public Text heroOneChargeText;
     public Text heroTwoChargeText;
 
+    public Text debugChargeTimerText;
+
 
     public void InitDebugText() {
 
@@ -77,8 +79,9 @@ public class DebugDisplayManager : MonoBehaviour {
         else {
             heroTwoChargeText.text = (battleManager.heroObjectTwo.currentAbility.chargeEndTimer - Time.time).ToString();
         }
-    
-    
+
+
+        debugChargeTimerText.text = battleManager.heroObjectTwo.abilityThree.infChargeStartTimer.ToString();
 
     } //end UpdateDebugText()
     

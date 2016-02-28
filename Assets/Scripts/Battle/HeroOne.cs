@@ -15,6 +15,7 @@ public class HeroOne : Hero {
 
         abilityOne = new HeroOneAbilityOne();
         abilityTwo = new HeroOneAbilityTwo();
+        abilityThree = new EndlessPunches();
 
     }
     

@@ -19,6 +19,7 @@ public class BattleDisplayManager : MonoBehaviour {
     public Text selectedHeroNameText;
     public Text abilityOneText;
     public Text abilityTwoText;
+    public Text abilityThreeText;
 
     public void InitNameText() {
 
@@ -57,6 +58,13 @@ public class BattleDisplayManager : MonoBehaviour {
                 abilityTwoText.text = (Mathf.Round(battleManager.selectedHero.abilityTwo.cooldownEndTimer - Time.time)).ToString();
             }
 
+            if(battleManager.selectedHero.abilityThree.cooldownEndTimer <= Time.time) {
+                abilityThreeText.text = battleManager.selectedHero.abilityThree.abilityName;
+            }
+            else {
+                abilityThreeText.text = (Mathf.Round(battleManager.selectedHero.abilityThree.cooldownEndTimer - Time.time)).ToString();
+            }
+
         } //end if there is a selected hero
         else {
             NoHeroSelected();
@@ -69,7 +77,9 @@ public class BattleDisplayManager : MonoBehaviour {
         selectedHeroNameText.text = "Press 1 or 2 to select a hero.";
         abilityOneText.text = "";
         abilityTwoText.text = "";
+        abilityThreeText.text = "";
 
-    }
 
-}
+    } //end NoHeroSelected()
+
+} //end BattleDisplayManager()

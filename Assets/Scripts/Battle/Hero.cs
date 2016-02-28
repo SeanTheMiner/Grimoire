@@ -54,7 +54,8 @@ namespace Heroes {
         public Ability defaultAbility;
 
         public Ability abilityOne;
-        public Ability abilityTwo;  
+        public Ability abilityTwo;
+        public Ability abilityThree;
 
         //Eventually 1-6 go here!
 
@@ -70,8 +71,8 @@ namespace Heroes {
             Charge,
             Burst,
             Barrage,
-            InfBarrage,
             InfCharge,
+            InfBarrage,
             Uncharge,
             Dead
         }

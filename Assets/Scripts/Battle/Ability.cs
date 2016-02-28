@@ -28,6 +28,23 @@ namespace Abilities {
             get; set;
         }
 
+        public bool isInfBarrage {
+            get; set;
+        }
+        
+        public bool isInfCharge {
+            get; set;
+        }
+
+        public bool retainsInfCharge {
+            get; set;
+        }
+        
+        public bool hasCooldown {
+            get; set;
+        }
+
+        
         public DamageType primaryDamageType {
             get; set;
         }
@@ -79,6 +96,10 @@ namespace Abilities {
             get; set;
         }
 
+        public float infChargeStartTimer {
+            get; set;
+        }
+
         public float abilityDuration {
             get; set;
         }
@@ -126,8 +147,16 @@ namespace Abilities {
             get; set;
         }
 
+        public float infProcMultiplier {
+            get; set;
+        }
 
-        //Other stuff
+        //InfCharge stuff
+
+        
+
+
+        //Other stuff, not used for now
 
 
         public string resource {
@@ -142,8 +171,11 @@ namespace Abilities {
 
         //Virtual functions (to be overridden in each ability as needed)
 
-        public virtual void AbilityMap() { }
+        //Key functions (these will require instructions in every ability, or at least each ability class...once i make those...
 
+        public virtual void AbilityMap() { }
+        public virtual void SetBattleState() { }
+        public virtual void ClearTargeting() { }
 
         public virtual void InitCharge() {
             abilityOwner.canTakeCommands = false;
@@ -158,19 +190,27 @@ namespace Abilities {
             }
         } //end CheckCharge()
 
-        public virtual void SetBattleState() { }
-        public virtual void ClearTargeting() { }
 
         public virtual void InitAbility() {
-            abilityOwner.canTakeCommands = false;
-            abilityEndTimer = Time.time + abilityDuration;
             SetBattleState();
+            if((abilityOwner.currentBattleState == Hero.BattleState.InfBarrage) | (abilityOwner.currentBattleState == Hero.BattleState.InfCharge)) {
+                abilityOwner.canTakeCommands = true;
+            }
+            if(isInfBarrage == false) {
+                abilityEndTimer = Time.time + abilityDuration;
+            }
+            if(isInfCharge) {
+                infChargeStartTimer = Time.time;
+            }
+            
         } //end InitAbility()
 
 
         public virtual void ExitAbility() {
             ClearTargeting();
-            cooldownEndTimer = Time.time + cooldownDuration;
+            if(hasCooldown) {
+                cooldownEndTimer = Time.time + cooldownDuration;
+            }
             abilityOwner.currentAbility = null;
             abilityOwner.canTakeCommands = true;
             abilityOwner.currentBattleState = Hero.BattleState.Wait;
@@ -182,6 +222,11 @@ namespace Abilities {
         }
         
 
+        public virtual void InfDamageProc(Hero attacker, Enemy defender, float multiplier) {
+            defender.currentHealth -= (multiplier * (Time.time - infChargeStartTimer));
+        }
+
+
         public virtual void HealProc(Hero healer, Hero healee) {
             healee.currentHealth += healer.currentAbility.procHeal;
             if(healee.currentHealth >= healee.maxHealth) {
@@ -189,7 +234,14 @@ namespace Abilities {
             }
         }
 
-      
+        public virtual void InfHealProc(Hero healer, Hero healee, float multiplier) {
+            healee.currentHealth += (multiplier * (Time.time - infChargeStartTimer));
+            if(healee.currentHealth >= healee.maxHealth) {
+                healee.currentHealth = healee.maxHealth;
+            }
+        }
+
+
         //Ability constructor
 
         public Ability() {
@@ -198,6 +250,10 @@ namespace Abilities {
 
             requiresCharge = true;
             requiresTargeting = true;
+            isInfBarrage = false;
+            isInfCharge = false;
+            retainsInfCharge = false;
+            hasCooldown = true;
             
             targetScope = TargetScope.Null;
 
