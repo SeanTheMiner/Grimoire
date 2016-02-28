@@ -25,10 +25,6 @@ public class HeroOneAbilityTwo : Ability {
 
     public override void AbilityMap() {
 
-        if (targetEnemy == null) {
-            abilityOwner.currentBattleState = Heroes.Hero.BattleState.ReTarget;
-        }
-
         if(nextProcTimer <= Time.time) {
             DamageProc(abilityOwner, targetEnemy);
             nextProcTimer = Time.time + procSpacing;

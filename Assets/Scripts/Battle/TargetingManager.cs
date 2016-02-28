@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,7 +10,7 @@ using Abilities;
 public class TargetingManager : MonoBehaviour {
 
     public BattleManager battleManager;
-    public static System.Random randomer;
+    
 
     public void SortUntargetedType(Hero hero) {
 
@@ -72,7 +71,7 @@ public class TargetingManager : MonoBehaviour {
     //Not used right now - not sure if we'll need a random enemy picker for an ABILITY - proc, sure.
     public void TargetRandomEnemy(Hero hero) {
         battleManager.TargetingToCurrent(hero);
-        hero.currentAbility.targetEnemy = battleManager.enemyList[randomer.Next(battleManager.enemyList.Count)];
+        hero.currentAbility.targetEnemy = battleManager.enemyList[Random.Range(0, battleManager.enemyList.Count)];
         battleManager.ExecuteAbility(hero);
     }
 
@@ -80,7 +79,7 @@ public class TargetingManager : MonoBehaviour {
     //Other functions
 
     public void ReTargetRandomEnemy(Hero hero) {
-        hero.currentAbility.targetEnemy = battleManager.enemyList[randomer.Next(battleManager.enemyList.Count)];
+        hero.currentAbility.targetEnemy = battleManager.enemyList[Random.Range(0, battleManager.enemyList.Count)];
         hero.currentAbility.SetBattleState();
     }
 

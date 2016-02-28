@@ -173,7 +173,12 @@ namespace Abilities {
 
         //Key functions (these will require instructions in every ability, or at least each ability class...once i make those...
 
-        public virtual void AbilityMap() { }
+        public virtual void AbilityMap() {
+            if (targetEnemy == null) {
+                abilityOwner.currentBattleState = Hero.BattleState.ReTarget;
+            }
+        }
+
         public virtual void SetBattleState() { }
         public virtual void ClearTargeting() { }
 
