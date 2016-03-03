@@ -137,6 +137,12 @@ public class BattleManager : MonoBehaviour {
             }
         }
 
+        else if(hero.currentBattleState == Hero.BattleState.TargetAll) {
+            targetingManager.RefreshTargetAllEnemies(hero);
+            hero.currentAbility.SetBattleState();
+            hero.currentAbility.AbilityMap();
+        }
+
         else if(hero.currentBattleState == Hero.BattleState.ReTarget) {
             targetingManager.ReTargetRandomEnemy(hero); 
         }

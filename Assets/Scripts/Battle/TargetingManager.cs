@@ -59,6 +59,13 @@ public class TargetingManager : MonoBehaviour {
         battleManager.ExecuteAbility(hero);
     }
 
+    public void RefreshTargetAllEnemies(Hero hero) {
+        hero.currentAbility.targetEnemyList.Clear();
+        foreach(Enemy enemyTarget in battleManager.enemyList) {
+            hero.currentAbility.targetEnemyList.Add(enemyTarget);
+        }
+    }
+
 
     public void TargetAllHeroes(Hero hero) {
         battleManager.TargetingToCurrent(hero);

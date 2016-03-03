@@ -207,7 +207,10 @@ namespace Abilities {
             if(isInfCharge) {
                 infChargeStartTimer = Time.time;
             }
-            
+            if(targetScope == Ability.TargetScope.AllEnemies) {
+                abilityOwner.currentBattleState = Hero.BattleState.TargetAll;
+            }
+
         } //end InitAbility()
 
 
