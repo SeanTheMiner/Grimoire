@@ -24,6 +24,7 @@ public class HeroOneAbilityTwo : Ability {
     }
 
     public override void AbilityMap() {
+        base.AbilityMap();
 
         if(nextProcTimer <= Time.time) {
             DamageProc(abilityOwner, targetEnemy);
@@ -33,7 +34,7 @@ public class HeroOneAbilityTwo : Ability {
         if(abilityEndTimer <= Time.time) {
             ExitAbility();
         }
+        
+    } //end AbilityMap()
 
-    } //end AbilityMap
-
-}
+} //end HeroOneAbilityTwo class
