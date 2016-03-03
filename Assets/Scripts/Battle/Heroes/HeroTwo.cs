@@ -9,7 +9,7 @@ public class HeroTwo : Hero {
 
         heroName = "Weeetch";
         maxHealth = 600;
-        healthRegen = 7;
+        healthRegen = 3;
         armor = 20;
         spirit = 50;
 

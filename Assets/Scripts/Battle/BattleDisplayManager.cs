@@ -20,8 +20,8 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public void UpdateHealthText() {
 
-        heroOneHealthText.text = battleManager.heroObjectOne.currentHealth.ToString() + "  /  " + battleManager.heroObjectOne.maxHealth.ToString();
-        heroTwoHealthText.text = battleManager.heroObjectTwo.currentHealth.ToString() + "  /  " + battleManager.heroObjectTwo.maxHealth.ToString();
+        heroOneHealthText.text = (Mathf.Round(battleManager.heroObjectOne.currentHealth)).ToString() + "  /  " + battleManager.heroObjectOne.maxHealth.ToString();
+        heroTwoHealthText.text = (Mathf.Round(battleManager.heroObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.heroObjectTwo.maxHealth.ToString();
 
         enemyOneHealthText.text = battleManager.enemyObjectOne.currentHealth.ToString() + "  /  " + battleManager.enemyObjectOne.maxHealth.ToString();
         enemyTwoHealthText.text = battleManager.enemyObjectTwo.currentHealth.ToString() + "  /  " + battleManager.enemyObjectTwo.maxHealth.ToString();

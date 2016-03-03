@@ -51,6 +51,8 @@ public class BattleManager : MonoBehaviour {
 
         ResetHeroes();
         ResetEnemyHealths();
+
+        InvokeRepeating("ApplyHealthRegen", 0, 0.2f);
         
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.NoHeroSelected();
@@ -358,6 +360,23 @@ public class BattleManager : MonoBehaviour {
 
 
 //Other functions
+
+    void ApplyHealthRegen() {
+
+        foreach (Enemy enemy in enemyList) {
+            if (enemy.currentHealth < enemy.maxHealth) {
+                enemy.currentHealth += (enemy.healthRegen / 5);
+            }
+        } //end foreach enemy
+
+        foreach (Hero hero in heroList) {
+            if(hero.currentHealth < hero.maxHealth) {
+                hero.currentHealth += (hero.healthRegen / 5);
+            }
+        } //end foreach hero
+
+    } //end ApplyHealthRegen()
+
 
     void CheckIfEnemyIsDead(Enemy enemy) {
 
