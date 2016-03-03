@@ -66,7 +66,8 @@ public class BattleManager : MonoBehaviour {
     void Update() {
 
         //Every-frame maintenance
-        
+
+        battleDisplayManager.CheckForEnemyHealthRemoval();
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.UpdateSelectedHeroText();
         debugDisplayManager.UpdateDebugText();

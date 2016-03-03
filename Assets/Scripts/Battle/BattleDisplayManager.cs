@@ -6,20 +6,11 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public BattleManager battleManager;
 
-    public Text heroOneNameText;
-    public Text heroTwoNameText;
-
-    public Text heroOneHealthText;
-    public Text heroTwoHealthText;
-
-    public Text enemyOneHealthText;
-    public Text enemyTwoHealthText;
-    public Text enemyThreeHealthText;
-
-    public Text selectedHeroNameText;
-    public Text abilityOneText;
-    public Text abilityTwoText;
-    public Text abilityThreeText;
+    public Text heroOneNameText, heroTwoNameText,
+        heroOneHealthText, heroTwoHealthText, 
+        selectedHeroNameText, abilityOneText, abilityTwoText, abilityThreeText,
+        enemyOneHealthText, enemyTwoHealthText, enemyThreeHealthText
+        ;
 
     public void InitNameText() {
 
@@ -81,5 +72,17 @@ public class BattleDisplayManager : MonoBehaviour {
 
 
     } //end NoHeroSelected()
+
+    public void CheckForEnemyHealthRemoval() {
+        if (battleManager.enemyObjectOne == null) {
+            Destroy(enemyOneHealthText);
+        }
+        if(battleManager.enemyObjectTwo == null) {
+            Destroy(enemyTwoHealthText);
+        }
+        if(battleManager.enemyObjectThree == null) {
+            Destroy(enemyThreeHealthText);
+        }
+    }
 
 } //end BattleDisplayManager()
