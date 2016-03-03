@@ -80,8 +80,12 @@ public class DebugDisplayManager : MonoBehaviour {
             heroTwoChargeText.text = (battleManager.heroObjectTwo.currentAbility.chargeEndTimer - Time.time).ToString();
         }
 
-
-        debugChargeTimerText.text = battleManager.heroObjectTwo.abilityThree.infChargeStartTimer.ToString();
+        if((battleManager.heroObjectTwo.currentBattleState == Heroes.Hero.BattleState.InfCharge) | (battleManager.heroObjectTwo.targetingAbility == battleManager.heroObjectTwo.abilityThree)) {
+            debugChargeTimerText.text = (Time.time - battleManager.heroObjectTwo.abilityThree.infChargeStartTimer).ToString();
+        }
+        else {
+            debugChargeTimerText.text = "";
+        }
 
     } //end UpdateDebugText()
     
