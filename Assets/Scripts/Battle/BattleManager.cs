@@ -58,6 +58,10 @@ public class BattleManager : MonoBehaviour {
 
         debugDisplayManager.InitDebugText();
         debugDisplayManager.UpdateDebugText();
+        
+        foreach (Enemy enemy in enemyList) {
+            enemy.SpawnDamageText();
+        }
 
     } //end Start()
 
@@ -80,7 +84,7 @@ public class BattleManager : MonoBehaviour {
             if ((selectedHero.selectedAbility != null) && (selectedHero.selectedAbility.isInfCharge)) {
                 CheckForInfChargeActivation();
             }
-            else {
+            else if ((selectedHero.currentBattleState != Hero.BattleState.Charge) && (selectedHero.currentBattleState != Hero.BattleState.Barrage)) {
                 CheckForAbilitySelectionInput();
             }
             
@@ -407,7 +411,7 @@ public class BattleManager : MonoBehaviour {
     void DebugAllEnemiesSpawnDamageText() {
 
         foreach (Enemy enemy in enemyList) {
-            enemy.SpawnDamageText(1337, Ability.DamageType.Null);
+            enemy.SpawnDamageText();
         }
 
     } //end DebugAllEnemiesSpawnDamageText()

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Abilities;
+using DamageTextObjects;
 
 namespace Enemies {
 
@@ -15,9 +16,18 @@ namespace Enemies {
         {
             get; set;
         }
+        
 
         public float healthRegen
         {
+            get; set;
+        }
+
+        public int latestDamageTaken {
+            get; set;
+        }
+
+        public Vector3 battlePosition {
             get; set;
         }
 
@@ -40,13 +50,22 @@ namespace Enemies {
 
         }
 
-        public virtual void SpawnDamageText(int damage, Ability.DamageType damageType) {
+        //eventually this guy will include (int damage, Ability.DamageType damageType)
+
+        public virtual void SpawnDamageText() {
+
+            Debug.Log(transform.position);
 
             GameObject damageTextPrefab = Instantiate(Resources.Load("DamageTextPrefab"),
                 transform.position,
-                Quaternion.identity
+                Camera.main.transform.rotation
                 ) as GameObject;
-            
+
+            TextMesh damageTextMesh = damageTextPrefab.GetComponent<TextMesh>();
+            damageTextMesh.text = "Ouch!";
+
+            //damageTextPrefab.damageDisplayed = (int)Mathf.Round(latestDamageTaken);
+             
             
         } //end TakeDamage
 

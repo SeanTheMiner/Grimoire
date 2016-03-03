@@ -13,10 +13,6 @@ public class HeroOne : Hero {
         armor = 50;
         spirit = 20;
 
-        abilityOne = new HeroOneAbilityOne();
-        abilityTwo = new HeroOneAbilityTwo();
-        abilityThree = new EndlessPunches();
-
     }
     
 }
