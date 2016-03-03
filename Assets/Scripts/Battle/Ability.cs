@@ -238,17 +238,27 @@ namespace Abilities {
 
 
         public virtual void HealProc(Hero healer, Hero healee) {
-            healee.currentHealth += healer.currentAbility.procHeal;
-            if(healee.currentHealth >= healee.maxHealth) {
-                healee.currentHealth = healee.maxHealth;
+            int heal;
+            if ((healee.currentHealth + healer.currentAbility.procHeal) <= healee.maxHealth) {
+                heal = Mathf.RoundToInt(healer.currentAbility.procHeal);
             }
+            else {
+                heal = Mathf.RoundToInt(healee.maxHealth - healee.currentHealth);
+            }
+            healee.currentHealth += heal;
+            healee.SpawnHealText(heal);
         }
 
         public virtual void InfHealProc(Hero healer, Hero healee, float multiplier) {
-            healee.currentHealth += (multiplier * (Time.time - infChargeStartTimer));
-            if(healee.currentHealth >= healee.maxHealth) {
-                healee.currentHealth = healee.maxHealth;
+            int heal;
+            if(healee.currentHealth + (multiplier * (Time.time - infChargeStartTimer)) <= healee.maxHealth) {
+                heal = Mathf.RoundToInt(multiplier * (Time.time - infChargeStartTimer));
             }
+            else {
+                heal = Mathf.RoundToInt(healee.maxHealth - healee.currentHealth);
+            }
+            healee.currentHealth += heal;
+            healee.SpawnHealText(heal);
         }
 
 

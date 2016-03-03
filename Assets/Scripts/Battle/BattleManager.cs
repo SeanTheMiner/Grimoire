@@ -389,14 +389,16 @@ public class BattleManager : MonoBehaviour {
     void DebugAllHeroDamage() {
 
         foreach(Hero hero in heroList) {
-            hero.currentHealth -= 100;
+            hero.currentHealth -= 120;
+            hero.SpawnDamageText(120);
         }
     }
 
     void DebugSelectedHeroDamage () {
 
         if(selectedHero != null) {
-            selectedHero.currentHealth -= 100;
+            selectedHero.currentHealth -= 177;
+            selectedHero.SpawnDamageText(177);
         }
     }
 
