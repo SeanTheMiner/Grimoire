@@ -419,6 +419,7 @@
     <Compile Include="Assets\Scripts\Battle\BlueEnemy.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageTextController.cs" />
     <Compile Include="Assets\Scripts\Battle\DebugDisplayManager.cs" />
+    <Compile Include="Assets\Scripts\Battle\DestroyByTime.cs" />
     <Compile Include="Assets\Scripts\Battle\EndlessFire.cs" />
     <Compile Include="Assets\Scripts\Battle\EndlessPunches.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemy.cs" />

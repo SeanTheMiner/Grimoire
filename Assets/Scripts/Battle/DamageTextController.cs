@@ -18,16 +18,9 @@ namespace DamageTextObjects {
         private RectTransform rectTransform;
         private Vector2 textStartPosition, textEndPosition;
         private Color textStartColor, textEndColor;
-        private Coroutine TextRiseCoroutine, TextFadeCoroutine;
 
 
         void Start() {
-
-            //This has to somehow set the damage displayed from the enemy script...blech
-            //damageText.text = damageDisplayed.ToString();
-
-            damageTextMesh = GetComponent<TextMesh>();
-            damageTextMesh.text = "What";
 
             rectTransform = GetComponent<RectTransform>();
 
@@ -37,8 +30,8 @@ namespace DamageTextObjects {
             textStartColor = damageTextMesh.color;
             textEndColor = new Color(textStartColor.r, textStartColor.g, textStartColor.b, 0f);
 
-            TextRiseCoroutine = StartCoroutine(RiseText());
-            TextFadeCoroutine = StartCoroutine(FadeText());
+            StartCoroutine(RiseText());
+            StartCoroutine(FadeText());
 
             Destroy(gameObject, lifetime);
 

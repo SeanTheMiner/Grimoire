@@ -55,13 +55,9 @@ public class BattleManager : MonoBehaviour {
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.NoHeroSelected();
         battleDisplayManager.InitNameText();
-
+        
         debugDisplayManager.InitDebugText();
         debugDisplayManager.UpdateDebugText();
-        
-        foreach (Enemy enemy in enemyList) {
-            enemy.SpawnDamageText();
-        }
 
     } //end Start()
 
@@ -116,10 +112,6 @@ public class BattleManager : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.X)) {
             DebugSelectedHeroDamage();
-        }
-
-        if(Input.GetKeyDown(KeyCode.M)) {
-            DebugAllEnemiesSpawnDamageText();
         }
 
     } //end Update
@@ -407,14 +399,6 @@ public class BattleManager : MonoBehaviour {
             selectedHero.currentHealth -= 100;
         }
     }
-    
-    void DebugAllEnemiesSpawnDamageText() {
-
-        foreach (Enemy enemy in enemyList) {
-            enemy.SpawnDamageText();
-        }
-
-    } //end DebugAllEnemiesSpawnDamageText()
 
 } //end BattleManager
 

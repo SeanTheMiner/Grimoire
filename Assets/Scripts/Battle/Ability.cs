@@ -222,13 +222,18 @@ namespace Abilities {
         } //end ExitAbility()
 
 
+        //Proc functions
+
         public virtual void DamageProc(Hero attacker, Enemy defender) {
-            defender.currentHealth -= procDamage;
+            defender.currentHealth -= Mathf.RoundToInt(procDamage);
+            defender.SpawnDamageText(Mathf.RoundToInt(procDamage));
         }
         
 
         public virtual void InfDamageProc(Hero attacker, Enemy defender, float multiplier) {
-            defender.currentHealth -= (multiplier * (Time.time - infChargeStartTimer));
+            int damage = Mathf.RoundToInt(multiplier * (Time.time - infChargeStartTimer));
+            defender.currentHealth -= damage;
+            defender.SpawnDamageText(damage);
         }
 
 

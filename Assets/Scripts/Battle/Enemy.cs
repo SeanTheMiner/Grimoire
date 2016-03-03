@@ -52,23 +52,18 @@ namespace Enemies {
 
         //eventually this guy will include (int damage, Ability.DamageType damageType)
 
-        public virtual void SpawnDamageText() {
+        public virtual void SpawnDamageText(int damage) {
 
-            Debug.Log(transform.position);
-
-            GameObject damageTextPrefab = Instantiate(Resources.Load("DamageTextPrefab"),
+            GameObject damageTextPrefab = (GameObject)Instantiate(Resources.Load("DamageTextPrefab"),
                 transform.position,
                 Quaternion.Euler(90, 0, 0)
-                ) as GameObject;
+                );
 
-            TextMesh damageTextMesh = damageTextPrefab.GetComponent<TextMesh>();
-            damageTextMesh.text = "Ouch!";
-
-            //damageTextPrefab.damageDisplayed = (int)Mathf.Round(latestDamageTaken);
-             
+            TextMesh damageTextMesh = damageTextPrefab.GetComponentInChildren<TextMesh>();
+            damageTextMesh.text = damage.ToString();
             
         } //end TakeDamage
 
+    } //end Enemy class
 
-    }
-}
+} //end Enemies namespace

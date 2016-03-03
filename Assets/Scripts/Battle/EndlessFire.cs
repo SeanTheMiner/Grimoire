@@ -11,7 +11,7 @@ public class EndlessFire : Ability {
         requiresTargeting = true;
         isInfCharge = true;
         cooldownDuration = 5.0f;
-        infProcMultiplier = 10.0f;
+        infProcMultiplier = 70.0f;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Magical;
 
