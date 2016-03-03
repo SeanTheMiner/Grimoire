@@ -58,7 +58,7 @@ namespace Enemies {
 
             GameObject damageTextPrefab = Instantiate(Resources.Load("DamageTextPrefab"),
                 transform.position,
-                Camera.main.transform.rotation
+                Quaternion.Euler(90, 0, 0)
                 ) as GameObject;
 
             TextMesh damageTextMesh = damageTextPrefab.GetComponent<TextMesh>();

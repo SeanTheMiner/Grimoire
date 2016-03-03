@@ -14,6 +14,7 @@ namespace DamageTextObjects {
         public float lifetime, riseDuration, fadeDuration, riseDistance;
         private float riseElapsedTime, fadeElapsedTime;
 
+        
         private RectTransform rectTransform;
         private Vector2 textStartPosition, textEndPosition;
         private Color textStartColor, textEndColor;
@@ -26,8 +27,10 @@ namespace DamageTextObjects {
             //damageText.text = damageDisplayed.ToString();
 
             damageTextMesh = GetComponent<TextMesh>();
+            damageTextMesh.text = "What";
 
             rectTransform = GetComponent<RectTransform>();
+
             textStartPosition = rectTransform.anchoredPosition;
             textEndPosition = new Vector2(textStartPosition.x, (textStartPosition.y + riseDistance));
 
@@ -41,13 +44,14 @@ namespace DamageTextObjects {
 
         } //end Start() 
 
+        
+
 
         IEnumerator RiseText() {
 
             while(riseElapsedTime < riseDuration) {
                 float t = riseElapsedTime / riseDuration;
                 rectTransform.anchoredPosition = Vector2.Lerp(textStartPosition, textEndPosition, t);
-                damageTextMesh.color = Color.Lerp(textStartColor, textEndColor, t);
                 riseElapsedTime += Time.deltaTime;
                 yield return null;
             }
