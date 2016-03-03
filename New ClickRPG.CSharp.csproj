@@ -433,6 +433,7 @@
     <Compile Include="Assets\Scripts\Battle\Heroes\HeroOne.cs" />
     <Compile Include="Assets\Scripts\Battle\Heroes\HeroTwo.cs" />
     <Compile Include="Assets\Scripts\Battle\TargetingManager.cs" />
+    <Compile Include="Assets\Scripts\Overworld\BattleSpawner.cs" />
     <Compile Include="Assets\Scripts\Overworld\Biome.cs" />
     <Compile Include="Assets\Scripts\Overworld\BlueBiome.cs" />
     <Compile Include="Assets\Scripts\Overworld\CameraController.cs" />
