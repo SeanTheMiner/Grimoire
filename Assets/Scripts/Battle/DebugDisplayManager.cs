@@ -22,6 +22,7 @@ public class DebugDisplayManager : MonoBehaviour {
     public Text heroTwoChargeText;
 
     public Text debugChargeTimerText;
+    public Text armorText;
 
 
     public void InitDebugText() {
@@ -86,6 +87,11 @@ public class DebugDisplayManager : MonoBehaviour {
         else {
             debugChargeTimerText.text = "";
         }
+
+        if (battleManager.enemyObjectOne != null) {
+            armorText.text = battleManager.enemyObjectOne.armor.ToString();
+        }
+
 
     } //end UpdateDebugText()
     
