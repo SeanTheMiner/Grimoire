@@ -414,6 +414,7 @@
     <Compile Include="Assets\NodeCanvas\Tasks\Conditions\Utility\DebugCondition.cs" />
     <Compile Include="Assets\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
     <Compile Include="Assets\Scripts\Battle\Abilities\Ability.cs" />
+    <Compile Include="Assets\Scripts\Battle\Abilities\ArmorBreakAbility.cs" />
     <Compile Include="Assets\Scripts\Battle\Abilities\EndlessFire.cs" />
     <Compile Include="Assets\Scripts\Battle\Abilities\EndlessPunches.cs" />
     <Compile Include="Assets\Scripts\Battle\Abilities\HeroOneAbilityOne.cs" />
@@ -426,6 +427,7 @@
     <Compile Include="Assets\Scripts\Battle\DamageTextController.cs" />
     <Compile Include="Assets\Scripts\Battle\DebugDisplayManager.cs" />
     <Compile Include="Assets\Scripts\Battle\DestroyByTime.cs" />
+    <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
     <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />

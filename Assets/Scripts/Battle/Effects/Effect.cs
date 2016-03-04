@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using Heroes;
-using Enemies;
+using BattleObjects;
 
 namespace Effects {
 
@@ -35,11 +34,7 @@ namespace Effects {
             get; set;
         }
 
-        public Hero effectedHero {
-            get; set;
-        }
-
-        public Enemy effectedEnemy {
+        public BattleObject effectedBattleObject {
             get; set;
         }
 
@@ -53,17 +48,28 @@ namespace Effects {
 
         } //end constructor
         
-
-        public virtual void InitEffect() {
-            effectStartTimer = Time.time;
-            
+        public virtual void EffectMap(BattleObject host) {
+            CheckForExpiration(host);
         }
 
-        public virtual void ResetEffect() {
+
+        public virtual void InitEffect(BattleObject host) {
+            effectStartTimer = Time.time;
+            host.effectList.Add(this);
+
+            //Spawn prefab as child of enemy (panel eventually)
+
+        }
+
+        public virtual void RemoveEffect(BattleObject host) {
             effectStartTimer = 0;
         }
 
-
+        public virtual void CheckForExpiration(BattleObject host) {
+            if ((effectStartTimer + effectDuration) >= Time.time) {
+                RemoveEffect(host);
+            }
+        }
 
 
 

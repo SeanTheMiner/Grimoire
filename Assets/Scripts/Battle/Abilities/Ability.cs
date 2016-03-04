@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using BattleObjects;
 using Heroes;
 using Enemies;
 using Effects;
@@ -190,7 +191,6 @@ namespace Abilities {
             cooldownDuration = 0.0f;
             cooldownEndTimer = 0.0f;
 
-
             nextProcTimer = 0.0f;
             procCounter = 0;
             procLimit = 0;
@@ -306,13 +306,11 @@ namespace Abilities {
 
         //Effect functions
 
-        public virtual void ApplyEffectToHero(Hero hero) {
-            hero.effectList.Add(effectApplied);
+        public virtual void ApplyEffect(Effect effect, BattleObject target) {
+            effect.InitEffect(target);
             //Spawn effect object...yeah? That probably needs to be on the effect itself.
             //so effectApplied.AddEffectObjectToTarget(Hero hero or Enemy enemy);
         }
-
-
 
 
     } //end Ability class
