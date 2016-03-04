@@ -23,9 +23,9 @@ public class BattleDisplayManager : MonoBehaviour {
         heroOneHealthText.text = (Mathf.Round(battleManager.heroObjectOne.currentHealth)).ToString() + "  /  " + battleManager.heroObjectOne.maxHealth.ToString();
         heroTwoHealthText.text = (Mathf.Round(battleManager.heroObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.heroObjectTwo.maxHealth.ToString();
 
-        enemyOneHealthText.text = battleManager.enemyObjectOne.currentHealth.ToString() + "  /  " + battleManager.enemyObjectOne.maxHealth.ToString();
-        enemyTwoHealthText.text = battleManager.enemyObjectTwo.currentHealth.ToString() + "  /  " + battleManager.enemyObjectTwo.maxHealth.ToString();
-        enemyThreeHealthText.text = battleManager.enemyObjectThree.currentHealth.ToString() + "  /  " + battleManager.enemyObjectThree.maxHealth.ToString();
+        enemyOneHealthText.text = (Mathf.Round(battleManager.enemyObjectOne.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectOne.maxHealth.ToString();
+        enemyTwoHealthText.text = (Mathf.Round(battleManager.enemyObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectTwo.maxHealth.ToString();
+        enemyThreeHealthText.text = (Mathf.Round(battleManager.enemyObjectThree.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectThree.maxHealth.ToString();
 
     }
 

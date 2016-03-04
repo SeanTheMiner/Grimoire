@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 using Heroes;
 using Enemies;
+using Effects;
+
 
 namespace Abilities {
 
@@ -16,6 +18,7 @@ namespace Abilities {
         }
 
         public Hero abilityOwner;
+        public Effect effectApplied;
             
 
         //Ability type-defining variables
@@ -43,7 +46,6 @@ namespace Abilities {
         public bool hasCooldown {
             get; set;
         }
-
         
         public DamageType primaryDamageType {
             get; set;
@@ -151,10 +153,6 @@ namespace Abilities {
             get; set;
         }
 
-        //InfCharge stuff
-
-        
-
 
         //Other stuff, not used for now
 
@@ -167,7 +165,46 @@ namespace Abilities {
             get; set;
         }
 
-        
+
+        //Ability constructor
+
+        public Ability() {
+
+            abilityOwner = null;
+
+            requiresCharge = true;
+            requiresTargeting = true;
+            isInfBarrage = false;
+            isInfCharge = false;
+            retainsInfCharge = false;
+            hasCooldown = true;
+
+            targetScope = TargetScope.Null;
+
+            chargeDuration = 0.0f;
+            chargeEndTimer = 0.0f;
+
+            abilityDuration = 0.0f;
+            abilityEndTimer = 0.0f;
+
+            cooldownDuration = 0.0f;
+            cooldownEndTimer = 0.0f;
+
+
+            nextProcTimer = 0.0f;
+            procCounter = 0;
+            procLimit = 0;
+            procSpacing = 0.0f;
+            procDamage = 0.0f;
+            procHeal = 0.0f;
+
+            resource = "";
+            cost = 0;
+            primaryDamageType = DamageType.Null;
+
+        } //end constructor
+
+
 
         //Virtual functions (to be overridden in each ability as needed)
 
@@ -225,6 +262,7 @@ namespace Abilities {
         } //end ExitAbility()
 
 
+
         //Proc functions
 
         public virtual void DamageProc(Hero attacker, Enemy defender) {
@@ -252,6 +290,7 @@ namespace Abilities {
             healee.SpawnHealText(heal);
         }
 
+
         public virtual void InfHealProc(Hero healer, Hero healee, float multiplier) {
             int heal;
             if(healee.currentHealth + (multiplier * (Time.time - infChargeStartTimer)) <= healee.maxHealth) {
@@ -265,43 +304,16 @@ namespace Abilities {
         }
 
 
-        //Ability constructor
+        //Effect functions
 
-        public Ability() {
+        public virtual void ApplyEffectToHero(Hero hero) {
+            hero.effectList.Add(effectApplied);
+            //Spawn effect object...yeah? That probably needs to be on the effect itself.
+            //so effectApplied.AddEffectObjectToTarget(Hero hero or Enemy enemy);
+        }
 
-            abilityOwner = null;
 
-            requiresCharge = true;
-            requiresTargeting = true;
-            isInfBarrage = false;
-            isInfCharge = false;
-            retainsInfCharge = false;
-            hasCooldown = true;
-            
-            targetScope = TargetScope.Null;
 
-            chargeDuration = 0.0f;
-            chargeEndTimer = 0.0f;
-
-            abilityDuration = 0.0f;
-            abilityEndTimer = 0.0f;
-
-            cooldownDuration = 0.0f;
-            cooldownEndTimer = 0.0f;
-
-  
-            nextProcTimer = 0.0f;
-            procCounter = 0;
-            procLimit = 0;
-            procSpacing = 0.0f;
-            procDamage = 0.0f;
-            procHeal = 0.0f;
-
-            resource = "";
-            cost = 0;
-            primaryDamageType = DamageType.Null;
-
-        } //end constructor
 
     } //end Ability class
 

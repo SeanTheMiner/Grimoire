@@ -28,5 +28,5 @@ public class HeroOneAbilityOne : Ability {
     public override void ClearTargeting() {
         targetEnemy = null;
     }
-    
+
 } //end class

@@ -422,9 +422,11 @@
     <Compile Include="Assets\Scripts\Battle\Abilities\HeroTwoAbilityTwo.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleDisplayManager.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleManager.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleObject.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageTextController.cs" />
     <Compile Include="Assets\Scripts\Battle\DebugDisplayManager.cs" />
     <Compile Include="Assets\Scripts\Battle\DestroyByTime.cs" />
+    <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Battle\Enemies\RedEnemy.cs" />
