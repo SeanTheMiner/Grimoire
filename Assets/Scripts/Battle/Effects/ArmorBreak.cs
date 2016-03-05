@@ -9,18 +9,19 @@ public class ArmorBreak : Effect {
 	public ArmorBreak() {
 
         effectName = "Armor Break";
-        effectDuration = 10;
+		effectDisplayText = "ARM / 2";
+		effectDuration = 5;
 
     } //end Constructor
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.armor /= 2;
+        effectedBattleObject.armor /= 2;
     }
 
-    public override void RemoveEffect(BattleObject host) {
-        base.RemoveEffect(host);
-        host.armor *= 2;
+    public override void RemoveEffect() {
+		effectedBattleObject.armor *= 2;
+        base.RemoveEffect();
     }
 
 } //end ArmorBreak class
