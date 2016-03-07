@@ -9,7 +9,7 @@ public class ArmorBreak : Effect {
 	public ArmorBreak() {
 
         effectName = "Armor Break";
-		effectDisplayText = "ARM / 2";
+		effectDisplayText = "Armor down";
 		effectDuration = 5;
 
     } //end Constructor
@@ -22,6 +22,12 @@ public class ArmorBreak : Effect {
     public override void RemoveEffect() {
 		effectedBattleObject.armor *= 2;
         base.RemoveEffect();
+    }
+
+    public override void SpawnDisplayObject()
+    {
+        base.SpawnDisplayObject();
+        effectDisplayPrefab.AddComponent<ArmorBreak>();
     }
 
 } //end ArmorBreak class

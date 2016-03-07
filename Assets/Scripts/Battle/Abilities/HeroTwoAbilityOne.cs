@@ -19,8 +19,6 @@ public class HeroTwoAbilityOne : Ability {
 
     public override void AbilityMap() {
         
-
-
         foreach (Enemy enemy in targetEnemyList) {
             DamageProc(abilityOwner, enemy);
         }

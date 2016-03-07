@@ -308,8 +308,6 @@ namespace Abilities {
 
         public virtual void ApplyEffect(Effect effect, BattleObject target) {
             effect.InitEffect(target);
-            //Spawn effect object...yeah? That probably needs to be on the effect itself.
-            //so effectApplied.AddEffectObjectToTarget(Hero hero or Enemy enemy);
         }
 
 

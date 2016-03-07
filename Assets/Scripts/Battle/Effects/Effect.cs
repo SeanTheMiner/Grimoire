@@ -108,7 +108,9 @@ namespace Effects {
 				                                 Quaternion.Euler (90, 0, 0)
 			                                 );
 			displayTextMesh = effectDisplayPrefab.GetComponentInChildren<TextMesh> ();
-			displayTextMesh.text = effectName;
+			displayTextMesh.text = effectDisplayText;
+
+            //effectDisplayPrefab.AddComponent <EffectClass>();
 
 		} //end SpawnDisplayObject()
 
