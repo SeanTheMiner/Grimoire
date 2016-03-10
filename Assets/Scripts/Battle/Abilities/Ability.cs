@@ -154,6 +154,41 @@ namespace Abilities {
         }
 
 
+        //HitManager variables
+
+        public float critChance {
+            get; set;
+        }
+
+        public float critMultiplier {
+            get; set;
+        }
+
+        public float armorPenetration {
+            get; set;
+        }
+
+        public float spiritPenetration {
+            get; set;
+        }
+
+        public float physicalAccuracy {
+            get; set;
+        }
+
+        public float magicalAccuracy {
+            get; set;
+        }
+
+        public float physicalFinesse {
+            get; set;
+        }
+
+        public float magicalFinesse {
+            get; set;
+        }
+
+        
         //Other stuff, not used for now
 
 
@@ -264,16 +299,63 @@ namespace Abilities {
 
         //Proc functions
 
-        public virtual void DamageProcSingle(Hero attacker, Enemy defender) {
-            defender.currentHealth -= Mathf.RoundToInt(procDamage);
-            defender.SpawnDamageText(Mathf.RoundToInt(procDamage));
+        public virtual void DamageProc (BattleObject defender, float damage) {
+            int damageToApply = Mathf.RoundToInt(damage);
+            defender.currentHealth -= damageToApply;
+            defender.SpawnDamageText(damageToApply);
         }
-        
-        public virtual void DamageProcMultiple(Hero attacker) {
-            foreach (BattleObject defender in targetBattleObjectList) {
-                defender.currentHealth -= Mathf.RoundToInt(procDamage);
-                defender.SpawnDamageText(Mathf.RoundToInt(procDamage));
+
+        public virtual void CritDamageProc (BattleObject defender, float damage) {
+            int damageToApply = Mathf.RoundToInt(damage * critMultiplier);
+            defender.currentHealth -= damageToApply;
+            defender.SpawnDamageText(damageToApply);
+        }
+
+        public virtual void BlockDamageProc (BattleObject defender, float damage) {
+
+            float blockModifier = 0;
+
+            if (primaryDamageType == DamageType.Physical) {
+                blockModifier = defender.physicalBlockModifier;
             }
+            else if (primaryDamageType == DamageType.Magical) {
+                blockModifier = defender.magicalBlockModifier;
+            }
+
+            int damageToApply = Mathf.RoundToInt(damage * (1 - (blockModifier/ 100)));
+            defender.currentHealth -= damageToApply;
+            defender.SpawnDamageText(damageToApply);
+
+        } //end BlockDamageProc
+
+
+        public virtual void DetermineHitOutcomeSingle(Hero attacker, BattleObject defender) {
+           
+            if (HitManager.DetermineHitOutcome(attacker, defender, this) == HitManager.HitOutcome.Evaded) {
+                defender.SpawnMissText();
+                return;
+            }
+            else if (HitManager.DetermineHitOutcome(attacker, defender, this) == HitManager.HitOutcome.Blocked) {
+                BlockDamageProc(defender, procDamage);
+                return;
+            }
+            else if (HitManager.DetermineHitOutcome(attacker, defender, this) == HitManager.HitOutcome.CriticalHit) {
+                CritDamageProc(defender, procDamage);
+                return;
+            }
+            else {
+                DamageProc(defender, procDamage);
+            }
+
+        } //end DamageProcSingle(2)
+        
+
+        public virtual void DetermineHitOutcomeMultiple(Hero attacker) {
+
+            foreach (BattleObject defender in targetBattleObjectList) {
+                DetermineHitOutcomeSingle(attacker, defender);
+            } //end foreach
+
         } //end DamageProcMultiple()
 
 

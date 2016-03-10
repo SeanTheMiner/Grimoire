@@ -3,11 +3,9 @@ using System.Collections;
 using Abilities;
 using Enemies;
 
-public class PiercingFire : Ability
-{
+public class PiercingFire : Ability {
 
-    public PiercingFire()
-    {
+    public PiercingFire() {
 
         abilityName = "Piercing Fire";
         requiresTargeting = false;
@@ -19,10 +17,10 @@ public class PiercingFire : Ability
 
     }
 
-    public override void AbilityMap()
-    {
+    public override void AbilityMap() {
+
         ApplyEffectMultiple(effectApplied);
-        DamageProcMultiple(abilityOwner);
+        DetermineHitOutcomeMultiple(abilityOwner);
         ExitAbility();
 
     } //end AbilityMap()

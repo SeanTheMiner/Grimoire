@@ -18,7 +18,7 @@ public class ArmorBreakAbility : Ability {
     }
 
     public override void AbilityMap() {
-        DamageProcSingle(abilityOwner, targetEnemy);
+        DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
         ApplyEffectSingle(effectApplied, targetEnemy);
         ExitAbility();
     }

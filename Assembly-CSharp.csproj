@@ -409,6 +409,7 @@
      <Compile Include="Assets\Scripts\Battle\Heroes\Hero.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroTwo.cs" />
+     <Compile Include="Assets\Scripts\Battle\HitManager.cs" />
      <Compile Include="Assets\Scripts\Battle\TargetingManager.cs" />
      <Compile Include="Assets\Scripts\Overworld\BattleSpawner.cs" />
      <Compile Include="Assets\Scripts\Overworld\Biome.cs" />

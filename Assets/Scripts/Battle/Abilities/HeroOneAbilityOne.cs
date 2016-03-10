@@ -17,7 +17,7 @@ public class HeroOneAbilityOne : Ability {
 
 
     public override void AbilityMap() {
-        DamageProcSingle(abilityOwner, targetEnemy);
+        DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
         ExitAbility();
     }
 

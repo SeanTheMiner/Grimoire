@@ -25,7 +25,7 @@ public class EndlessPunches : Ability {
         }
 
         if(nextProcTimer <= Time.time) {
-            DamageProcSingle(abilityOwner, targetEnemy);
+            DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
             nextProcTimer = Time.time + procSpacing;
         }
         

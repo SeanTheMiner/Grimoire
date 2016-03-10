@@ -31,10 +31,53 @@ namespace BattleObjects {
             get; set;
         }
 
+        public float physicalEvasionChance {
+            get; set;
+        }
+
+        public float magicalEvasionChance {
+            get; set;
+        }
+
+        public float physicalBlockChance {
+            get; set;
+        }
+
+        public float physicalBlockModifier {
+            get; set;
+        }
+
+        public float magicalBlockChance {
+            get; set;
+        }
+
+        public float magicalBlockModifier {
+            get; set;
+        }
+
+
         public List<Effect> effectList;
         
 
-        
+        //Constructor
+
+        public BattleObject () {
+
+            maxHealth = 0;
+            currentHealth = 0;
+            healthRegen = 0;
+            armor = 0;
+            spirit = 0;
+            physicalEvasionChance = 0;
+            magicalEvasionChance = 0;
+            physicalBlockChance = 0;
+            physicalBlockModifier = 0;
+            magicalBlockChance = 0;
+            magicalBlockModifier = 0;
+            
+        } //end Constructor
+
+
         //Native functions
 
         //eventually this guy will include (int damage, Ability.DamageType damageType)
@@ -63,7 +106,33 @@ namespace BattleObjects {
 
         } //end SpawnHealText()
 
-        
+
+        public virtual void SpawnMissText() {
+
+            GameObject missTextPrefab = (GameObject)Instantiate(Resources.Load("MissTextPrefab"),
+                transform.position,
+                Quaternion.Euler(90, 0, 0)
+                );
+
+            TextMesh missTextMesh = missTextPrefab.GetComponentInChildren<TextMesh>();
+            missTextMesh.text = "Miss!";
+
+        } //end SpawnDamageText()
+
+
+        public virtual void SpawnBlockText(int damage) {
+
+            GameObject blockTextPrefab = (GameObject)Instantiate(Resources.Load("BlockTextPrefab"),
+                transform.position,
+                Quaternion.Euler(90, 0, 0)
+                );
+
+            TextMesh missTextMesh = blockTextPrefab.GetComponentInChildren<TextMesh>();
+            missTextMesh.text = damage.ToString(); 
+
+        } //end SpawnDamageText() 
+
+
     } //end BattleObject class
 
 } //end namespace

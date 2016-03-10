@@ -8,10 +8,14 @@ public class HeroOneAbilityTwo : Ability {
 
         abilityName = "Punch Barrage";
         chargeDuration = 3.0f;
-        abilityDuration = 5.0f;
+        abilityDuration = 6.0f;
         cooldownDuration = 5.0f;
-        procDamage = 30.0f;
-        procSpacing = 0.5f;
+
+        procDamage = 25.0f;
+        procSpacing = 0.4f;
+        critChance = 20;
+        critMultiplier = 2;
+
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
 
@@ -27,7 +31,7 @@ public class HeroOneAbilityTwo : Ability {
         base.AbilityMap();
 
         if(nextProcTimer <= Time.time) {
-            DamageProcSingle(abilityOwner, targetEnemy);
+            DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
             nextProcTimer = Time.time + procSpacing;
         }
 

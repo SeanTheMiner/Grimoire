@@ -18,7 +18,7 @@ public class HeroTwoAbilityOne : Ability {
     }
 
     public override void AbilityMap() {
-        DamageProcMultiple(abilityOwner);
+        DetermineHitOutcomeMultiple(abilityOwner);
         ExitAbility();
     } //end AbilityMap()
     
