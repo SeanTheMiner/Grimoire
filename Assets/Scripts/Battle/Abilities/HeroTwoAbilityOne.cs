@@ -18,12 +18,8 @@ public class HeroTwoAbilityOne : Ability {
     }
 
     public override void AbilityMap() {
-        
-        foreach (Enemy enemy in targetEnemyList) {
-            DamageProc(abilityOwner, enemy);
-        }
+        DamageProcMultiple(abilityOwner);
         ExitAbility();
-
     } //end AbilityMap()
     
     public override void SetBattleState() {
@@ -31,7 +27,7 @@ public class HeroTwoAbilityOne : Ability {
     }
 
     public override void ClearTargeting() {
-        targetEnemyList.Clear();
+        targetBattleObjectList.Clear();
     }
 
 } //end Ability

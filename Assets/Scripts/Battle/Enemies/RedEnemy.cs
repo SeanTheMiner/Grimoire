@@ -10,5 +10,7 @@ public class RedEnemy : Enemy {
         maxHealth = 900;
         healthRegen = 4;
         homeBiome = Biome.BlueBiome;
+        armor = 50;
+        spirit = 100;
     }
 }

@@ -9,7 +9,7 @@ public class PiercingFire : Ability
     public PiercingFire()
     {
 
-        abilityName = "Charge Blast";
+        abilityName = "Piercing Fire";
         requiresTargeting = false;
         chargeDuration = 3.0f;
         cooldownDuration = 5.0f;
@@ -21,13 +21,8 @@ public class PiercingFire : Ability
 
     public override void AbilityMap()
     {
-        
-        foreach (Enemy enemy in targetEnemyList)
-        {
-            ApplyEffect(effectApplied, enemy);
-            DamageProc(abilityOwner, enemy);
-        }
-        
+        ApplyEffectMultiple(effectApplied);
+        DamageProcMultiple(abilityOwner);
         ExitAbility();
 
     } //end AbilityMap()
@@ -39,7 +34,7 @@ public class PiercingFire : Ability
 
     public override void ClearTargeting()
     {
-        targetEnemyList.Clear();
+        targetBattleObjectList.Clear();
     }
 
 } //end Ability

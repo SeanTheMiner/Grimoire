@@ -16,18 +16,12 @@ public class ArmorBreak : Effect {
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        effectedBattleObject.armor /= 2;
+        host.armor /= 2;
     }
 
-    public override void RemoveEffect() {
-		effectedBattleObject.armor *= 2;
-        base.RemoveEffect();
-    }
-
-    public override void SpawnDisplayObject()
-    {
-        base.SpawnDisplayObject();
-        effectDisplayPrefab.AddComponent<ArmorBreak>();
+    public override void RemoveEffect(BattleObject host) {
+		host.armor *= 2;
+        base.RemoveEffect(host);
     }
 
 } //end ArmorBreak class

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,8 +7,7 @@ using BattleObjects;
 namespace Effects {
 
     public class Effect : MonoBehaviour {
-
-
+        
        	public string effectName {
             get; set;
         }
@@ -36,12 +34,6 @@ namespace Effects {
             get; set;
         }
 
-        public BattleObject effectedBattleObject {
-            get; set;
-        }
-
-		public GameObject effectDisplayPrefab;
-
         public Effect () {
 
             effectDuration = 0;
@@ -50,13 +42,10 @@ namespace Effects {
             resolveScale = 1;
 
         } //end constructor
-        
 
-		//Effect display object stuff
+        public GameObject effectManager;
 
-		public TextMesh displayTextMesh;
-
-	
+		
 		//Virtual functions, to be overridden on child classes as needed
 
 		//I feel like most effects won't need a map.
@@ -67,55 +56,43 @@ namespace Effects {
 		//because if there is an effect script on a hero's ability like there needs to be,
 		//it'll just get called all day.
 
-        public virtual void EffectMap(BattleObject host) {
-			
-        }
-
+        public virtual void EffectMap(BattleObject host) {}
 
         public virtual void InitEffect(BattleObject host) {
+            host.effectList.Add(this);
+        }
+
+
+        public virtual void CreateEffectSingle(BattleObject host) {
             
-			effectedBattleObject = host;
-			StartCoroutine (CheckForExpiration ());
-			effectedBattleObject.effectList.Add(this);
-			SpawnDisplayObject();
-            //Spawn prefab as child of enemy (panel eventually)
-
-        }
-
-        public virtual void RemoveEffect() {
-			effectedBattleObject.effectList.Remove (this);
-			Destroy (effectDisplayPrefab);
-        }
-
-		public virtual IEnumerator CheckForExpiration() {
-			yield return new WaitForSeconds (effectDuration);
-			RemoveEffect ();
-		}
+            EffectController effectController = effectManager.AddComponent<EffectController>();
+            effectController.effectApplied = this;
+            effectController.affectedBattleObjectList.Add(host);
+            effectController.Initialize();
+            InitEffect(host);
+           
+        } //endCreateEffectSingle()
 
 
+        public virtual void CreateEffectMultiple(List<BattleObject> list) {
 
-/*        public virtual void CheckForExpiration() {
-            if ((effectStartTimer + effectDuration) <= Time.time) {
-                RemoveEffect();
+            EffectController effectController = effectManager.AddComponent<EffectController>();
+            effectController.effectApplied = this;
+            foreach (BattleObject host in list)
+            {
+                effectController.affectedBattleObjectList.Add(host);
+                InitEffect(host);
             }
+            effectController.Initialize();
+
+        } //end CreateEffectMultiple()
+
+
+        public virtual void RemoveEffect(BattleObject host) {
+			host.effectList.Remove (this);
         }
-*/
 
-		public virtual void SpawnDisplayObject() {
-			Vector3 spawnPosition = effectedBattleObject.transform.position;
-			effectDisplayPrefab = (GameObject)Instantiate (Resources.Load ("EffectPrefab"),
-				                                 spawnPosition,
-				                                 Quaternion.Euler (90, 0, 0)
-			                                 );
-			displayTextMesh = effectDisplayPrefab.GetComponentInChildren<TextMesh> ();
-			displayTextMesh.text = effectDisplayText;
-
-            //effectDisplayPrefab.AddComponent <EffectClass>();
-
-		} //end SpawnDisplayObject()
-
-
-
+        
     } //end Effect Class
 
 } //end Effects namespace

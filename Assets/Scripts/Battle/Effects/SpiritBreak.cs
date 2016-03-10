@@ -19,19 +19,13 @@ public class SpiritBreak : Effect
     public override void InitEffect(BattleObject host)
     {
         base.InitEffect(host);
-        effectedBattleObject.spirit /= 2;
+        host.spirit /= 2;
     }
 
-    public override void RemoveEffect()
+    public override void RemoveEffect(BattleObject host)
     {
-        effectedBattleObject.spirit *= 2;
-        base.RemoveEffect();
-    }
-
-    public override void SpawnDisplayObject()
-    {
-        base.SpawnDisplayObject();
-        effectDisplayPrefab.AddComponent<SpiritBreak>();
+        host.spirit *= 2;
+        base.RemoveEffect(host);
     }
 
 } //end SpiritBreak class

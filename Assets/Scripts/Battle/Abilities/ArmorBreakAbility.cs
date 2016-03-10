@@ -2,6 +2,7 @@
 using System.Collections;
 
 using Abilities;
+using Effects;
 
 public class ArmorBreakAbility : Ability {
 
@@ -17,8 +18,8 @@ public class ArmorBreakAbility : Ability {
     }
 
     public override void AbilityMap() {
-        DamageProc(abilityOwner, targetEnemy);
-        ApplyEffect(effectApplied, targetEnemy);
+        DamageProcSingle(abilityOwner, targetEnemy);
+        ApplyEffectSingle(effectApplied, targetEnemy);
         ExitAbility();
     }
 

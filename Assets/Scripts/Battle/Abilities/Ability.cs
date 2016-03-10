@@ -86,8 +86,7 @@ namespace Abilities {
             get; set;
         }
 
-        public List<Enemy> targetEnemyList = new List<Enemy>();
-        public List<Hero> targetHeroList = new List<Hero>();
+        public List<BattleObject> targetBattleObjectList = new List<BattleObject>();
 
         //Timekeeping
 
@@ -252,7 +251,7 @@ namespace Abilities {
 
 
         public virtual void ExitAbility() {
-            ClearTargeting();
+            //ClearTargeting();
             if(hasCooldown) {
                 cooldownEndTimer = Time.time + cooldownDuration;
             }
@@ -265,20 +264,27 @@ namespace Abilities {
 
         //Proc functions
 
-        public virtual void DamageProc(Hero attacker, Enemy defender) {
+        public virtual void DamageProcSingle(Hero attacker, Enemy defender) {
             defender.currentHealth -= Mathf.RoundToInt(procDamage);
             defender.SpawnDamageText(Mathf.RoundToInt(procDamage));
         }
         
+        public virtual void DamageProcMultiple(Hero attacker) {
+            foreach (BattleObject defender in targetBattleObjectList) {
+                defender.currentHealth -= Mathf.RoundToInt(procDamage);
+                defender.SpawnDamageText(Mathf.RoundToInt(procDamage));
+            }
+        } //end DamageProcMultiple()
+
 
         public virtual void InfDamageProc(Hero attacker, Enemy defender, float multiplier) {
             int damage = Mathf.RoundToInt(multiplier * (Time.time - infChargeStartTimer));
             defender.currentHealth -= damage;
             defender.SpawnDamageText(damage);
-        }
+        } //end InfDamageProc()
 
 
-        public virtual void HealProc(Hero healer, Hero healee) {
+        public virtual void HealProcSingle(Hero healer, Hero healee) {
             int heal;
             if ((healee.currentHealth + healer.currentAbility.procHeal) <= healee.maxHealth) {
                 heal = Mathf.RoundToInt(healer.currentAbility.procHeal);
@@ -288,10 +294,28 @@ namespace Abilities {
             }
             healee.currentHealth += heal;
             healee.SpawnHealText(heal);
-        }
+        } //end HealProcSingle
+
+
+        public virtual void HealProcMultiple(Hero healer) {
+            int heal;
+            foreach (BattleObject healee in targetBattleObjectList)
+            {
+                if ((healee.currentHealth + healer.currentAbility.procHeal) <= healee.maxHealth)
+                {
+                    heal = Mathf.RoundToInt(healer.currentAbility.procHeal);
+                }
+                else {
+                    heal = Mathf.RoundToInt(healee.maxHealth - healee.currentHealth);
+                }
+                healee.currentHealth += heal;
+                healee.SpawnHealText(heal);
+            }
+        } //end HealProcMultiple
 
 
         public virtual void InfHealProc(Hero healer, Hero healee, float multiplier) {
+
             int heal;
             if(healee.currentHealth + (multiplier * (Time.time - infChargeStartTimer)) <= healee.maxHealth) {
                 heal = Mathf.RoundToInt(multiplier * (Time.time - infChargeStartTimer));
@@ -306,11 +330,14 @@ namespace Abilities {
 
         //Effect functions
 
-        public virtual void ApplyEffect(Effect effect, BattleObject target) {
-            effect.InitEffect(target);
+        public virtual void ApplyEffectSingle(Effect effect, BattleObject target) {
+            effect.CreateEffectSingle(target);
         }
 
-
+        public virtual void ApplyEffectMultiple(Effect effect) {
+            effect.CreateEffectMultiple(targetBattleObjectList);
+        }
+        
     } //end Ability class
 
 } //end Ability namespace

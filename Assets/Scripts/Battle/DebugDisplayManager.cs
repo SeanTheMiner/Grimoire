@@ -89,7 +89,7 @@ public class DebugDisplayManager : MonoBehaviour {
         }
 
         if (battleManager.enemyObjectOne != null) {
-            armorText.text = battleManager.enemyObjectOne.armor.ToString();
+            armorText.text = battleManager.enemyObjectOne.spirit.ToString();
         }
 
 

@@ -54,15 +54,15 @@ public class TargetingManager : MonoBehaviour {
     public void TargetAllEnemies(Hero hero) {
         battleManager.TargetingToCurrent(hero);
         foreach(Enemy enemyTarget in battleManager.enemyList) {
-            hero.currentAbility.targetEnemyList.Add(enemyTarget);
+            hero.currentAbility.targetBattleObjectList.Add(enemyTarget);
         }
         battleManager.ExecuteAbility(hero);
     }
 
     public void RefreshTargetAllEnemies(Hero hero) {
-        hero.currentAbility.targetEnemyList.Clear();
+        hero.currentAbility.targetBattleObjectList.Clear();
         foreach(Enemy enemyTarget in battleManager.enemyList) {
-            hero.currentAbility.targetEnemyList.Add(enemyTarget);
+            hero.currentAbility.targetBattleObjectList.Add(enemyTarget);
         }
     }
 
@@ -70,7 +70,7 @@ public class TargetingManager : MonoBehaviour {
     public void TargetAllHeroes(Hero hero) {
         battleManager.TargetingToCurrent(hero);
         foreach(Hero heroTarget in battleManager.heroList) {
-            hero.currentAbility.targetHeroList.Add(heroTarget);
+            hero.currentAbility.targetBattleObjectList.Add(heroTarget);
         }
         battleManager.ExecuteAbility(hero);
     }

@@ -10,7 +10,8 @@ public class BlueEnemy : Enemy {
         maxHealth = 1200;
         healthRegen = 2;
         homeBiome = Biome.BlueBiome;
-        armor = 20;
+        armor = 100;
+        spirit = 50;
     }
 
 }

@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: d130b8aecf39884479381828f5c30b4e
-timeCreated: 1457535841
+guid: 5f7a0354205f97945be084a4093fe715
+timeCreated: 1457567523
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - effectDisplayPrefab: {instanceID: 0}
-  - displayTextMesh: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -19,9 +19,7 @@ public class HeroTwoAbilityTwo : Ability {
 
     public override void AbilityMap() {
 
-        foreach(Hero hero in targetHeroList) {
-            HealProc(abilityOwner, hero);
-        }
+        HealProcMultiple(abilityOwner);
         ExitAbility();
 
     } //end AbilityMap()
@@ -31,7 +29,7 @@ public class HeroTwoAbilityTwo : Ability {
     }
 
     public override void ClearTargeting() {
-        targetHeroList.Clear();
+        targetBattleObjectList.Clear();
     }
 
 }

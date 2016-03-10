@@ -400,6 +400,7 @@
      <Compile Include="Assets\Scripts\Battle\DestroyByTime.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
+     <Compile Include="Assets\Scripts\Battle\Effects\EffectController.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\SpiritBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />

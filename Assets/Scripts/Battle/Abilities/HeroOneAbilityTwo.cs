@@ -27,7 +27,7 @@ public class HeroOneAbilityTwo : Ability {
         base.AbilityMap();
 
         if(nextProcTimer <= Time.time) {
-            DamageProc(abilityOwner, targetEnemy);
+            DamageProcSingle(abilityOwner, targetEnemy);
             nextProcTimer = Time.time + procSpacing;
         }
 
