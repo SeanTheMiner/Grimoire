@@ -164,11 +164,11 @@ namespace Abilities {
             get; set;
         }
 
-        public float armorPenetration {
+        public float physicalPenetration {
             get; set;
         }
 
-        public float spiritPenetration {
+        public float magicalPenetration {
             get; set;
         }
 
@@ -300,13 +300,13 @@ namespace Abilities {
         //Proc functions
 
         public virtual void DamageProc (BattleObject defender, float damage) {
-            int damageToApply = Mathf.RoundToInt(damage);
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply);
         }
 
         public virtual void CritDamageProc (BattleObject defender, float damage) {
-            int damageToApply = Mathf.RoundToInt(damage * critMultiplier);
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply);
         }
@@ -322,7 +322,7 @@ namespace Abilities {
                 blockModifier = defender.magicalBlockModifier;
             }
 
-            int damageToApply = Mathf.RoundToInt(damage * (1 - (blockModifier/ 100)));
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * (1 - (blockModifier / 100)))));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply);
 
@@ -330,20 +330,24 @@ namespace Abilities {
 
 
         public virtual void DetermineHitOutcomeSingle(Hero attacker, BattleObject defender) {
-           
-            if (HitManager.DetermineHitOutcome(attacker, defender, this) == HitManager.HitOutcome.Evaded) {
+            
+            if (HitManager.DetermineEvasion(attacker, defender, this) == true) {
                 defender.SpawnMissText();
+                Debug.Log("Miss");
                 return;
             }
-            else if (HitManager.DetermineHitOutcome(attacker, defender, this) == HitManager.HitOutcome.Blocked) {
+            else if (HitManager.DetermineBlock(attacker, defender, this) == true) {
                 BlockDamageProc(defender, procDamage);
+                Debug.Log("Block");
                 return;
             }
-            else if (HitManager.DetermineHitOutcome(attacker, defender, this) == HitManager.HitOutcome.CriticalHit) {
+            else if (HitManager.DetermineCrit(attacker, defender, this) == true) {
                 CritDamageProc(defender, procDamage);
+                Debug.Log("Crit");
                 return;
             }
             else {
+                Debug.Log("Hit");
                 DamageProc(defender, procDamage);
             }
 

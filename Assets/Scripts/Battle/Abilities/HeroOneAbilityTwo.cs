@@ -9,12 +9,12 @@ public class HeroOneAbilityTwo : Ability {
         abilityName = "Punch Barrage";
         chargeDuration = 3.0f;
         abilityDuration = 6.0f;
-        cooldownDuration = 5.0f;
+        cooldownDuration = 4.0f;
 
-        procDamage = 25.0f;
-        procSpacing = 0.4f;
-        critChance = 20;
-        critMultiplier = 2;
+        procDamage = 60;
+        procSpacing = 0.5f;
+        critChance = 15;
+        critMultiplier = 2.5f;
 
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;

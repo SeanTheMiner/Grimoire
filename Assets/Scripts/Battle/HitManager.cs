@@ -5,60 +5,90 @@ using BattleObjects;
 using Abilities;
 
 public class HitManager : MonoBehaviour {
+    
+    //Abilities call these, in order.
 
-    public enum HitOutcome {
-        Evaded,
-        Blocked,
-        CriticalHit,
-        StandardHit
-    }
-
-
-	public static HitOutcome DetermineHitOutcome (BattleObject attacker, BattleObject defender, Ability ability) {
+    public static bool DetermineEvasion(BattleObject attack, BattleObject defender, Ability ability) {
 
         float evasionChance = 0;
-        float blockChance = 0;
         float accuracy = 0;
-        float finesse = 0;
-
-        //Set the local variables to the appropriate set, per the ability's DamageType
         if (ability.primaryDamageType == Ability.DamageType.Physical) {
             evasionChance = defender.physicalEvasionChance;
-            blockChance = defender.physicalBlockChance;
             accuracy = ability.physicalAccuracy;
-            finesse = ability.physicalFinesse;
-        } else if (ability.primaryDamageType == Ability.DamageType.Magical) {
+        }
+        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
             evasionChance = defender.magicalEvasionChance;
-            blockChance = defender.magicalBlockChance;
             accuracy = ability.magicalAccuracy;
+        }
+
+        int evadeCheck = Random.Range(1, 100);
+        if (evadeCheck <= (evasionChance * (1 - (accuracy / 100)))) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    } //end DetermineEvasion(3)
+
+    
+    public static bool DetermineBlock(BattleObject attack, BattleObject defender, Ability ability) {
+
+        float blockChance = 0;
+        float finesse = 0;
+        if (ability.primaryDamageType == Ability.DamageType.Physical) {
+            blockChance = defender.physicalBlockChance;
+            finesse = ability.physicalFinesse;
+        }
+        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
+            blockChance = defender.magicalBlockChance;
             finesse = ability.magicalFinesse;
         }
 
-        //Determine evasion
-        int evadeCheck = Random.Range(1, 100);
-        if (evadeCheck <= (evasionChance * (1- (accuracy / 100)))) {
-            return HitOutcome.Evaded;
-        }
-        
-        //Determine block
         int blockCheck = Random.Range(1, 100);
         if (blockCheck <= (blockChance * (1 - (finesse / 100)))) {
-            return HitOutcome.Blocked;
+            return true;
         }
-
-        //Determine crit
-        int critCheck = Random.Range(1, 100);
-        if (critCheck <= ability.critChance) {
-            return HitOutcome.CriticalHit;
-        }
-
         else {
-            return HitOutcome.StandardHit;
+            return false;
         }
-        
-    } //end DetermineHitOutcome(3)
-	
+
+    } //end DetermineBlock(3)
 
 
+    public static bool DetermineCrit(BattleObject attacker, BattleObject defender, Ability ability) {
 
+        float critChance = ability.critChance;
+        int critCheck = Random.Range(1, 100); 
+        if (critCheck <= critChance) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    } //end DetermineCrit(3)
+
+
+    public static float ApplyResist(BattleObject attacker, BattleObject defender, Ability ability, float rawDamage) {
+
+        float resist = 0;
+        float penetration = 0;
+        float finalDamage;
+        if (ability.primaryDamageType == Ability.DamageType.Physical) {
+            resist = defender.armor;
+            penetration = ability.physicalPenetration;
+        }
+        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
+            resist = defender.spirit;
+            penetration = ability.magicalPenetration;
+        }
+
+        resist *= (1 - (penetration / 100));
+        finalDamage = (rawDamage * (100/(resist+100)));
+        return finalDamage;
+
+    } //end ApplyResist(4)
+
+    
 } //end HitManager class 

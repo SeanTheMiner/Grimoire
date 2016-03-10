@@ -12,9 +12,9 @@ public class BlueEnemy : Enemy {
         homeBiome = Biome.BlueBiome;
         armor = 100;
         spirit = 50;
-        physicalEvasionChance = 10;
-        physicalBlockChance = 15;
-        physicalBlockModifier = 40;
+        physicalEvasionChance = 20;
+        physicalBlockChance = 20;
+        physicalBlockModifier = 50;
     }
 
 }
