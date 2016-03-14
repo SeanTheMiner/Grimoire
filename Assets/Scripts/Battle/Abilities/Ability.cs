@@ -12,6 +12,8 @@ namespace Abilities {
 
     public abstract class Ability : MonoBehaviour {
 
+        public TargetingManager targetingManager = new TargetingManager();
+        
         //Name and hero
 
         public string abilityName {
@@ -20,7 +22,7 @@ namespace Abilities {
 
         public Hero abilityOwner;
         public Effect effectApplied;
-            
+
 
         //Ability type-defining variables
 
@@ -35,7 +37,7 @@ namespace Abilities {
         public bool isInfBarrage {
             get; set;
         }
-        
+
         public bool isInfCharge {
             get; set;
         }
@@ -43,20 +45,32 @@ namespace Abilities {
         public bool retainsInfCharge {
             get; set;
         }
-        
+
         public bool hasCooldown {
             get; set;
         }
-        
+
+        public AbilityType abilityType {
+            get; set;
+        }
+
+        public enum AbilityType {
+            Burst,
+            Barrage,
+            InfCharge,
+            InfBarrage,
+            Toggle
+        }
+
         public DamageType primaryDamageType {
             get; set;
         }
 
         public enum DamageType {
-            Null,
             Physical,
             Magical,
-            Healing
+            Healing,
+            None
         }
 
         public TargetScope targetScope {
@@ -64,7 +78,6 @@ namespace Abilities {
         }
 
         public enum TargetScope {
-            Null,
             Untargeted,
             SingleHero,
             SingleEnemy,
@@ -209,13 +222,9 @@ namespace Abilities {
 
             requiresCharge = true;
             requiresTargeting = true;
-            isInfBarrage = false;
-            isInfCharge = false;
             retainsInfCharge = false;
             hasCooldown = true;
-
-            targetScope = TargetScope.Null;
-
+            
             chargeDuration = 0.0f;
             chargeEndTimer = 0.0f;
 
@@ -234,7 +243,7 @@ namespace Abilities {
 
             resource = "";
             cost = 0;
-            primaryDamageType = DamageType.Null;
+            
 
         } //end constructor
 
@@ -244,14 +253,34 @@ namespace Abilities {
 
         //Key functions (these will require instructions in every ability, or at least each ability class...once i make those...
 
-        public virtual void AbilityMap() {
-            if (targetEnemy == null) {
-                abilityOwner.currentBattleState = Hero.BattleState.ReTarget;
+
+        public virtual void InitAbility() {
+
+            if (abilityType == AbilityType.InfCharge) {
+                infChargeStartTimer = Time.time;
+                abilityOwner.currentBattleState = Hero.BattleState.InfCharge;
+                return;
             }
+
+            else if (requiresTargeting) {
+                abilityOwner.currentBattleState = Hero.BattleState.Target;
+            }
+            
+            else if(requiresCharge) {
+                InitCharge();
+            }
+            
+            else {
+                AbilityMap();
+            }
+
+        } //end InitAbility()
+
+
+        public virtual void CastRay() {
+            targetingManager.CastSelecterRay(this);
         }
 
-        public virtual void SetBattleState() { }
-        public virtual void ClearTargeting() { }
 
         public virtual void InitCharge() {
             abilityOwner.canTakeCommands = false;
@@ -262,50 +291,66 @@ namespace Abilities {
 
         public virtual void CheckCharge() {
             if (chargeEndTimer <= Time.time) {
-                InitAbility();
+                if (abilityType == AbilityType.Barrage) {
+                    abilityEndTimer = Time.time + abilityDuration;
+                }
+                abilityOwner.currentBattleState = Hero.BattleState.Ability;
+                AbilityMap();
             }
         } //end CheckCharge()
 
 
-        public virtual void InitAbility() {
-            SetBattleState();
-            if((abilityOwner.currentBattleState == Hero.BattleState.InfBarrage) | (abilityOwner.currentBattleState == Hero.BattleState.InfCharge)) {
-                abilityOwner.canTakeCommands = true;
-            }
-            if(isInfBarrage == false) {
-                abilityEndTimer = Time.time + abilityDuration;
-            }
-            if(isInfCharge) {
-                infChargeStartTimer = Time.time;
-            }
-            if(targetScope == Ability.TargetScope.AllEnemies) {
-                abilityOwner.currentBattleState = Hero.BattleState.TargetAll;
-            }
+        public virtual void AbilityMap() {
 
-        } //end InitAbility()
+            // This is where everything defining the ability goes. 
+           
+        }
 
-
+        
         public virtual void ExitAbility() {
-            //ClearTargeting();
+
+            ClearTargeting();
+
             if(hasCooldown) {
                 cooldownEndTimer = Time.time + cooldownDuration;
             }
+
             abilityOwner.currentAbility = null;
             abilityOwner.canTakeCommands = true;
             abilityOwner.currentBattleState = Hero.BattleState.Wait;
+
         } //end ExitAbility()
 
+
+        public virtual void ClearTargeting() {
+            targetEnemy = null;
+            targetBattleObjectList.Clear();
+        }
+        
+
+        public virtual void CheckTarget () {
+
+            if ((targetScope == TargetScope.SingleEnemy) && (targetEnemy == null)) {
+                targetingManager.TargetRandomEnemy(this);
+            }
+            else if ((targetScope == TargetScope.SingleHero) && (targetHero == null)) {
+                targetingManager.TargetRandomHero(this);
+            }
+       
+        } //end CheckTarget()
 
 
         //Proc functions
 
         public virtual void DamageProc (BattleObject defender, float damage) {
+
             int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply);
         }
 
         public virtual void CritDamageProc (BattleObject defender, float damage) {
+
             int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply);

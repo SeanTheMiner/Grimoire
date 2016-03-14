@@ -5,90 +5,88 @@ using System.Collections.Generic;
 using Heroes;
 using Enemies;
 using Abilities;
+using BattleObjects;
 
 
-public class TargetingManager : MonoBehaviour {
+public class TargetingManager {
 
-    public BattleManager battleManager;
-    
+    public void SortTargetingType(Ability ability) {
 
-    public void SortUntargetedType(Hero hero) {
-
-        if (hero.targetingAbility.targetScope == Ability.TargetScope.AllEnemies) {
-            TargetAllEnemies(hero);
+        if ((ability.targetScope == Ability.TargetScope.SingleEnemy) | (ability.targetScope == Ability.TargetScope.SingleHero) | (ability.targetScope == Ability.TargetScope.SingleHeroOrEnemy)) {
+            ability.abilityOwner.currentBattleState = Hero.BattleState.Target;
         }
-
-        else if(hero.targetingAbility.targetScope == Ability.TargetScope.AllHeroes) {
-            TargetAllHeroes(hero);
+        else if (ability.targetScope == Ability.TargetScope.AllEnemies) {
+            TargetAllEnemies(ability);
+        }
+        else if (ability.targetScope == Ability.TargetScope.AllHeroes) {
+            TargetAllHeroes(ability);
         }
         
+    } //end SortTargetingType
 
-    } //end SortUntargetedType()
 
-
-    public void CastSelecterRay(Hero hero) {
+    public void CastSelecterRay(Ability ability) {
 
         RaycastHit objectHit;
         Ray selectingRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+        
         if(Physics.Raycast(selectingRay, out objectHit)) {
 
-            if((objectHit.collider.tag == "Enemy") && (hero.targetingAbility.targetScope == Ability.TargetScope.SingleEnemy)) {
-                battleManager.TargetingToCurrent(hero);
-                hero.currentAbility.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
-                battleManager.ExecuteAbility(hero);
-            } //end if enemy & enemytargetable
+            if((objectHit.collider.tag == "Enemy") && (ability.targetScope == Ability.TargetScope.SingleEnemy)) {
+                ability.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
+            } 
 
-            else if((objectHit.collider.tag == "Hero") && (hero.currentAbility.targetScope == Ability.TargetScope.SingleHero)) {
-                battleManager.TargetingToCurrent(hero);
-                hero.currentAbility.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
-                battleManager.ExecuteAbility(hero);
-            } //end if hero & herotargetable
-            
+            else if((objectHit.collider.tag == "Hero") && (ability.targetScope == Ability.TargetScope.SingleHero)) {
+                ability.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
+            } 
+
+            else {
+                return;
+            }
+
+            if (ability.requiresCharge) {
+                ability.InitCharge();
+            }
+            else {
+                ability.AbilityMap();
+            }
+
         }  //end if objectHit
 
-    } //end CastSelecterRay
-    
-    //Initial unchosen targeting functions
+    } //end CastSelecterRay(1)
 
-    public void TargetAllEnemies(Hero hero) {
-        battleManager.TargetingToCurrent(hero);
-        foreach(Enemy enemyTarget in battleManager.enemyList) {
-            hero.currentAbility.targetBattleObjectList.Add(enemyTarget);
+
+    public void TargetRandomEnemy(Ability ability) {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        int index = Random.Range(0, allEnemies.Length);
+        ability.targetEnemy = allEnemies[index].GetComponent<Enemy>();
+    } //end TargetRandomEnemy(1)
+
+
+    public void TargetAllEnemies(Ability ability) {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemyObject in allEnemies) {
+            if (enemyObject.activeInHierarchy) {
+                ability.targetBattleObjectList.Add(enemyObject.GetComponent<Enemy>());
+            }
         }
-        battleManager.ExecuteAbility(hero);
-    }
+    } //end TargetAllEnemies(1)
 
-    public void RefreshTargetAllEnemies(Hero hero) {
-        hero.currentAbility.targetBattleObjectList.Clear();
-        foreach(Enemy enemyTarget in battleManager.enemyList) {
-            hero.currentAbility.targetBattleObjectList.Add(enemyTarget);
+
+    public void TargetRandomHero(Ability ability) {
+        GameObject[] allHeroes = GameObject.FindGameObjectsWithTag("Hero");
+        int index = Random.Range(0, allHeroes.Length);
+        ability.targetHero = allHeroes[index].GetComponent<Hero>();
+    } //end TargetRandomHero(1)
+
+
+    public void TargetAllHeroes(Ability ability) {
+        GameObject[] allHeroes = GameObject.FindGameObjectsWithTag("Hero");
+        foreach (GameObject heroObject in allHeroes) {
+            if (heroObject.activeInHierarchy) {
+                ability.targetBattleObjectList.Add(heroObject.GetComponent<Hero>());
+            }
         }
-    }
-
-
-    public void TargetAllHeroes(Hero hero) {
-        battleManager.TargetingToCurrent(hero);
-        foreach(Hero heroTarget in battleManager.heroList) {
-            hero.currentAbility.targetBattleObjectList.Add(heroTarget);
-        }
-        battleManager.ExecuteAbility(hero);
-    }
-
-    //Not used right now - not sure if we'll need a random enemy picker for an ABILITY - proc, sure.
-    public void TargetRandomEnemy(Hero hero) {
-        battleManager.TargetingToCurrent(hero);
-        hero.currentAbility.targetEnemy = battleManager.enemyList[Random.Range(0, battleManager.enemyList.Count)];
-        battleManager.ExecuteAbility(hero);
-    }
-
-
-    //Other functions
-
-    public void ReTargetRandomEnemy(Hero hero) {
-        hero.currentAbility.targetEnemy = battleManager.enemyList[Random.Range(0, battleManager.enemyList.Count)];
-        hero.currentAbility.SetBattleState();
-    }
-
+    } //end TargetAllHeroes(1)
 
 } //end TargetingManager

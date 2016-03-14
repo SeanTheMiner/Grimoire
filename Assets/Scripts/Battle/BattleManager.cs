@@ -13,9 +13,8 @@ using Biomes;
 public class BattleManager : MonoBehaviour {
 
     public BattleDisplayManager battleDisplayManager;
-    public DebugDisplayManager debugDisplayManager;
-    public TargetingManager targetingManager;
-
+    public DebugDisplayManager debugDisplayManager; 
+    
     public float battleTimer = 0.0f;
     public static System.Random randomer;
 
@@ -80,16 +79,12 @@ public class BattleManager : MonoBehaviour {
         CheckForHeroSelectionInput();
 
         if(selectedHero != null) {
-            if ((selectedHero.selectedAbility != null) && (selectedHero.selectedAbility.isInfCharge)) {
-                CheckForInfChargeActivation();
-            }
-            else if ((selectedHero.currentBattleState != Hero.BattleState.Charge) && (selectedHero.currentBattleState != Hero.BattleState.Barrage)) {
+            if (selectedHero.canTakeCommands) {
                 CheckForAbilitySelectionInput();
             }
-            
-
         } //end if hero is selected
 
+        
         //Hero BattleState switch
             //Figure out what each Hero is currently doing, and see if it needs to change
 
@@ -127,56 +122,30 @@ public class BattleManager : MonoBehaviour {
 
     void CheckBattleState(Hero hero) {
 
-        if (hero.currentBattleState == Hero.BattleState.Wait) {
+        if ((hero.currentBattleState == Hero.BattleState.Wait) 
+            | (hero.currentBattleState == Hero.BattleState.InfCharge) 
+            | (hero.currentBattleState == Hero.BattleState.Dead)) {
             return;
         }
 
-        else if(hero.currentBattleState == Hero.BattleState.Target) {
-            if (hero.currentAbility != null) {
-                hero.currentAbility.AbilityMap();
+        else if (hero.currentBattleState == Hero.BattleState.Target) {
+            if (Input.GetMouseButtonDown(0)) {
+                selectedHero.currentAbility.CastRay();
             }
-            if(Input.GetMouseButtonDown(0)) {
-                targetingManager.CastSelecterRay(hero);
-            }
-        }
-
-        else if(hero.currentBattleState == Hero.BattleState.TargetAll) {
-            targetingManager.RefreshTargetAllEnemies(hero);
-            hero.currentAbility.SetBattleState();
-            hero.currentAbility.AbilityMap();
-        }
-
-        else if(hero.currentBattleState == Hero.BattleState.ReTarget) {
-            targetingManager.ReTargetRandomEnemy(hero); 
         }
 
         else if(hero.currentBattleState == Hero.BattleState.Charge) {
             hero.currentAbility.CheckCharge();
         }
-
-        else if(hero.currentBattleState == Hero.BattleState.Burst) {
+        
+        else if(hero.currentBattleState == Hero.BattleState.Ability) {
             hero.currentAbility.AbilityMap();
-        }
-
-        else if(hero.currentBattleState == Hero.BattleState.Barrage) {
-            hero.currentAbility.AbilityMap();
-        }
-
-        else if(hero.currentBattleState == Hero.BattleState.InfCharge) {
-            return;
-        }
-
-        else if(hero.currentBattleState == Hero.BattleState.InfBarrage) {
-            hero.currentAbility.AbilityMap();
-        }
-
-        else if(hero.currentBattleState == Hero.BattleState.Dead) {
-            return;
         }
 
     } //end CheckBattleState()
 
     
+
 //Input checking functions
 
     void CheckForHeroSelectionInput() {
@@ -198,85 +167,29 @@ public class BattleManager : MonoBehaviour {
 
     void CheckForAbilitySelectionInput() {
 
-        if((Input.GetKeyDown(KeyCode.Q)) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
-            selectedHero.selectedAbility = selectedHero.abilityOne;
-            ExecuteAbilitySelection(selectedHero);
+        Ability abilityToApply = null;
+
+        if ((Input.GetKeyDown(KeyCode.Q)) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
+            abilityToApply = selectedHero.abilityOne;
         }
-
-        if((Input.GetKeyDown(KeyCode.W)) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
-            selectedHero.selectedAbility = selectedHero.abilityTwo;
-            ExecuteAbilitySelection(selectedHero);
+        else if ((Input.GetKeyDown(KeyCode.W)) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
+            abilityToApply = selectedHero.abilityTwo;
         }
-
-        if((Input.GetKeyDown(KeyCode.E)) && (selectedHero.abilityThree.cooldownEndTimer <= Time.time)) {
-            selectedHero.selectedAbility = selectedHero.abilityThree;
-            ExecuteAbilitySelection(selectedHero);
+        else if ((Input.GetKeyDown(KeyCode.E)) && (selectedHero.abilityThree.cooldownEndTimer <= Time.time)) {
+            abilityToApply = selectedHero.abilityThree;
         }
-
-    } //end CheckForHeroSelectionInput()
-
-    void CheckForInfChargeActivation() {
-
-        if((Input.GetKeyDown(KeyCode.Q)) && (selectedHero.selectedAbility == selectedHero.abilityOne)) {
-            SelectedToTargeting(selectedHero);
-            ExecuteInfChargeTargeting(selectedHero);
+            
+        if (abilityToApply != null) {
+            selectedHero.currentAbility = abilityToApply;
+            abilityToApply.InitAbility();
         }
-
-        if((Input.GetKeyDown(KeyCode.W)) && (selectedHero.selectedAbility == selectedHero.abilityTwo)) {
-            SelectedToTargeting(selectedHero);
-            ExecuteInfChargeTargeting(selectedHero);
-        }
-
-        if((Input.GetKeyDown(KeyCode.E)) && (selectedHero.selectedAbility == selectedHero.abilityThree)) {
-            SelectedToTargeting(selectedHero);
-            ExecuteInfChargeTargeting(selectedHero);
-        }
-
-    } //end CheckForInfChargeActivation()
-
-
+ 
+    } //end CheckForAbilitySelectionInput()
+    
+    
 //Ability handling functions
 
-    public void ExecuteAbilitySelection(Hero hero) {
-
-        if(hero.selectedAbility.isInfCharge) {
-            hero.selectedAbility.InitAbility();
-            return;
-        }
-        else if(hero.selectedAbility.requiresTargeting) {
-            SelectedToTargeting(hero);
-            hero.currentBattleState = Hero.BattleState.Target;
-        }
-        else {
-            SelectedToTargeting(hero);
-            targetingManager.SortUntargetedType(hero);
-        }
-
-    } //end ExecuteAbilitySelection()
-
-    public void ExecuteInfChargeTargeting(Hero hero) {
-        if(hero.targetingAbility.requiresTargeting) {
-            hero.currentBattleState = Hero.BattleState.Target;
-        }
-        else {
-            targetingManager.SortUntargetedType(hero);
-        }
-    } //end ExecuteInfChargeTargeting()
-
-    public void ExecuteAbility(Hero hero) {
-
-        if (hero.currentAbility.isInfCharge) {
-            hero.currentAbility.AbilityMap();
-        }
-        else if(hero.currentAbility.requiresCharge) {
-            hero.currentAbility.InitCharge();
-        }
-        else {
-            hero.currentAbility.InitAbility();
-        }
-
-    } //end ExecuteAbility()
-
+        
     public void CancelAbility(Hero hero) {
         hero.selectedAbility = null;
         hero.targetingAbility = null;

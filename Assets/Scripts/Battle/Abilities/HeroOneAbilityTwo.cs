@@ -7,30 +7,26 @@ public class HeroOneAbilityTwo : Ability {
     public HeroOneAbilityTwo() {
 
         abilityName = "Punch Barrage";
+        abilityType = AbilityType.Barrage;
+        targetScope = TargetScope.SingleEnemy;
+        primaryDamageType = DamageType.Physical;
+
         chargeDuration = 3.0f;
         abilityDuration = 6.0f;
         cooldownDuration = 4.0f;
 
         procDamage = 60;
         procSpacing = 0.5f;
-        critChance = 15;
+        critChance = 30;
         critMultiplier = 2.5f;
+        
+    } //end constructor
 
-        targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
-
-    }
-
-    //Basic barrage for now
-
-    public override void SetBattleState() {
-        abilityOwner.currentBattleState = Heroes.Hero.BattleState.Barrage;
-    }
 
     public override void AbilityMap() {
-        base.AbilityMap();
-
+      
         if(nextProcTimer <= Time.time) {
+            CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
             nextProcTimer = Time.time + procSpacing;
         }

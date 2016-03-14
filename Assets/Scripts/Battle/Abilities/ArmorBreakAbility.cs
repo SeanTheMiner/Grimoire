@@ -9,26 +9,23 @@ public class ArmorBreakAbility : Ability {
     public ArmorBreakAbility () {
 
         abilityName = "Armor Breaker";
-        chargeDuration = 3;
-        cooldownDuration = 5;
-        procDamage = 100;
+        abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
 
+        chargeDuration = 4;
+        cooldownDuration = 8;
+        procDamage = 100;
+        
     }
 
+
     public override void AbilityMap() {
-        DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
+        CheckTarget();
         ApplyEffectSingle(effectApplied, targetEnemy);
+        DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
         ExitAbility();
     }
 
-    public override void SetBattleState() {
-        abilityOwner.currentBattleState = Heroes.Hero.BattleState.Burst;
-    }
-
-    public override void ClearTargeting() {
-        targetEnemy = null;
-    }
 
 } //end ArmorBreakAbility class

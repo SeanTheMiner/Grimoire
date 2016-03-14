@@ -8,26 +8,23 @@ public class HeroTwoAbilityOne : Ability {
     public HeroTwoAbilityOne() {
 
         abilityName = "Charge Blast";
-        requiresTargeting = false;
-        chargeDuration = 2.0f;
-        cooldownDuration = 3.0f;
-        procDamage = 100.0f;
+        abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
         primaryDamageType = DamageType.Magical;
+        
+        requiresTargeting = false;
 
+        chargeDuration = 4.0f;
+        cooldownDuration = 10.0f;
+        procDamage = 300.0f;
+       
     }
 
     public override void AbilityMap() {
+        targetingManager.TargetAllEnemies(this);
         DetermineHitOutcomeMultiple(abilityOwner);
         ExitAbility();
     } //end AbilityMap()
     
-    public override void SetBattleState() {
-        abilityOwner.currentBattleState = Heroes.Hero.BattleState.Burst;
-    }
-
-    public override void ClearTargeting() {
-        targetBattleObjectList.Clear();
-    }
 
 } //end Ability

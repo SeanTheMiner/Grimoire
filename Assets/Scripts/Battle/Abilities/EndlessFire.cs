@@ -8,29 +8,25 @@ public class EndlessFire : Ability {
     public EndlessFire() {
 
         abilityName = "Endless Fire";
-        requiresTargeting = true;
-        isInfCharge = true;
-        cooldownDuration = 5.0f;
-        infProcMultiplier = 80.0f;
+        abilityType = AbilityType.InfCharge;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Magical;
 
+        requiresTargeting = true;
+        
+        cooldownDuration = 5.0f;
+        infProcMultiplier = 70.0f;
+        
     }
 
 
     public override void AbilityMap() {
-       
+
+        targetingManager.SortTargetingType(this);
         InfDamageProc(abilityOwner, targetEnemy, infProcMultiplier);
         ExitAbility();
 
     } //end AbilityMap()
 
-    public override void SetBattleState() {
-        abilityOwner.currentBattleState = Heroes.Hero.BattleState.InfCharge;
-    }
-
-    public override void ClearTargeting() {
-        targetEnemy = null;
-    }
 
 } //end EndlessFire() (HAHAHA)
