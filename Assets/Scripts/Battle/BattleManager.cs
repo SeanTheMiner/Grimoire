@@ -137,8 +137,12 @@ public class BattleManager : MonoBehaviour {
         else if(hero.currentBattleState == Hero.BattleState.Charge) {
             hero.currentAbility.CheckCharge();
         }
-        
-        else if(hero.currentBattleState == Hero.BattleState.Ability) {
+
+        else if (hero.currentBattleState == Hero.BattleState.InfBarrage) {
+            hero.currentAbility.AbilityMap();
+        }
+
+        else if((hero.currentBattleState == Hero.BattleState.Ability) | (hero.currentBattleState == Hero.BattleState.InfBarrage)) {
             hero.currentAbility.AbilityMap();
         }
 
@@ -178,11 +182,17 @@ public class BattleManager : MonoBehaviour {
         else if ((Input.GetKeyDown(KeyCode.E)) && (selectedHero.abilityThree.cooldownEndTimer <= Time.time)) {
             abilityToApply = selectedHero.abilityThree;
         }
-            
+        
         if (abilityToApply != null) {
-            selectedHero.currentAbility = abilityToApply;
-            abilityToApply.InitAbility();
+            if (selectedHero.currentBattleState != Hero.BattleState.InfCharge) {
+                selectedHero.currentAbility = abilityToApply;
+                abilityToApply.InitAbility();
+            }
+            else if (abilityToApply == selectedHero.currentAbility) {
+                selectedHero.currentAbility.targetingManager.SortTargetingType(selectedHero.currentAbility);
+            }
         }
+        
  
     } //end CheckForAbilitySelectionInput()
     
@@ -193,7 +203,7 @@ public class BattleManager : MonoBehaviour {
     public void CancelAbility(Hero hero) {
         hero.selectedAbility = null;
         hero.targetingAbility = null;
-        if ((hero.currentBattleState != Hero.BattleState.Charge) && (hero.currentAbility != null)) {
+        if ((hero.currentBattleState != Hero.BattleState.Charge) && (hero.currentBattleState != Hero.BattleState.InfCharge) && (hero.currentAbility != null)) {
             hero.currentAbility.cooldownEndTimer = Time.time + hero.currentAbility.cooldownDuration;
         }
         hero.currentAbility = null;

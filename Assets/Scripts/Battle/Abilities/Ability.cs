@@ -276,7 +276,11 @@ namespace Abilities {
 
         } //end InitAbility()
 
+        public virtual void TargetInfCharge() {
+            targetingManager.SortTargetingType(this);
+        }
 
+        
         public virtual void CastRay() {
             targetingManager.CastSelecterRay(this);
         }
@@ -294,9 +298,15 @@ namespace Abilities {
                 if (abilityType == AbilityType.Barrage) {
                     abilityEndTimer = Time.time + abilityDuration;
                 }
-                abilityOwner.currentBattleState = Hero.BattleState.Ability;
+                if (abilityType != AbilityType.InfBarrage) {
+                    abilityOwner.currentBattleState = Hero.BattleState.Ability;
+                }
+                else {
+                    abilityOwner.currentBattleState = Hero.BattleState.InfBarrage;
+                    abilityOwner.canTakeCommands = true;
+                }
                 AbilityMap();
-            }
+            } //end if chargeEndTimer <= Time.time
         } //end CheckCharge()
 
 
