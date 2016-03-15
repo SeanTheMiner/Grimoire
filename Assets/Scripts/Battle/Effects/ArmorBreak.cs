@@ -10,7 +10,7 @@ public class ArmorBreak : Effect {
 
         effectName = "Armor Break";
 		effectDisplayText = "Armor down";
-		effectDuration = 5;
+		effectDuration = 12;
 
     } //end Constructor
 

@@ -11,8 +11,8 @@ public class EndlessPunches : Ability {
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
 
-        chargeDuration = 1.0f;
-        procDamage = 20.0f;
+        chargeDuration = 2.0f;
+        procDamage = 90;
         procSpacing = 0.7f;
 
         hasCooldown = false;

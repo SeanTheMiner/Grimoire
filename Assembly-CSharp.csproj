@@ -385,8 +385,10 @@
      <Compile Include="Assets\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\Ability.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\ArmorBreakAbility.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities\EbbAndFlow.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\EndlessFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\EndlessPunches.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities\FireStorm.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\HeroOneAbilityOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\HeroOneAbilityTwo.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\HeroTwoAbilityOne.cs" />

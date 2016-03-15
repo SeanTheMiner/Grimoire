@@ -12,7 +12,7 @@ public class SpiritBreak : Effect
 
         effectName = "Spirit Break";
         effectDisplayText = "Spirit down";
-        effectDuration = 5;
+        effectDuration = 8;
 
     } //end Constructor
 
