@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Heroes;
 using Enemies;
 using Abilities;
+using EnemyAbilities;
 using BattleObjects;
 
 
@@ -88,5 +89,70 @@ public class TargetingManager {
             }
         }
     } //end TargetAllHeroes(1)
+
+
+
+
+    // END HERO SET, BEGIN ENEMY SET
+    //YEAH I KNOW IT'S EMBARRASSING, MAYBE ABILITYOWNERS SHOULD BE BATTLEOBJECTS HUH
+
+
+    public void EnemySortTargetingType(EnemyAbility ability) {
+
+        if (ability.targetScope == EnemyAbility.TargetScope.SingleHero) {
+            EnemyTargetRandomHero(ability);
+            return;
+        }
+        else if (ability.targetScope == EnemyAbility.TargetScope.SingleEnemy) {
+            EnemyTargetRandomEnemy(ability);
+            return;
+        }
+        else if (ability.targetScope == EnemyAbility.TargetScope.AllHeroes) {
+            EnemyTargetAllHeroes(ability); ;
+            return;
+        }
+        else if (ability.targetScope == EnemyAbility.TargetScope.AllEnemies) {
+            EnemyTargetAllEnemies(ability);
+            return;
+        }
+
+    } //end SortTargetingType
+
+    
+    public void EnemyTargetRandomHero(EnemyAbility ability) {
+        GameObject[] allHeroes = GameObject.FindGameObjectsWithTag("Hero");
+        int index = Random.Range(0, allHeroes.Length);
+        ability.targetHero = allHeroes[index].GetComponent<Hero>();
+    } //end TargetRandomHero(1)
+    
+
+    public void EnemyTargetAllHeroes(EnemyAbility ability) {
+        GameObject[] allHeroes = GameObject.FindGameObjectsWithTag("Hero");
+        foreach (GameObject heroObject in allHeroes) {
+            if (heroObject.activeInHierarchy) {
+                ability.targetBattleObjectList.Add(heroObject.GetComponent<Hero>());
+            }
+        }
+    } //end TargetAllHeroes(1)
+
+
+    public void EnemyTargetRandomEnemy(EnemyAbility ability) {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        int index = Random.Range(0, allEnemies.Length);
+        ability.targetEnemy = allEnemies[index].GetComponent<Enemy>();
+    } //end TargetRandomEnemy(1)
+
+
+    public void EnemyTargetAllEnemies(EnemyAbility ability) {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemyObject in allEnemies) {
+            if (enemyObject.activeInHierarchy) {
+                ability.targetBattleObjectList.Add(enemyObject.GetComponent<Enemy>());
+            }
+        }
+    } //end TargetAllEnemies(1)
+
+
+
 
 } //end TargetingManager

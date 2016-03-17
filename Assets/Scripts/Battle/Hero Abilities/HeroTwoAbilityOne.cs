@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Abilities;
-using Enemies;
+
 
 public class HeroTwoAbilityOne : Ability {
 

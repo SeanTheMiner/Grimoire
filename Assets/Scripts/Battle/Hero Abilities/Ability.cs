@@ -79,6 +79,7 @@ namespace Abilities {
 
         public enum TargetScope {
             Untargeted,
+            Self,
             SingleHero,
             SingleEnemy,
             SingleHeroOrEnemy,
@@ -334,6 +335,7 @@ namespace Abilities {
 
         public virtual void ClearTargeting() {
             targetEnemy = null;
+            targetHero = null;
             targetBattleObjectList.Clear();
         }
         

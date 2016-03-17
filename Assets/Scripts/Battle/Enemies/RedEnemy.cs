@@ -5,12 +5,22 @@ using Enemies;
 
 public class RedEnemy : Enemy {
 
-    public RedEnemy()
-    {
+    public RedEnemy() {
+
         maxHealth = 900;
         healthRegen = 4;
         homeBiome = Biome.BlueBiome;
-        armor = 50;
-        spirit = 100;
+        armor = 30;
+        spirit = 80;
+        magicalEvasionChance = 20;
+        magicalBlockChance = 10;
+        magicalBlockModifier = 70;
+        
+        enemyAbilityList.Add(enemyAbilityOne);
+        enemyAbilityList.Add(enemyAbilityTwo);
+        enemyAbilityList.Add(enemyAbilityTwo);
+
     }
+
+    
 }

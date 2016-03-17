@@ -8,10 +8,15 @@ public class HeroOne : Hero {
     public HeroOne() {
 
         heroName = "Punchie McGee";
-        maxHealth = 800;
-        healthRegen = 7;
-        armor = 50;
-        spirit = 20;
+        maxHealth = 1120;
+        healthRegen = 6;
+        armor = 120;
+        spirit = 40;
+
+        physicalBlockChance = 25;
+        physicalBlockModifier = 60;
+        magicalBlockChance = 15;
+        magicalBlockModifier = 40;
 
     }
     

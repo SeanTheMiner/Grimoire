@@ -13,18 +13,19 @@ public class HeroTwoAbilityTwo : Ability {
         primaryDamageType = DamageType.Healing;
         requiresTargeting = false;
         
-        chargeDuration = 4.0f;
-        cooldownDuration = 5.0f;
+        chargeDuration = 6.0f;
+        cooldownDuration = 10.0f;
 
-        procHeal = 120.0f;
+        procHeal = 150.0f;
         
     } //end constructor
 
     public override void AbilityMap() {
-        //CheckTarget();
-        //I think that's not necessary?
+
+        targetingManager.TargetAllHeroes(this);
         HealProcMultiple(abilityOwner);
         ExitAbility();
+
     } //end AbilityMap()
     
 

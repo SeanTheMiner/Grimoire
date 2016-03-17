@@ -13,7 +13,8 @@ using Biomes;
 public class BattleManager : MonoBehaviour {
 
     public BattleDisplayManager battleDisplayManager;
-    public DebugDisplayManager debugDisplayManager; 
+    public DebugDisplayManager debugDisplayManager;
+    public EnemyManager enemyManager;
     
     public float battleTimer = 0.0f;
     public static System.Random randomer;
@@ -33,8 +34,8 @@ public class BattleManager : MonoBehaviour {
     public Enemy enemyObjectTwo;
     public Enemy enemyObjectThree;
 
-    public List<Hero> heroList;
-    public List<Enemy> enemyList;
+    public List<Hero> heroList = new List<Hero>();
+    public List<Enemy> enemyList = new List<Enemy>();
    
     public GameObject[] allHeroes;
     public GameObject[] allEnemies;

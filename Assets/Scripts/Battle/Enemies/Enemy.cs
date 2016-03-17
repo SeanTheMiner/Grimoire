@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Abilities;
+using EnemyAbilities;
 using BattleObjects;
 
 namespace Enemies {
@@ -24,7 +24,23 @@ namespace Enemies {
             BlueBiome
         }
 
+        public EnemyState currentEnemyState {
+            get; set;
+        }
 
+        public enum EnemyState {
+            Inactive,
+            Charge,
+            Barrage,
+        }
+
+        public EnemyAbility currentEnemyAbility;
+        public EnemyAbility enemyAbilityOne, enemyAbilityTwo, enemyAbilityThree;
+
+        public List<EnemyAbility> enemyAbilityList = new List<EnemyAbility>();
+        
+
+        
     } //end Enemy class
 
 } //end Enemies namespace

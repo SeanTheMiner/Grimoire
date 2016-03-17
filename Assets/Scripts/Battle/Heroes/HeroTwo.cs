@@ -8,11 +8,14 @@ public class HeroTwo : Hero {
     public HeroTwo() {
 
         heroName = "Weeetch";
-        maxHealth = 600;
-        healthRegen = 3;
+        maxHealth = 735;
+        healthRegen = 2;
         armor = 20;
-        spirit = 50;
+        spirit = 100;
+
+        magicalEvasionChance = 30;
+        physicalEvasionChance = 20;
 
     }
 
-} //end HeroTwo()
+}
