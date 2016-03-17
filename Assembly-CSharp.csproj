@@ -393,6 +393,7 @@
      <Compile Include="Assets\Scripts\Battle\Abilities\HeroOneAbilityTwo.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\HeroTwoAbilityOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\HeroTwoAbilityTwo.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities\MonkKata.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities\PiercingFire.cs" />
      <Compile Include="Assets\Scripts\Battle\BattleDisplayManager.cs" />
      <Compile Include="Assets\Scripts\Battle\BattleManager.cs" />

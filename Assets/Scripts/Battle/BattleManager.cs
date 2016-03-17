@@ -182,7 +182,17 @@ public class BattleManager : MonoBehaviour {
         else if ((Input.GetKeyDown(KeyCode.E)) && (selectedHero.abilityThree.cooldownEndTimer <= Time.time)) {
             abilityToApply = selectedHero.abilityThree;
         }
+        else if ((Input.GetKeyDown(KeyCode.A)) && (selectedHero.abilityFour.cooldownEndTimer <= Time.time)) {
+            abilityToApply = selectedHero.abilityFour;
+        }
+        else if ((Input.GetKeyDown(KeyCode.S)) && (selectedHero.abilityFive.cooldownEndTimer <= Time.time)) {
+            abilityToApply = selectedHero.abilityFive;
+        }
+        else if ((Input.GetKeyDown(KeyCode.D)) && (selectedHero.abilitySix.cooldownEndTimer <= Time.time)) {
+            abilityToApply = selectedHero.abilitySix;
+        }
         
+
         if (abilityToApply != null) {
             if (selectedHero.currentBattleState != Hero.BattleState.InfCharge) {
                 selectedHero.currentAbility = abilityToApply;

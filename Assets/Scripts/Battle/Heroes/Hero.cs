@@ -38,7 +38,7 @@ namespace Heroes {
 
         [HideInInspector]
         public Ability currentAbility, queuedAbility, selectedAbility, targetingAbility, defaultAbility;
-        public Ability abilityOne, abilityTwo, abilityThree;
+        public Ability abilityOne, abilityTwo, abilityThree, abilityFour, abilityFive, abilitySix;
         
         public BattleState currentBattleState {
             get; set;

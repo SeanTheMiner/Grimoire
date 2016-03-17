@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Abilities;
+using System;
 
 public class BattleDisplayManager : MonoBehaviour {
 
@@ -8,9 +10,24 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public Text heroOneNameText, heroTwoNameText,
         heroOneHealthText, heroTwoHealthText, 
-        selectedHeroNameText, abilityOneText, abilityTwoText, abilityThreeText,
+        selectedHeroNameText, 
+        abilityOneText, abilityTwoText, abilityThreeText, abilityFourText, abilityFiveText, abilitySixText,
         enemyOneHealthText, enemyTwoHealthText, enemyThreeHealthText
         ;
+
+    public List<Text> abilityTextList = new List<Text>();
+
+    public void Awake () {
+
+        abilityTextList.Add(abilityOneText);
+        abilityTextList.Add(abilityTwoText);
+        abilityTextList.Add(abilityThreeText);
+        abilityTextList.Add(abilityFourText);
+        abilityTextList.Add(abilityFiveText);
+        abilityTextList.Add(abilitySixText);
+
+    } //end Awake()
+
 
     public void InitNameText() {
 
@@ -35,7 +52,18 @@ public class BattleDisplayManager : MonoBehaviour {
 
             selectedHeroNameText.text = battleManager.selectedHero.heroName;
 
-            if(battleManager.selectedHero.abilityOne.cooldownEndTimer <= Time.time) {
+            UpdateAbilityButtonText(abilityOneText, battleManager.selectedHero.abilityOne);
+            UpdateAbilityButtonText(abilityTwoText, battleManager.selectedHero.abilityTwo);
+            UpdateAbilityButtonText(abilityThreeText, battleManager.selectedHero.abilityThree);
+            UpdateAbilityButtonText(abilityFourText, battleManager.selectedHero.abilityFour);
+            UpdateAbilityButtonText(abilityFiveText, battleManager.selectedHero.abilityFive);
+            UpdateAbilityButtonText(abilitySixText, battleManager.selectedHero.abilitySix);
+
+
+
+            /*
+
+            if (battleManager.selectedHero.abilityOne.cooldownEndTimer <= Time.time) {
                 abilityOneText.text = battleManager.selectedHero.abilityOne.abilityName;
             }
             else {
@@ -56,6 +84,8 @@ public class BattleDisplayManager : MonoBehaviour {
                 abilityThreeText.text = (Mathf.Round(battleManager.selectedHero.abilityThree.cooldownEndTimer - Time.time)).ToString();
             }
 
+    */
+
         } //end if there is a selected hero
         else {
             NoHeroSelected();
@@ -63,15 +93,29 @@ public class BattleDisplayManager : MonoBehaviour {
 
     } //end UpdateSelectedHeroText()
 
+
+    public void UpdateAbilityButtonText(Text text, Ability ability) {
+
+        if (ability.cooldownEndTimer <= Time.time) {
+            text.text = ability.abilityName;
+        }
+        else {
+            text.text = (Mathf.Round(ability.cooldownEndTimer - Time.time)).ToString();
+        }
+
+    } //end UpdateAbilityButtonText(2)
+
+    
     public void NoHeroSelected() {
 
-        selectedHeroNameText.text = "Press 1 or 2 to select a hero.";
-        abilityOneText.text = "";
-        abilityTwoText.text = "";
-        abilityThreeText.text = "";
+        selectedHeroNameText.text = "Select hero.";
 
-
+        foreach (Text abilityText in abilityTextList) {
+            abilityText.text = "";
+        }
+        
     } //end NoHeroSelected()
+
 
     public void CheckForEnemyHealthRemoval() {
         if (battleManager.enemyObjectOne == null) {
@@ -83,6 +127,6 @@ public class BattleDisplayManager : MonoBehaviour {
         if(battleManager.enemyObjectThree == null) {
             Destroy(enemyThreeHealthText);
         }
-    }
+    } //end CheckForEnemyHealthRemoval()
 
 } //end BattleDisplayManager()
