@@ -15,6 +15,12 @@ public class BattleDisplayManager : MonoBehaviour {
         enemyOneHealthText, enemyTwoHealthText, enemyThreeHealthText
         ;
 
+    public Slider heroOneHealthSlider, heroTwoHealthSlider;
+
+    //public Animator anim;
+    //Animator anim?
+    //in awake anim = GetComponent <Animator>();
+
     public List<Text> abilityTextList = new List<Text>();
 
     public void Awake () {
@@ -25,6 +31,9 @@ public class BattleDisplayManager : MonoBehaviour {
         abilityTextList.Add(abilityFourText);
         abilityTextList.Add(abilityFiveText);
         abilityTextList.Add(abilitySixText);
+
+        heroOneHealthSlider.maxValue = battleManager.heroObjectOne.maxHealth;
+        heroTwoHealthSlider.maxValue = battleManager.heroObjectTwo.maxHealth;
 
     } //end Awake()
 
@@ -39,6 +48,9 @@ public class BattleDisplayManager : MonoBehaviour {
 
         heroOneHealthText.text = (Mathf.Round(battleManager.heroObjectOne.currentHealth)).ToString() + "  /  " + battleManager.heroObjectOne.maxHealth.ToString();
         heroTwoHealthText.text = (Mathf.Round(battleManager.heroObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.heroObjectTwo.maxHealth.ToString();
+
+        heroOneHealthSlider.value = (Mathf.Round(battleManager.heroObjectOne.currentHealth));
+        heroTwoHealthSlider.value = (Mathf.Round(battleManager.heroObjectTwo.currentHealth));
 
         enemyOneHealthText.text = (Mathf.Round(battleManager.enemyObjectOne.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectOne.maxHealth.ToString();
         enemyTwoHealthText.text = (Mathf.Round(battleManager.enemyObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectTwo.maxHealth.ToString();
@@ -59,32 +71,6 @@ public class BattleDisplayManager : MonoBehaviour {
             UpdateAbilityButtonText(abilityFiveText, battleManager.selectedHero.abilityFive);
             UpdateAbilityButtonText(abilitySixText, battleManager.selectedHero.abilitySix);
 
-
-
-            /*
-
-            if (battleManager.selectedHero.abilityOne.cooldownEndTimer <= Time.time) {
-                abilityOneText.text = battleManager.selectedHero.abilityOne.abilityName;
-            }
-            else {
-                abilityOneText.text = (Mathf.Round(battleManager.selectedHero.abilityOne.cooldownEndTimer - Time.time)).ToString();
-            }
-
-            if(battleManager.selectedHero.abilityTwo.cooldownEndTimer <= Time.time) {
-                abilityTwoText.text = battleManager.selectedHero.abilityTwo.abilityName;
-            }
-            else {
-                abilityTwoText.text = (Mathf.Round(battleManager.selectedHero.abilityTwo.cooldownEndTimer - Time.time)).ToString();
-            }
-
-            if(battleManager.selectedHero.abilityThree.cooldownEndTimer <= Time.time) {
-                abilityThreeText.text = battleManager.selectedHero.abilityThree.abilityName;
-            }
-            else {
-                abilityThreeText.text = (Mathf.Round(battleManager.selectedHero.abilityThree.cooldownEndTimer - Time.time)).ToString();
-            }
-
-    */
 
         } //end if there is a selected hero
         else {

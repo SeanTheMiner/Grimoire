@@ -17,7 +17,7 @@ public class MonkKata : Ability {
         primaryDamageType = DamageType.Physical;
 
         chargeDuration = 2;
-        procDamage = 40;
+        procDamage = 30;
         procSpacing = 0.35f;
 
         interProcSpacing = 2.5f;
@@ -44,7 +44,7 @@ public class MonkKata : Ability {
         } //end if isChaining = false
 
         if (nextProcTimer <= Time.time) {
-            procDamage += (procCounter * 40);
+            procDamage += 30;
             if (Random.Range(0, 100) <= chainContinueChance) {
                 DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
                 nextProcTimer = Time.time + procSpacing;
