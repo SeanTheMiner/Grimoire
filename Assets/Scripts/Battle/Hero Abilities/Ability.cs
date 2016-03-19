@@ -20,6 +20,11 @@ namespace Abilities {
             get; set;
         }
 
+        public int manaCost {
+            get; set;
+        }
+
+
         public Hero abilityOwner;
         public Effect effectApplied;
 
@@ -31,6 +36,10 @@ namespace Abilities {
         }
 
         public bool requiresTargeting {
+            get; set;
+        }
+
+        public bool costsMana {
             get; set;
         }
 
@@ -202,17 +211,6 @@ namespace Abilities {
             get; set;
         }
 
-        
-        //Other stuff, not used for now
-
-
-        public string resource {
-            get; set;
-        }
-
-        public int cost {
-            get; set;
-        }
 
 
         //Ability constructor
@@ -220,12 +218,14 @@ namespace Abilities {
         public Ability() {
 
             abilityOwner = null;
+            manaCost = 0;
 
             requiresCharge = true;
             requiresTargeting = true;
+            costsMana = true;
             retainsInfCharge = false;
             hasCooldown = true;
-            
+           
             chargeDuration = 0.0f;
             chargeEndTimer = 0.0f;
 
@@ -241,11 +241,7 @@ namespace Abilities {
             procSpacing = 0.0f;
             procDamage = 0.0f;
             procHeal = 0.0f;
-
-            resource = "";
-            cost = 0;
             
-
         } //end constructor
 
 
@@ -272,6 +268,9 @@ namespace Abilities {
             }
             
             else {
+                if (costsMana) {
+                    ApplyManaCost();
+                }
                 AbilityMap();
             }
 
@@ -306,9 +305,19 @@ namespace Abilities {
                     abilityOwner.currentBattleState = Hero.BattleState.InfBarrage;
                     abilityOwner.canTakeCommands = true;
                 }
+
+                if (costsMana) {
+                    ApplyManaCost();
+                }
+
                 AbilityMap();
             } //end if chargeEndTimer <= Time.time
         } //end CheckCharge()
+
+
+        public virtual void ApplyManaCost () {
+            abilityOwner.currentMana -= manaCost;
+        } //end ApplyManaCost()
 
 
         public virtual void AbilityMap() {

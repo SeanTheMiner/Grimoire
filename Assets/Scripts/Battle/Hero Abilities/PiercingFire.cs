@@ -11,6 +11,7 @@ public class PiercingFire : Ability {
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
         primaryDamageType = DamageType.Magical;
+        manaCost = 100;
 
         requiresTargeting = false;
 

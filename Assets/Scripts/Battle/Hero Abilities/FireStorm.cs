@@ -10,6 +10,7 @@ public class FireStorm : Ability {
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.Untargeted;
         primaryDamageType = DamageType.Magical;
+        costsMana = false;
 
         chargeDuration = 2;
         procDamage = 45;

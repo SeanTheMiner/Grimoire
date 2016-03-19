@@ -10,6 +10,7 @@ public class EbbAndFlow : Ability {
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.Untargeted;
         primaryDamageType = DamageType.Magical;
+        costsMana = false;
 
         chargeDuration = 3;
         procDamage = 100;

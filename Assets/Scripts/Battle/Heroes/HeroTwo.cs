@@ -8,8 +8,13 @@ public class HeroTwo : Hero {
     public HeroTwo() {
 
         heroName = "Weeetch";
-        maxHealth = 735;
-        healthRegen = 2;
+
+        maxHealth = 760;
+        healthRegen = 3;
+        maxMana = 1100;
+        manaRegen = 15;
+
+
         armor = 20;
         spirit = 100;
 

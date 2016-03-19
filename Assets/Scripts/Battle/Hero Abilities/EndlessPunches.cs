@@ -10,6 +10,7 @@ public class EndlessPunches : Ability {
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
+        costsMana = false;
 
         chargeDuration = 2.0f;
         procDamage = 90;

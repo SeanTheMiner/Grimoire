@@ -12,6 +12,7 @@ public class ArmorBreakAbility : Ability {
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
+        manaCost = 80;
 
         chargeDuration = 4;
         cooldownDuration = 8;

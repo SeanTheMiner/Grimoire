@@ -11,6 +11,7 @@ public class HeroTwoAbilityOne : Ability {
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
         primaryDamageType = DamageType.Magical;
+        manaCost = 70;
         
         requiresTargeting = false;
 

@@ -12,8 +12,9 @@ public class HeroTwoAbilityTwo : Ability {
         targetScope = TargetScope.AllHeroes;
         primaryDamageType = DamageType.Healing;
         requiresTargeting = false;
+        manaCost = 85;
         
-        chargeDuration = 6.0f;
+        chargeDuration = 4.0f;
         cooldownDuration = 10.0f;
 
         procHeal = 150.0f;
@@ -21,7 +22,7 @@ public class HeroTwoAbilityTwo : Ability {
     } //end constructor
 
     public override void AbilityMap() {
-
+        
         targetingManager.TargetAllHeroes(this);
         HealProcMultiple(abilityOwner);
         ExitAbility();

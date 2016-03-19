@@ -9,13 +9,16 @@ public class BattleDisplayManager : MonoBehaviour {
     public BattleManager battleManager;
 
     public Text heroOneNameText, heroTwoNameText,
+        selectedHeroNameText,
         heroOneHealthText, heroTwoHealthText, 
-        selectedHeroNameText, 
+        heroOneManaText, heroTwoManaText,
         abilityOneText, abilityTwoText, abilityThreeText, abilityFourText, abilityFiveText, abilitySixText,
         enemyOneHealthText, enemyTwoHealthText, enemyThreeHealthText
         ;
 
-    public Slider heroOneHealthSlider, heroTwoHealthSlider;
+    public Slider heroOneHealthSlider, heroTwoHealthSlider,
+        heroOneManaSlider, heroTwoManaSlider
+        ;
 
     //public Animator anim;
     //Animator anim?
@@ -35,6 +38,9 @@ public class BattleDisplayManager : MonoBehaviour {
         heroOneHealthSlider.maxValue = battleManager.heroObjectOne.maxHealth;
         heroTwoHealthSlider.maxValue = battleManager.heroObjectTwo.maxHealth;
 
+        heroOneManaSlider.maxValue = battleManager.heroObjectOne.maxMana;
+        heroTwoManaSlider.maxValue = battleManager.heroObjectTwo.maxMana;
+
     } //end Awake()
 
 
@@ -44,22 +50,35 @@ public class BattleDisplayManager : MonoBehaviour {
         heroTwoNameText.text = battleManager.heroObjectTwo.heroName;
     }
 
+
     public void UpdateHealthText() {
 
-        heroOneHealthText.text = (Mathf.Round(battleManager.heroObjectOne.currentHealth)).ToString() + "  /  " + battleManager.heroObjectOne.maxHealth.ToString();
-        heroTwoHealthText.text = (Mathf.Round(battleManager.heroObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.heroObjectTwo.maxHealth.ToString();
+        heroOneHealthText.text = (Mathf.Round(battleManager.heroObjectOne.currentHealth)).ToString() + " / " + battleManager.heroObjectOne.maxHealth.ToString();
+        heroTwoHealthText.text = (Mathf.Round(battleManager.heroObjectTwo.currentHealth)).ToString() + " / " + battleManager.heroObjectTwo.maxHealth.ToString();
 
         heroOneHealthSlider.value = (Mathf.Round(battleManager.heroObjectOne.currentHealth));
         heroTwoHealthSlider.value = (Mathf.Round(battleManager.heroObjectTwo.currentHealth));
 
-        enemyOneHealthText.text = (Mathf.Round(battleManager.enemyObjectOne.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectOne.maxHealth.ToString();
-        enemyTwoHealthText.text = (Mathf.Round(battleManager.enemyObjectTwo.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectTwo.maxHealth.ToString();
-        enemyThreeHealthText.text = (Mathf.Round(battleManager.enemyObjectThree.currentHealth)).ToString() + "  /  " + battleManager.enemyObjectThree.maxHealth.ToString();
+        enemyOneHealthText.text = (Mathf.Round(battleManager.enemyObjectOne.currentHealth)).ToString() + " / " + battleManager.enemyObjectOne.maxHealth.ToString();
+        enemyTwoHealthText.text = (Mathf.Round(battleManager.enemyObjectTwo.currentHealth)).ToString() + " / " + battleManager.enemyObjectTwo.maxHealth.ToString();
+        enemyThreeHealthText.text = (Mathf.Round(battleManager.enemyObjectThree.currentHealth)).ToString() + " / " + battleManager.enemyObjectThree.maxHealth.ToString();
 
     }
 
-    public void UpdateSelectedHeroText() {
 
+    public void UpdateManaText() {
+
+        heroOneManaText.text = (Mathf.Round(battleManager.heroObjectOne.currentMana)).ToString() + " / " + battleManager.heroObjectOne.maxMana.ToString();
+        heroTwoManaText.text = (Mathf.Round(battleManager.heroObjectTwo.currentMana)).ToString() + " / " + battleManager.heroObjectTwo.maxMana.ToString();
+
+        heroOneManaSlider.value = (Mathf.Round(battleManager.heroObjectOne.currentMana));
+        heroTwoManaSlider.value = (Mathf.Round(battleManager.heroObjectTwo.currentMana));
+
+    }
+
+
+    public void UpdateSelectedHeroText() {
+        
         if(battleManager.selectedHero != null) {
 
             selectedHeroNameText.text = battleManager.selectedHero.heroName;

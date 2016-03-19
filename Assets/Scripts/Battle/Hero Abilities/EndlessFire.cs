@@ -11,6 +11,7 @@ public class EndlessFire : Ability {
         abilityType = AbilityType.InfCharge;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Magical;
+        manaCost = 150;
 
         requiresTargeting = true;
         

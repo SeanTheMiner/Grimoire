@@ -52,7 +52,7 @@ public class BattleManager : MonoBehaviour {
         ResetHeroes();
         ResetEnemyHealths();
 
-        InvokeRepeating("ApplyHealthRegen", 0, 0.2f);
+        InvokeRepeating("ApplyHealthAndManaRegen", 0, 0.2f);
         
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.NoHeroSelected();
@@ -71,6 +71,7 @@ public class BattleManager : MonoBehaviour {
 
         battleDisplayManager.CheckForEnemyHealthRemoval();
         battleDisplayManager.UpdateHealthText();
+        battleDisplayManager.UpdateManaText();
         battleDisplayManager.UpdateSelectedHeroText();
         debugDisplayManager.UpdateDebugText();
         battleTimer += Time.deltaTime;
@@ -268,7 +269,8 @@ public class BattleManager : MonoBehaviour {
 
     public void ResetHeroes() {
         
-        ResetHeroHealths();
+        ResetHeroHealth();
+        ResetHeroMana();
         foreach(Hero hero in heroList) {
             hero.currentBattleState = Hero.BattleState.Wait;
             hero.selectedAbility = null;
@@ -277,25 +279,36 @@ public class BattleManager : MonoBehaviour {
         }
     } //end ResetHeroes()
 
-    public void ResetHeroHealths() {
 
+    public void ResetHeroHealth() {
         foreach(Hero hero in heroList) {
             hero.currentHealth = hero.maxHealth;
-        } 
+        }
     } //endResetHeroHealth()
+    
+
+    public void ResetHeroMana() {
+        foreach (Hero hero in heroList) {
+            hero.currentMana = hero.maxMana;
+        }
+    } //endResetHeroMana()
 
 
     public void ResetEnemyHealths() {
-
         foreach(Enemy enemy in enemyList) {
             enemy.currentHealth = enemy.maxHealth;
         } //end foreach
     } //endResetEnemyHealth()
 
 
+
+
 //Other functions
 
-    void ApplyHealthRegen() {
+
+
+
+    void ApplyHealthAndManaRegen() {
 
         foreach (Enemy enemy in enemyList) {
             if (enemy.currentHealth < enemy.maxHealth) {
@@ -306,6 +319,9 @@ public class BattleManager : MonoBehaviour {
         foreach (Hero hero in heroList) {
             if(hero.currentHealth < hero.maxHealth) {
                 hero.currentHealth += (hero.healthRegen / 5);
+            }
+            if (hero.currentMana < hero.maxMana) {
+                hero.currentMana += (hero.manaRegen / 5);
             }
         } //end foreach hero
 

@@ -10,6 +10,7 @@ public class HeroOneAbilityTwo : Ability {
         abilityType = AbilityType.Barrage;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
+        manaCost = 50;
 
         chargeDuration = 3.0f;
         abilityDuration = 6.0f;

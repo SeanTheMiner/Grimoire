@@ -33,6 +33,10 @@ namespace Heroes {
             get; set;
         }
 
+        public float manaRegen {
+            get; set;
+        }
+
 
         //Under the hood
 
