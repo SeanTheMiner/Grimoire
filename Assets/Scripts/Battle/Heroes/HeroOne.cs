@@ -10,9 +10,9 @@ public class HeroOne : Hero {
         heroName = "Punchie McGee";
 
         maxHealth = 1120;
-        maxMana = 550;
+        maxMana = 400;
         healthRegen = 5;
-        manaRegen = 8;
+        manaRegen = 3;
 
         armor = 120;
         spirit = 40;
