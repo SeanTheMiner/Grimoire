@@ -102,7 +102,6 @@ public class AbilityButtonManager : MonoBehaviour {
         else {
             abilitySelecterImage.enabled = false;
         }
-        
 
         if (hero.currentBattleState == Hero.BattleState.Charge) {
             
@@ -118,7 +117,6 @@ public class AbilityButtonManager : MonoBehaviour {
             ClearChargingMasks();
         }
 
-
         if ((hero.currentAbility != null) && (hero.currentAbility.abilityType == Ability.AbilityType.InfCharge)) {
 
             CheckInfChargingMask(hero.abilityOne, infChargingMaskOne);
@@ -132,7 +130,6 @@ public class AbilityButtonManager : MonoBehaviour {
         else {
             ClearInfChargingMasks();
         }
-
 
         if (hero.currentBattleState == Hero.BattleState.Ability) {
 
@@ -162,9 +159,7 @@ public class AbilityButtonManager : MonoBehaviour {
         else {
             ClearInfBarrageMasks();
         }
-
-
-
+        
     } //end UpdateSelectedHeroButtons (Hero)
 
 

@@ -320,21 +320,21 @@ namespace EnemyAbilities {
 
             if (HitManager.EnemyDetermineEvasion(attacker, defender, this) == true) {
                 defender.SpawnMissText();
-                Debug.Log("Miss");
+                //Debug.Log("Miss");
                 return;
             }
             else if (HitManager.EnemyDetermineBlock(attacker, defender, this) == true) {
                 BlockDamageProc(defender, procDamage);
-                Debug.Log("Block");
+                //Debug.Log("Block");
                 return;
             }
             else if (HitManager.EnemyDetermineCrit(attacker, defender, this) == true) {
                 CritDamageProc(defender, procDamage);
-                Debug.Log("Crit");
+                //Debug.Log("Crit");
                 return;
             }
             else {
-                Debug.Log("Hit");
+                //Debug.Log("Hit");
                 DamageProc(defender, procDamage);
             }
 
