@@ -63,25 +63,13 @@ public class AbilityButtonManager : MonoBehaviour {
         CheckCooldownMask(hero.abilitySix, cooldownMaskSix);
 
         if (hero.currentBattleState == Hero.BattleState.Charge) {
-
-            if (hero.currentAbility == hero.abilityOne) {
-                CheckChargingMask(hero.abilityOne, chargingMaskOne);
-            }
-            else if (hero.currentAbility == hero.abilityTwo) {
-                CheckChargingMask(hero.abilityTwo, chargingMaskTwo);
-            }
-            else if (hero.currentAbility == hero.abilityThree) {
-                CheckChargingMask(hero.abilityThree, chargingMaskThree);
-            }
-            else if (hero.currentAbility == hero.abilityFour) {
-                CheckChargingMask(hero.abilityFour, chargingMaskFour);
-            }
-            else if (hero.currentAbility == hero.abilityFive) {
-                CheckChargingMask(hero.abilityFive, chargingMaskFive);
-            }
-            else if (hero.currentAbility == hero.abilitySix) {
-                CheckChargingMask(hero.abilitySix, chargingMaskSix);
-            }
+            
+            CheckChargingMask(hero.abilityOne, chargingMaskOne);
+            CheckChargingMask(hero.abilityTwo, chargingMaskTwo);
+            CheckChargingMask(hero.abilityThree, chargingMaskThree);
+            CheckChargingMask(hero.abilityFour, chargingMaskFour);
+            CheckChargingMask(hero.abilityFive, chargingMaskFive);
+            CheckChargingMask(hero.abilitySix, chargingMaskSix);
             
         } //end if charging
         else {
@@ -106,8 +94,13 @@ public class AbilityButtonManager : MonoBehaviour {
 
     public void CheckChargingMask(Ability ability, Image chargingMask) {
 
-        chargingMask.fillAmount = (1- ((ability.chargeEndTimer - Time.time) / ability.chargeDuration));
-
+        if (ability.chargeEndTimer > Time.time) {
+            chargingMask.fillAmount = (1 - ((ability.chargeEndTimer - Time.time) / ability.chargeDuration));
+        }
+        else {
+            chargingMask.fillAmount = 0;
+        }
+        
     } //end CheckCharging Mask(2)
 
     
