@@ -10,7 +10,51 @@ public class HitManager : MonoBehaviour {
     //Abilities call these, in order.
     //HERO SET FIRST - this feels so ugly, but, well, here we are.
 
-    public static bool DetermineEvasion(BattleObject attack, BattleObject defender, Ability ability) {
+
+    public static int DeterminEvasionAndBlock(BattleObject attacker, BattleObject defender, Ability ability) {
+
+        float evasionChance = 0;
+        float blockChance = 0;
+        float accuracy = 0;
+        float finesse = 0;
+        float maxRange = 100;
+
+        if (ability.primaryDamageType == Ability.DamageType.Physical) {
+            evasionChance = defender.physicalEvasionChance;
+            accuracy = ability.physicalAccuracy;
+            blockChance = defender.physicalBlockChance;
+            finesse = ability.physicalFinesse;
+        }
+        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
+            evasionChance = defender.magicalEvasionChance;
+            accuracy = ability.magicalAccuracy;
+            blockChance = defender.magicalBlockChance;
+            finesse = ability.magicalFinesse;
+        }
+
+        float evasionCeiling = evasionChance;
+        float blockCeiling = evasionChance + blockChance;
+        
+        if ((blockChance + evasionChance) > 100) {
+            maxRange = Mathf.CeilToInt(blockChance + evasionChance);
+        }
+
+        float checker = Random.Range(1, maxRange);
+
+        if (checker <= evasionCeiling) {
+            return 1;
+        }
+        if (checker <= blockCeiling) {
+            return 2;
+        }
+        else {
+            return 0;
+        }
+
+    } //end DetermineEvasionAndBlock (3)
+
+
+    public static bool DetermineEvasion(BattleObject attacker, BattleObject defender, Ability ability) {
 
         float evasionChance = 0;
         float accuracy = 0;
@@ -34,7 +78,7 @@ public class HitManager : MonoBehaviour {
     } //end DetermineEvasion(3)
 
     
-    public static bool DetermineBlock(BattleObject attack, BattleObject defender, Ability ability) {
+    public static bool DetermineBlock(BattleObject attacker, BattleObject defender, Ability ability) {
 
         float blockChance = 0;
         float finesse = 0;
