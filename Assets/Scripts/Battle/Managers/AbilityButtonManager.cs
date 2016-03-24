@@ -227,13 +227,6 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end CheckInfBarrageMask(2)
 
 
-    public void ClearCooldownMasks() {
-        foreach (Image cooldownMask in cooldownMaskList) {
-            cooldownMask.fillAmount = 0;
-        }
-    }
-
-
     public void CheckAbilitySelecterPosition (Hero hero) {
 
         if (hero.currentAbility == hero.abilityOne) {
@@ -255,11 +248,38 @@ public class AbilityButtonManager : MonoBehaviour {
             abilitySelecter.transform.position = abilitySixButton.transform.position;
         }
 
+        SetAbilitySelecterColor(hero);
+
+
     } //end CheckAbilitySelecterPosition (Hero)
+
+
+    public void SetAbilitySelecterColor (Hero hero) {
+
+        if (hero.currentBattleState == Hero.BattleState.Target) {
+            abilitySelecterImage.color = Color.red;
+        }
+        else if ((hero.currentBattleState == Hero.BattleState.Charge) | (hero.currentBattleState == Hero.BattleState.InfCharge)) {
+            abilitySelecterImage.color = Color.green;
+        }
+        else if ((hero.currentBattleState == Hero.BattleState.Ability) | (hero.currentBattleState == Hero.BattleState.InfBarrage)) {
+            abilitySelecterImage.color = Color.blue;
+        }
+
+    } //end SetAbilitySelecterColor (hero)
+
 
 
 
     //Clearing functions
+
+
+
+    public void ClearCooldownMasks() {
+        foreach (Image cooldownMask in cooldownMaskList) {
+            cooldownMask.fillAmount = 0;
+        }
+    }
 
 
     public void ClearChargingMasks() {
