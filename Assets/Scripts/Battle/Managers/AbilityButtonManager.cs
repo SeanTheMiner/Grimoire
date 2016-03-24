@@ -13,9 +13,13 @@ public class AbilityButtonManager : MonoBehaviour {
         chargingMaskOne, chargingMaskTwo, chargingMaskThree, chargingMaskFour, chargingMaskFive, chargingMaskSix,
         infChargingMaskOne, infChargingMaskTwo, infChargingMaskThree, infChargingMaskFour, infChargingMaskFive, infChargingMaskSix,
         durationMaskOne, durationMaskTwo, durationMaskThree, durationMaskFour, durationMaskFive, durationMaskSix,
-        infBarrageMaskOne, infBarrageMaskTwo, infBarrageMaskThree, infBarrageMaskFour, infBarrageMaskFive, infBarrageMaskSix
+        infBarrageMaskOne, infBarrageMaskTwo, infBarrageMaskThree, infBarrageMaskFour, infBarrageMaskFive, infBarrageMaskSix,
+        abilitySelecterImage
         ;
+        
 
+
+    public GameObject abilitySelecter;
     
     public List<Button> buttonList = new List<Button>();
     public List<Image> cooldownMaskList = new List<Image>();
@@ -74,6 +78,9 @@ public class AbilityButtonManager : MonoBehaviour {
         ClearInfChargingMasks();
         ClearDurationMasks();
         ClearInfBarrageMasks();
+
+        abilitySelecterImage = abilitySelecter.GetComponent<Image>();
+        abilitySelecterImage.enabled = false;
         
     } //end Awake()
 
@@ -87,6 +94,15 @@ public class AbilityButtonManager : MonoBehaviour {
         CheckCooldownMask(hero.abilityFour, cooldownMaskFour);
         CheckCooldownMask(hero.abilityFive, cooldownMaskFive);
         CheckCooldownMask(hero.abilitySix, cooldownMaskSix);
+
+        if (hero.currentAbility != null) {
+            abilitySelecterImage.enabled = true;
+            CheckAbilitySelecterPosition(hero);
+        }
+        else {
+            abilitySelecterImage.enabled = false;
+        }
+        
 
         if (hero.currentBattleState == Hero.BattleState.Charge) {
             
@@ -204,6 +220,9 @@ public class AbilityButtonManager : MonoBehaviour {
         if (hero.currentAbility == ability) {
             infBarrageMask.fillAmount = (1 - ((ability.nextProcTimer - Time.time) / ability.procSpacing));
         }
+        else {
+            infBarrageMask.fillAmount = 0;
+        }
         
     } //end CheckInfBarrageMask(2)
 
@@ -213,6 +232,30 @@ public class AbilityButtonManager : MonoBehaviour {
             cooldownMask.fillAmount = 0;
         }
     }
+
+
+    public void CheckAbilitySelecterPosition (Hero hero) {
+
+        if (hero.currentAbility == hero.abilityOne) {
+            abilitySelecter.transform.position = abilityOneButton.transform.position;
+        }
+        else if (hero.currentAbility == hero.abilityTwo) {
+            abilitySelecter.transform.position = abilityTwoButton.transform.position;
+        }
+        else if (hero.currentAbility == hero.abilityThree) {
+            abilitySelecter.transform.position = abilityThreeButton.transform.position;
+        }
+        else if (hero.currentAbility == hero.abilityFour) {
+            abilitySelecter.transform.position = abilityFourButton.transform.position;
+        }
+        else if (hero.currentAbility == hero.abilityFive) {
+            abilitySelecter.transform.position = abilityFiveButton.transform.position;
+        }
+        else if (hero.currentAbility == hero.abilitySix) {
+            abilitySelecter.transform.position = abilitySixButton.transform.position;
+        }
+
+    } //end CheckAbilitySelecterPosition (Hero)
 
 
 
