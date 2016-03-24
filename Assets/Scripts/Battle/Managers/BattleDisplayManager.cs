@@ -101,11 +101,17 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public void UpdateAbilityButtonText(Text text, Ability ability) {
 
-        if (ability.cooldownEndTimer <= Time.time) {
-            text.text = ability.abilityName;
+        if (ability.cooldownEndTimer > Time.time) {
+            text.text = (Mathf.Round(ability.cooldownEndTimer - Time.time)).ToString();
+        }
+        else if (ability.chargeEndTimer > Time.time) {
+            text.text = (Mathf.Round(ability.chargeEndTimer - Time.time)).ToString();
+        }
+        else if (ability.abilityEndTimer > Time.time) {
+            text.text = (Mathf.Round(ability.abilityEndTimer - Time.time)).ToString();
         }
         else {
-            text.text = (Mathf.Round(ability.cooldownEndTimer - Time.time)).ToString();
+            text.text = ability.abilityName;
         }
 
     } //end UpdateAbilityButtonText(2)

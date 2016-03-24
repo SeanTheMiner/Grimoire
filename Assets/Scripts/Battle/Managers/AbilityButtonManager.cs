@@ -10,13 +10,15 @@ public class AbilityButtonManager : MonoBehaviour {
     public Button abilityOneButton, abilityTwoButton, abilityThreeButton, abilityFourButton, abilityFiveButton, abilitySixButton;
 
     public Image cooldownMaskOne, cooldownMaskTwo, cooldownMaskThree, cooldownMaskFour, cooldownMaskFive, cooldownMaskSix,
-        chargingMaskOne, chargingMaskTwo, chargingMaskThree, chargingMaskFour, chargingMaskFive, chargingMaskSix
+        chargingMaskOne, chargingMaskTwo, chargingMaskThree, chargingMaskFour, chargingMaskFive, chargingMaskSix,
+        durationMaskOne, durationMaskTwo, durationMaskThree, durationMaskFour, durationMaskFive, durationMaskSix
         ;
 
     
     public List<Button> buttonList = new List<Button>();
     public List<Image> cooldownMaskList = new List<Image>();
     public List<Image> chargingMaskList = new List<Image>();
+    public List<Image> durationMaskList = new List<Image>();
 
 
     void Awake () {
@@ -42,12 +44,16 @@ public class AbilityButtonManager : MonoBehaviour {
         chargingMaskList.Add(chargingMaskFive);
         chargingMaskList.Add(chargingMaskSix);
 
+        durationMaskList.Add(durationMaskOne);
+        durationMaskList.Add(durationMaskTwo);
+        durationMaskList.Add(durationMaskThree);
+        durationMaskList.Add(durationMaskFour);
+        durationMaskList.Add(durationMaskFive);
+        durationMaskList.Add(durationMaskSix);
 
-        foreach (Image cooldownMask in cooldownMaskList) {
-            cooldownMask.fillAmount = 0;
-        }
-
+        ClearCooldownMasks();
         ClearChargingMasks();
+        ClearDurationMasks();
         
     } //end Awake()
 
@@ -72,11 +78,18 @@ public class AbilityButtonManager : MonoBehaviour {
             CheckChargingMask(hero.abilitySix, chargingMaskSix);
             
         } //end if charging
-        else {
-            ClearChargingMasks();
-        }
 
+        else if (hero.currentBattleState == Hero.BattleState.Ability) {
 
+            CheckDurationMask(hero.abilityOne, durationMaskOne);
+            CheckDurationMask(hero.abilityTwo, durationMaskTwo);
+            CheckDurationMask(hero.abilityThree, durationMaskThree);
+            CheckDurationMask(hero.abilityFour, durationMaskFour);
+            CheckDurationMask(hero.abilityFive, durationMaskFive);
+            CheckDurationMask(hero.abilitySix, durationMaskSix);
+            
+        } //end if abilitying
+        
     } //end UpdateSelectedHeroButtons (Hero)
 
 
@@ -103,18 +116,45 @@ public class AbilityButtonManager : MonoBehaviour {
         
     } //end CheckCharging Mask(2)
 
-    
+
+    public void CheckDurationMask(Ability ability, Image durationMask) {
+
+        if (ability.abilityEndTimer > Time.time) {
+            durationMask.fillAmount = ((ability.abilityEndTimer - Time.time) / ability.abilityDuration);
+        }
+        else {
+            durationMask.fillAmount = 0;
+        }
+
+    } //end CheckCharging Mask(2)
+
+
+
+
+    public void ClearCooldownMasks() {
+        foreach (Image cooldownMask in cooldownMaskList) {
+            cooldownMask.fillAmount = 0;
+        }
+    }
+
+
     public void ClearChargingMasks() {
         foreach (Image chargingMask in chargingMaskList) {
             chargingMask.fillAmount = 0;
         }
     }
-    
+
+
+    public void ClearDurationMasks() {
+        foreach (Image durationMask in durationMaskList) {
+            durationMask.fillAmount = 0;
+        }
+    }
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
