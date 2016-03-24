@@ -10,11 +10,11 @@ public class HeroOneAbilityOne : Ability {
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
-        manaCost = 40;
+        manaCost = 80;
 
         chargeDuration = 4.0f;
-        cooldownDuration = 7.0f;
-        procDamage = 200.0f;
+        cooldownDuration = 10.0f;
+        procDamage = 250.0f;
         
     } //end constructor
 

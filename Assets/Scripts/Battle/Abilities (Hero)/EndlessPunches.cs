@@ -13,7 +13,7 @@ public class EndlessPunches : Ability {
         costsMana = false;
 
         chargeDuration = 2.0f;
-        procDamage = 90;
+        procDamage = 80;
         procSpacing = 0.7f;
 
         hasCooldown = false;

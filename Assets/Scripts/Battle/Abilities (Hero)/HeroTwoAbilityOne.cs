@@ -1,34 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Abilities;
-using Enemies;
 
-public class PiercingFire : Ability {
 
-    public PiercingFire() {
+public class HeroTwoAbilityOne : Ability {
 
-        abilityName = "Piercing Fire";
+    public HeroTwoAbilityOne() {
+
+        abilityName = "Charge Blast";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
         primaryDamageType = DamageType.Magical;
         manaCost = 100;
-
+        
         requiresTargeting = false;
 
-        chargeDuration = 4.0f;
-        cooldownDuration = 5.0f;
-        procDamage = 80.0f;
-        
+        chargeDuration = 5.0f;
+        cooldownDuration = 10.0f;
+        procDamage = 150.0f;
+       
     }
 
     public override void AbilityMap() {
-
         targetingManager.TargetAllEnemies(this);
-        ApplyEffectMultiple(effectApplied);
         DetermineHitOutcomeMultiple(abilityOwner);
         ExitAbility();
-
     } //end AbilityMap()
-
+    
 
 } //end Ability

@@ -13,9 +13,9 @@ public class EbbAndFlow : Ability {
         costsMana = false;
 
         chargeDuration = 3;
-        procDamage = 100;
-        procHeal = 80;
-        procSpacing = 1.2f;
+        procDamage = 90;
+        procHeal = 75;
+        procSpacing = 0.8f;
 
         requiresTargeting = false;
         hasCooldown = false;

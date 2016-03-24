@@ -10,16 +10,16 @@ public class HeroOneAbilityTwo : Ability {
         abilityType = AbilityType.Barrage;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
-        manaCost = 50;
+        manaCost = 120;
 
         chargeDuration = 3.0f;
         abilityDuration = 6.0f;
-        cooldownDuration = 4.0f;
+        cooldownDuration = 12.0f;
 
-        procDamage = 60;
-        procSpacing = 0.5f;
-        critChance = 30;
-        critMultiplier = 2.5f;
+        procDamage = 50;
+        procSpacing = 0.35f;
+        critChance = 20;
+        critMultiplier = 3;
         
     } //end constructor
 
