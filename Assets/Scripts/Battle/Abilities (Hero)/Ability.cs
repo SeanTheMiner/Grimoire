@@ -47,7 +47,7 @@ namespace Abilities {
             get; set;
         }
 
-        public bool isInfCharge {
+        public bool isInfCharging {
             get; set;
         }
 
@@ -225,6 +225,7 @@ namespace Abilities {
             costsMana = true;
             retainsInfCharge = false;
             hasCooldown = true;
+            isInfCharging = false;
            
             chargeDuration = 0.0f;
             chargeEndTimer = 0.0f;
@@ -256,6 +257,7 @@ namespace Abilities {
             if (abilityType == AbilityType.InfCharge) {
                 infChargeStartTimer = Time.time;
                 abilityOwner.currentBattleState = Hero.BattleState.InfCharge;
+                isInfCharging = true;
                 return;
             }
 
@@ -430,6 +432,7 @@ namespace Abilities {
 
 
         public virtual void InfDamageProc(Hero attacker, Enemy defender, float multiplier) {
+            isInfCharging = false;
             int damage = Mathf.RoundToInt(multiplier * (Time.time - infChargeStartTimer));
             defender.currentHealth -= damage;
             defender.SpawnDamageText(damage);

@@ -11,6 +11,7 @@ public class AbilityButtonManager : MonoBehaviour {
 
     public Image cooldownMaskOne, cooldownMaskTwo, cooldownMaskThree, cooldownMaskFour, cooldownMaskFive, cooldownMaskSix,
         chargingMaskOne, chargingMaskTwo, chargingMaskThree, chargingMaskFour, chargingMaskFive, chargingMaskSix,
+        infChargingMaskOne, infChargingMaskTwo, infChargingMaskThree, infChargingMaskFour, infChargingMaskFive, infChargingMaskSix,
         durationMaskOne, durationMaskTwo, durationMaskThree, durationMaskFour, durationMaskFive, durationMaskSix
         ;
 
@@ -18,6 +19,7 @@ public class AbilityButtonManager : MonoBehaviour {
     public List<Button> buttonList = new List<Button>();
     public List<Image> cooldownMaskList = new List<Image>();
     public List<Image> chargingMaskList = new List<Image>();
+    public List<Image> infChargingMaskList = new List<Image>();
     public List<Image> durationMaskList = new List<Image>();
 
 
@@ -44,6 +46,13 @@ public class AbilityButtonManager : MonoBehaviour {
         chargingMaskList.Add(chargingMaskFive);
         chargingMaskList.Add(chargingMaskSix);
 
+        infChargingMaskList.Add(infChargingMaskOne);
+        infChargingMaskList.Add(infChargingMaskTwo);
+        infChargingMaskList.Add(infChargingMaskThree);
+        infChargingMaskList.Add(infChargingMaskFour);
+        infChargingMaskList.Add(infChargingMaskFive);
+        infChargingMaskList.Add(infChargingMaskSix);
+
         durationMaskList.Add(durationMaskOne);
         durationMaskList.Add(durationMaskTwo);
         durationMaskList.Add(durationMaskThree);
@@ -53,6 +62,7 @@ public class AbilityButtonManager : MonoBehaviour {
 
         ClearCooldownMasks();
         ClearChargingMasks();
+        ClearInfChargingMasks();
         ClearDurationMasks();
         
     } //end Awake()
@@ -80,6 +90,21 @@ public class AbilityButtonManager : MonoBehaviour {
         } //end if charging
         else {
             ClearChargingMasks();
+        }
+
+
+        if ((hero.currentAbility != null) && (hero.currentAbility.abilityType == Ability.AbilityType.InfCharge)) {
+
+            CheckInfChargingMask(hero.abilityOne, infChargingMaskOne);
+            CheckInfChargingMask(hero.abilityTwo, infChargingMaskTwo);
+            CheckInfChargingMask(hero.abilityThree, infChargingMaskThree);
+            CheckInfChargingMask(hero.abilityFour, infChargingMaskFour);
+            CheckInfChargingMask(hero.abilityFive, infChargingMaskFive);
+            CheckInfChargingMask(hero.abilitySix, infChargingMaskSix);
+
+        }
+        else {
+            ClearInfChargingMasks();
         }
 
 
@@ -124,6 +149,17 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end CheckCharging Mask(2)
 
 
+    public void CheckInfChargingMask(Ability ability, Image infChargingMask) {
+
+        if (ability.isInfCharging) {
+            infChargingMask.fillAmount = ((Time.time - ability.infChargeStartTimer) - (Mathf.FloorToInt(Time.time - ability.infChargeStartTimer)));
+        }
+        else {
+            infChargingMask.fillAmount = 0;
+        }
+    }
+
+
     public void CheckDurationMask(Ability ability, Image durationMask) {
 
         if (ability.abilityEndTimer > Time.time) {
@@ -151,6 +187,13 @@ public class AbilityButtonManager : MonoBehaviour {
         }
     }
 
+
+    public void ClearInfChargingMasks() {
+        foreach (Image infChargingMask in infChargingMaskList) {
+            infChargingMask.fillAmount = 0;
+        }
+    }
+    
 
     public void ClearDurationMasks() {
         foreach (Image durationMask in durationMaskList) {

@@ -110,6 +110,9 @@ public class BattleDisplayManager : MonoBehaviour {
         else if (ability.abilityEndTimer > Time.time) {
             text.text = (Mathf.Round(ability.abilityEndTimer - Time.time)).ToString();
         }
+        else if (ability.isInfCharging) {
+            text.text = (Mathf.Round(Time.time - ability.infChargeStartTimer)).ToString();
+        }
         else {
             text.text = ability.abilityName;
         }
