@@ -12,7 +12,8 @@ public class AbilityButtonManager : MonoBehaviour {
     public Image cooldownMaskOne, cooldownMaskTwo, cooldownMaskThree, cooldownMaskFour, cooldownMaskFive, cooldownMaskSix,
         chargingMaskOne, chargingMaskTwo, chargingMaskThree, chargingMaskFour, chargingMaskFive, chargingMaskSix,
         infChargingMaskOne, infChargingMaskTwo, infChargingMaskThree, infChargingMaskFour, infChargingMaskFive, infChargingMaskSix,
-        durationMaskOne, durationMaskTwo, durationMaskThree, durationMaskFour, durationMaskFive, durationMaskSix
+        durationMaskOne, durationMaskTwo, durationMaskThree, durationMaskFour, durationMaskFive, durationMaskSix,
+        infBarrageMaskOne, infBarrageMaskTwo, infBarrageMaskThree, infBarrageMaskFour, infBarrageMaskFive, infBarrageMaskSix
         ;
 
     
@@ -21,6 +22,7 @@ public class AbilityButtonManager : MonoBehaviour {
     public List<Image> chargingMaskList = new List<Image>();
     public List<Image> infChargingMaskList = new List<Image>();
     public List<Image> durationMaskList = new List<Image>();
+    public List<Image> infBarrageMaskList = new List<Image>();
 
 
     void Awake () {
@@ -60,10 +62,18 @@ public class AbilityButtonManager : MonoBehaviour {
         durationMaskList.Add(durationMaskFive);
         durationMaskList.Add(durationMaskSix);
 
+        infBarrageMaskList.Add(infBarrageMaskOne);
+        infBarrageMaskList.Add(infBarrageMaskTwo);
+        infBarrageMaskList.Add(infBarrageMaskThree);
+        infBarrageMaskList.Add(infBarrageMaskFour);
+        infBarrageMaskList.Add(infBarrageMaskFive);
+        infBarrageMaskList.Add(infBarrageMaskSix);
+
         ClearCooldownMasks();
         ClearChargingMasks();
         ClearInfChargingMasks();
         ClearDurationMasks();
+        ClearInfBarrageMasks();
         
     } //end Awake()
 
@@ -122,6 +132,23 @@ public class AbilityButtonManager : MonoBehaviour {
             ClearDurationMasks();
         }
         
+
+        if (hero.currentBattleState == Hero.BattleState.InfBarrage) {
+
+            CheckInfBarrageMask(hero, hero.abilityOne, infBarrageMaskOne);
+            CheckInfBarrageMask(hero, hero.abilityTwo, infBarrageMaskTwo);
+            CheckInfBarrageMask(hero, hero.abilityThree, infBarrageMaskThree);
+            CheckInfBarrageMask(hero, hero.abilityFour, infBarrageMaskFour);
+            CheckInfBarrageMask(hero, hero.abilityFive, infBarrageMaskFive);
+            CheckInfBarrageMask(hero, hero.abilitySix, infBarrageMaskSix);
+
+        }
+        else {
+            ClearInfBarrageMasks();
+        }
+
+
+
     } //end UpdateSelectedHeroButtons (Hero)
 
 
@@ -157,7 +184,7 @@ public class AbilityButtonManager : MonoBehaviour {
         else {
             infChargingMask.fillAmount = 0;
         }
-    }
+    } //end CheckInfChargingMask(2)
 
 
     public void CheckDurationMask(Ability ability, Image durationMask) {
@@ -169,9 +196,16 @@ public class AbilityButtonManager : MonoBehaviour {
             durationMask.fillAmount = 0;
         }
 
-    } //end CheckCharging Mask(2)
+    } //end CheckChargingMask(2)
 
-
+    
+    public void CheckInfBarrageMask(Hero hero, Ability ability, Image infBarrageMask) {
+        
+        if (hero.currentAbility == ability) {
+            infBarrageMask.fillAmount = (1 - ((ability.nextProcTimer - Time.time) / ability.procSpacing));
+        }
+        
+    } //end CheckInfBarrageMask(2)
 
 
     public void ClearCooldownMasks() {
@@ -179,6 +213,10 @@ public class AbilityButtonManager : MonoBehaviour {
             cooldownMask.fillAmount = 0;
         }
     }
+
+
+
+    //Clearing functions
 
 
     public void ClearChargingMasks() {
@@ -202,14 +240,10 @@ public class AbilityButtonManager : MonoBehaviour {
     }
 
 
-
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-}
+    public void ClearInfBarrageMasks() {
+        foreach (Image infBarrageMask in infBarrageMaskList) {
+            infBarrageMask.fillAmount = 0;
+        }
+    }
+    
+} //end AbilityButtonManager class

@@ -221,13 +221,24 @@ public class BattleManager : MonoBehaviour {
     public void CancelAbility(Hero hero) {
         hero.selectedAbility = null;
         hero.targetingAbility = null;
-        if ((hero.currentBattleState != Hero.BattleState.Charge) && (hero.currentBattleState != Hero.BattleState.InfCharge) && (hero.currentAbility != null)) {
-            hero.currentAbility.cooldownEndTimer = Time.time + hero.currentAbility.cooldownDuration;
+
+        if (hero.currentAbility != null) {
+            if (hero.currentBattleState == Hero.BattleState.Charge) {
+                hero.currentAbility.chargeEndTimer = 0;
+            }
+            else if (hero.currentBattleState == Hero.BattleState.InfCharge) {
+                hero.currentAbility.isInfCharging = false;
+            }
+            else if (hero.currentBattleState != Hero.BattleState.Target) {
+                hero.currentAbility.cooldownEndTimer = Time.time + hero.currentAbility.cooldownDuration;
+            }
         }
+        
         hero.currentAbility = null;
         hero.canTakeCommands = true;
         hero.currentBattleState = Hero.BattleState.Wait;
-    }
+
+    } //end CancelAbility(Hero)
 
 
     public void SelectedToTargeting(Hero hero) {
