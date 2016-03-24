@@ -78,8 +78,12 @@ public class AbilityButtonManager : MonoBehaviour {
             CheckChargingMask(hero.abilitySix, chargingMaskSix);
             
         } //end if charging
+        else {
+            ClearChargingMasks();
+        }
 
-        else if (hero.currentBattleState == Hero.BattleState.Ability) {
+
+        if (hero.currentBattleState == Hero.BattleState.Ability) {
 
             CheckDurationMask(hero.abilityOne, durationMaskOne);
             CheckDurationMask(hero.abilityTwo, durationMaskTwo);
@@ -89,6 +93,9 @@ public class AbilityButtonManager : MonoBehaviour {
             CheckDurationMask(hero.abilitySix, durationMaskSix);
             
         } //end if abilitying
+        else {
+            ClearDurationMasks();
+        }
         
     } //end UpdateSelectedHeroButtons (Hero)
 
