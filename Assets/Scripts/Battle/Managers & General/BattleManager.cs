@@ -15,6 +15,7 @@ public class BattleManager : MonoBehaviour {
     public BattleDisplayManager battleDisplayManager;
     public DebugDisplayManager debugDisplayManager;
     public EnemyManager enemyManager;
+    public AbilityButtonManager abilityButtonManager;
     
     public float battleTimer = 0.0f;
     public static System.Random randomer;
@@ -73,6 +74,8 @@ public class BattleManager : MonoBehaviour {
         battleDisplayManager.UpdateHealthText();
         battleDisplayManager.UpdateManaText();
         battleDisplayManager.UpdateSelectedHeroText();
+        
+
         debugDisplayManager.UpdateDebugText();
         battleTimer += Time.deltaTime;
 
@@ -81,6 +84,9 @@ public class BattleManager : MonoBehaviour {
         CheckForHeroSelectionInput();
 
         if(selectedHero != null) {
+
+            abilityButtonManager.UpdateSelectedHeroButtons(selectedHero);
+
             if (selectedHero.canTakeCommands) {
                 CheckForAbilitySelectionInput();
             }

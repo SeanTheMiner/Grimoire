@@ -410,6 +410,7 @@
      <Compile Include="Assets\Scripts\Battle\Heroes\Hero.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroTwo.cs" />
+     <Compile Include="Assets\Scripts\Battle\Managers &amp; General\AbilityButtonManager.cs" />
      <Compile Include="Assets\Scripts\Battle\Managers &amp; General\BattleDisplayManager.cs" />
      <Compile Include="Assets\Scripts\Battle\Managers &amp; General\BattleManager.cs" />
      <Compile Include="Assets\Scripts\Battle\Managers &amp; General\BattleObject.cs" />
