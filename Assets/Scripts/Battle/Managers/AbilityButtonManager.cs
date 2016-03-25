@@ -14,12 +14,12 @@ public class AbilityButtonManager : MonoBehaviour {
         infChargingMaskOne, infChargingMaskTwo, infChargingMaskThree, infChargingMaskFour, infChargingMaskFive, infChargingMaskSix,
         durationMaskOne, durationMaskTwo, durationMaskThree, durationMaskFour, durationMaskFive, durationMaskSix,
         infBarrageMaskOne, infBarrageMaskTwo, infBarrageMaskThree, infBarrageMaskFour, infBarrageMaskFive, infBarrageMaskSix,
-        abilitySelecterImage
+        abilitySelecterImage, defaultAbilityMarkerImage
         ;
-        
 
+    public Vector3 defaultAbilityMarkerOffset;
 
-    public GameObject abilitySelecter;
+    public GameObject abilitySelecter, defaultAbilityMarker;
     
     public List<Button> buttonList = new List<Button>();
     public List<Image> cooldownMaskList = new List<Image>();
@@ -80,8 +80,13 @@ public class AbilityButtonManager : MonoBehaviour {
         ClearInfBarrageMasks();
 
         abilitySelecterImage = abilitySelecter.GetComponent<Image>();
+        defaultAbilityMarkerImage = defaultAbilityMarker.GetComponent<Image>();
+
         abilitySelecterImage.enabled = false;
-        
+        defaultAbilityMarkerImage.enabled = false;
+
+        defaultAbilityMarkerOffset = new Vector3(-0.4f, 0, -0.5f);
+
     } //end Awake()
 
 
@@ -102,6 +107,16 @@ public class AbilityButtonManager : MonoBehaviour {
         else {
             abilitySelecterImage.enabled = false;
         }
+
+        if (hero.defaultAbility != null) {
+            defaultAbilityMarkerImage.enabled = true;
+            CheckDefaultAbilityMarkerPosition(hero);
+        }
+        else {
+            defaultAbilityMarkerImage.enabled = false;
+        }
+
+
 
         if (hero.currentBattleState == Hero.BattleState.Charge) {
             
@@ -223,7 +238,7 @@ public class AbilityButtonManager : MonoBehaviour {
 
 
     public void CheckAbilitySelecterPosition (Hero hero) {
-
+        
         if (hero.currentAbility == hero.abilityOne) {
             abilitySelecter.transform.position = abilityOneButton.transform.position;
         }
@@ -263,6 +278,29 @@ public class AbilityButtonManager : MonoBehaviour {
 
     } //end SetAbilitySelecterColor (hero)
 
+
+    public void CheckDefaultAbilityMarkerPosition(Hero hero) {
+
+        if (hero.defaultAbility == hero.abilityOne) {
+            defaultAbilityMarker.transform.position = abilityOneButton.transform.position + defaultAbilityMarkerOffset;
+        }
+        else if (hero.defaultAbility == hero.abilityTwo) {
+            defaultAbilityMarker.transform.position = abilityTwoButton.transform.position + defaultAbilityMarkerOffset;
+        }
+        else if (hero.defaultAbility == hero.abilityThree) {
+            defaultAbilityMarker.transform.position = abilityThreeButton.transform.position + defaultAbilityMarkerOffset;
+        }
+        else if (hero.defaultAbility == hero.abilityFour) {
+            defaultAbilityMarker.transform.position = abilityFourButton.transform.position + defaultAbilityMarkerOffset;
+        }
+        else if (hero.defaultAbility == hero.abilityFive) {
+            defaultAbilityMarker.transform.position = abilityFiveButton.transform.position + defaultAbilityMarkerOffset;
+        }
+        else if (hero.defaultAbility == hero.abilitySix) {
+            defaultAbilityMarker.transform.position = abilitySixButton.transform.position + defaultAbilityMarkerOffset;
+        }
+        
+    } //end CheckDefaultAbilityMarkerPosition (Hero)
 
 
 
