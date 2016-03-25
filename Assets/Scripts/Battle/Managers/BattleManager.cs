@@ -90,6 +90,11 @@ public class BattleManager : MonoBehaviour {
             if (selectedHero.canTakeCommands) {
                 CheckForAbilitySelectionInput();
             }
+            if (Input.GetKey(KeyCode.LeftShift)) {
+
+                CheckForDefaultAbilitySelectionInput();
+            }
+
         } //end if hero is selected
 
         
@@ -130,12 +135,18 @@ public class BattleManager : MonoBehaviour {
 
     void CheckBattleState(Hero hero) {
 
-        if ((hero.currentBattleState == Hero.BattleState.Wait) 
-            | (hero.currentBattleState == Hero.BattleState.InfCharge) 
+        if ((hero.currentBattleState == Hero.BattleState.InfCharge) 
             | (hero.currentBattleState == Hero.BattleState.Dead)) {
             return;
         }
 
+        else if (hero.currentBattleState == Hero.BattleState.Wait) {
+            if ((hero.defaultAbility != null) && (hero.defaultAbility.cooldownEndTimer < Time.time)) {
+                hero.currentAbility = hero.defaultAbility;
+                hero.currentAbility.InitDefaultAbility();
+            }
+        }
+        
         else if (hero.currentBattleState == Hero.BattleState.Target) {
             if (Input.GetMouseButtonDown(0)) {
                 selectedHero.currentAbility.CastRay();
@@ -214,9 +225,46 @@ public class BattleManager : MonoBehaviour {
  
     } //end CheckForAbilitySelectionInput()
     
+
+    void CheckForDefaultAbilitySelectionInput() {
+
+        Debug.Log("Check called");
+
+        Ability defaultAbilityToApply = null;
+        
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            defaultAbilityToApply = selectedHero.abilityOne;
+        }
+        else if (Input.GetKeyDown(KeyCode.W)) {
+            defaultAbilityToApply = selectedHero.abilityTwo;
+        }
+        else if (Input.GetKeyDown(KeyCode.E)) {
+            defaultAbilityToApply = selectedHero.abilityThree;
+        }
+        else if (Input.GetKeyDown(KeyCode.A)) {
+            defaultAbilityToApply = selectedHero.abilityFour;
+        }
+        else if (Input.GetKeyDown(KeyCode.S)) {
+            defaultAbilityToApply = selectedHero.abilityFive;
+        }
+        else if (Input.GetKeyDown(KeyCode.D)) {
+            defaultAbilityToApply = selectedHero.abilitySix;
+        }
+        
+        if ((defaultAbilityToApply != null) && (defaultAbilityToApply.canBeDefault)) {
+            selectedHero.defaultAbility = defaultAbilityToApply;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space)) {
+            selectedHero.defaultAbility = null;
+        }
+
+    } //end CheckForDefaultAbilitySelectionInput()
+
+
     
 //Ability handling functions
 
+        
         
     public void CancelAbility(Hero hero) {
         hero.selectedAbility = null;
@@ -260,7 +308,10 @@ public class BattleManager : MonoBehaviour {
     }
 
 
+
 //Initializing functions
+
+
 
     public void PopulateHeroList() {
 

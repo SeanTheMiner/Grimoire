@@ -49,6 +49,8 @@ public class TargetingManager {
                 ability.InitCharge();
             }
             else {
+
+
                 ability.AbilityMap();
             }
 

@@ -59,6 +59,10 @@ namespace Abilities {
             get; set;
         }
 
+        public bool canBeDefault {
+            get; set;
+        }
+
         public AbilityType abilityType {
             get; set;
         }
@@ -226,6 +230,7 @@ namespace Abilities {
             retainsInfCharge = false;
             hasCooldown = true;
             isInfCharging = false;
+            canBeDefault = true;
            
             chargeDuration = 0.0f;
             chargeEndTimer = 0.0f;
@@ -277,6 +282,40 @@ namespace Abilities {
             }
 
         } //end InitAbility()
+
+
+        public void InitDefaultAbility() {
+
+            if (abilityType == AbilityType.InfCharge) {
+                infChargeStartTimer = Time.time;
+                abilityOwner.currentBattleState = Hero.BattleState.InfCharge;
+                isInfCharging = true;
+                return;
+            }
+
+            if (requiresTargeting) {
+                if (targetScope == TargetScope.SingleEnemy) {
+                    targetingManager.TargetRandomEnemy(this);
+                }
+                else if (targetScope == TargetScope.SingleHero) {
+                    targetingManager.TargetRandomHero(this);
+                }
+            }
+
+            if (requiresCharge) {
+                InitCharge();
+            }
+
+            else {
+                if (costsMana) {
+                    ApplyManaCost();
+                }
+                AbilityMap();
+            }
+
+        } //end InitDefaultAbility()
+
+
 
         public virtual void TargetInfCharge() {
             targetingManager.SortTargetingType(this);
