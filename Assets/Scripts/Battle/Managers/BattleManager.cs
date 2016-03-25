@@ -228,8 +228,6 @@ public class BattleManager : MonoBehaviour {
 
     void CheckForDefaultAbilitySelectionInput() {
 
-        Debug.Log("Check called");
-
         Ability defaultAbilityToApply = null;
         
         if (Input.GetKeyDown(KeyCode.Q)) {

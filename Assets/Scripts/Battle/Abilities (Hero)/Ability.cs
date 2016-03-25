@@ -442,12 +442,10 @@ namespace Abilities {
 
             if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText();
-                Debug.Log("Evaded");
                 return;
             }
             if (hitOutcome == HitManager.HitOutcome.Block) {
                 BlockDamageProc(defender, procDamage);
-                Debug.Log("Blocked");
                 return;
             }
 
@@ -455,12 +453,10 @@ namespace Abilities {
 
             if (hitOutcome == HitManager.HitOutcome.Crit) {
                 CritDamageProc(defender, procDamage);
-                Debug.Log("Crit");
                 return;
             }
             else {
                 DamageProc(defender, procDamage);
-                Debug.Log("Hit");
                 return;
             }
 
