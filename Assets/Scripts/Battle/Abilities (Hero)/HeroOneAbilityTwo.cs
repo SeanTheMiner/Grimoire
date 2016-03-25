@@ -13,12 +13,12 @@ public class HeroOneAbilityTwo : Ability {
         manaCost = 120;
 
         chargeDuration = 3.0f;
-        abilityDuration = 6.0f;
+        abilityDuration = 5.0f;
         cooldownDuration = 12.0f;
 
         procDamage = 50;
-        procSpacing = 0.35f;
-        critChance = 20;
+        procSpacing = 0.5f;
+        critChance = 25;
         critMultiplier = 3;
         
     } //end constructor

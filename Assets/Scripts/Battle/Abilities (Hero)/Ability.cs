@@ -398,26 +398,33 @@ namespace Abilities {
 
 
         public virtual void DetermineHitOutcomeSingle(Hero attacker, BattleObject defender) {
-            
-            if (HitManager.DetermineEvasion(attacker, defender, this) == true) {
+
+            HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
+
+            if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText();
-                //Debug.Log("Miss");
+                Debug.Log("Evaded");
                 return;
             }
-            else if (HitManager.DetermineBlock(attacker, defender, this) == true) {
+            if (hitOutcome == HitManager.HitOutcome.Block) {
                 BlockDamageProc(defender, procDamage);
-                //Debug.Log("Block");
+                Debug.Log("Blocked");
                 return;
             }
-            else if (HitManager.DetermineCrit(attacker, defender, this) == true) {
+
+            hitOutcome = HitManager.DetermineCrit(attacker, defender, this);
+
+            if (hitOutcome == HitManager.HitOutcome.Crit) {
                 CritDamageProc(defender, procDamage);
-                //Debug.Log("Crit");
+                Debug.Log("Crit");
                 return;
             }
             else {
-                //Debug.Log("Hit");
                 DamageProc(defender, procDamage);
+                Debug.Log("Hit");
+                return;
             }
+
 
         } //end DamageProcSingle(2)
         

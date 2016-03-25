@@ -10,11 +10,11 @@ public class BlueEnemy : Enemy {
         maxHealth = 1200;
         healthRegen = 2;
         homeBiome = Biome.BlueBiome;
-        armor = 80;
-        spirit = 30;
-        physicalEvasionChance = 10;
+        armor = 70;
+        spirit = 20;
+        physicalEvasionChance = 12;
         physicalBlockChance = 20;
-        physicalBlockModifier = 50;
+        physicalBlockModifier = 40;
 
         enemyAbilityList.Add(enemyAbilityOne);
         enemyAbilityList.Add(enemyAbilityTwo);

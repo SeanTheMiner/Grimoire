@@ -13,8 +13,8 @@ public class FireStorm : Ability {
         costsMana = false;
 
         chargeDuration = 2;
-        procDamage = 50;
-        procSpacing = 0.4f;
+        procDamage = 30;
+        procSpacing = 0.35f;
 
         requiresTargeting = false;
         hasCooldown = false;

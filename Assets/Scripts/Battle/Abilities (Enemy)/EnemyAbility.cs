@@ -318,26 +318,28 @@ namespace EnemyAbilities {
 
         public virtual void DetermineHitOutcomeSingle(Enemy attacker, BattleObject defender) {
 
-            if (HitManager.EnemyDetermineEvasion(attacker, defender, this) == true) {
+            HitManager.HitOutcome hitOutcome = HitManager.EnemyDetermineEvasionAndBlock(attacker, defender, this);
+
+            if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText();
-                //Debug.Log("Miss");
                 return;
             }
-            else if (HitManager.EnemyDetermineBlock(attacker, defender, this) == true) {
+            if (hitOutcome == HitManager.HitOutcome.Block) {
                 BlockDamageProc(defender, procDamage);
-                //Debug.Log("Block");
                 return;
             }
-            else if (HitManager.EnemyDetermineCrit(attacker, defender, this) == true) {
+
+            hitOutcome = HitManager.EnemyDetermineCrit(attacker, defender, this);
+
+            if (hitOutcome == HitManager.HitOutcome.Crit) {
                 CritDamageProc(defender, procDamage);
-                //Debug.Log("Crit");
                 return;
             }
             else {
-                //Debug.Log("Hit");
                 DamageProc(defender, procDamage);
+                return;
             }
-
+            
         } //end DamageProcSingle(2)
 
 
