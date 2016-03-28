@@ -99,7 +99,7 @@ public class BattleDisplayManager : MonoBehaviour {
     } //end UpdateSelectedHeroText()
 
 
-    public void UpdateAbilityButtonText(Text text, Ability ability) {
+    public void UpdateAbilityButtonText(Text text, HeroAbility ability) {
 
         if (ability.cooldownEndTimer > Time.time) {
             text.text = (Mathf.CeilToInt(ability.cooldownEndTimer - Time.time)).ToString();

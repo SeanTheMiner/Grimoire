@@ -3,7 +3,7 @@ using System.Collections;
 using Abilities;
 using Enemies;
 
-public class PiercingFire : Ability {
+public class PiercingFire : HeroAbility {
 
     public PiercingFire() {
 

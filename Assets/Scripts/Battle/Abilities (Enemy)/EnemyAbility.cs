@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+using Abilities;
 using BattleObjects;
 using Heroes;
 using Enemies;
@@ -10,14 +12,9 @@ using Effects;
 namespace EnemyAbilities {
 
 
-    public class EnemyAbility : MonoBehaviour {
+    public class EnemyAbility : Ability {
 
-        public TargetingManager targetingManager = new TargetingManager();
-
-
-        public string abilityName {
-            get; set;
-        }
+        public Enemy abilityOwner;
 
         public int enemyAbilityWeight {
             get; set;
@@ -27,30 +24,12 @@ namespace EnemyAbilities {
             get; set;
         }
 
-
-        public Enemy abilityOwner;
-        public Effect effectApplied;
-
-        public List<BattleObject> targetBattleObjectList = new List<BattleObject>();
-
-
         public bool requiresCharge {
             get; set;
         }
 
         public bool hasCooldown {
             get; set;
-        }
-
-        public DamageType primaryDamageType {
-            get; set;
-        }
-
-        public enum DamageType {
-            Physical,
-            Magical,
-            Healing,
-            None
         }
 
         public TargetScope targetScope {
@@ -76,104 +55,6 @@ namespace EnemyAbilities {
             Barrage
         }
 
-
-        public Enemy targetEnemy {
-            get; set;
-        }
-
-        public Hero targetHero {
-            get; set;
-        }
-
-
-        //Timekeeping
-
-        public float chargeDuration {
-            get; set;
-        }
-
-        public float chargeEndTimer {
-            get; set;
-        }
-
-        public float abilityDuration {
-            get; set;
-        }
-
-        public float abilityEndTimer {
-            get; set;
-        }
-
-        public float cooldownDuration {
-            get; set;
-        }
-
-        public float cooldownEndTimer {
-            get; set;
-        }
-
-
-
-        //Proc handlers
-
-        public float nextProcTimer {
-            get; set;
-        }
-
-        public int procCounter {
-            get; set;
-        }
-
-        public int procLimit {
-            get; set;
-        }
-
-        public float procSpacing {
-            get; set;
-        }
-
-        public float procDamage {
-            get; set;
-        }
-
-        public float procHeal {
-            get; set;
-        }
-
-
-        //HitManager variables 
-
-        public float critChance {
-            get; set;
-        }
-
-        public float critMultiplier {
-            get; set;
-        }
-
-        public float physicalPenetration {
-            get; set;
-        }
-
-        public float magicalPenetration {
-            get; set;
-        }
-
-        public float physicalAccuracy {
-            get; set;
-        }
-
-        public float magicalAccuracy {
-            get; set;
-        }
-
-        public float physicalFinesse {
-            get; set;
-        }
-
-        public float magicalFinesse {
-            get; set;
-        }
 
         //Enemy Ability constructor
 
@@ -288,14 +169,14 @@ namespace EnemyAbilities {
 
             int damageToApply = Mathf.RoundToInt(HitManager.EnemyApplyResist(abilityOwner, defender, this, damage));
             defender.currentHealth -= damageToApply;
-            defender.SpawnDamageText(damageToApply);
+            defender.SpawnDamageText(damageToApply, primaryDamageType);
         }
 
         public virtual void CritDamageProc(BattleObject defender, float damage) {
 
             int damageToApply = Mathf.RoundToInt(HitManager.EnemyApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
             defender.currentHealth -= damageToApply;
-            defender.SpawnDamageText(damageToApply);
+            defender.SpawnDamageText(damageToApply, primaryDamageType);
         }
 
         public virtual void BlockDamageProc(BattleObject defender, float damage) {
@@ -311,7 +192,7 @@ namespace EnemyAbilities {
 
             int damageToApply = Mathf.RoundToInt(HitManager.EnemyApplyResist(abilityOwner, defender, this, (damage * (1 - (blockModifier / 100)))));
             defender.currentHealth -= damageToApply;
-            defender.SpawnDamageText(damageToApply);
+            defender.SpawnDamageText(damageToApply, primaryDamageType);
 
         } //end BlockDamageProc
 

@@ -388,12 +388,12 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\HealPoke.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\PokeBlast.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\Ability.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\ArmorBreakAbility.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EbbAndFlow.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\FireStorm.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroAbility.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityTwo.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityOne.cs" />
@@ -407,6 +407,7 @@
      <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\RedEnemy.cs" />
+     <Compile Include="Assets\Scripts\Battle\General\Ability.cs" />
      <Compile Include="Assets\Scripts\Battle\General\BattleObject.cs" />
      <Compile Include="Assets\Scripts\Battle\General\DamageTextController.cs" />
      <Compile Include="Assets\Scripts\Battle\General\DestroyByTime.cs" />

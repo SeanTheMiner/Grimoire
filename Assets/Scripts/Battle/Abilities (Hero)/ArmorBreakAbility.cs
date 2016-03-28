@@ -4,7 +4,7 @@ using System.Collections;
 using Abilities;
 using Effects;
 
-public class ArmorBreakAbility : Ability {
+public class ArmorBreakAbility : HeroAbility {
 
     public ArmorBreakAbility () {
 

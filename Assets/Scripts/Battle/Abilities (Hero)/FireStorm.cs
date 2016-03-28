@@ -2,7 +2,7 @@
 using System.Collections;
 using Abilities;
 
-public class FireStorm : Ability {
+public class FireStorm : HeroAbility {
 
     public FireStorm() {
 

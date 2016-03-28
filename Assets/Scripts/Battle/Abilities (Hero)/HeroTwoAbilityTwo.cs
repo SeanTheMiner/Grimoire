@@ -3,7 +3,7 @@ using System.Collections;
 using Abilities;
 using Heroes;
 
-public class HeroTwoAbilityTwo : Ability {
+public class HeroTwoAbilityTwo : HeroAbility {
 
     public HeroTwoAbilityTwo() {
 

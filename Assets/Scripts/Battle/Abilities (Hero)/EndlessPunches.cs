@@ -2,7 +2,7 @@
 using System.Collections;
 using Abilities;
 
-public class EndlessPunches : Ability {
+public class EndlessPunches : HeroAbility {
 
     public EndlessPunches() {
 

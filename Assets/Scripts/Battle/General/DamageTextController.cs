@@ -26,7 +26,7 @@ namespace DamageTextObjects {
 
             textStartPosition = rectTransform.anchoredPosition;
             textEndPosition = new Vector2(textStartPosition.x, (textStartPosition.y + riseDistance));
-
+            
             textStartColor = damageTextMesh.color;
             textEndColor = new Color(textStartColor.r, textStartColor.g, textStartColor.b, 0f);
 

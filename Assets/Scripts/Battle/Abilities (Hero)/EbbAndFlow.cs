@@ -2,7 +2,7 @@
 using System.Collections;
 using Abilities;
 
-public class EbbAndFlow : Ability {
+public class EbbAndFlow : HeroAbility {
 
 	public EbbAndFlow() {
 

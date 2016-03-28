@@ -3,7 +3,7 @@ using System.Collections;
 using Abilities;
 using Enemies;
 
-public class EndlessFire : Ability {
+public class EndlessFire : HeroAbility {
 
     public EndlessFire() {
 

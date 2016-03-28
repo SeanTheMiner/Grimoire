@@ -11,33 +11,33 @@ using BattleObjects;
 
 public class TargetingManager {
 
-    public void SortTargetingType(Ability ability) {
+    public void SortTargetingType(HeroAbility ability) {
 
-        if ((ability.targetScope == Ability.TargetScope.SingleEnemy) | (ability.targetScope == Ability.TargetScope.SingleHero) | (ability.targetScope == Ability.TargetScope.SingleHeroOrEnemy)) {
+        if ((ability.targetScope == HeroAbility.TargetScope.SingleEnemy) | (ability.targetScope == HeroAbility.TargetScope.SingleHero) | (ability.targetScope == HeroAbility.TargetScope.SingleHeroOrEnemy)) {
             ability.abilityOwner.currentBattleState = Hero.BattleState.Target;
         }
-        else if (ability.targetScope == Ability.TargetScope.AllEnemies) {
+        else if (ability.targetScope == HeroAbility.TargetScope.AllEnemies) {
             TargetAllEnemies(ability);
         }
-        else if (ability.targetScope == Ability.TargetScope.AllHeroes) {
+        else if (ability.targetScope == HeroAbility.TargetScope.AllHeroes) {
             TargetAllHeroes(ability);
         }
         
     } //end SortTargetingType
 
 
-    public void CastSelecterRay(Ability ability) {
+    public void CastSelecterRay(HeroAbility ability) {
 
         RaycastHit objectHit;
         Ray selectingRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         if(Physics.Raycast(selectingRay, out objectHit)) {
 
-            if((objectHit.collider.tag == "Enemy") && (ability.targetScope == Ability.TargetScope.SingleEnemy)) {
+            if((objectHit.collider.tag == "Enemy") && (ability.targetScope == HeroAbility.TargetScope.SingleEnemy)) {
                 ability.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
             } 
 
-            else if((objectHit.collider.tag == "Hero") && (ability.targetScope == Ability.TargetScope.SingleHero)) {
+            else if((objectHit.collider.tag == "Hero") && (ability.targetScope == HeroAbility.TargetScope.SingleHero)) {
                 ability.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
             } 
 

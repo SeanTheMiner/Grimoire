@@ -2,7 +2,7 @@
 using System.Collections;
 using Abilities;
 
-public class HeroOneAbilityTwo : Ability {
+public class HeroOneAbilityTwo : HeroAbility {
 
     public HeroOneAbilityTwo() {
 

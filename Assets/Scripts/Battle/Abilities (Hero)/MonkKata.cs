@@ -2,7 +2,7 @@
 using System.Collections;
 using Abilities;
 
-public class MonkKata : Ability {
+public class MonkKata : HeroAbility {
 
     public float interProcSpacing;
     public float interProcTimer;

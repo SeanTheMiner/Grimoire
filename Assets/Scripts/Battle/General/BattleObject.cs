@@ -81,7 +81,7 @@ namespace BattleObjects {
         //Native functions
 
         //eventually this guy will include (int damage, Ability.DamageType damageType)
-        public virtual void SpawnDamageText(int damage) {
+        public virtual void SpawnDamageText(int damage, Abilities.Ability.DamageType damageType) {
 
             GameObject damageTextPrefab = (GameObject)Instantiate(Resources.Load("DamageTextPrefab"),
                 transform.position,
@@ -90,6 +90,12 @@ namespace BattleObjects {
 
             TextMesh damageTextMesh = damageTextPrefab.GetComponentInChildren<TextMesh>();
             damageTextMesh.text = damage.ToString();
+            if (damageType == Abilities.Ability.DamageType.Physical) {
+                damageTextMesh.color = Color.red;
+            }
+            else if (damageType == Abilities.Ability.DamageType.Magical) {
+                damageTextMesh.color = Color.blue;
+            }
 
         } //end SpawnDamageText()
 

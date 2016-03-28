@@ -190,7 +190,7 @@ public class BattleManager : MonoBehaviour {
 
     void CheckForAbilitySelectionInput() {
 
-        Ability abilityToApply = null;
+        HeroAbility abilityToApply = null;
 
         if ((Input.GetKeyDown(KeyCode.Q)) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
             abilityToApply = selectedHero.abilityOne;
@@ -228,7 +228,7 @@ public class BattleManager : MonoBehaviour {
 
     void CheckForDefaultAbilitySelectionInput() {
 
-        Ability defaultAbilityToApply = null;
+        HeroAbility defaultAbilityToApply = null;
         
         if (Input.GetKeyDown(KeyCode.Q)) {
             defaultAbilityToApply = selectedHero.abilityOne;
@@ -432,7 +432,7 @@ public class BattleManager : MonoBehaviour {
 
         foreach(Hero hero in heroList) {
             hero.currentHealth -= 120;
-            hero.SpawnDamageText(120);
+            hero.SpawnDamageText(120, Ability.DamageType.Physical);
         }
     }
 
@@ -440,7 +440,7 @@ public class BattleManager : MonoBehaviour {
 
         if(selectedHero != null) {
             selectedHero.currentHealth -= 177;
-            selectedHero.SpawnDamageText(177);
+            selectedHero.SpawnDamageText(177, Ability.DamageType.Magical);
         }
     }
 

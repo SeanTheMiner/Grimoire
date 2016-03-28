@@ -41,8 +41,8 @@ namespace Heroes {
         //Under the hood
 
         [HideInInspector]
-        public Ability currentAbility, queuedAbility, selectedAbility, targetingAbility, defaultAbility;
-        public Ability abilityOne, abilityTwo, abilityThree, abilityFour, abilityFive, abilitySix;
+        public HeroAbility currentAbility, queuedAbility, selectedAbility, targetingAbility, defaultAbility;
+        public HeroAbility abilityOne, abilityTwo, abilityThree, abilityFour, abilityFive, abilitySix;
         
         public BattleState currentBattleState {
             get; set;

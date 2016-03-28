@@ -132,7 +132,7 @@ public class AbilityButtonManager : MonoBehaviour {
             ClearChargingMasks();
         }
 
-        if ((hero.currentAbility != null) && (hero.currentAbility.abilityType == Ability.AbilityType.InfCharge)) {
+        if ((hero.currentAbility != null) && (hero.currentAbility.abilityType == HeroAbility.AbilityType.InfCharge)) {
 
             CheckInfChargingMask(hero.abilityOne, infChargingMaskOne);
             CheckInfChargingMask(hero.abilityTwo, infChargingMaskTwo);
@@ -178,7 +178,7 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end UpdateSelectedHeroButtons (Hero)
 
 
-    public void CheckCooldownMask(Ability ability, Image cooldownMask) {
+    public void CheckCooldownMask(HeroAbility ability, Image cooldownMask) {
 
         if (ability.cooldownEndTimer > Time.time) {
             cooldownMask.fillAmount = ((ability.cooldownEndTimer - Time.time) / ability.cooldownDuration);
@@ -190,7 +190,7 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end CheckCooldownMask (2)
 
 
-    public void CheckChargingMask(Ability ability, Image chargingMask) {
+    public void CheckChargingMask(HeroAbility ability, Image chargingMask) {
 
         if (ability.chargeEndTimer > Time.time) {
             chargingMask.fillAmount = (1 - ((ability.chargeEndTimer - Time.time) / ability.chargeDuration));
@@ -202,7 +202,7 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end CheckCharging Mask(2)
 
 
-    public void CheckInfChargingMask(Ability ability, Image infChargingMask) {
+    public void CheckInfChargingMask(HeroAbility ability, Image infChargingMask) {
 
         if (ability.isInfCharging) {
             infChargingMask.fillAmount = ((Time.time - ability.infChargeStartTimer) - (Mathf.FloorToInt(Time.time - ability.infChargeStartTimer)));
@@ -213,7 +213,7 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end CheckInfChargingMask(2)
 
 
-    public void CheckDurationMask(Ability ability, Image durationMask) {
+    public void CheckDurationMask(HeroAbility ability, Image durationMask) {
 
         if (ability.abilityEndTimer > Time.time) {
             durationMask.fillAmount = ((ability.abilityEndTimer - Time.time) / ability.abilityDuration);
@@ -225,7 +225,7 @@ public class AbilityButtonManager : MonoBehaviour {
     } //end CheckChargingMask(2)
 
     
-    public void CheckInfBarrageMask(Hero hero, Ability ability, Image infBarrageMask) {
+    public void CheckInfBarrageMask(Hero hero, HeroAbility ability, Image infBarrageMask) {
         
         if (hero.currentAbility == ability) {
             infBarrageMask.fillAmount = (1 - ((ability.nextProcTimer - Time.time) / ability.procSpacing));
