@@ -324,7 +324,7 @@ public class HeroAbility : Ability {
         int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
         defender.currentHealth -= damageToApply;
         defender.SpawnDamageText(damageToApply, primaryDamageType);
-        Debug.Log(primaryDamageType.ToString());
+
     }
 
 
@@ -350,7 +350,7 @@ public class HeroAbility : Ability {
 
         int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * (1 - (blockModifier / 100)))));
         defender.currentHealth -= damageToApply;
-        defender.SpawnDamageText(damageToApply, primaryDamageType);
+        defender.SpawnBlockText(damageToApply, primaryDamageType);
 
     } //end BlockDamageProc
 

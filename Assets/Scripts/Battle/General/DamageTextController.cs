@@ -62,12 +62,11 @@ namespace DamageTextObjects {
 
             //workVector.x = (Random.Range(1, riseDistance));
             //workVector.y = Mathf.Sqrt(riseDistance - workVector.x);
+            //Mathf.Pow(workVector.x, 2);
+            // Mathf.Pow(workVector.y, 2);
 
             workVector.x = Mathf.Sqrt(2 * riseDistance);
             workVector.y = Mathf.Sqrt(2 * riseDistance);
-
-            //Mathf.Pow(workVector.x, 2);
-           // Mathf.Pow(workVector.y, 2);
 
             returnVector = new Vector2((workVector.x + startVector.x) , (workVector.y + startVector.y));
 

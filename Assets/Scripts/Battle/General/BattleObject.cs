@@ -145,13 +145,15 @@ namespace BattleObjects {
                 Quaternion.Euler(90, 0, 0)
                 );
 
-            TextMesh missTextMesh = blockTextPrefab.GetComponentInChildren<TextMesh>();
-            missTextMesh.text = damage.ToString();
+            TextMesh blockTextMesh = blockTextPrefab.GetComponentInChildren<TextMesh>();
+            blockTextMesh.text = damage.ToString();
 
             if (damageType == Abilities.Ability.DamageType.Physical) {
+                blockTextMesh.color = new Color(1, 0.5f, 0.5f, 1);
                 blockTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.PhysicalBlock;
             }
             else {
+                blockTextMesh.color = new Color(0.5f, 0.5f, 1, 1);
                 blockTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.MagicalBlock;
             }
 
