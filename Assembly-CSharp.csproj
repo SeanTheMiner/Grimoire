@@ -389,6 +389,7 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\PokeBlast.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\ArmorBreakAbility.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\ChangeStance.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EbbAndFlow.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
@@ -400,6 +401,7 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityTwo.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\EffectController.cs" />
@@ -413,6 +415,7 @@
      <Compile Include="Assets\Scripts\Battle\General\DestroyByTime.cs" />
      <Compile Include="Assets\Scripts\Battle\General\EnemyController.cs" />
      <Compile Include="Assets\Scripts\Battle\General\EnemyHealthSliderController.cs" />
+     <Compile Include="Assets\Scripts\Battle\Heroes\Champion.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\Hero.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroTwo.cs" />
