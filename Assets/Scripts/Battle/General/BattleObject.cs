@@ -90,13 +90,16 @@ namespace BattleObjects {
 
             TextMesh damageTextMesh = damageTextPrefab.GetComponentInChildren<TextMesh>();
             damageTextMesh.text = damage.ToString();
+            
             if (damageType == Abilities.Ability.DamageType.Physical) {
                 damageTextMesh.color = Color.red;
+                damageTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.PhysicalHit;
             }
             else if (damageType == Abilities.Ability.DamageType.Magical) {
                 damageTextMesh.color = Color.blue;
+                damageTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.MagicalHit;
             }
-
+            
         } //end SpawnDamageText()
 
 
@@ -109,11 +112,13 @@ namespace BattleObjects {
 
             TextMesh healTextMesh = healTextPrefab.GetComponentInChildren<TextMesh>();
             healTextMesh.text = heal.ToString();
+            
+            healTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.Heal;
 
         } //end SpawnHealText()
 
 
-        public virtual void SpawnMissText() {
+        public virtual void SpawnMissText(Abilities.Ability.DamageType damageType) {
 
             GameObject missTextPrefab = (GameObject)Instantiate(Resources.Load("MissTextPrefab"),
                 transform.position,
@@ -122,11 +127,18 @@ namespace BattleObjects {
 
             TextMesh missTextMesh = missTextPrefab.GetComponentInChildren<TextMesh>();
             missTextMesh.text = "Miss!";
+            
+            if (damageType == Abilities.Ability.DamageType.Physical) {
+                missTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.PhysicalMiss;
+            }
+            else {
+                missTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.MagicalMiss;
+            }
 
         } //end SpawnDamageText()
 
 
-        public virtual void SpawnBlockText(int damage) {
+        public virtual void SpawnBlockText(int damage, Abilities.Ability.DamageType damageType) {
 
             GameObject blockTextPrefab = (GameObject)Instantiate(Resources.Load("BlockTextPrefab"),
                 transform.position,
@@ -134,7 +146,14 @@ namespace BattleObjects {
                 );
 
             TextMesh missTextMesh = blockTextPrefab.GetComponentInChildren<TextMesh>();
-            missTextMesh.text = damage.ToString(); 
+            missTextMesh.text = damage.ToString();
+
+            if (damageType == Abilities.Ability.DamageType.Physical) {
+                blockTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.PhysicalBlock;
+            }
+            else {
+                blockTextPrefab.GetComponentInChildren<DamageTextObjects.DamageTextController>().hitType = DamageTextObjects.DamageTextController.HitType.MagicalBlock;
+            }
 
         } //end SpawnDamageText() 
 

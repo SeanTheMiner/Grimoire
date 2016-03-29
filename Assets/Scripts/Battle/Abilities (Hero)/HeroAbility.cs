@@ -287,7 +287,7 @@ public class HeroAbility : Ability {
         HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
 
         if (hitOutcome == HitManager.HitOutcome.Evade) {
-            defender.SpawnMissText();
+            defender.SpawnMissText(primaryDamageType);
             return;
         }
         if (hitOutcome == HitManager.HitOutcome.Block) {
@@ -324,6 +324,7 @@ public class HeroAbility : Ability {
         int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
         defender.currentHealth -= damageToApply;
         defender.SpawnDamageText(damageToApply, primaryDamageType);
+        Debug.Log(primaryDamageType.ToString());
     }
 
 
@@ -332,6 +333,7 @@ public class HeroAbility : Ability {
         int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
         defender.currentHealth -= damageToApply;
         defender.SpawnDamageText(damageToApply, primaryDamageType);
+        //could call SpawnCritText, or not
     }
 
 

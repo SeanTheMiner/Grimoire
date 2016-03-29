@@ -202,7 +202,7 @@ namespace EnemyAbilities {
             HitManager.HitOutcome hitOutcome = HitManager.EnemyDetermineEvasionAndBlock(attacker, defender, this);
 
             if (hitOutcome == HitManager.HitOutcome.Evade) {
-                defender.SpawnMissText();
+                defender.SpawnMissText(primaryDamageType);
                 return;
             }
             if (hitOutcome == HitManager.HitOutcome.Block) {
