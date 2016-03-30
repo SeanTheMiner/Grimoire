@@ -1,95 +1,52 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class DebugDisplayManager : MonoBehaviour {
 
+    //Keep this
+
     public BattleManager battleManager;
 
-    public Text heroOneNameText;
-    public Text heroTwoNameText;
+    public Text textOne, textTwo, textThree, textFour,
+        textFive, textSix, textSeven, textEight;
 
-    public Text heroOneBStateText;
-    public Text heroTwoBStateText;
+    public List<Text> textList = new List<Text>();
 
-    public Text heroOneTarAbText;
-    public Text heroTwoTarAbText;
+    //End Keep this
+    //Do whatever you want with this 
 
-    public Text heroOneCurAbText;
-    public Text heroTwoCurAbText;
+    public Champion championObject;
 
-    public Text heroOneChargeText;
-    public Text heroTwoChargeText;
 
-    public Text debugChargeTimerText;
-    public Text armorText;
+    //end Do whatever you want with this
 
 
     public void InitDebugText() {
 
-        heroOneNameText.text = battleManager.heroObjectOne.heroName;
-        heroTwoNameText.text = battleManager.heroObjectTwo.heroName;
+        textList.Add(textOne);
+        textList.Add(textTwo);
+        textList.Add(textThree);
+        textList.Add(textFour);
+        textList.Add(textFive);
+        textList.Add(textSix);
+        textList.Add(textSeven);
+        textList.Add(textEight);
+        
+        textOne.text = battleManager.heroObjectThree.heroName;
+        
 
     } //end InitDebugText()
 
 
     public void UpdateDebugText() {
 
-        heroOneBStateText.text = battleManager.heroObjectOne.currentBattleState.ToString();
-        heroTwoBStateText.text = battleManager.heroObjectTwo.currentBattleState.ToString();
+       textTwo.text = championObject.currentStance.ToString();
 
-        if(battleManager.heroObjectOne.targetingAbility == null) {
-            heroOneTarAbText.text = "No ability";
-        }
-        else {
-            heroOneTarAbText.text = battleManager.heroObjectOne.targetingAbility.abilityName;
-        }
-
-        if(battleManager.heroObjectTwo.targetingAbility == null) {
-            heroTwoTarAbText.text = "No ability";
-        }
-        else {
-            heroTwoTarAbText.text = battleManager.heroObjectTwo.targetingAbility.abilityName;
-        }
-
-
-        if(battleManager.heroObjectOne.currentAbility == null) {
-            heroOneCurAbText.text = "No ability";
-        }
-        else {
-            heroOneCurAbText.text = battleManager.heroObjectOne.currentAbility.abilityName;
-        }
-
-        if(battleManager.heroObjectTwo.currentAbility == null) {
-            heroTwoCurAbText.text = "No ability";
-        }
-        else {
-            heroTwoCurAbText.text = battleManager.heroObjectTwo.currentAbility.abilityName;
-        }
-
-        if(battleManager.heroObjectOne.currentBattleState != Heroes.Hero.BattleState.Charge) {
-            heroOneChargeText.text = "";
-        }
-        else {
-            heroOneChargeText.text = (battleManager.heroObjectOne.currentAbility.chargeEndTimer - Time.time).ToString();
-        }
-
-        if(battleManager.heroObjectTwo.currentBattleState != Heroes.Hero.BattleState.Charge) {
-            heroTwoChargeText.text = "";
-        }
-        else {
-            heroTwoChargeText.text = (battleManager.heroObjectTwo.currentAbility.chargeEndTimer - Time.time).ToString();
-        }
-
-        if((battleManager.heroObjectTwo.currentBattleState == Heroes.Hero.BattleState.InfCharge) | (battleManager.heroObjectTwo.targetingAbility == battleManager.heroObjectTwo.abilityThree)) {
-            debugChargeTimerText.text = (Time.time - battleManager.heroObjectTwo.abilityThree.infChargeStartTimer).ToString();
-        }
-        else {
-            debugChargeTimerText.text = "";
-        }
-
-        if (battleManager.enemyObjectOne != null) {
-            armorText.text = battleManager.enemyObjectOne.spirit.ToString();
+        foreach (Text text in textList) {
+            if (text.text == null) {
+                text.text = "";
+            }
         }
 
 

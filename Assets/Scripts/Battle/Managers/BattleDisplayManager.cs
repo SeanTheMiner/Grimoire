@@ -8,16 +8,18 @@ public class BattleDisplayManager : MonoBehaviour {
 
     public BattleManager battleManager;
 
-    public Text heroOneNameText, heroTwoNameText,
+    public Text heroOneNameText, heroTwoNameText, heroThreeNameText, heroFourNameText,
         selectedHeroNameText,
-        heroOneHealthText, heroTwoHealthText, 
-        heroOneManaText, heroTwoManaText,
+        heroOneHealthText, heroTwoHealthText, heroThreeHealthText, heroFourHealthText, 
+        heroOneManaText, heroTwoManaText, heroThreeManaText, heroFourManaText,
         abilityOneText, abilityTwoText, abilityThreeText, abilityFourText, abilityFiveText, abilitySixText,
         enemyOneHealthText, enemyTwoHealthText, enemyThreeHealthText
         ;
 
     public Slider heroOneHealthSlider, heroTwoHealthSlider,
-        heroOneManaSlider, heroTwoManaSlider
+        heroOneManaSlider, heroTwoManaSlider,
+        heroThreeHealthSlider, heroThreeManaSlider,
+        heroFourHealthSlider, heroFourManaSlider
         ;
 
     //public Animator anim;
@@ -37,9 +39,13 @@ public class BattleDisplayManager : MonoBehaviour {
 
         heroOneHealthSlider.maxValue = battleManager.heroObjectOne.maxHealth;
         heroTwoHealthSlider.maxValue = battleManager.heroObjectTwo.maxHealth;
+        heroThreeHealthSlider.maxValue = battleManager.heroObjectThree.maxHealth;
+        heroFourHealthSlider.maxValue = battleManager.heroObjectFour.maxHealth;
 
         heroOneManaSlider.maxValue = battleManager.heroObjectOne.maxMana;
         heroTwoManaSlider.maxValue = battleManager.heroObjectTwo.maxMana;
+        heroThreeManaSlider.maxValue = battleManager.heroObjectThree.maxMana;
+        heroFourManaSlider.maxValue = battleManager.heroObjectFour.maxMana;
 
     } //end Awake()
 
@@ -48,6 +54,10 @@ public class BattleDisplayManager : MonoBehaviour {
 
         heroOneNameText.text = battleManager.heroObjectOne.heroName;
         heroTwoNameText.text = battleManager.heroObjectTwo.heroName;
+        heroThreeNameText.text = battleManager.heroObjectThree.heroName;
+        heroFourNameText.text = battleManager.heroObjectFour.heroName;
+
+
     }
 
 
@@ -55,9 +65,13 @@ public class BattleDisplayManager : MonoBehaviour {
 
         heroOneHealthText.text = (Mathf.Round(battleManager.heroObjectOne.currentHealth)).ToString() + " / " + battleManager.heroObjectOne.maxHealth.ToString();
         heroTwoHealthText.text = (Mathf.Round(battleManager.heroObjectTwo.currentHealth)).ToString() + " / " + battleManager.heroObjectTwo.maxHealth.ToString();
+        heroThreeHealthText.text = (Mathf.Round(battleManager.heroObjectThree.currentHealth)).ToString() + " / " + battleManager.heroObjectThree.maxHealth.ToString();
+        heroFourHealthText.text = (Mathf.Round(battleManager.heroObjectFour.currentHealth)).ToString() + " / " + battleManager.heroObjectFour.maxHealth.ToString();
 
         heroOneHealthSlider.value = (Mathf.Round(battleManager.heroObjectOne.currentHealth));
         heroTwoHealthSlider.value = (Mathf.Round(battleManager.heroObjectTwo.currentHealth));
+        heroThreeHealthSlider.value = (Mathf.Round(battleManager.heroObjectThree.currentHealth));
+        heroFourHealthSlider.value = (Mathf.Round(battleManager.heroObjectFour.currentHealth));
 
         enemyOneHealthText.text = (Mathf.Round(battleManager.enemyObjectOne.currentHealth)).ToString() + " / " + battleManager.enemyObjectOne.maxHealth.ToString();
         enemyTwoHealthText.text = (Mathf.Round(battleManager.enemyObjectTwo.currentHealth)).ToString() + " / " + battleManager.enemyObjectTwo.maxHealth.ToString();
@@ -70,9 +84,13 @@ public class BattleDisplayManager : MonoBehaviour {
 
         heroOneManaText.text = (Mathf.Round(battleManager.heroObjectOne.currentMana)).ToString() + " / " + battleManager.heroObjectOne.maxMana.ToString();
         heroTwoManaText.text = (Mathf.Round(battleManager.heroObjectTwo.currentMana)).ToString() + " / " + battleManager.heroObjectTwo.maxMana.ToString();
+        heroThreeManaText.text = (Mathf.Round(battleManager.heroObjectThree.currentMana)).ToString() + " / " + battleManager.heroObjectThree.maxMana.ToString();
+        heroFourManaText.text = (Mathf.Round(battleManager.heroObjectFour.currentMana)).ToString() + " / " + battleManager.heroObjectFour.maxMana.ToString();
 
         heroOneManaSlider.value = (Mathf.Round(battleManager.heroObjectOne.currentMana));
         heroTwoManaSlider.value = (Mathf.Round(battleManager.heroObjectTwo.currentMana));
+        heroThreeManaSlider.value = (Mathf.Round(battleManager.heroObjectThree.currentMana));
+        heroFourManaSlider.value = (Mathf.Round(battleManager.heroObjectFour.currentMana));
 
     }
 

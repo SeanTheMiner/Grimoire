@@ -22,11 +22,10 @@ public class BattleManager : MonoBehaviour {
 
     //Hero variables
 
-    public Hero heroObjectOne;
-    public Hero heroObjectTwo;
-
-    public Hero selectedHero;
-    public Hero queuedHero;
+    public Hero heroObjectOne, heroObjectTwo, heroObjectThree, heroObjectFour,
+        selectedHero, queuedHero
+        ;
+   
 
     public Ability targetingAbility;
 
@@ -181,7 +180,15 @@ public class BattleManager : MonoBehaviour {
             selectedHero = heroObjectTwo;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            selectedHero = heroObjectThree;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            selectedHero = heroObjectFour;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
             CancelAbility(selectedHero);
         }
 
