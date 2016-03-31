@@ -153,9 +153,8 @@ public class BattleManager : MonoBehaviour {
         else if (hero.currentBattleState == Hero.BattleState.Target) {
 
             if (hero.currentAbility.targetScope == HeroAbility.TargetScope.FreeTargetAOE) {
-                //AOETargeter.SetActive(true);
                 if (Input.GetMouseButtonDown(0)) {
-                    selectedHero.currentAbility.SendAOETargets();
+                    selectedHero.currentAbility.PlaceAOETargeter();
                 }
             }
             else {
@@ -234,6 +233,11 @@ public class BattleManager : MonoBehaviour {
 
         if (abilityToApply != null) {
             if (selectedHero.currentBattleState != Hero.BattleState.InfCharge) {
+                
+                if ((selectedHero.currentAbility != null) && (selectedHero.currentAbility.associatedTargeter != null)) {
+                    Destroy(selectedHero.currentAbility.associatedTargeter);
+                }
+
                 selectedHero.currentAbility = abilityToApply;
                 abilityToApply.InitAbility();
             }
@@ -241,7 +245,6 @@ public class BattleManager : MonoBehaviour {
                 selectedHero.currentAbility.targetingManager.SortTargetingType(selectedHero.currentAbility);
             }
         }
-        
  
     } //end CheckForAbilitySelectionInput()
     
@@ -285,10 +288,16 @@ public class BattleManager : MonoBehaviour {
         
         
     public void CancelAbility(Hero hero) {
+
         hero.selectedAbility = null;
         hero.targetingAbility = null;
 
         if (hero.currentAbility != null) {
+
+            if (hero.currentAbility.associatedTargeter != null) {
+                Destroy(hero.currentAbility.associatedTargeter);
+            }
+
             if (hero.currentBattleState == Hero.BattleState.Charge) {
                 hero.currentAbility.chargeEndTimer = 0;
             }

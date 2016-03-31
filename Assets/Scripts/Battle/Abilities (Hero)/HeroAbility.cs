@@ -17,6 +17,7 @@ public class HeroAbility : Ability {
 
     public Hero abilityOwner;
 
+    public GameObject associatedTargeter;
 
     //ability-defining vools
 
@@ -52,8 +53,7 @@ public class HeroAbility : Ability {
     public bool canBeDefault {
         get; set;
     }
-
-
+    
     public AbilityType abilityType {
         get; set;
     }
@@ -66,7 +66,9 @@ public class HeroAbility : Ability {
         Toggle
     }
 
-
+    public float radiusOfAOE {
+        get; set;
+    }
 
 
     public TargetScope targetScope;
@@ -144,6 +146,9 @@ public class HeroAbility : Ability {
 
         else if (requiresTargeting) {
 
+            if (targetScope == TargetScope.FreeTargetAOE) {
+                ActivateAOETargeter();
+            }
             abilityOwner.currentBattleState = Hero.BattleState.Target;
         }
 
@@ -204,10 +209,30 @@ public class HeroAbility : Ability {
     }
 
 
-    public virtual void SendAOETargets() {
-
+    public virtual void ActivateAOETargeter() {
+        associatedTargeter = (GameObject)Instantiate(Resources.Load("AOEFreetargeterPrefab"), Input.mousePosition, Quaternion.identity);
+        associatedTargeter.transform.localScale = new Vector3(radiusOfAOE, 0.05f, radiusOfAOE);
     }
 
+
+    public virtual void PlaceAOETargeter() {
+        associatedTargeter.GetComponent<AOETargeterController>().PlaceTargeter();
+        if (requiresCharge) {
+            InitCharge();
+        }
+        else {
+            AbilityMap();
+        }
+    }
+
+
+    public virtual void CheckAOETargets() {
+        foreach (BattleObject enemy in associatedTargeter.GetComponent<AOETargeterController>().battleObjectList) {
+            targetBattleObjectList.Add(enemy);
+        }
+    }
+
+    
 
     public virtual void InitCharge() {
         abilityOwner.canTakeCommands = false;
@@ -262,6 +287,10 @@ public class HeroAbility : Ability {
         abilityOwner.canTakeCommands = true;
         abilityOwner.currentBattleState = Hero.BattleState.Wait;
 
+        if (associatedTargeter != null) {
+            Destroy(associatedTargeter);
+        }
+
     } //end ExitAbility()
 
 
@@ -280,6 +309,10 @@ public class HeroAbility : Ability {
         else if ((targetScope == TargetScope.SingleHero) && (targetHero == null)) {
             targetingManager.TargetRandomHero(this);
         }
+        else if (targetScope == TargetScope.FreeTargetAOE) {
+            CheckAOETargets();
+        }
+
 
     } //end CheckTarget()
 

@@ -403,6 +403,7 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\RingOfFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
