@@ -400,6 +400,7 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityTwo.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityTwo.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\Inspire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
@@ -408,6 +409,7 @@
      <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\EffectController.cs" />
+     <Compile Include="Assets\Scripts\Battle\Effects\InspireEffect.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\SpiritBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
