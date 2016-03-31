@@ -20,6 +20,8 @@ public class BattleManager : MonoBehaviour {
     public float battleTimer = 0.0f;
     public static System.Random randomer;
 
+    public GameObject AOETargeter;
+
     //Hero variables
 
     public Hero heroObjectOne, heroObjectTwo, heroObjectThree, heroObjectFour,
@@ -41,7 +43,7 @@ public class BattleManager : MonoBehaviour {
     public GameObject[] allEnemies;
     public GameObject[] allHeroesAndEnemies;
 
-
+    //public GameObject AOETargeter;
 
     //LET'S GET IT STARTED IN HERE
     void Start() {
@@ -60,6 +62,8 @@ public class BattleManager : MonoBehaviour {
         
         debugDisplayManager.InitDebugText();
         debugDisplayManager.UpdateDebugText();
+
+        //AOETargeter.SetActive(false);
 
     } //end Start()
 
@@ -147,8 +151,17 @@ public class BattleManager : MonoBehaviour {
         }
         
         else if (hero.currentBattleState == Hero.BattleState.Target) {
-            if (Input.GetMouseButtonDown(0)) {
-                selectedHero.currentAbility.CastRay();
+
+            if (hero.currentAbility.targetScope == HeroAbility.TargetScope.FreeTargetAOE) {
+                //AOETargeter.SetActive(true);
+                if (Input.GetMouseButtonDown(0)) {
+                    selectedHero.currentAbility.SendAOETargets();
+                }
+            }
+            else {
+                if (Input.GetMouseButtonDown(0)) {
+                    selectedHero.currentAbility.CastRay();
+                }
             }
         }
 

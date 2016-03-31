@@ -143,6 +143,7 @@ public class HeroAbility : Ability {
         }
 
         else if (requiresTargeting) {
+
             abilityOwner.currentBattleState = Hero.BattleState.Target;
         }
 
@@ -200,6 +201,11 @@ public class HeroAbility : Ability {
 
     public virtual void CastRay() {
         targetingManager.CastSelecterRay(this);
+    }
+
+
+    public virtual void SendAOETargets() {
+
     }
 
 

@@ -412,6 +412,7 @@
      <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\RedEnemy.cs" />
+     <Compile Include="Assets\Scripts\Battle\General\AOETargeterController.cs" />
      <Compile Include="Assets\Scripts\Battle\General\Ability.cs" />
      <Compile Include="Assets\Scripts\Battle\General\BattleObject.cs" />
      <Compile Include="Assets\Scripts\Battle\General\DamageTextController.cs" />
