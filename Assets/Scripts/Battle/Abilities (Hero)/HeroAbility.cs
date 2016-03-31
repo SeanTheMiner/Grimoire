@@ -80,7 +80,8 @@ public class HeroAbility : Ability {
         AllHeroes,
         AllEnemies,
         AllHeroesOrAllEnemies,
-        FreeTargetAOE
+        FreeTargetAOE,
+        CenteredAOE
     }
 
 

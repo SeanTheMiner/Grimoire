@@ -394,6 +394,7 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\FireStorm.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HealBarrage.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroAbility.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityTwo.cs" />
@@ -401,10 +402,12 @@
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityTwo.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
+     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
      <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\EffectController.cs" />
+     <Compile Include="Assets\Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
      <Compile Include="Assets\Scripts\Battle\Effects\SpiritBreak.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
      <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />
@@ -419,6 +422,7 @@
      <Compile Include="Assets\Scripts\Battle\Heroes\Hero.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroOne.cs" />
      <Compile Include="Assets\Scripts\Battle\Heroes\HeroTwo.cs" />
+     <Compile Include="Assets\Scripts\Battle\Heroes\Myshka.cs" />
      <Compile Include="Assets\Scripts\Battle\Managers\AbilityButtonManager.cs" />
      <Compile Include="Assets\Scripts\Battle\Managers\BattleDisplayManager.cs" />
      <Compile Include="Assets\Scripts\Battle\Managers\BattleManager.cs" />

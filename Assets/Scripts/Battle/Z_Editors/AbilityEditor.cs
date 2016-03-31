@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/*
+
+
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
@@ -34,3 +37,7 @@ public class AbilityEditor : EditorWindow {
 
 
 } //end AbilityEditor class
+
+
+
+*/
