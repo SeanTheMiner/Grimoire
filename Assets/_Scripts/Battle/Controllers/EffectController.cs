@@ -20,32 +20,14 @@ public class EffectController : MonoBehaviour {
     public void Initialize () {
         foreach (BattleObject host in affectedBattleObjectList)
         {
-            //SpawnDisplayObject(host);
-            SpawnDisplayIcon(host);
-            StartCoroutine(CheckForExpiration(host));
+            StartCoroutine(CheckForExpiration(host, SpawnDisplayIcon(host)));
         }
 	} //end Initialize
+    
 
-
-    public void SpawnDisplayObject(BattleObject host) {
-        GameObject effectPrefab = new GameObject();
-        Vector3 spawnPosition = host.transform.position;
-
-        effectPrefab = (GameObject)Instantiate(Resources.Load("EffectPrefab"),
-                                             spawnPosition,
-                                             Quaternion.Euler(90, 0, 0)
-                                         );
-
-        TextMesh displayTextMesh = effectPrefab.GetComponentInChildren<TextMesh>();
-        displayTextMesh.text = effectApplied.effectDisplayText;
-        effectPrefabList.Add(effectPrefab);
-    }
-
-
-    public void SpawnDisplayIcon (BattleObject host) {
+    public GameObject SpawnDisplayIcon (BattleObject host) {
 
         GameObject effectIcon = new GameObject();
-
         EffectDisplayController effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
 
         effectIcon = (GameObject)Instantiate(Resources.Load("EffectIcon"),
@@ -67,33 +49,26 @@ public class EffectController : MonoBehaviour {
         effectDisplayController.displayEffectIconList.Add(effectIcon);
         effectIconList.Add(effectIcon);
 
+        return effectIcon;
+
     } //end SpawnDisplayIcon
 
 
 
-    public IEnumerator CheckForExpiration(BattleObject host) {
+    public IEnumerator CheckForExpiration(BattleObject host, GameObject icon) {
+
+        //Tenacity here?
         yield return new WaitForSeconds(effectApplied.effectDuration);
-
-        /*
-
-        GameObject effectToRemove = effectPrefabList[affectedBattleObjectList.IndexOf(host)];
-        Destroy(effectToRemove);
-        effectPrefabList.RemoveAt(affectedBattleObjectList.IndexOf(host));
-
-    */
-
-        GameObject iconToRemove = effectIconList[affectedBattleObjectList.IndexOf(host)];
-        Destroy(iconToRemove);
-
-        
-        
-        effectIconList.RemoveAt(affectedBattleObjectList.IndexOf(host));
-
-        //host.GetComponentInChildren<EffectDisplayController>().UpdateEffectIconPositions();
 
         affectedBattleObjectList.Remove(host);
         effectApplied.RemoveEffect(host);
 
+        EffectDisplayController effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
+
+        effectDisplayController.displayEffectIconList.Remove(icon);
+        Destroy(icon);
+        effectDisplayController.UpdateEffectIconPositions();
+        
     } //end CheckForExpiration()
 
 

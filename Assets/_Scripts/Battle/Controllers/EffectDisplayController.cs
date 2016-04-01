@@ -43,6 +43,8 @@ public class EffectDisplayController : MonoBehaviour {
 
         Debug.Log("update positions called");
 
+        /*
+
         List<GameObject> tempList = new List<GameObject>();
         
         foreach (GameObject icon in displayEffectIconList) {
@@ -52,8 +54,7 @@ public class EffectDisplayController : MonoBehaviour {
             }
         }
 
-        displayEffectIconList = tempList;
-
+    */
         foreach (GameObject icon in displayEffectIconList) {
             icon.transform.position = displayPositionList[displayEffectIconList.IndexOf(icon)];
         }
