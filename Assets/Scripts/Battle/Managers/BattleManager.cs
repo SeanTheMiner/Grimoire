@@ -200,7 +200,7 @@ public class BattleManager : MonoBehaviour {
             selectedHero = heroObjectFour;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && (!Input.GetKey(KeyCode.LeftShift))) {
             CancelAbility(selectedHero);
         }
 

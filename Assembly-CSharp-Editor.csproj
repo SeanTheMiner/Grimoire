@@ -45,28 +45,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\AOTClassesGenerator.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Inspectors\BlackboardInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Inspectors\GlobalBlackboardInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Inspectors\GraphInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Inspectors\GraphOwnerInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Windows\ExternalInspectorWindow.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Windows\GraphEditor.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Windows\PreferedTypesEditorWindow.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Windows\SceneGraphsEditorInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Windows\TaskWizardWindow.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\Design\Editor\Windows\WelcomeWindow.cs" />
-     <Compile Include="Assets\NodeCanvas\Framework\_ParadoxNotion (shared)\Design\Editor\EventDebuggerInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Modules\ActionListPlayer\Editor\ActionListPlayerInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Modules\BehaviourCanvas\BehaviourTrees\Editor\BehaviourTreeOwnerInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Modules\DialogueCanvas\Editor\DialogueActorInspector.cs" />
-     <Compile Include="Assets\NodeCanvas\Modules\DialogueCanvas\Editor\DialogueTreeInspector.cs" />
-     <None Include="Assets\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween43.xml" />
-     <None Include="Assets\NodeCanvas\!ReadMe!.txt" />
-     <None Include="Assets\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween46.xml" />
-     <None Include="Assets\NodeCanvas\Framework\_ParadoxNotion (shared)\Runtime\Serialization\_LICENSE - FULL SERIALIZER.txt" />
-     <None Include="Assets\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween50.xml" />
-     <None Include="Assets\NodeCanvas\Tasks\Actions\Tween\DOTWeen\readme.txt" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\AOTClassesGenerator.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Inspectors\BlackboardInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Inspectors\GlobalBlackboardInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Inspectors\GraphInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Inspectors\GraphOwnerInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Windows\ExternalInspectorWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Windows\GraphEditor.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Windows\PreferedTypesEditorWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Windows\SceneGraphsEditorInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Windows\TaskWizardWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\Editor\Windows\WelcomeWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\_ParadoxNotion (shared)\Design\Editor\EventDebuggerInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Modules\ActionListPlayer\Editor\ActionListPlayerInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Modules\BehaviourCanvas\BehaviourTrees\Editor\BehaviourTreeOwnerInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Modules\DialogueCanvas\Editor\DialogueActorInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Modules\DialogueCanvas\Editor\DialogueTreeInspector.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\EditorGUI\UPAEditorWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\EditorGUI\UPAExportWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\EditorGUI\UPAImageCreationWindow.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\EditorGUI\UPAImageEditorPreview.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\EditorGUI\UPALayerSettings.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\UPABlendModes.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\UPACustomTypes.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\UPADrawer.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\UPAImage.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\UPALayer.cs" />
+     <Compile Include="Assets\Z_Toolkits\UPAToolkit\Editor\UPASession.cs" />
+     <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween43.xml" />
+     <None Include="Assets\Z_Toolkits\NodeCanvas\!ReadMe!.txt" />
+     <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween46.xml" />
+     <None Include="Assets\Z_Toolkits\NodeCanvas\Framework\_ParadoxNotion (shared)\Runtime\Serialization\_LICENSE - FULL SERIALIZER.txt" />
+     <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween50.xml" />
+     <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\readme.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -91,26 +102,26 @@
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/BestGameEver/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTween43">
- <HintPath>C:/BestGameEver/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween43.dll</HintPath>
- </Reference>
- <Reference Include="DOTween46">
- <HintPath>C:/BestGameEver/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween46.dll</HintPath>
- </Reference>
- <Reference Include="DOTween50">
- <HintPath>C:/BestGameEver/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween50.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>C:/BestGameEver/Assets/NodeCanvas/Tasks/Actions/Tween/DOTWeen/Editor/DOTweenEditor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
