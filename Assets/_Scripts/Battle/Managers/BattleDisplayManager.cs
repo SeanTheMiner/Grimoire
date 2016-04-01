@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Abilities;
 using System;
+using Heroes;
 
 public class BattleDisplayManager : MonoBehaviour {
 
@@ -47,6 +48,8 @@ public class BattleDisplayManager : MonoBehaviour {
         heroThreeManaSlider.maxValue = battleManager.heroObjectThree.maxMana;
         heroFourManaSlider.maxValue = battleManager.heroObjectFour.maxMana;
 
+        SetRelativeSliderLengths();
+
     } //end Awake()
 
 
@@ -56,9 +59,65 @@ public class BattleDisplayManager : MonoBehaviour {
         heroTwoNameText.text = battleManager.heroObjectTwo.heroName;
         heroThreeNameText.text = battleManager.heroObjectThree.heroName;
         heroFourNameText.text = battleManager.heroObjectFour.heroName;
-
-
+        
     }
+
+
+    public void SetRelativeSliderLengths() {
+
+        //really this needs to check for if a mana bar is the highest bar. I don't really expect that to happen, but yeah.
+        //Otherwise, frankly, the League system of having ticks every 100 could work...
+        //Or vertical health bars?
+
+        float highestMaxValue = heroOneHealthSlider.maxValue;
+        int highestHeroPosition = 1;
+
+        if (heroTwoHealthSlider.maxValue > highestMaxValue) {
+            highestMaxValue = heroTwoHealthSlider.maxValue;
+            highestHeroPosition = 2;
+        }
+        if (heroThreeHealthSlider.maxValue > highestMaxValue) {
+            highestMaxValue = heroThreeHealthSlider.maxValue;
+            highestHeroPosition = 3;
+        }
+        if (heroFourHealthSlider.maxValue > highestMaxValue) {
+            highestMaxValue = heroFourHealthSlider.maxValue;
+            highestHeroPosition = 4;
+        }
+
+        if (highestHeroPosition == 1) {
+            SetBarLength(heroTwoHealthSlider, highestMaxValue);
+            SetBarLength(heroThreeHealthSlider, highestMaxValue);
+            SetBarLength(heroFourHealthSlider, highestMaxValue);
+        }
+        else if (highestHeroPosition == 2) {
+            SetBarLength(heroOneHealthSlider, highestMaxValue);
+            SetBarLength(heroThreeHealthSlider, highestMaxValue);
+            SetBarLength(heroFourHealthSlider, highestMaxValue);
+        }
+        else if (highestHeroPosition == 3) {
+            SetBarLength(heroOneHealthSlider, highestMaxValue);
+            SetBarLength(heroTwoHealthSlider, highestMaxValue);
+            SetBarLength(heroFourHealthSlider, highestMaxValue);
+        }
+        else if (highestHeroPosition == 4) {
+            SetBarLength(heroOneHealthSlider, highestMaxValue);
+            SetBarLength(heroTwoHealthSlider, highestMaxValue);
+            SetBarLength(heroThreeHealthSlider, highestMaxValue);
+        }
+
+        SetBarLength(heroOneManaSlider, highestMaxValue);
+        SetBarLength(heroTwoManaSlider, highestMaxValue);
+        SetBarLength(heroThreeManaSlider, highestMaxValue);
+        SetBarLength(heroFourManaSlider, highestMaxValue);
+
+
+    } //end SetRelativeSliderLengths()
+
+    
+    public void SetBarLength(Slider slider, float highestValue) {
+        slider.transform.localScale = new Vector3((slider.maxValue / highestValue), 1, 1);
+    } //end SetBarLength(2)
 
 
     public void UpdateHealthText() {
@@ -107,8 +166,7 @@ public class BattleDisplayManager : MonoBehaviour {
             UpdateAbilityButtonText(abilityFourText, battleManager.selectedHero.abilityFour);
             UpdateAbilityButtonText(abilityFiveText, battleManager.selectedHero.abilityFive);
             UpdateAbilityButtonText(abilitySixText, battleManager.selectedHero.abilitySix);
-
-
+            
         } //end if there is a selected hero
         else {
             NoHeroSelected();
