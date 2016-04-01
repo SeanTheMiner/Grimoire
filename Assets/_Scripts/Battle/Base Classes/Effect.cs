@@ -12,7 +12,11 @@ namespace Effects {
             get; set;
         }
 
-		public string effectDisplayText {
+        public string effectDisplayText {
+            get; set;
+        }
+
+        public string effectIconText {
 			get; set;
 		}
 
@@ -33,6 +37,18 @@ namespace Effects {
         public float resolveScale {
             get; set;
         }
+
+        public enum StatType {
+            Physical,
+            Magical,
+            None                
+        }
+
+        public StatType statType {
+            get; set;
+        }
+
+
 
         public Effect () {
 
@@ -84,7 +100,7 @@ namespace Effects {
                 InitEffect(host);
             }
             effectController.Initialize();
-
+            
         } //end CreateEffectMultiple()
 
 

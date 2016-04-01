@@ -4,24 +4,26 @@ using System.Collections;
 using Effects;
 using BattleObjects;
 
-public class InspireEffect : Effect {
+public class ArmorBreak : Effect {
 
-    public InspireEffect() {
+	public ArmorBreak() {
 
-        effectName = "Inspire";
-        effectDisplayText = "Armor Up";
-        effectDuration = 8;
+        effectName = "Armor Break";
+		effectDisplayText = "Armor down";
+        effectIconText = "A-";
+		effectDuration = 12;
+        statType = StatType.Physical;
 
     } //end Constructor
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.armor *= 2.5f;
+        host.armor /= 2;
     }
 
     public override void RemoveEffect(BattleObject host) {
-        host.spirit /= 2.5f;
+		host.armor *= 2;
         base.RemoveEffect(host);
     }
 
-} //end SpiritBreak class
+} //end ArmorBreak class

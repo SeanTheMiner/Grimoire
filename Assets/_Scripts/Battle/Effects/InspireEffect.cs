@@ -4,23 +4,25 @@ using System.Collections;
 using Effects;
 using BattleObjects;
 
-public class RaiseSpiritsEff : Effect {
+public class InspireEffect : Effect {
 
-    public RaiseSpiritsEff() {
+    public InspireEffect() {
 
-        effectName = "Raise Spirits";
-        effectDisplayText = "Spirit Up";
-        effectDuration = 10;
+        effectName = "Inspire";
+        effectDisplayText = "Armor Up";
+        effectIconText = "A+";
+        effectDuration = 8;
+        statType = StatType.Physical;
 
     } //end Constructor
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.spirit *= 1.7f;
+        host.armor *= 2.5f;
     }
 
     public override void RemoveEffect(BattleObject host) {
-        host.spirit /= 1.7f;
+        host.spirit /= 2.5f;
         base.RemoveEffect(host);
     }
 

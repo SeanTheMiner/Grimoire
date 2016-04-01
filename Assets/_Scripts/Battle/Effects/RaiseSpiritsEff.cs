@@ -4,23 +4,25 @@ using System.Collections;
 using Effects;
 using BattleObjects;
 
-public class SpiritBreak : Effect {
+public class RaiseSpiritsEff : Effect {
 
-    public SpiritBreak() {
+    public RaiseSpiritsEff() {
 
-        effectName = "Spirit Break";
-        effectDisplayText = "Spirit down";
-        effectDuration = 8;
+        effectName = "Raise Spirits";
+        effectDisplayText = "Spirit Up";
+        effectIconText = "S+";
+        effectDuration = 10;
+        statType = StatType.Magical;
 
     } //end Constructor
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.spirit /= 2;
+        host.spirit *= 1.7f;
     }
 
     public override void RemoveEffect(BattleObject host) {
-        host.spirit *= 2;
+        host.spirit /= 1.7f;
         base.RemoveEffect(host);
     }
 

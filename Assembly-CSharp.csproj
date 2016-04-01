@@ -45,62 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\ChargePoke.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\EnemyAbility.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\HealPoke.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Enemy)\PokeBlast.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\ArmorBreakAbility.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\ChangeStance.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EbbAndFlow.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\FireStorm.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HealBarrage.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroAbility.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityOne.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroOneAbilityTwo.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityOne.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\HeroTwoAbilityTwo.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\Inspire.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\RingOfFire.cs" />
-     <Compile Include="Assets\Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
-     <Compile Include="Assets\Scripts\Battle\Effects\ArmorBreak.cs" />
-     <Compile Include="Assets\Scripts\Battle\Effects\Effect.cs" />
-     <Compile Include="Assets\Scripts\Battle\Effects\InspireEffect.cs" />
-     <Compile Include="Assets\Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
-     <Compile Include="Assets\Scripts\Battle\Effects\SpiritBreak.cs" />
-     <Compile Include="Assets\Scripts\Battle\Enemies\BlueEnemy.cs" />
-     <Compile Include="Assets\Scripts\Battle\Enemies\Enemy.cs" />
-     <Compile Include="Assets\Scripts\Battle\Enemies\RedEnemy.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\AOETargeterController.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\Ability.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\BattleObject.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\DamageTextController.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\DestroyByTime.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\EffectController.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\Battle\General\EnemyHealthSliderController.cs" />
-     <Compile Include="Assets\Scripts\Battle\Heroes\Champion.cs" />
-     <Compile Include="Assets\Scripts\Battle\Heroes\Hero.cs" />
-     <Compile Include="Assets\Scripts\Battle\Heroes\HeroOne.cs" />
-     <Compile Include="Assets\Scripts\Battle\Heroes\HeroTwo.cs" />
-     <Compile Include="Assets\Scripts\Battle\Heroes\Myshka.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\AbilityButtonManager.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\BattleDisplayManager.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\BattleManager.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\DebugDisplayManager.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\EnemyManager.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\HitManager.cs" />
-     <Compile Include="Assets\Scripts\Battle\Managers\TargetingManager.cs" />
-     <Compile Include="Assets\Scripts\Overworld\BattleSpawner.cs" />
-     <Compile Include="Assets\Scripts\Overworld\Biome.cs" />
-     <Compile Include="Assets\Scripts\Overworld\BlueBiome.cs" />
-     <Compile Include="Assets\Scripts\Overworld\CameraController.cs" />
-     <Compile Include="Assets\Scripts\Overworld\PlayerController.cs" />
      <Compile Include="Assets\Z_Editors\AbilityEditor.cs" />
      <Compile Include="Assets\Z_Toolkits\NodeCanvas\AOTDummy.cs" />
      <Compile Include="Assets\Z_Toolkits\NodeCanvas\Framework\Design\PartialEditor\BlackboardEditor.cs" />
@@ -440,6 +384,63 @@
      <Compile Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Conditions\Utility\CheckEvent.cs" />
      <Compile Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Conditions\Utility\DebugCondition.cs" />
      <Compile Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\ChargePoke.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\HealPoke.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBlast.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ArmorBreakAbility.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ChangeStance.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EbbAndFlow.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\FireStorm.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HealBarrage.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroOneAbilityOne.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroOneAbilityTwo.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroTwoAbilityOne.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroTwoAbilityTwo.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\Inspire.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RingOfFire.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\Ability.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\BattleObject.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\Effect.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\Enemy.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\EnemyAbility.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\HeroAbility.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\AOETargeterController.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\DamageTextController.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\DestroyByTime.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\EffectController.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\EffectDisplayController.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyController.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Effects\InspireEffect.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Effects\SpiritBreak.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Enemies\BlueEnemy.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Enemies\RedEnemy.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Heroes\Champion.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Heroes\Hero.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Heroes\HeroOne.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Heroes\HeroTwo.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Heroes\Myshka.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\AbilityButtonManager.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\BattleDisplayManager.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\BattleManager.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\DebugDisplayManager.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\EnemyManager.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\HitManager.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Managers\TargetingManager.cs" />
+     <Compile Include="Assets\_Scripts\Overworld\BattleSpawner.cs" />
+     <Compile Include="Assets\_Scripts\Overworld\Biome.cs" />
+     <Compile Include="Assets\_Scripts\Overworld\BlueBiome.cs" />
+     <Compile Include="Assets\_Scripts\Overworld\CameraController.cs" />
+     <Compile Include="Assets\_Scripts\Overworld\PlayerController.cs" />
      <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween43.xml" />
      <None Include="Assets\Z_Toolkits\NodeCanvas\!ReadMe!.txt" />
      <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween46.xml" />
@@ -452,8 +453,8 @@
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
- <Reference Include="DOTween50">
- <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween50.dll</HintPath>
+ <Reference Include="DOTween">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
  <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween43.dll</HintPath>
@@ -461,8 +462,8 @@
  <Reference Include="DOTween46">
  <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween46.dll</HintPath>
  </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween.dll</HintPath>
+ <Reference Include="DOTween50">
+ <HintPath>C:/BestGameEver/Assets/Z_Toolkits/NodeCanvas/Tasks/Actions/Tween/DOTWeen/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
