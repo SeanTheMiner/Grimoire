@@ -34,6 +34,11 @@ namespace Effects {
             get; set;
         }
         
+        public float stackDuration {
+            get; set;
+        }
+
+
         public float resolveScale {
             get; set;
         }
@@ -48,6 +53,15 @@ namespace Effects {
             get; set;
         }
 
+        public enum EffectType {
+            Lump,
+            Stacking,
+            Persistent
+        }
+
+        public EffectType effectType {
+            get; set;
+        }
 
 
         public Effect () {
@@ -73,6 +87,7 @@ namespace Effects {
 		//it'll just get called all day.
 
         public virtual void EffectMap(BattleObject host) {}
+
 
         public virtual void InitEffect(BattleObject host) {
             host.effectList.Add(this);
@@ -106,6 +121,11 @@ namespace Effects {
 
         public virtual void RemoveEffect(BattleObject host) {
 			host.effectList.Remove (this);
+        }
+
+
+        public virtual void InitStacks(int stacks) {
+            stackCount += stacks;
         }
 
         

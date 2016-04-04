@@ -18,10 +18,19 @@ public class EffectController : MonoBehaviour {
 
 
     public void Initialize () {
-        foreach (BattleObject host in affectedBattleObjectList)
-        {
-            StartCoroutine(CheckForExpiration(host, SpawnDisplayIcon(host)));
+
+        if (effectApplied.effectType == Effect.EffectType.Lump) {
+            foreach (BattleObject host in affectedBattleObjectList) {        
+                StartCoroutine(CheckForExpirationLump(host, SpawnDisplayIcon(host)));
+            }
         }
+        else if (effectApplied.effectType == Effect.EffectType.Stacking) {
+            foreach (BattleObject host in affectedBattleObjectList) {
+                StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host)));
+            }
+        }
+
+
 	} //end Initialize
     
 
@@ -30,22 +39,39 @@ public class EffectController : MonoBehaviour {
         GameObject effectIcon = new GameObject();
         EffectDisplayController effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
 
-        effectIcon = (GameObject)Instantiate(Resources.Load("EffectIcon"),
-            effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
-            Quaternion.identity
-            );
+        if (effectApplied.effectType == Effect.EffectType.Lump) {
+            
+            effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconLump"),
+                effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
+                Quaternion.identity
+                );
 
-        effectIcon.GetComponentInChildren<TextMesh>().text = effectApplied.effectIconText;
+            if (effectApplied.statType == Effect.StatType.Magical) {
+                effectIcon.GetComponentInChildren<Renderer>().material =
+                    Resources.Load("Magic Icon Material", typeof(Material)) as Material;
+            }
+            else if (effectApplied.statType == Effect.StatType.Physical) {
+                effectIcon.GetComponentInChildren<Renderer>().material =
+                    Resources.Load("Physical Icon Material", typeof(Material)) as Material;
+            }
 
-        if (effectApplied.statType == Effect.StatType.Magical) {
-            effectIcon.GetComponentInChildren<Renderer>().material = 
-                Resources.Load("Magic Icon Material", typeof(Material)) as Material;
-        } 
-        else if (effectApplied.statType == Effect.StatType.Physical) {
-            effectIcon.GetComponentInChildren<Renderer>().material =
-                Resources.Load("Physical Icon Material", typeof(Material)) as Material;
+            effectIcon.GetComponentInChildren<TextMesh>().text = effectApplied.effectIconText;
+
+        } //end if lump
+
+        else if (effectApplied.effectType == Effect.EffectType.Stacking) {
+
+            effectIcon = effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconStacking"),
+                effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
+                Quaternion.identity
+                );
+
         }
 
+
+
+       
+        
         effectDisplayController.displayEffectIconList.Add(effectIcon);
         effectIconList.Add(effectIcon);
 
@@ -55,10 +81,34 @@ public class EffectController : MonoBehaviour {
 
 
 
-    public IEnumerator CheckForExpiration(BattleObject host, GameObject icon) {
+    public IEnumerator CheckForExpirationLump(BattleObject host, GameObject icon) {
 
         //Tenacity here?
         yield return new WaitForSeconds(effectApplied.effectDuration);
+        KillEffect(host, icon);
+        
+    } //end CheckForExpiration()
+
+
+    public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon) {
+
+        //Tenacity here?
+        yield return new WaitForSeconds(effectApplied.stackDuration);
+
+        effectApplied.stackCount--;
+        icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
+
+        if (effectApplied.stackCount > 0) {
+            StartCoroutine(CheckForExpirationStacking(host, icon));
+        }
+        else {
+            KillEffect(host, icon);
+        } //end else
+
+    } //end CheckForExpiration()
+
+
+    public void KillEffect(BattleObject host, GameObject icon) {
 
         affectedBattleObjectList.Remove(host);
         effectApplied.RemoveEffect(host);
@@ -68,8 +118,8 @@ public class EffectController : MonoBehaviour {
         effectDisplayController.displayEffectIconList.Remove(icon);
         Destroy(icon);
         effectDisplayController.UpdateEffectIconPositions();
-        
-    } //end CheckForExpiration()
+
+    } //end KillEffect(2)
 
 
     void Update () {

@@ -449,7 +449,10 @@ public class HeroAbility : Ability {
 
     public virtual void ApplyEffectSingle(Effect effect, BattleObject target) {
         effect.CreateEffectSingle(target);
-    }
+        if (effect.effectType == Effect.EffectType.Stacking) {
+            effect.InitStacks(effectStacksApplied);
+        }
+    } //end ApplyEffectSingle(2)
 
 
     public virtual void ApplyEffectMultiple(Effect effect) {

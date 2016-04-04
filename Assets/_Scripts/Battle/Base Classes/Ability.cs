@@ -22,6 +22,10 @@ namespace Abilities {
 
         public Effect effectApplied;
 
+        public int effectStacksApplied {
+            get; set;
+        }
+
         public DamageType primaryDamageType {
             get; set;
         }

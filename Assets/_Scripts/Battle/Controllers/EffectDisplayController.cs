@@ -31,36 +31,14 @@ public class EffectDisplayController : MonoBehaviour {
         }
         
     } //end Start()
-	
-	// Update is called once per frame
-	void Update () {
 
-        //UpdateEffectIconPositions();
-
-	}
 
     public void UpdateEffectIconPositions () {
 
-        Debug.Log("update positions called");
-
-        /*
-
-        List<GameObject> tempList = new List<GameObject>();
-        
-        foreach (GameObject icon in displayEffectIconList) {
-            if (icon == null) {
-                tempList.Add(icon);
-                Debug.Log("Adeded icon");
-            }
-        }
-
-    */
         foreach (GameObject icon in displayEffectIconList) {
             icon.transform.position = displayPositionList[displayEffectIconList.IndexOf(icon)];
         }
 
     } //end UpdateEffectIconPositions()
-
-
-
+    
 }

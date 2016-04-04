@@ -12,7 +12,9 @@ public class SpiritBreak : Effect {
         effectDisplayText = "Spirit down";
         effectIconText = "S-";
         effectDuration = 8;
+        effectType = EffectType.Lump;
         statType = StatType.Magical;
+        
 
     } //end Constructor
 

@@ -12,6 +12,7 @@ public class ArmorBreak : Effect {
 		effectDisplayText = "Armor down";
         effectIconText = "A-";
 		effectDuration = 12;
+        effectType = EffectType.Lump;
         statType = StatType.Physical;
 
     } //end Constructor

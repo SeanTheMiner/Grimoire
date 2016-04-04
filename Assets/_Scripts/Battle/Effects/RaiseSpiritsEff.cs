@@ -12,6 +12,7 @@ public class RaiseSpiritsEff : Effect {
         effectDisplayText = "Spirit Up";
         effectIconText = "S+";
         effectDuration = 10;
+        effectType = EffectType.Lump;
         statType = StatType.Magical;
 
     } //end Constructor

@@ -404,6 +404,7 @@
      <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
      <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
      <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RingOfFire.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SetAblaze.cs" />
      <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
      <Compile Include="Assets\_Scripts\Battle\Base Classes\Ability.cs" />
      <Compile Include="Assets\_Scripts\Battle\Base Classes\BattleObject.cs" />
@@ -419,6 +420,7 @@
      <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyController.cs" />
      <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
      <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Effects\FlameStackEffect.cs" />
      <Compile Include="Assets\_Scripts\Battle\Effects\InspireEffect.cs" />
      <Compile Include="Assets\_Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
      <Compile Include="Assets\_Scripts\Battle\Effects\SpiritBreak.cs" />

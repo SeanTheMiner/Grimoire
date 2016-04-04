@@ -12,6 +12,7 @@ public class InspireEffect : Effect {
         effectDisplayText = "Armor Up";
         effectIconText = "A+";
         effectDuration = 8;
+        effectType = EffectType.Lump;
         statType = StatType.Physical;
 
     } //end Constructor
