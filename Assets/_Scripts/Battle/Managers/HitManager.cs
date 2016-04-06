@@ -81,11 +81,11 @@ public class HitManager : MonoBehaviour {
         float penetration = 0;
         float finalDamage;
         if (ability.primaryDamageType == Ability.DamageType.Physical) {
-            resist = defender.armor;
+            resist = defender.ApplyStatModifications(defender.armor, defender.armorMultMod, defender.armorAddMod);
             penetration = ability.physicalPenetration;
         }
         else if (ability.primaryDamageType == Ability.DamageType.Magical) {
-            resist = defender.spirit;
+            resist = defender.ApplyStatModifications(defender.spirit, defender.spiritMultMod, defender.spiritAddMod);
             penetration = ability.magicalPenetration;
         }
 
@@ -95,8 +95,7 @@ public class HitManager : MonoBehaviour {
 
     } //end ApplyResist(4)
 
-
-
+    
 
 
     //END HERO SET, BEGIN ENEMY SET

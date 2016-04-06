@@ -10,7 +10,7 @@ public class FlameStackEffect : Effect {
 
         effectName = "Flame Stack";
         effectIconText = "";
-        stackDuration = 1.4f;
+        stackDuration = 1.3f;
         effectType = EffectType.Stacking;
         statType = StatType.Magical;
 

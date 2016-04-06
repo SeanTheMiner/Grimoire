@@ -263,77 +263,84 @@ namespace BattleObjects {
             currentHealth = 0;
 
             healthRegen = 0;
-            healthRegenAddMod = 1;
+            healthRegenAddMod = 0;
             healthRegenMultMod = 1;
 
             physicalPenetration = 0;
-            physicalPenetrationAddMod = 1;
+            physicalPenetrationAddMod = 0;
             physicalPenetrationMultMod = 1;
 
             physicalAccuracy = 0;
-            physicalAccuracyAddMod = 1;
+            physicalAccuracyAddMod = 0;
             physicalAccuracyMultMod = 1;
 
             physicalFinesse = 0;
-            physicalFinesseAddMod = 1;
+            physicalFinesseAddMod = 0;
             physicalFinesseMultMod = 1;
 
             magicalPenetration = 0;
-            magicalPenetrationAddMod = 1;
+            magicalPenetrationAddMod = 0;
             magicalPenetrationMultMod = 1;
 
             magicalAccuracy = 0;
-            magicalAccuracyAddMod = 1;
+            magicalAccuracyAddMod = 0;
             magicalAccuracyMultMod = 1;
 
             magicalFinesse = 0;
-            magicalFinesseAddMod = 1;
+            magicalFinesseAddMod = 0;
             magicalFinesseMultMod = 1;
             
             armor = 0;
-            armorAddMod = 1;
+            armorAddMod = 0;
             armorMultMod = 1;
 
             spirit = 0;
-            spiritAddMod = 1;
+            spiritAddMod = 0;
             spiritMultMod = 1;
             
             physicalEvasionChance = 0;
-            physicalEvasionChanceAddMod = 1;
+            physicalEvasionChanceAddMod = 0;
             physicalEvasionChanceMultMod = 1;
 
             magicalEvasionChance = 0;
-            magicalEvasionChanceAddMod = 1;
+            magicalEvasionChanceAddMod = 0;
             magicalEvasionChanceMultMod = 1;
 
             physicalBlockChance = 0;
-            physicalBlockChanceAddMod = 1;
+            physicalBlockChanceAddMod = 0;
             physicalBlockChanceMultMod = 1;
 
             physicalBlockModifier = 0;
-            physicalBlockModifierAddMod = 1;
+            physicalBlockModifierAddMod = 0;
             physicalBlockModifierMultMod = 1;
 
             magicalBlockChance = 0;
-            magicalBlockChanceAddMod = 1;
+            magicalBlockChanceAddMod = 0;
             magicalBlockChanceMultMod = 1;
 
             magicalBlockModifier = 0;
-            magicalBlockModifierAddMod = 1;
+            magicalBlockModifierAddMod = 0;
             magicalBlockModifierMultMod = 1;
 
             physicalLifesteal = 0;
-            physicalLifestealAddMod = 1;
+            physicalLifestealAddMod = 0;
             physicalLifestealMultMod = 1;
 
             magicalLifesteal = 0;
-            magicalLifestealAddMod = 1;
+            magicalLifestealAddMod = 0;
             magicalLifestealMultMod = 1;
             
         } //end Constructor
 
 
         //Native functions
+       
+        public float ApplyStatModifications(float baseStat, float multMod, float addMod) {
+            return ((baseStat * multMod) + addMod);
+        }
+
+
+        //Spawning functions
 
         //eventually this guy will include (int damage, Ability.DamageType damageType)
         public virtual void SpawnDamageText(int damage, Abilities.Ability.DamageType damageType) {

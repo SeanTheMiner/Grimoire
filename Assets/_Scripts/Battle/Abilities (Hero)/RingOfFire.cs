@@ -19,6 +19,8 @@ public class RingOfFire : HeroAbility {
         procDamage = 220.0f;
         radiusOfAOE = 4;
 
+        effectStacksApplied = 8;
+
     } //end constructor
 
 
@@ -26,6 +28,7 @@ public class RingOfFire : HeroAbility {
 
         CheckAOETargets();
         DetermineHitOutcomeMultiple(abilityOwner);
+        ApplyEffectMultiple(effectApplied);
         ExitAbility();
 
     } //end AbilityType
