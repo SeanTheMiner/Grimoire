@@ -30,11 +30,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float healthRegenAddMod {
+        public float healthRegenMultMod {
             get; set;
         }
 
-        public float healthRegenMultMod {
+        public float healthRegenAddMod {
             get; set;
         }
 
@@ -45,11 +45,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float physicalPenetrationAddMod {
+        public float physicalPenetrationMultMod {
             get; set;
         }
 
-        public float physicalPenetrationMultMod {
+        public float physicalPenetrationAddMod {
             get; set;
         }
 
@@ -58,11 +58,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float physicalAccuracyAddMod {
+        public float physicalAccuracyMultMod {
             get; set;
         }
 
-        public float physicalAccuracyMultMod {
+        public float physicalAccuracyAddMod {
             get; set;
         }
 
@@ -71,11 +71,24 @@ namespace BattleObjects {
             get; set;
         }
 
+        public float physicalFinesseMultMod {
+            get; set;
+        }
+
         public float physicalFinesseAddMod {
             get; set;
         }
 
-        public float physicalFinesseMultMod {
+
+        public float physicalCritChance {
+            get; set;
+        }
+
+        public float physicalCritChanceAddMod {
+            get; set;
+        }
+
+        public float physicalCritChanceMultMod {
             get; set;
         }
 
@@ -84,11 +97,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float magicalPenetrationAddMod {
+        public float magicalPenetrationMultMod {
             get; set;
         }
 
-        public float magicalPenetrationMultMod {
+        public float magicalPenetrationAddMod {
             get; set;
         }
 
@@ -97,11 +110,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float magicalAccuracyAddMod {
+        public float magicalAccuracyMultMod {
             get; set;
         }
 
-        public float magicalAccuracyMultMod {
+        public float magicalAccuracyAddMod {
             get; set;
         }
 
@@ -110,13 +123,27 @@ namespace BattleObjects {
             get; set;
         }
 
+        public float magicalFinesseMultMod {
+            get; set;
+        }
+
         public float magicalFinesseAddMod {
             get; set;
         }
 
-        public float magicalFinesseMultMod {
+
+        public float magicalCritChance {
             get; set;
         }
+
+        public float magicalCritChanceAddMod {
+            get; set;
+        }
+
+        public float magicalCritChanceMultMod {
+            get; set;
+        }
+
 
 
 
@@ -126,11 +153,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float armorAddMod {
+        public float armorMultMod {
             get; set;
         }
 
-        public float armorMultMod {
+        public float armorAddMod {
             get; set;
         }
 
@@ -139,11 +166,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float spiritAddMod {
+        public float spiritMultMod {
             get; set;
         }
 
-        public float spiritMultMod {
+        public float spiritAddMod {
             get; set;
         }
 
@@ -152,11 +179,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float physicalEvasionChanceAddMod {
+        public float physicalEvasionChanceMultMod {
             get; set;
         }
 
-        public float physicalEvasionChanceMultMod {
+        public float physicalEvasionChanceAddMod {
             get; set;
         }
 
@@ -164,12 +191,12 @@ namespace BattleObjects {
         public float magicalEvasionChance {
             get; set;
         }
-        
-        public float magicalEvasionChanceAddMod {
-            get; set;
-        }
 
         public float magicalEvasionChanceMultMod {
+            get; set;
+        }
+        
+        public float magicalEvasionChanceAddMod {
             get; set;
         }
 
@@ -177,12 +204,12 @@ namespace BattleObjects {
         public float physicalBlockChance {
             get; set;
         }
-        
-        public float physicalBlockChanceAddMod {
-            get; set;
-        }
 
         public float physicalBlockChanceMultMod {
+            get; set;
+        }
+        
+        public float physicalBlockChanceAddMod {
             get; set;
         }
 
@@ -191,11 +218,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float physicalBlockModifierAddMod {
+        public float physicalBlockModifierMultMod {
             get; set;
         }
 
-        public float physicalBlockModifierMultMod {
+        public float physicalBlockModifierAddMod {
             get; set;
         }
 
@@ -204,11 +231,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float magicalBlockChanceAddMod {
+        public float magicalBlockChanceMultMod {
             get; set;
         }
 
-        public float magicalBlockChanceMultMod {
+        public float magicalBlockChanceAddMod {
             get; set;
         }
 
@@ -217,11 +244,11 @@ namespace BattleObjects {
             get; set;
         }
 
-        public float magicalBlockModifierAddMod {
+        public float magicalBlockModifierMultMod {
             get; set;
         }
 
-        public float magicalBlockModifierMultMod {
+        public float magicalBlockModifierAddMod {
             get; set;
         }
 
@@ -229,12 +256,12 @@ namespace BattleObjects {
         public float physicalLifesteal {
             get; set;
         }
-
-        public float physicalLifestealAddMod {
+        
+        public float physicalLifestealMultMod {
             get; set;
         }
 
-        public float physicalLifestealMultMod {
+        public float physicalLifestealAddMod {
             get; set;
         }
 
@@ -243,13 +270,14 @@ namespace BattleObjects {
             get; set;
         }
         
+        public float magicalLifestealMultMod {
+            get; set;
+        }
+
         public float magicalLifestealAddMod {
             get; set;
         }
 
-        public float magicalLifestealMultMod {
-            get; set;
-        }
 
         
         public List<Effect> effectList;
@@ -263,72 +291,76 @@ namespace BattleObjects {
             currentHealth = 0;
 
             healthRegen = 0;
-            healthRegenAddMod = 0;
             healthRegenMultMod = 1;
+            healthRegenAddMod = 0;
 
             physicalPenetration = 0;
-            physicalPenetrationAddMod = 0;
             physicalPenetrationMultMod = 1;
+            physicalPenetrationAddMod = 0;
 
             physicalAccuracy = 0;
-            physicalAccuracyAddMod = 0;
             physicalAccuracyMultMod = 1;
+            physicalAccuracyAddMod = 0;
 
             physicalFinesse = 0;
-            physicalFinesseAddMod = 0;
             physicalFinesseMultMod = 1;
+            physicalFinesseAddMod = 0;
+
+            physicalCritChance = 0;
+            physicalCritChanceMultMod = 1;
+            physicalCritChanceAddMod = 0;
 
             magicalPenetration = 0;
-            magicalPenetrationAddMod = 0;
             magicalPenetrationMultMod = 1;
+            magicalPenetrationAddMod = 0;
 
             magicalAccuracy = 0;
-            magicalAccuracyAddMod = 0;
             magicalAccuracyMultMod = 1;
+            magicalAccuracyAddMod = 0;
 
             magicalFinesse = 0;
-            magicalFinesseAddMod = 0;
             magicalFinesseMultMod = 1;
+            magicalFinesseAddMod = 0;
             
             armor = 0;
-            armorAddMod = 0;
             armorMultMod = 1;
+            armorAddMod = 0;
 
             spirit = 0;
-            spiritAddMod = 0;
             spiritMultMod = 1;
+            spiritAddMod = 0;
             
             physicalEvasionChance = 0;
-            physicalEvasionChanceAddMod = 0;
             physicalEvasionChanceMultMod = 1;
+            physicalEvasionChanceAddMod = 0;
 
             magicalEvasionChance = 0;
-            magicalEvasionChanceAddMod = 0;
             magicalEvasionChanceMultMod = 1;
+            magicalEvasionChanceAddMod = 0;
 
             physicalBlockChance = 0;
-            physicalBlockChanceAddMod = 0;
             physicalBlockChanceMultMod = 1;
+            physicalBlockChanceAddMod = 0;
 
             physicalBlockModifier = 0;
-            physicalBlockModifierAddMod = 0;
             physicalBlockModifierMultMod = 1;
+            physicalBlockModifierAddMod = 0;
 
             magicalBlockChance = 0;
-            magicalBlockChanceAddMod = 0;
             magicalBlockChanceMultMod = 1;
+            magicalBlockChanceAddMod = 0;
 
             magicalBlockModifier = 0;
-            magicalBlockModifierAddMod = 0;
             magicalBlockModifierMultMod = 1;
+            magicalBlockModifierAddMod = 0;
 
             physicalLifesteal = 0;
-            physicalLifestealAddMod = 0;
             physicalLifestealMultMod = 1;
+            physicalLifestealAddMod = 0;
 
             magicalLifesteal = 0;
-            magicalLifestealAddMod = 0;
             magicalLifestealMultMod = 1;
+            magicalLifestealAddMod = 0;
             
         } //end Constructor
 

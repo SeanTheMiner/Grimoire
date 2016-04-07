@@ -19,11 +19,11 @@ public class InspireEffect : Effect {
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.armor *= 2.5f;
+        host.armorAddMod += 50;
     }
 
     public override void RemoveEffect(BattleObject host) {
-        host.spirit /= 2.5f;
+        host.armorAddMod -= 50;
         base.RemoveEffect(host);
     }
 

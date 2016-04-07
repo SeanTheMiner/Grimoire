@@ -20,11 +20,11 @@ public class SpiritBreak : Effect {
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.spirit /= 2;
+        host.spiritMultMod -= 0.5f;
     }
 
     public override void RemoveEffect(BattleObject host) {
-        host.spirit *= 2;
+        host.spiritMultMod += 0.5f;
         base.RemoveEffect(host);
     }
 

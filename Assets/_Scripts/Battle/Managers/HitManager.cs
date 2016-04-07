@@ -7,8 +7,6 @@ using EnemyAbilities;
 
 public class HitManager : MonoBehaviour {
     
-    //Abilities call these, in order.
-    //HERO SET FIRST - this feels so ugly, but, well, here we are.
 
     public enum HitOutcome {
         Evade,
@@ -27,16 +25,20 @@ public class HitManager : MonoBehaviour {
         float maxRange = 100;
 
         if (ability.primaryDamageType == Ability.DamageType.Physical) {
-            evasionChance = defender.physicalEvasionChance;
-            accuracy = ability.physicalAccuracy;
-            blockChance = defender.physicalBlockChance;
-            finesse = ability.physicalFinesse;
+
+            evasionChance = defender.ApplyStatModifications(defender.physicalEvasionChance, defender.physicalEvasionChanceMultMod, defender.physicalEvasionChanceAddMod);
+            accuracy = attacker.ApplyStatModifications((ability.physicalAccuracy + attacker.physicalAccuracy), attacker.physicalAccuracyMultMod, attacker.physicalAccuracyAddMod);
+
+            blockChance = defender.ApplyStatModifications(defender.physicalBlockChance, defender.physicalBlockChanceMultMod, defender.physicalBlockChanceAddMod);
+            finesse = attacker.ApplyStatModifications((ability.physicalFinesse + attacker.physicalFinesse), attacker.physicalFinesseMultMod, attacker.physicalFinesseAddMod);
         }
         else if (ability.primaryDamageType == Ability.DamageType.Magical) {
-            evasionChance = defender.magicalEvasionChance;
-            accuracy = ability.magicalAccuracy;
-            blockChance = defender.magicalBlockChance;
-            finesse = ability.magicalFinesse;
+
+            evasionChance = defender.ApplyStatModifications(defender.magicalEvasionChance, defender.magicalEvasionChanceMultMod, defender.magicalEvasionChanceAddMod);
+            accuracy = attacker.ApplyStatModifications((ability.magicalAccuracy + attacker.magicalAccuracy), attacker.magicalAccuracyMultMod, attacker.magicalAccuracyAddMod);
+
+            blockChance = defender.ApplyStatModifications(defender.magicalBlockChance, defender.magicalBlockChanceMultMod, defender.magicalBlockChanceAddMod);
+            finesse = attacker.ApplyStatModifications((ability.magicalFinesse + attacker.magicalFinesse), attacker.magicalFinesseMultMod, attacker.magicalFinesseAddMod);
         }
 
         float evasionCeiling = (evasionChance * (1 - (accuracy / 100)));
@@ -63,7 +65,15 @@ public class HitManager : MonoBehaviour {
 
     public static HitOutcome DetermineCrit(BattleObject attacker, BattleObject defender, Ability ability) {
 
-        float critChance = ability.critChance;
+        float critChance = 0;
+
+        if (ability.primaryDamageType == Ability.DamageType.Physical) {
+            critChance = attacker.ApplyStatModifications((ability.critChance + attacker.physicalCritChance), attacker.physicalCritChanceMultMod, attacker.physicalCritChanceAddMod);
+        }
+        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
+            critChance = attacker.ApplyStatModifications((ability.critChance + attacker.magicalCritChance), attacker.magicalCritChanceMultMod, attacker.magicalCritChanceAddMod);
+        }
+
         int critCheck = Random.Range(1, 100); 
         if (critCheck <= critChance) {
             return HitOutcome.Crit;
@@ -80,13 +90,16 @@ public class HitManager : MonoBehaviour {
         float resist = 0;
         float penetration = 0;
         float finalDamage;
+
         if (ability.primaryDamageType == Ability.DamageType.Physical) {
             resist = defender.ApplyStatModifications(defender.armor, defender.armorMultMod, defender.armorAddMod);
-            penetration = ability.physicalPenetration;
+            penetration = ability.physicalPenetration 
+                + attacker.ApplyStatModifications(attacker.physicalPenetration, attacker.physicalPenetrationMultMod, attacker.physicalPenetrationAddMod);
         }
         else if (ability.primaryDamageType == Ability.DamageType.Magical) {
             resist = defender.ApplyStatModifications(defender.spirit, defender.spiritMultMod, defender.spiritAddMod);
-            penetration = ability.magicalPenetration;
+            penetration = ability.magicalPenetration 
+                + attacker.ApplyStatModifications(attacker.magicalPenetration, attacker.magicalPenetrationMultMod, attacker.magicalPenetrationAddMod);
         }
 
         resist *= (1 - (penetration / 100));
@@ -94,91 +107,6 @@ public class HitManager : MonoBehaviour {
         return finalDamage;
 
     } //end ApplyResist(4)
-
-    
-
-
-    //END HERO SET, BEGIN ENEMY SET
-
-
-
-    public static HitOutcome EnemyDetermineEvasionAndBlock(BattleObject attacker, BattleObject defender, EnemyAbility ability) {
-
-        float evasionChance = 0;
-        float blockChance = 0;
-        float accuracy = 0;
-        float finesse = 0;
-        float maxRange = 100;
-
-        if (ability.primaryDamageType == EnemyAbility.DamageType.Physical) {
-            evasionChance = defender.physicalEvasionChance;
-            accuracy = ability.physicalAccuracy;
-            blockChance = defender.physicalBlockChance;
-            finesse = ability.physicalFinesse;
-        }
-        else if (ability.primaryDamageType == EnemyAbility.DamageType.Magical) {
-            evasionChance = defender.magicalEvasionChance;
-            accuracy = ability.magicalAccuracy;
-            blockChance = defender.magicalBlockChance;
-            finesse = ability.magicalFinesse;
-        }
-
-        float evasionCeiling = (evasionChance * (1 - (accuracy / 100)));
-        float blockCeiling = evasionCeiling + (blockChance * (1 - (finesse / 100)));
-
-        if ((blockChance + evasionChance) > 100) {
-            maxRange = Mathf.CeilToInt(blockChance + evasionChance);
-        }
-
-        float checker = Random.Range(1, maxRange);
-
-        if (checker <= evasionCeiling) {
-            return HitOutcome.Evade;
-        }
-        if (checker <= blockCeiling) {
-            return HitOutcome.Block;
-        }
-        else {
-            return HitOutcome.Hit;
-        }
-
-    } //end DetermineEvasionAndBlock (3)
-
-
-    public static HitOutcome EnemyDetermineCrit(BattleObject attacker, BattleObject defender, EnemyAbility ability) {
-
-        float critChance = ability.critChance;
-        int critCheck = Random.Range(1, 100);
-        if (critCheck <= critChance) {
-            return HitOutcome.Crit;
-        }
-        else {
-            return HitOutcome.Hit;
-        }
-
-    } //end EnemyDetermineCrit(3)
-
-
-    public static float EnemyApplyResist(BattleObject attacker, BattleObject defender, EnemyAbility ability, float rawDamage) {
-
-        float resist = 0;
-        float penetration = 0;
-        float finalDamage;
-        if (ability.primaryDamageType == EnemyAbility.DamageType.Physical) {
-            resist = defender.armor;
-            penetration = ability.physicalPenetration;
-        }
-        else if (ability.primaryDamageType == EnemyAbility.DamageType.Magical) {
-            resist = defender.spirit;
-            penetration = ability.magicalPenetration;
-        }
-
-        resist *= (1 - (penetration / 100));
-        finalDamage = (rawDamage * (100 / (resist + 100)));
-        return finalDamage;
-
-    } //end EnemyApplyResist(4)
-
 
 
 } //end HitManager class 

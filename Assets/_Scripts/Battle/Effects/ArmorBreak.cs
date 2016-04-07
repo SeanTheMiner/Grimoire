@@ -19,11 +19,11 @@ public class ArmorBreak : Effect {
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.armor /= 2;
+        host.armorMultMod -= 0.65f;
     }
 
     public override void RemoveEffect(BattleObject host) {
-		host.armor *= 2;
+		host.armorMultMod += 0.65f;
         base.RemoveEffect(host);
     }
 

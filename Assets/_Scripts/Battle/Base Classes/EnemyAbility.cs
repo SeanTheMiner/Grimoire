@@ -167,14 +167,14 @@ namespace EnemyAbilities {
 
         public virtual void DamageProc(BattleObject defender, float damage) {
 
-            int damageToApply = Mathf.RoundToInt(HitManager.EnemyApplyResist(abilityOwner, defender, this, damage));
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply, primaryDamageType);
         }
 
         public virtual void CritDamageProc(BattleObject defender, float damage) {
 
-            int damageToApply = Mathf.RoundToInt(HitManager.EnemyApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply, primaryDamageType);
         }
@@ -190,7 +190,7 @@ namespace EnemyAbilities {
                 blockModifier = defender.magicalBlockModifier;
             }
 
-            int damageToApply = Mathf.RoundToInt(HitManager.EnemyApplyResist(abilityOwner, defender, this, (damage * (1 - (blockModifier / 100)))));
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * (1 - (blockModifier / 100)))));
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply, primaryDamageType);
 
@@ -199,7 +199,7 @@ namespace EnemyAbilities {
 
         public virtual void DetermineHitOutcomeSingle(Enemy attacker, BattleObject defender) {
 
-            HitManager.HitOutcome hitOutcome = HitManager.EnemyDetermineEvasionAndBlock(attacker, defender, this);
+            HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
 
             if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText(primaryDamageType);
@@ -210,7 +210,7 @@ namespace EnemyAbilities {
                 return;
             }
 
-            hitOutcome = HitManager.EnemyDetermineCrit(attacker, defender, this);
+            hitOutcome = HitManager.DetermineCrit(attacker, defender, this);
 
             if (hitOutcome == HitManager.HitOutcome.Crit) {
                 CritDamageProc(defender, procDamage);

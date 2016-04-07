@@ -19,11 +19,11 @@ public class RaiseSpiritsEff : Effect {
 
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
-        host.spirit *= 1.7f;
+        host.spiritMultMod += 0.7f;
     }
 
     public override void RemoveEffect(BattleObject host) {
-        host.spirit /= 1.7f;
+        host.spiritMultMod -= 0.7f;
         base.RemoveEffect(host);
     }
 

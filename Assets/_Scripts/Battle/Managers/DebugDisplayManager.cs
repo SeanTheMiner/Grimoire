@@ -41,7 +41,16 @@ public class DebugDisplayManager : MonoBehaviour {
 
     public void UpdateDebugText() {
 
-       textTwo.text = championObject.currentStance.ToString();
+        textOne.text = "H1A: " + battleManager.heroObjectOne.ApplyStatModifications(battleManager.heroObjectOne.armor, battleManager.heroObjectOne.armorMultMod, battleManager.heroObjectOne.armorAddMod);
+        textTwo.text = "H2A: " + battleManager.heroObjectTwo.ApplyStatModifications(battleManager.heroObjectTwo.armor, battleManager.heroObjectTwo.armorMultMod, battleManager.heroObjectTwo.armorAddMod);
+        textThree.text = "H3A: " + battleManager.heroObjectThree.ApplyStatModifications(battleManager.heroObjectThree.armor, battleManager.heroObjectThree.armorMultMod, battleManager.heroObjectThree.armorAddMod);
+        textFour.text = "H4A: " + battleManager.heroObjectFour.ApplyStatModifications(battleManager.heroObjectFour.armor, battleManager.heroObjectFour.armorMultMod, battleManager.heroObjectFour.armorAddMod);
+
+        textFive.text = "H1S: " + battleManager.heroObjectOne.ApplyStatModifications(battleManager.heroObjectOne.spirit, battleManager.heroObjectOne.spiritMultMod, battleManager.heroObjectOne.spiritAddMod);
+        textSix.text = "H2S: " + battleManager.heroObjectTwo.ApplyStatModifications(battleManager.heroObjectTwo.spirit, battleManager.heroObjectTwo.spiritMultMod, battleManager.heroObjectTwo.spiritAddMod);
+        textSeven.text = "H3S: " + battleManager.heroObjectThree.ApplyStatModifications(battleManager.heroObjectThree.spirit, battleManager.heroObjectThree.spiritMultMod, battleManager.heroObjectThree.spiritAddMod);
+        textEight.text = "H4S: " + battleManager.heroObjectFour.ApplyStatModifications(battleManager.heroObjectFour.spirit, battleManager.heroObjectFour.spiritMultMod, battleManager.heroObjectFour.spiritAddMod);
+
 
         foreach (Text text in textList) {
             if (text.text == null) {

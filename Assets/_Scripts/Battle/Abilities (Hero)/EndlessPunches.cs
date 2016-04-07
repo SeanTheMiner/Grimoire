@@ -13,8 +13,11 @@ public class EndlessPunches : HeroAbility {
         costsMana = false;
 
         chargeDuration = 2.0f;
-        procDamage = 80;
+        procDamage = 45;
         procSpacing = 0.7f;
+
+        critChance = 30;
+        critMultiplier = 2.5f;
 
         hasCooldown = false;
 
