@@ -73,7 +73,7 @@ namespace Effects {
 
         } //end constructor
 
-        public GameObject effectManager = GameObject.FindGameObjectWithTag("EffectManager");
+        //public GameObject effectManager = GameObject.FindGameObjectWithTag("EffectManager");
 
 		
 		//Virtual functions, to be overridden on child classes as needed
@@ -95,8 +95,8 @@ namespace Effects {
 
 
         public virtual void CreateEffectSingle(BattleObject host) {
-            
-            EffectController effectController = effectManager.AddComponent<EffectController>();
+
+            EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
             effectController.effectApplied = this;
             effectController.affectedBattleObjectList.Add(host);
             effectController.Initialize();
@@ -107,7 +107,7 @@ namespace Effects {
 
         public virtual void CreateEffectMultiple(List<BattleObject> list) {
 
-            EffectController effectController = effectManager.AddComponent<EffectController>();
+            EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
             effectController.effectApplied = this;
             foreach (BattleObject host in list)
             {
