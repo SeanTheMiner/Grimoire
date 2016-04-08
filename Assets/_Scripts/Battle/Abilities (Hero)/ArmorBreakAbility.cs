@@ -18,13 +18,10 @@ public class ArmorBreakAbility : HeroAbility {
         cooldownDuration = 8;
         procDamage = 100;
 
-
-    }
-
-    void Awake () {
         effectApplied = new ArmorBreak();
     }
 
+ 
     public override void AbilityMap() {
         CheckTarget();
         ApplyEffectSingle(effectApplied, targetEnemy);

@@ -15,12 +15,10 @@ public class Inspire : HeroAbility {
         cooldownDuration = 17;
         procHeal = 220;
 
-
-    }
-
-    void Awake() {
         effectApplied = new InspireEffect();
+
     }
+
 
     public override void AbilityMap() {
 

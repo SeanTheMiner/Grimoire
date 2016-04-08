@@ -19,12 +19,11 @@ public class PiercingFire : HeroAbility {
         cooldownDuration = 20;
         procDamage = 100.0f;
         
-
-    }
-
-    void Start() {
         effectApplied = new SpiritBreak();
+
     }
+
+
 
     public override void AbilityMap() {
 

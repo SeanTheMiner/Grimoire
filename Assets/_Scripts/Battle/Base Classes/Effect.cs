@@ -96,6 +96,8 @@ namespace Effects {
 
         public virtual void CreateEffectSingle(BattleObject host) {
 
+            Debug.Log("CreateEffectSingle called");
+
             EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
             effectController.effectApplied = this;
             effectController.affectedBattleObjectList.Add(host);
@@ -106,7 +108,7 @@ namespace Effects {
 
 
         public virtual void CreateEffectMultiple(List<BattleObject> list) {
-
+            
             EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
             effectController.effectApplied = this;
             foreach (BattleObject host in list)

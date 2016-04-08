@@ -17,13 +17,10 @@ public class SetAblaze : HeroAbility {
         chargeDuration = 5;
         cooldownDuration = 17;
         procDamage = 120;
-        
+
+        effectApplied = new FlameStackEffect();   
         effectStacksApplied = 20;
 
-    }
-
-    void Awake () {
-        effectApplied = new FlameStackEffect();
     }
 
 

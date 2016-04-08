@@ -61,16 +61,12 @@ public class EffectController : MonoBehaviour {
 
         else if (effectApplied.effectType == Effect.EffectType.Stacking) {
 
-            effectIcon = effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconStacking"),
+            effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconStacking"),
                 effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
                 Quaternion.identity
                 );
 
-        }
-
-
-
-       
+        } 
         
         effectDisplayController.displayEffectIconList.Add(effectIcon);
         effectIconList.Add(effectIcon);
