@@ -67,6 +67,18 @@ namespace Heroes {
             
         } //end constructor
 
+
+        public void SetAbilityOwner () {
+
+            abilityOne.abilityOwner = this;
+            abilityTwo.abilityOwner = this;
+            abilityThree.abilityOwner = this;
+            abilityFour.abilityOwner = this;
+            abilityFive.abilityOwner = this;
+            abilitySix.abilityOwner = this;
+
+        } //end SetAbilityOwner(1)
+        
         
     } //end Hero class
 

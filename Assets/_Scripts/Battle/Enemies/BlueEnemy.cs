@@ -16,10 +16,17 @@ public class BlueEnemy : Enemy {
         physicalBlockChance = 20;
         physicalBlockModifier = 40;
 
+        enemyAbilityOne = new ChargePoke();
+        enemyAbilityTwo = new PokeBarrage();
+        enemyAbilityThree = new HealPoke();
+
         enemyAbilityList.Add(enemyAbilityOne);
         enemyAbilityList.Add(enemyAbilityTwo);
         enemyAbilityList.Add(enemyAbilityTwo);
-        
-    }
 
-}
+        SetAbilityOwner();
+
+    } //end Constructor()
+
+
+} //end BlueEnemy class

@@ -28,7 +28,7 @@ public class RingOfFire : HeroAbility {
 
         CheckAOETargets();
         DetermineHitOutcomeMultiple(abilityOwner);
-        ApplyEffectMultiple(effectApplied);
+        //ApplyEffectMultiple(effectApplied);
         ExitAbility();
 
     } //end AbilityType

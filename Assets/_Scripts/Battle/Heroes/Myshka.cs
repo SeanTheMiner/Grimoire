@@ -20,5 +20,19 @@ public class Myshka : Hero {
         magicalEvasionChance = 60;
         physicalEvasionChance = 50;
 
-    }
-}
+        abilityOne = new EbbAndFlow();
+        abilityTwo = new HealBarrage();
+        abilityThree = new HeroTwoAbilityOne();
+        abilityFour = new EndlessFire();
+        abilityFive = new RingOfFire();
+        abilitySix = new RaiseSpirits();
+
+        SetAbilityOwner();
+
+        //this needs to be put on the ability itself.
+        //abilitySix.effectApplied = new RaiseSpiritsEff();
+
+    } //end Constructor()
+
+
+} //end Myshka class

@@ -38,9 +38,16 @@ namespace Enemies {
         public EnemyAbility enemyAbilityOne, enemyAbilityTwo, enemyAbilityThree;
 
         public List<EnemyAbility> enemyAbilityList = new List<EnemyAbility>();
-        
 
-        
+
+        public void SetAbilityOwner() {
+
+            enemyAbilityOne.abilityOwner = this;
+            enemyAbilityTwo.abilityOwner = this;
+            enemyAbilityThree.abilityOwner = this;
+            
+        } //end SetAbilityOwner(1)
+
     } //end Enemy class
 
 } //end Enemies namespace

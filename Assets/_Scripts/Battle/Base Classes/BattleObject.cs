@@ -10,7 +10,7 @@ namespace BattleObjects {
     //This way, if something treats both the same, you only have to write code once.
 
     //Note "AddMod" and "MultMod" - additive modifiers and multiplicative modifiers. 
-    //These are all initialized at 1, and buffs modify these rather than the base stats, 
+    //These are initialized at 1 and 0, and buffs modify these rather than the base stats, 
     //Which should only be modified by level things? God maybe.
 
     public class BattleObject : MonoBehaviour {

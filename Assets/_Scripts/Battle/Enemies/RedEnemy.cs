@@ -15,12 +15,18 @@ public class RedEnemy : Enemy {
         magicalEvasionChance = 20;
         magicalBlockChance = 10;
         magicalBlockModifier = 70;
+
+        enemyAbilityOne = new ChargePoke();
+        enemyAbilityTwo = new PokeBlast();
+        enemyAbilityThree = new HealPoke();
         
         enemyAbilityList.Add(enemyAbilityOne);
         enemyAbilityList.Add(enemyAbilityTwo);
         enemyAbilityList.Add(enemyAbilityTwo);
 
-    }
+        SetAbilityOwner();
+
+    } //end Constructor()
 
     
-}
+} //end RedEnemy class

@@ -65,12 +65,7 @@ public class HeroAbility : Ability {
         InfBarrage,
         Toggle
     }
-
-    public float radiusOfAOE {
-        get; set;
-    }
-
-
+    
     public TargetScope targetScope;
 
     public enum TargetScope {
@@ -84,6 +79,10 @@ public class HeroAbility : Ability {
         AllHeroesOrAllEnemies,
         FreeTargetAOE,
         CenteredAOE
+    }
+
+    public float radiusOfAOE {
+        get; set;
     }
 
 
@@ -210,7 +209,7 @@ public class HeroAbility : Ability {
 
 
     public virtual void ActivateAOETargeter() {
-        associatedTargeter = (GameObject)Instantiate(Resources.Load("AOEFreetargeterPrefab"), Input.mousePosition, Quaternion.identity);
+        associatedTargeter = (GameObject)MonoBehaviour.Instantiate(Resources.Load("AOEFreetargeterPrefab"), Input.mousePosition, Quaternion.identity);
         associatedTargeter.transform.localScale = new Vector3(radiusOfAOE, 0.05f, radiusOfAOE);
     }
 
@@ -288,7 +287,7 @@ public class HeroAbility : Ability {
         abilityOwner.currentBattleState = Hero.BattleState.Wait;
 
         if (associatedTargeter != null) {
-            Destroy(associatedTargeter);
+            MonoBehaviour.Destroy(associatedTargeter);
         }
 
     } //end ExitAbility()
@@ -331,18 +330,18 @@ public class HeroAbility : Ability {
             return;
         }
         if (hitOutcome == HitManager.HitOutcome.Block) {
-            BlockDamageProc(defender, procDamage);
+            ApplyBlockDamageProc(defender, procDamage);
             return;
         }
 
         hitOutcome = HitManager.DetermineCrit(attacker, defender, this);
 
         if (hitOutcome == HitManager.HitOutcome.Crit) {
-            CritDamageProc(defender, procDamage);
+            ApplyCritDamageProc(defender, procDamage);
             return;
         }
         else {
-            DamageProc(defender, procDamage);
+            ApplyDamageProc(defender, procDamage);
             return;
         }
 
@@ -359,7 +358,7 @@ public class HeroAbility : Ability {
     } //end DamageProcMultiple()
 
 
-    public virtual void DamageProc(BattleObject defender, float damage) {
+    public virtual void ApplyDamageProc(BattleObject defender, float damage) {
 
         int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
         defender.currentHealth -= damageToApply;
@@ -368,7 +367,7 @@ public class HeroAbility : Ability {
     }
 
 
-    public virtual void CritDamageProc(BattleObject defender, float damage) {
+    public virtual void ApplyCritDamageProc(BattleObject defender, float damage) {
 
         int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, (damage * critMultiplier)));
         defender.currentHealth -= damageToApply;
@@ -377,7 +376,7 @@ public class HeroAbility : Ability {
     }
 
 
-    public virtual void BlockDamageProc(BattleObject defender, float damage) {
+    public virtual void ApplyBlockDamageProc(BattleObject defender, float damage) {
 
         float blockModifier = 0;
 

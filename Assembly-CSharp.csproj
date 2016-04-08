@@ -412,7 +412,9 @@
      <Compile Include="Assets\_Scripts\Battle\Base Classes\Effect.cs" />
      <Compile Include="Assets\_Scripts\Battle\Base Classes\Enemy.cs" />
      <Compile Include="Assets\_Scripts\Battle\Base Classes\EnemyAbility.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\Hero.cs" />
      <Compile Include="Assets\_Scripts\Battle\Base Classes\HeroAbility.cs" />
+     <Compile Include="Assets\_Scripts\Battle\Base Classes\Proc.cs" />
      <Compile Include="Assets\_Scripts\Battle\Controllers\AOETargeterController.cs" />
      <Compile Include="Assets\_Scripts\Battle\Controllers\DamageTextController.cs" />
      <Compile Include="Assets\_Scripts\Battle\Controllers\DestroyByTime.cs" />
@@ -428,7 +430,6 @@
      <Compile Include="Assets\_Scripts\Battle\Enemies\BlueEnemy.cs" />
      <Compile Include="Assets\_Scripts\Battle\Enemies\RedEnemy.cs" />
      <Compile Include="Assets\_Scripts\Battle\Heroes\Champion.cs" />
-     <Compile Include="Assets\_Scripts\Battle\Heroes\Hero.cs" />
      <Compile Include="Assets\_Scripts\Battle\Heroes\HeroOne.cs" />
      <Compile Include="Assets\_Scripts\Battle\Heroes\HeroTwo.cs" />
      <Compile Include="Assets\_Scripts\Battle\Heroes\Myshka.cs" />

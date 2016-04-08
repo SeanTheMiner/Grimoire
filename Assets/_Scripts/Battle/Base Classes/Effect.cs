@@ -6,7 +6,7 @@ using BattleObjects;
 
 namespace Effects {
 
-    public class Effect : MonoBehaviour {
+    public class Effect {
         
        	public string effectName {
             get; set;
@@ -73,7 +73,7 @@ namespace Effects {
 
         } //end constructor
 
-        public GameObject effectManager;
+        public GameObject effectManager = GameObject.FindGameObjectWithTag("EffectManager");
 
 		
 		//Virtual functions, to be overridden on child classes as needed

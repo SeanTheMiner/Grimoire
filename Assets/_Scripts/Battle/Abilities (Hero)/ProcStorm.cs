@@ -2,14 +2,16 @@
 using System.Collections;
 using Abilities;
 using Effects;
+using Procs;
 
 public class ProcStorm : HeroAbility {
     
-    public DamageProc primaryDamageProc;
-    public DamageProc secondaryDamageProc;
-    public EffectProc effectProc;
+    public DamageProc primaryDamageProc = new DamageProc();
+    public DamageProc secondaryDamageProc = new DamageProc();
 
-    public Effect secondaryEffect;
+    public EffectProc primaryEffectProc = new EffectProc();
+    public EffectProc secondaryEffectProc = new EffectProc();
+    
 
     public ProcStorm () {
 
@@ -21,21 +23,18 @@ public class ProcStorm : HeroAbility {
         chargeDuration = 1;
         abilityDuration = 10;
         cooldownDuration = 5;
-
-        primaryDamageProc = gameObject.AddComponent<DamageProc>();
+        
         primaryDamageProc.procDamage = 30;
         primaryDamageProc.procSpacing = 1;
-        primaryDamageProc.damageType = Abilities.DamageProc.DamageType.Physical;
-
-        secondaryDamageProc = gameObject.AddComponent<DamageProc>();
+        primaryDamageProc.damageType = DamageProc.DamageType.Physical;
+        
         secondaryDamageProc.procDamage = 30;
         secondaryDamageProc.procSpacing = 1;
         secondaryDamageProc.procStartDelay = 0.5f;
-        secondaryDamageProc.damageType = Abilities.DamageProc.DamageType.Magical;
-        secondaryDamageProc.dependentProc = effectProc;
+        secondaryDamageProc.damageType = DamageProc.DamageType.Magical;
+        secondaryDamageProc.dependentProc = primaryEffectProc;
 
-        effectProc = gameObject.AddComponent<EffectProc>();
-        effectProc.effectApplied = effectProc.gameObject.AddComponent<ArmorBreak>();
+        primaryEffectProc.effectApplied = new ArmorBreak();
         
         
     } //end Constructor()

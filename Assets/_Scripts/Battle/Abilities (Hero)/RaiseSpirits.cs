@@ -3,8 +3,9 @@ using System.Collections;
 
 public class RaiseSpirits : HeroAbility {
 
+ 
     public RaiseSpirits() {
-
+        
         abilityName = "Raise Spirits";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllHeroes;
@@ -13,11 +14,16 @@ public class RaiseSpirits : HeroAbility {
 
         requiresTargeting = false;
 
-        chargeDuration = 5.0f;
+        chargeDuration = 2.0f;
         cooldownDuration = 20;
         procHeal = 100;
-        
-    }
+
+        effectApplied = new RaiseSpiritsEff();
+
+
+    } //end Constructor()
+
+    
 
     public override void AbilityMap() {
 

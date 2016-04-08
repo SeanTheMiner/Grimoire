@@ -31,7 +31,20 @@ public class Champion : Hero {
 
         currentStance = ChampionStance.Defensive;
 
-    }
+        abilityOne = new EndlessPunches();
+        abilityTwo = new ChangeStance();
+        abilityThree = new SwordBarrage();
+        abilityFour = new MonkKata();
+        abilityFive = new HeroTwoAbilityTwo();
+        abilitySix = new ArmorBreakAbility();
+
+        SetAbilityOwner();
+
+        //On ability itself
+        //abilitySix.effectApplied = new ArmorBreak();
+
+    } //end Constructor()
+
 
     public void ChangeStanceToOffensive () {
 
@@ -43,7 +56,8 @@ public class Champion : Hero {
         magicalBlockModifier = 30;
 
         //Addeffect countery bit?
-    }
+    } //end ChangeStanceToOffensive()
+
 
     public void ChangeStanceToDefensive () {
 
@@ -55,6 +69,7 @@ public class Champion : Hero {
         magicalBlockModifier = 40;
 
         //removeeffect, or idk if this needs any effect
-    }
+    } //end ChangeStanceToDefensive()
+
     
-} //end Champion
+} //end Champion class

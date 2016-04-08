@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Heroes;
 using Abilities;
+using Effects;
 
 public class HeroOne : Hero {
 
@@ -22,6 +23,21 @@ public class HeroOne : Hero {
         magicalBlockChance = 15;
         magicalBlockModifier = 40;
 
-    }
+        abilityOne = new EndlessPunches();
+        abilityTwo = new MonkKata();
+        abilityThree = new HeroOneAbilityTwo();
+        abilityFour = new HeroOneAbilityOne();
+        abilityFive = new Inspire();
+        abilitySix = new ArmorBreakAbility();
+
+        SetAbilityOwner();
+
+
+        //this needs to be put on the ability itself.
+            //abilityFive.effectApplied = new InspireEffect();
+            //abilitySix.effectApplied = new ArmorBreak();
+
+    } //end Constructor()
     
-}
+
+} //end HeroOne class
