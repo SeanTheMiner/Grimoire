@@ -14,7 +14,9 @@ namespace BattleObjects {
     //Which should only be modified by level things? God maybe.
 
     public class BattleObject : MonoBehaviour {
-        
+
+        public List<Effect> effectList = new List<Effect>();
+
         //Health & modifiers
 
         public float maxHealth {
@@ -280,7 +282,7 @@ namespace BattleObjects {
 
 
         
-        public List<Effect> effectList;
+       
         
 
         //Constructor

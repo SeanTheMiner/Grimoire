@@ -7,7 +7,9 @@ using BattleObjects;
 namespace Effects {
 
     public class Effect {
-        
+
+        public GameObject effectManager;
+
        	public string effectName {
             get; set;
         }
@@ -96,12 +98,13 @@ namespace Effects {
 
         public virtual void CreateEffectSingle(BattleObject host) {
 
-            Debug.Log("CreateEffectSingle called");
+            effectManager = GameObject.Find("EffectManager");
+            EffectController effectController = effectManager.AddComponent<EffectController>();
 
-            EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
             effectController.effectApplied = this;
             effectController.affectedBattleObjectList.Add(host);
             effectController.Initialize();
+
             InitEffect(host);
            
         } //endCreateEffectSingle()
