@@ -3,6 +3,7 @@ using System.Collections;
 
 using BattleObjects;
 using Abilities;
+using Procs;
 using EnemyAbilities;
 
 public class HitManager : MonoBehaviour {
@@ -63,15 +64,15 @@ public class HitManager : MonoBehaviour {
     } //end DetermineEvasionAndBlock (3)
 
 
-    public static HitOutcome DetermineCrit(BattleObject attacker, BattleObject defender, Ability ability) {
+    public static HitOutcome DetermineCrit(BattleObject attacker, BattleObject defender, DamageProc damageProc) {
 
         float critChance = 0;
 
-        if (ability.primaryDamageType == Ability.DamageType.Physical) {
-            critChance = attacker.ApplyStatModifications((ability.critChance + attacker.physicalCritChance), attacker.physicalCritChanceMultMod, attacker.physicalCritChanceAddMod);
+        if (damageProc.damageType == DamageProc.DamageType.Physical) {
+            critChance = attacker.ApplyStatModifications((damageProc.critChance + attacker.physicalCritChance), attacker.physicalCritChanceMultMod, attacker.physicalCritChanceAddMod);
         }
-        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
-            critChance = attacker.ApplyStatModifications((ability.critChance + attacker.magicalCritChance), attacker.magicalCritChanceMultMod, attacker.magicalCritChanceAddMod);
+        else if (damageProc.damageType == DamageProc.DamageType.Magical) {
+            critChance = attacker.ApplyStatModifications((damageProc.critChance + attacker.magicalCritChance), attacker.magicalCritChanceMultMod, attacker.magicalCritChanceAddMod);
         }
 
         int critCheck = Random.Range(1, 100); 
@@ -85,7 +86,34 @@ public class HitManager : MonoBehaviour {
     } //end DetermineCrit(3)
 
 
-    public static float ApplyResist(BattleObject attacker, BattleObject defender, Ability ability, float rawDamage) {
+    public static float ApplyResist(BattleObject attacker, BattleObject defender, DamageProc damageProc, float modifier) {
+
+        float resist = 0;
+        float penetration = 0;
+        float finalDamage;
+
+        if (damageProc.damageType == DamageProc.DamageType.Physical) {
+            resist = defender.ApplyStatModifications(defender.armor, defender.armorMultMod, defender.armorAddMod);
+            penetration = damageProc.physicalPenetration
+                + attacker.ApplyStatModifications(attacker.physicalPenetration, attacker.physicalPenetrationMultMod, attacker.physicalPenetrationAddMod);
+        }
+        else if (damageProc.damageType == DamageProc.DamageType.Magical) {
+            resist = defender.ApplyStatModifications(defender.spirit, defender.spiritMultMod, defender.spiritAddMod);
+            penetration = damageProc.magicalPenetration
+                + attacker.ApplyStatModifications(attacker.magicalPenetration, attacker.magicalPenetrationMultMod, attacker.magicalPenetrationAddMod);
+        }
+        
+
+        resist *= (1 - (penetration / 100));
+        finalDamage = ((damageProc.procDamage * modifier) * (100 / (resist + 100)));
+        return finalDamage;
+        
+    } //end ApplyResistNew(3)
+
+
+    //OLD OLD OLD NOT SURE WHY IT'S HERE
+
+    public static float ApplyResistOLD(BattleObject attacker, BattleObject defender, Ability ability, float rawDamage) {
 
         float resist = 0;
         float penetration = 0;

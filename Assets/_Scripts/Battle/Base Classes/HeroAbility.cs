@@ -8,6 +8,7 @@ using BattleObjects;
 using Heroes;
 using Enemies;
 using Effects;
+using Procs;
 
 public class HeroAbility : Ability {
 
@@ -316,12 +317,51 @@ public class HeroAbility : Ability {
     } //end CheckTarget()
 
 
-    
+
 
     //Hit functions
 
+    public virtual void DetermineHitOutcomeSingle(Hero attacker, BattleObject defender, DamageProc damageProc) {
 
-    public virtual void DetermineHitOutcomeSingle(Hero attacker, BattleObject defender) {
+        HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
+
+        if (hitOutcome == HitManager.HitOutcome.Evade) {
+            defender.SpawnMissText(damageProc.damageType);
+            return;
+        }
+        if (hitOutcome == HitManager.HitOutcome.Block) {
+            damageProc.ApplyBlockDamageProc(attacker, defender);
+            return;
+        }
+
+        hitOutcome = HitManager.DetermineCrit(attacker, defender, damageProc);
+
+        if (hitOutcome == HitManager.HitOutcome.Crit) {
+            damageProc.ApplyCritDamageProc(attacker, defender);
+            return;
+        }
+        else {
+            damageProc.ApplyDamageProc(attacker, defender);
+            return;
+        }
+        
+    } //End DetermineHitOutComeSingle (3)
+
+
+    public virtual void DetermineHitOutcomeMultiple(Hero attacker, DamageProc damageProc) {
+
+        foreach (BattleObject defender in targetBattleObjectList) {
+            DetermineHitOutcomeSingle(attacker, defender, damageProc);
+        } //end foreach
+
+    } //end DamageProcMultiple()
+
+
+
+
+
+    /*
+    public virtual void DetermineHitOutcomeSingleOld(Hero attacker, BattleObject defender) {
 
         HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
 
@@ -347,16 +387,12 @@ public class HeroAbility : Ability {
 
 
     } //end DamageProcSingle(2)
+    */
 
 
-    public virtual void DetermineHitOutcomeMultiple(Hero attacker) {
 
-        foreach (BattleObject defender in targetBattleObjectList) {
-            DetermineHitOutcomeSingle(attacker, defender);
-        } //end foreach
 
-    } //end DamageProcMultiple()
-
+    /*
 
     public virtual void ApplyDamageProc(BattleObject defender, float damage) {
 
@@ -457,5 +493,7 @@ public class HeroAbility : Ability {
     public virtual void ApplyEffectMultiple(Effect effect) {
         effect.CreateEffectMultiple(targetBattleObjectList);
     }
+
+    */
 
 } //end HeroAbility class

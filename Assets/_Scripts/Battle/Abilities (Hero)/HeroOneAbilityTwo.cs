@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Abilities;
+using Procs;
 
 public class HeroOneAbilityTwo : HeroAbility {
+
+    public DamageProc damageProc = new DamageProc();
 
     public HeroOneAbilityTwo() {
 
@@ -16,20 +19,20 @@ public class HeroOneAbilityTwo : HeroAbility {
         abilityDuration = 5.0f;
         cooldownDuration = 12.0f;
 
-        procDamage = 50;
-        procSpacing = 0.5f;
-        critChance = 25;
-        critMultiplier = 3;
-        
+        damageProc.procDamage = 50;
+        damageProc.procSpacing = 0.5f;
+        damageProc.critChance = 25;
+        damageProc.critMultiplier = 3;
+
     } //end constructor
 
 
     public override void AbilityMap() {
       
-        if(nextProcTimer <= Time.time) {
+        if(damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
-            DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
-            nextProcTimer = Time.time + procSpacing;
+            DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
+            damageProc.nextProcTimer = Time.time + procSpacing;
         }
 
         if(abilityEndTimer <= Time.time) {
