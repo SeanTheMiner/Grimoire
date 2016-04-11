@@ -2,8 +2,11 @@
 using System.Collections;
 using Abilities;
 using Heroes;
+using Procs;
 
 public class HeroTwoAbilityTwo : HeroAbility {
+
+    public HealProc healProc = new HealProc();
 
     public HeroTwoAbilityTwo() {
 
@@ -17,14 +20,15 @@ public class HeroTwoAbilityTwo : HeroAbility {
         chargeDuration = 4.0f;
         cooldownDuration = 10.0f;
 
-        procHeal = 150.0f;
+        healProc.procHeal = 150.0f;
         
     } //end constructor
+
 
     public override void AbilityMap() {
         
         targetingManager.TargetAllHeroes(this);
-        HealProcMultiple(abilityOwner);
+        healProc.HealProcMultiple(abilityOwner, this);
         ExitAbility();
 
     } //end AbilityMap()

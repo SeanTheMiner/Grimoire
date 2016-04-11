@@ -165,6 +165,10 @@ namespace EnemyAbilities {
         //PROC FUNCTIONS
 
 
+        /*
+
+
+
         public virtual void DamageProc(BattleObject defender, float damage) {
 
             int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(abilityOwner, defender, this, damage));
@@ -271,6 +275,11 @@ namespace EnemyAbilities {
             effect.CreateEffectMultiple(targetBattleObjectList);
         }
         
+
+    */
+   
+
+
 
     } //end EnemyAbility class
 

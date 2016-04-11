@@ -2,8 +2,12 @@
 using System.Collections;
 using Abilities;
 using Enemies;
+using Procs;
 
 public class PiercingFire : HeroAbility {
+
+    public DamageProc damageProc = new DamageProc();
+    public EffectProc effectProc = new EffectProc();
 
     public PiercingFire() {
 
@@ -11,25 +15,26 @@ public class PiercingFire : HeroAbility {
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
         primaryDamageType = DamageType.Magical;
-        manaCost = 200;
 
         requiresTargeting = false;
-
+        
+        manaCost = 200;
         chargeDuration = 5.0f;
         cooldownDuration = 20;
-        procDamage = 100.0f;
-        
-        effectApplied = new SpiritBreak();
 
-    }
+        damageProc.procDamage = 100;
+        damageProc.damageType = DamageProc.DamageType.Magical;
 
+        effectProc.effectApplied = new SpiritBreak();
 
+    } //end Constructor()
 
+    
     public override void AbilityMap() {
 
         targetingManager.TargetAllEnemies(this);
-        ApplyEffectMultiple(effectApplied);
-        DetermineHitOutcomeMultiple(abilityOwner);
+        effectProc.ApplyEffectMultiple(effectApplied, this);
+        DetermineHitOutcomeMultiple(abilityOwner, damageProc);
         ExitAbility();
 
     } //end AbilityMap()

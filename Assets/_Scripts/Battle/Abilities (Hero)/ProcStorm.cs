@@ -44,7 +44,7 @@ public class ProcStorm : HeroAbility {
 
         if (nextProcTimer <= Time.time) {
             CheckTarget();
-            DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
+            DetermineHitOutcomeSingle(abilityOwner, targetEnemy, primaryDamageProc);
             nextProcTimer = Time.time + procSpacing;
         }
 

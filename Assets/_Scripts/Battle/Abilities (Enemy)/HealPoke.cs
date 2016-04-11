@@ -1,19 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EnemyAbilities;
+using Procs;
 
 public class HealPoke : EnemyAbility {
+
+    public HealProc healProc = new HealProc();
 
     public HealPoke() {
 
         abilityName = "Heal Poke";
         chargeDuration = 5.0f;
-        procHeal = 50.0f;
+        
         enemyAbilityWeight = 10;
 
         primaryDamageType = DamageType.Healing;
         targetScope = TargetScope.AllEnemies;
         enemyAbilityType = EnemyAbilityType.Burst;
+
+        healProc.procHeal = 50;
 
     } //end Constructor
 
@@ -21,7 +26,7 @@ public class HealPoke : EnemyAbility {
     public override void EnemyAbilityMap() {
 
         targetingManager.EnemyTargetAllEnemies(this);
-        HealProcMultiple(abilityOwner);
+        healProc.HealProcMultiple(abilityOwner, this);
         ExitEnemyAbility();
 
     } //end AbilityMap()

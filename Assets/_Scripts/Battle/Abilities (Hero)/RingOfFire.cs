@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using Abilities;
+﻿using Procs;
 
 public class RingOfFire : HeroAbility {
+
+    public DamageProc damageProc = new DamageProc();
 
     public RingOfFire() {
 
@@ -16,22 +16,24 @@ public class RingOfFire : HeroAbility {
 
         chargeDuration = 4.0f;
         cooldownDuration = 12.0f;
-        procDamage = 220.0f;
         radiusOfAOE = 4;
 
-        effectStacksApplied = 8;
+        damageProc.procDamage = 200;
+        damageProc.damageType = DamageProc.DamageType.Magical;
 
-    } //end constructor
+        //effectStacksApplied = 8;
+
+    } //end Constructor()
 
 
     public override void AbilityMap() {
 
         CheckAOETargets();
-        DetermineHitOutcomeMultiple(abilityOwner);
+        DetermineHitOutcomeMultiple(abilityOwner, damageProc);
         //ApplyEffectMultiple(effectApplied);
         ExitAbility();
 
-    } //end AbilityType
+    } //end AbilityMap()
 
 
-} //end class
+} //end RingOfFire class

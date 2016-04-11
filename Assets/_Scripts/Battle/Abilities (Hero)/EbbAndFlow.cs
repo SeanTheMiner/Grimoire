@@ -23,6 +23,7 @@ public class EbbAndFlow : HeroAbility {
         procSpacing = 0.8f;
         
         damageProc.procDamage = 90;
+        damageProc.damageType = DamageProc.DamageType.Magical;
         damageProc.procSpacing = 1.5f;
         
         healProc.procHeal = 75;

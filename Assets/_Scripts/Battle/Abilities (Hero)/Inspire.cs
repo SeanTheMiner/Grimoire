@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Procs;
 
 public class Inspire : HeroAbility {
+
+    public HealProc healProc = new HealProc();
+    public EffectProc effectProc = new EffectProc();
 
     public Inspire() {
 
@@ -13,18 +17,19 @@ public class Inspire : HeroAbility {
         
         chargeDuration = 3.0f;
         cooldownDuration = 17;
-        procHeal = 220;
+       
+        healProc.procHeal = 220;
 
-        effectApplied = new InspireEffect();
+        effectProc.effectApplied = new InspireEffect();
 
-    }
+    } //end Constructor()
 
 
     public override void AbilityMap() {
 
         CheckTarget();
-        HealProcSingle(abilityOwner, targetHero);
-        ApplyEffectSingle(effectApplied, targetHero);
+        healProc.HealProcSingle(abilityOwner, targetHero);
+        effectProc.ApplyEffectSingle(effectApplied, targetHero);
         ExitAbility();
 
     } //end AbilityMap()

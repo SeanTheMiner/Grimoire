@@ -19,6 +19,7 @@ namespace Procs {
         }
 
         public Proc dependentProc;
+        public Proc dependentUponProc;
 
     } //end AbilityProc class
 
@@ -153,7 +154,7 @@ namespace Procs {
                 blockModifier = defender.magicalBlockModifier;
             }
 
-            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(attacker, defender, this, blockModifier));
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(attacker, defender, this, (1-(blockModifier/100))));
             defender.currentHealth -= damageToApply;
             defender.SpawnBlockText(damageToApply, damageType);
 

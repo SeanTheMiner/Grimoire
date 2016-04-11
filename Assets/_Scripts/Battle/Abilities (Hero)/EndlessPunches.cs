@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Abilities;
+using Procs;
 
 public class EndlessPunches : HeroAbility {
+
+    public DamageProc damageProc = new DamageProc();
 
     public EndlessPunches() {
 
@@ -11,25 +14,26 @@ public class EndlessPunches : HeroAbility {
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
         costsMana = false;
-
-        chargeDuration = 2.0f;
-        procDamage = 45;
-        procSpacing = 0.7f;
-
-        critChance = 30;
-        critMultiplier = 2.5f;
-
         hasCooldown = false;
 
-    }
+        chargeDuration = 2.0f;
+        
+        damageProc.procDamage = 40;
+        damageProc.procSpacing = 0.7f;
+        damageProc.damageType = DamageProc.DamageType.Physical;
+        damageProc.critChance = 20;
+        damageProc.critMultiplier = 2.5f;
+        damageProc.physicalFinesse = 40;
+        
+    } //end Constructor()
 
 
     public override void AbilityMap() {
 
-        if(nextProcTimer <= Time.time) {
+        if(damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
-            DetermineHitOutcomeSingle(abilityOwner, targetEnemy);
-            nextProcTimer = Time.time + procSpacing;
+            DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
+            damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
         }
         
     } //end AbilityMap()

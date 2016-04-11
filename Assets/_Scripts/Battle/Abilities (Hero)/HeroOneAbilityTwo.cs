@@ -21,6 +21,7 @@ public class HeroOneAbilityTwo : HeroAbility {
 
         damageProc.procDamage = 50;
         damageProc.procSpacing = 0.5f;
+        damageProc.damageType = DamageProc.DamageType.Physical;
         damageProc.critChance = 25;
         damageProc.critMultiplier = 3;
 
@@ -32,7 +33,7 @@ public class HeroOneAbilityTwo : HeroAbility {
         if(damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
-            damageProc.nextProcTimer = Time.time + procSpacing;
+            damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
         }
 
         if(abilityEndTimer <= Time.time) {

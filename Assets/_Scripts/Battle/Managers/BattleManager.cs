@@ -461,7 +461,7 @@ public class BattleManager : MonoBehaviour {
 
         foreach(Hero hero in heroList) {
             hero.currentHealth -= 120;
-            hero.SpawnDamageText(120, Ability.DamageType.Physical);
+            hero.SpawnDamageText(120, Procs.DamageProc.DamageType.Physical);
         }
     }
 
@@ -469,7 +469,7 @@ public class BattleManager : MonoBehaviour {
 
         if(selectedHero != null) {
             selectedHero.currentHealth -= 177;
-            selectedHero.SpawnDamageText(177, Ability.DamageType.Magical);
+            selectedHero.SpawnDamageText(177, Procs.DamageProc.DamageType.Magical);
         }
     }
 

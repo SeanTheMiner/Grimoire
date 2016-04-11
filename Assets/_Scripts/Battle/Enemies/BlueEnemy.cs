@@ -13,7 +13,7 @@ public class BlueEnemy : Enemy {
         armor = 70;
         spirit = 20;
         physicalEvasionChance = 12;
-        physicalBlockChance = 20;
+        physicalBlockChance = 50;
         physicalBlockModifier = 40;
 
         enemyAbilityOne = new ChargePoke();

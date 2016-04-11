@@ -10,16 +10,18 @@ public class ChangeStance : HeroAbility {
         abilityName = "Change Stance";
         abilityType = AbilityType.Toggle;
         targetScope = TargetScope.Untargeted;
+
         requiresTargeting = false;
+        costsMana = false;
+        canBeDefault = false;
 
         chargeDuration = 1;
-        cooldownDuration = 3;
-        costsMana = false;
-        
-
+        cooldownDuration = 4;
+       
         ownerChampion = (Champion)abilityOwner;
         
-    } //end constructor
+    } //end Constructor()
+
 
     public override void AbilityMap() {
 
@@ -33,4 +35,5 @@ public class ChangeStance : HeroAbility {
 
     } //end AbilityMap()
     
+
 } //end ChangeStance class

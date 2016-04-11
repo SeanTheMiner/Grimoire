@@ -146,8 +146,46 @@ namespace Abilities {
         public float magicalFinesse {
             get; set;
         }
+
+
+        //Functions shared between Hero & Enemy Abilities
+
+        public virtual void DetermineHitOutcomeSingle(BattleObject attacker, BattleObject defender, DamageProc damageProc) {
+
+            HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
+
+            if (hitOutcome == HitManager.HitOutcome.Evade) {
+                defender.SpawnMissText(damageProc.damageType);
+                return;
+            }
+            if (hitOutcome == HitManager.HitOutcome.Block) {
+                damageProc.ApplyBlockDamageProc(attacker, defender);
+                return;
+            }
+
+            hitOutcome = HitManager.DetermineCrit(attacker, defender, damageProc);
+
+            if (hitOutcome == HitManager.HitOutcome.Crit) {
+                damageProc.ApplyCritDamageProc(attacker, defender);
+                return;
+            }
+            else {
+                damageProc.ApplyDamageProc(attacker, defender);
+                return;
+            }
+
+        } //End DetermineHitOutComeSingle (3)
+
+
+        public virtual void DetermineHitOutcomeMultiple(BattleObject attacker, DamageProc damageProc) {
+
+            foreach (BattleObject defender in targetBattleObjectList) {
+                DetermineHitOutcomeSingle(attacker, defender, damageProc);
+            } //end foreach
+
+        } //end DamageProcMultiple()
         
     } //end Ability class
- 
+
 
 } //end Abilities namespace
