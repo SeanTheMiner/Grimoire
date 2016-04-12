@@ -4,10 +4,8 @@ using BattleObjects;
 using Procs;
 
 
-public class SwordBarrage : HeroAbility {
-
-    public Champion ownerChampion;
-
+public class SwordBarrage : ChampionAbility {
+    
     public DamageProc primaryDamageProc = new DamageProc();
     public DamageProc secondaryDamageProc = new DamageProc();
     public HealProc healProc = new HealProc();
@@ -23,7 +21,7 @@ public class SwordBarrage : HeroAbility {
         chargeDuration = 3.0f;
         abilityDuration = 4;
         cooldownDuration = 12.0f;
-        procSpacing = 0.5f;
+        procSpacing = 0.6f;
         
         primaryDamageProc.procDamage = 60;
         primaryDamageProc.damageType = DamageProc.DamageType.Physical;
@@ -53,6 +51,8 @@ public class SwordBarrage : HeroAbility {
             else if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
                 secondaryDamageProc.ApplyDamageProc(abilityOwner, targetEnemy);
             }
+
+            nextProcTimer = Time.time + procSpacing;
 
         } //end if time to proc
         

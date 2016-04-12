@@ -439,6 +439,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\Ability.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\BattleObject.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Base Classes\CustomHeroAbility.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\Effect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\EnemyAbility.cs" />

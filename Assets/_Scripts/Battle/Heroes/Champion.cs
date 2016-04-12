@@ -39,13 +39,17 @@ public class Champion : Hero {
         currentStance = ChampionStance.Defensive;
 
         abilityOne = new EndlessPunches();
-        abilityTwo = new ChangeStance();
+        abilityTwo= new ChangeStance();
         abilityThree = new SwordBarrage();
         abilityFour = new MonkKata();
         abilityFive = new HeroTwoAbilityTwo();
         abilitySix = new ArmorBreakAbility();
 
         SetAbilityOwner();
+        
+        //eventually SetOwnerChampion just calls all 6, when they are all ChampionAbilities
+        SetOwnerChampion((ChampionAbility)abilityTwo);
+        SetOwnerChampion((ChampionAbility)abilityThree);
         
     } //end Constructor()
 
@@ -75,5 +79,10 @@ public class Champion : Hero {
         //removeeffect, or idk if this needs any effect
     } //end ChangeStanceToDefensive()
     
+    
+    private void SetOwnerChampion(ChampionAbility ability) {
+        ability.ownerChampion = this;
+    }
+
 
 } //end Champion class

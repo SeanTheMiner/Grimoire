@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChangeStance : HeroAbility {
-
-    public Champion ownerChampion;
-    public HeroManager heroManager;
+public class ChangeStance : ChampionAbility {
     
     public ChangeStance() {
 
@@ -36,10 +33,5 @@ public class ChangeStance : HeroAbility {
 
     } //end AbilityMap()
 
-
-    void SetChampion() {
-        heroManager = GameObject.Find("HeroManager").GetComponent<HeroManager>();
-        ownerChampion = heroManager.activeChampion;
-    }
-
+    
 } //end ChangeStance class
