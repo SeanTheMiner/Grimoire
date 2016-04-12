@@ -111,8 +111,12 @@ namespace Effects {
 
 
         public virtual void CreateEffectMultiple(List<BattleObject> list) {
-            
-            EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
+
+            //EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
+
+            effectManager = GameObject.Find("EffectManager");
+            EffectController effectController = effectManager.AddComponent<EffectController>();
+
             effectController.effectApplied = this;
             foreach (BattleObject host in list)
             {
@@ -122,6 +126,21 @@ namespace Effects {
             effectController.Initialize();
             
         } //end CreateEffectMultiple()
+
+
+        public virtual void CreateStackingEffectSingle(BattleObject host, int stacksApplied) {
+
+            effectManager = GameObject.Find("EffectManager");
+            EffectController effectController = effectManager.AddComponent<EffectController>();
+
+            effectController.effectApplied = this;
+            effectController.affectedBattleObjectList.Add(host);
+            effectController.Initialize();
+
+            InitEffect(host);
+
+        } //endCreateEffectSingle()
+
 
 
         public virtual void RemoveEffect(BattleObject host) {

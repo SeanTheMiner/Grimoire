@@ -310,16 +310,27 @@ namespace Procs {
         //Application functions
 
         public virtual void ApplyEffectSingle(Effect effect, BattleObject target) {
-            effect.CreateEffectSingle(target);
             if (effect.effectType == Effect.EffectType.Stacking) {
+                effect.CreateStackingEffectSingle(target, stacksApplied);
                 effect.InitStacks(stacksApplied);
+            }
+            else {
+                effect.CreateEffectSingle(target);
             }
         } //end ApplyEffectSingle(2)
 
 
         public virtual void ApplyEffectMultiple(Effect effect, Ability ability) {
+            
             effect.CreateEffectMultiple(ability.targetBattleObjectList);
-        }
+            if (effect.effectType == Effect.EffectType.Stacking) {
+                effect.InitStacks(stacksApplied);
+            }
+        } //end ApplyEffectMultiple(2)
+
+
+
+
 
     } //end EffectProc class
 

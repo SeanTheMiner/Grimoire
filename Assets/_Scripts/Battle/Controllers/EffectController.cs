@@ -26,6 +26,7 @@ public class EffectController : MonoBehaviour {
         }
         else if (effectApplied.effectType == Effect.EffectType.Stacking) {
             foreach (BattleObject host in affectedBattleObjectList) {
+                //Could do something here
                 StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host)));
             }
         }
@@ -87,6 +88,8 @@ public class EffectController : MonoBehaviour {
 
 
     public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon) {
+
+        Debug.Log(effectApplied.stackCount.ToString());
 
         //Tenacity here?
         yield return new WaitForSeconds(effectApplied.stackDuration);

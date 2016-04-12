@@ -7,6 +7,7 @@ using Procs;
 public class HeroTwoAbilityOne : HeroAbility {
 
     public DamageProc damageProc = new DamageProc();
+    public EffectProc effectProc = new EffectProc();
 
     public HeroTwoAbilityOne() {
 
@@ -18,11 +19,14 @@ public class HeroTwoAbilityOne : HeroAbility {
         
         requiresTargeting = false;
 
-        chargeDuration = 5.0f;
+        chargeDuration = 2;
         cooldownDuration = 10.0f;
 
         damageProc.damageType = DamageProc.DamageType.Magical;
         damageProc.procDamage = 150.0f;
+
+        effectProc.effectApplied = new FlameStackEffect();
+        effectProc.stacksApplied = 8;
        
     } //end Constructor()
 
@@ -30,6 +34,7 @@ public class HeroTwoAbilityOne : HeroAbility {
 
         targetingManager.TargetAllEnemies(this);
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
+        effectProc.ApplyEffectMultiple(effectProc.effectApplied, this);
         ExitAbility();
 
     } //end AbilityMap()
