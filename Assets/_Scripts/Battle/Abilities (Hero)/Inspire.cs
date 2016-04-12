@@ -2,10 +2,11 @@
 using System.Collections;
 using Procs;
 
-public class Inspire : HeroAbility {
+public class Inspire : ChampionAbility {
 
     public HealProc healProc = new HealProc();
-    public EffectProc effectProc = new EffectProc();
+    public EffectProc effectProcOff = new EffectProc();
+    public EffectProc effectProcDef = new EffectProc();
 
     public Inspire() {
 
@@ -20,7 +21,8 @@ public class Inspire : HeroAbility {
        
         healProc.procHeal = 220;
 
-        effectProc.effectApplied = new InspireEffect();
+        effectProcDef.effectApplied = new InspireEffect();
+        effectProcOff.effectApplied = new InspireOffEffect();
 
     } //end Constructor()
 
@@ -29,7 +31,14 @@ public class Inspire : HeroAbility {
 
         CheckTarget();
         healProc.HealProcSingle(abilityOwner, targetHero);
-        effectProc.ApplyEffectSingle(effectProc.effectApplied, targetHero);
+
+        if (ownerChampion.currentStance == Champion.ChampionStance.Defensive) {
+            effectProcDef.ApplyEffectSingle(effectProcDef.effectApplied, targetHero);
+        }
+        else if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
+            effectProcOff.ApplyEffectSingle(effectProcOff.effectApplied, targetHero);
+        }
+        
         ExitAbility();
 
     } //end AbilityMap()

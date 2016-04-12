@@ -456,6 +456,7 @@
     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\FlameStackEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\InspireEffect.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\InspireOffEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\SpiritBreak.cs" />
     <Compile Include="Assets\_Scripts\Battle\Enemies\BlueEnemy.cs" />

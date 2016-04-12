@@ -41,7 +41,7 @@ public class Champion : Hero {
         abilityOne = new EndlessPunches();
         abilityTwo= new ChangeStance();
         abilityThree = new SwordBarrage();
-        abilityFour = new MonkKata();
+        abilityFour = new Inspire();
         abilityFive = new HeroTwoAbilityTwo();
         abilitySix = new ArmorBreakAbility();
 
@@ -50,7 +50,8 @@ public class Champion : Hero {
         //eventually SetOwnerChampion just calls all 6, when they are all ChampionAbilities
         SetOwnerChampion((ChampionAbility)abilityTwo);
         SetOwnerChampion((ChampionAbility)abilityThree);
-        
+        SetOwnerChampion((ChampionAbility)abilityFour);
+
     } //end Constructor()
 
 

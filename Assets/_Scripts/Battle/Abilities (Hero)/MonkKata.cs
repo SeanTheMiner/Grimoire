@@ -30,7 +30,7 @@ public class MonkKata : HeroAbility {
         chargeDuration = 2;
 
         procSpacing = 0.6f;
-        interProcSpacing = 2.5f;
+        interProcSpacing = 2;
         interProcTimer = 0;
         chainContinueChance = 100;
         chainDecayRate = 15;
@@ -39,11 +39,11 @@ public class MonkKata : HeroAbility {
         requiresTargeting = false;
         hasCooldown = false;
 
-        firstProc.procDamage = 30;
-        secondProc.procDamage = 45;
-        thirdProc.procDamage = 60;
-        fourthProc.procDamage = 75;
-        fifthProc.procDamage = 100;
+        firstProc.procDamage = 40;
+        secondProc.procDamage = 55;
+        thirdProc.procDamage = 75;
+        fourthProc.procDamage = 100;
+        fifthProc.procDamage = 130;
 
         firstProc.damageType = DamageProc.DamageType.Physical;
         secondProc.damageType = DamageProc.DamageType.Physical;

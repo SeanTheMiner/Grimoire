@@ -27,7 +27,7 @@ public class HeroOne : Hero {
         abilityTwo = new MonkKata();
         abilityThree = new HeroOneAbilityTwo();
         abilityFour = new HeroOneAbilityOne();
-        abilityFive = new Inspire();
+        abilityFive = new RaiseSpirits();
         abilitySix = new ArmorBreakAbility();
 
         SetAbilityOwner();
