@@ -5,12 +5,19 @@ using Abilities;
 
 public class Champion : Hero {
 
+    public HeroManager heroManager;
+
     public enum ChampionStance {
         Offensive,
         Defensive
     }
 
     public ChampionStance currentStance;
+
+    void Start() {
+        heroManager = GameObject.Find("HeroManager").GetComponent<HeroManager>();
+        heroManager.activeChampion = this;
+    }
 
     public Champion() {
 
@@ -39,10 +46,7 @@ public class Champion : Hero {
         abilitySix = new ArmorBreakAbility();
 
         SetAbilityOwner();
-
-        //On ability itself
-        //abilitySix.effectApplied = new ArmorBreak();
-
+        
     } //end Constructor()
 
 
@@ -70,6 +74,6 @@ public class Champion : Hero {
 
         //removeeffect, or idk if this needs any effect
     } //end ChangeStanceToDefensive()
-
     
+
 } //end Champion class

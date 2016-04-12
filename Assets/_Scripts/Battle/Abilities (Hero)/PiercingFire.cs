@@ -33,7 +33,7 @@ public class PiercingFire : HeroAbility {
     public override void AbilityMap() {
 
         targetingManager.TargetAllEnemies(this);
-        effectProc.ApplyEffectMultiple(effectApplied, this);
+        effectProc.ApplyEffectMultiple(effectProc.effectApplied, this);
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
         ExitAbility();
 

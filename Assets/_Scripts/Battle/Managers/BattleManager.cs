@@ -27,7 +27,8 @@ public class BattleManager : MonoBehaviour {
     public Hero heroObjectOne, heroObjectTwo, heroObjectThree, heroObjectFour,
         selectedHero, queuedHero
         ;
-   
+
+    public Champion champion;
 
     public Ability targetingAbility;
 

@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -474,6 +468,7 @@
     <Compile Include="Assets\_Scripts\Battle\Managers\BattleManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\DebugDisplayManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\EnemyManager.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Managers\HeroManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\HitManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\TargetingManager.cs" />
     <Compile Include="Assets\_Scripts\Overworld\BattleSpawner.cs" />

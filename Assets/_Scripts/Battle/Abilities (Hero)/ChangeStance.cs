@@ -4,8 +4,9 @@ using System.Collections;
 public class ChangeStance : HeroAbility {
 
     public Champion ownerChampion;
-
-	public ChangeStance() {
+    public HeroManager heroManager;
+    
+    public ChangeStance() {
 
         abilityName = "Change Stance";
         abilityType = AbilityType.Toggle;
@@ -34,6 +35,11 @@ public class ChangeStance : HeroAbility {
         ExitAbility();
 
     } //end AbilityMap()
-    
+
+
+    void SetChampion() {
+        heroManager = GameObject.Find("HeroManager").GetComponent<HeroManager>();
+        ownerChampion = heroManager.activeChampion;
+    }
 
 } //end ChangeStance class

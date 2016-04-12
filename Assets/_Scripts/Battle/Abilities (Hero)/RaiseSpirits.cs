@@ -31,7 +31,7 @@ public class RaiseSpirits : HeroAbility {
     public override void AbilityMap() {
 
         targetingManager.TargetAllHeroes(this);
-        effectProc.ApplyEffectMultiple(effectApplied, this);
+        effectProc.ApplyEffectMultiple(effectProc.effectApplied, this);
         healProc.HealProcMultiple(abilityOwner, this);
         ExitAbility();
 

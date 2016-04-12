@@ -29,7 +29,7 @@ public class Inspire : HeroAbility {
 
         CheckTarget();
         healProc.HealProcSingle(abilityOwner, targetHero);
-        effectProc.ApplyEffectSingle(effectApplied, targetHero);
+        effectProc.ApplyEffectSingle(effectProc.effectApplied, targetHero);
         ExitAbility();
 
     } //end AbilityMap()

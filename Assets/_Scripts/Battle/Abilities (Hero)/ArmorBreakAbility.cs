@@ -33,7 +33,7 @@ public class ArmorBreakAbility : HeroAbility {
     public override void AbilityMap() {
 
         CheckTarget();
-        effectProc.ApplyEffectSingle(effectApplied, targetEnemy);
+        effectProc.ApplyEffectSingle(effectProc.effectApplied, targetEnemy);
         DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
         ExitAbility();
 
