@@ -27,7 +27,7 @@ public class SetAblaze : HeroAbility {
         damageProc.damageType = DamageProc.DamageType.Magical;
 
         effectProc.effectApplied = new FlameStackEffect();   
-        effectProc.stacksApplied = 20;
+        effectProc.stacksApplied = 15;
 
     } //end Constructor()
 

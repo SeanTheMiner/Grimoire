@@ -311,8 +311,8 @@ namespace Procs {
 
         public virtual void ApplyEffectSingle(Effect effect, BattleObject target) {
             if (effect.effectType == Effect.EffectType.Stacking) {
-                effect.CreateStackingEffectSingle(target, stacksApplied);
                 effect.InitStacks(stacksApplied);
+                effect.CreateStackingEffectSingle(target, stacksApplied);
             }
             else {
                 effect.CreateEffectSingle(target);

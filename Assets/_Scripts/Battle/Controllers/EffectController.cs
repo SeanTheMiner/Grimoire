@@ -66,7 +66,7 @@ public class EffectController : MonoBehaviour {
                 effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
                 Quaternion.identity
                 );
-
+            //effectIcon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
         } 
         
         effectDisplayController.displayEffectIconList.Add(effectIcon);
@@ -89,8 +89,8 @@ public class EffectController : MonoBehaviour {
 
     public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon) {
 
-        Debug.Log(effectApplied.stackCount.ToString());
-
+        icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
+  
         //Tenacity here?
         yield return new WaitForSeconds(effectApplied.stackDuration);
 

@@ -26,7 +26,7 @@ public class HeroTwoAbilityOne : HeroAbility {
         damageProc.procDamage = 150.0f;
 
         effectProc.effectApplied = new FlameStackEffect();
-        effectProc.stacksApplied = 8;
+        effectProc.stacksApplied = 10;
        
     } //end Constructor()
 
