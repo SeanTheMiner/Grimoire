@@ -321,17 +321,15 @@ namespace Procs {
 
 
         public virtual void ApplyEffectMultiple(Effect effect, Ability ability) {
-            
-            effect.CreateEffectMultiple(ability.targetBattleObjectList);
             if (effect.effectType == Effect.EffectType.Stacking) {
                 effect.InitStacks(stacksApplied);
+                effect.CreateStackingEffectMultiple(ability.targetBattleObjectList, stacksApplied);
+            }
+            else {
+                effect.CreateEffectMultiple(ability.targetBattleObjectList);
             }
         } //end ApplyEffectMultiple(2)
-
-
-
-
-
+        
     } //end EffectProc class
 
     

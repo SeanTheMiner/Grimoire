@@ -28,12 +28,10 @@ public class EffectController : MonoBehaviour {
         }
         else if (effectApplied.effectType == Effect.EffectType.Stacking) {
             foreach (BattleObject host in affectedBattleObjectList) {
-                //Could do something here
-                StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host)));
+                StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host), affectedBattleObjectList.IndexOf(host)));
             }
         }
-
-
+        
 	} //end Initialize
     
 
@@ -88,23 +86,27 @@ public class EffectController : MonoBehaviour {
     } //end CheckForExpiration()
 
 
-    public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon) {
+    public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon, int index) {
 
-        icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
-
+        //icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
+        icon.GetComponentInChildren<TextMesh>().text = stackCountList[index].ToString();
+        
         //update stack effect here? Probably function on the effect that takes in old stacks, new stacks, removes effect of old and applies effect of new
        
         yield return new WaitForSeconds(ApplyTenacity(host, effectApplied.stackDuration));
 
-        effectApplied.stackCount--;
-        icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
+        //effectApplied.stackCount--;
+        //icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
+        
+        stackCountList[index]--;
+        icon.GetComponentInChildren<TextMesh>().text = stackCountList[index].ToString();
 
-        if (effectApplied.stackCount > 0) {
-            StartCoroutine(CheckForExpirationStacking(host, icon));
+        if (stackCountList[index] > 0) {
+            StartCoroutine(CheckForExpirationStacking(host, icon, index));
         }
         else {
             KillEffect(host, icon);
-        } //end else
+        }
 
     } //end CheckForExpiration()
 
@@ -132,7 +134,7 @@ public class EffectController : MonoBehaviour {
         if (affectedBattleObjectList.Count <= 0)
         {
            Destroy(this);
-       }
+        }
     } //end Update()
 
 

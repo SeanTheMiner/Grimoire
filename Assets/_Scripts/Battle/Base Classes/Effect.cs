@@ -118,11 +118,12 @@ namespace Effects {
             EffectController effectController = effectManager.AddComponent<EffectController>();
 
             effectController.effectApplied = this;
-            foreach (BattleObject host in list)
-            {
+            foreach (BattleObject host in list) {
+
                 effectController.affectedBattleObjectList.Add(host);
                 InitEffect(host);
             }
+
             effectController.Initialize();
             
         } //end CreateEffectMultiple()
@@ -140,6 +141,26 @@ namespace Effects {
             InitEffect(host);
 
         } //endCreateEffectSingle()
+
+
+        public virtual void CreateStackingEffectMultiple(List<BattleObject> list, int stacksApplied) {
+
+            effectManager = GameObject.Find("EffectManager");
+            EffectController effectController = effectManager.AddComponent<EffectController>();
+
+            effectController.effectApplied = this;
+
+            foreach (BattleObject host in list) {
+
+                effectController.affectedBattleObjectList.Add(host);
+                //RESOLVE HERE (host.applystatmods(resolve, mm, am) (look at tenacity command)
+                effectController.stackCountList.Add(stacksApplied);
+                InitEffect(host);
+            }
+
+            effectController.Initialize();
+            
+        } //end CreateStackingEffectMultiple(2)
 
 
 
