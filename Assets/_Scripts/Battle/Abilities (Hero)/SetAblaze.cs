@@ -19,15 +19,15 @@ public class SetAblaze : HeroAbility {
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Magical;
         
-        manaCost = 100;
-        chargeDuration = 5;
-        cooldownDuration = 17;
+        manaCost = 10;
+        chargeDuration = 2;
+        cooldownDuration = 5;
         
         damageProc.procDamage = 120;
         damageProc.damageType = DamageProc.DamageType.Magical;
 
         effectProc.effectApplied = new FlameStackEffect();   
-        effectProc.stacksApplied = 15;
+        effectProc.stacksApplied = 50;
 
     } //end Constructor()
 

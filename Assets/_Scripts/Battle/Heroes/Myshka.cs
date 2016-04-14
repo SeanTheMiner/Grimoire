@@ -23,7 +23,7 @@ public class Myshka : Hero {
         abilityOne = new EbbAndFlow();
         abilityTwo = new HealBarrage();
         abilityThree = new HeroTwoAbilityOne();
-        abilityFour = new EndlessFire();
+        abilityFour = new SetAblaze();
         abilityFive = new RingOfFire();
         abilitySix = new RaiseSpirits();
 

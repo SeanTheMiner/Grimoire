@@ -10,11 +10,15 @@ public class RedEnemy : Enemy {
         maxHealth = 2000;
         healthRegen = 5;
         homeBiome = Biome.BlueBiome;
+
         armor = 30;
         spirit = 80;
+
         magicalEvasionChance = 20;
         magicalBlockChance = 10;
         magicalBlockModifier = 70;
+
+        tenacity = 35;
 
         enemyAbilityOne = new ChargePoke();
         enemyAbilityTwo = new PokeBlast();

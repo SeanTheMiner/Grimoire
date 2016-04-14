@@ -13,6 +13,8 @@ public class EffectController : MonoBehaviour {
     }
 
     public List<BattleObject> affectedBattleObjectList = new List<BattleObject>();
+    public List<int> stackCountList = new List<int>();
+
     public List<GameObject> effectPrefabList = new List<GameObject>();
     public List<GameObject> effectIconList = new List<GameObject>();
 
@@ -79,9 +81,8 @@ public class EffectController : MonoBehaviour {
 
 
     public IEnumerator CheckForExpirationLump(BattleObject host, GameObject icon) {
-
-        //Tenacity here?
-        yield return new WaitForSeconds(effectApplied.effectDuration);
+        
+        yield return new WaitForSeconds(ApplyTenacity(host, effectApplied.effectDuration));
         KillEffect(host, icon);
         
     } //end CheckForExpiration()
@@ -90,9 +91,10 @@ public class EffectController : MonoBehaviour {
     public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon) {
 
         icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
-  
-        //Tenacity here?
-        yield return new WaitForSeconds(effectApplied.stackDuration);
+
+        //update stack effect here? Probably function on the effect that takes in old stacks, new stacks, removes effect of old and applies effect of new
+       
+        yield return new WaitForSeconds(ApplyTenacity(host, effectApplied.stackDuration));
 
         effectApplied.stackCount--;
         icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
@@ -105,6 +107,11 @@ public class EffectController : MonoBehaviour {
         } //end else
 
     } //end CheckForExpiration()
+
+
+    public float ApplyTenacity (BattleObject host, float duration) {
+        return (duration *= (1 - (host.ApplyStatModifications(host.tenacity, host.tenacityMultMod, host.tenacityAddMod)/100)));
+    } //end ApplyTenacity
 
 
     public void KillEffect(BattleObject host, GameObject icon) {

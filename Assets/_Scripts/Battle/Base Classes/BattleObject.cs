@@ -254,7 +254,30 @@ namespace BattleObjects {
             get; set;
         }
 
+        public float tenacity {
+            get; set;
+        }
 
+        public float tenacityAddMod {
+            get; set;
+        }
+
+        public float tenacityMultMod {
+            get; set;
+        }
+
+        public float resolve {
+            get; set;
+        }
+
+        public float resolveAddMod {
+            get; set;
+        }
+
+        public float resolveMultMod {
+            get; set;
+        }
+        
         public float physicalLifesteal {
             get; set;
         }
@@ -355,6 +378,14 @@ namespace BattleObjects {
             magicalBlockModifier = 0;
             magicalBlockModifierMultMod = 1;
             magicalBlockModifierAddMod = 0;
+
+            tenacity = 0;
+            tenacityMultMod = 1;
+            tenacityAddMod = 0;
+
+            resolve = 0;
+            resolveMultMod = 1;
+            resolveAddMod = 0;
 
             physicalLifesteal = 0;
             physicalLifestealMultMod = 1;
