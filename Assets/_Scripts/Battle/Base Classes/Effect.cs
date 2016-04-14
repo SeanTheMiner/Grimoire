@@ -146,17 +146,27 @@ namespace Effects {
         public virtual void CreateStackingEffectMultiple(List<BattleObject> list, int stacksApplied) {
 
             effectManager = GameObject.Find("EffectManager");
-            EffectController effectController = effectManager.AddComponent<EffectController>();
 
+            //if (effectManager.GetComponentInChildren.effectApplied == this) ;
+            //well that sure doesn't work. I guess effect manager needs a way of 
+            //keeping track of active effects, or I need to figure out another way of searching.
+
+            EffectController effectController = effectManager.AddComponent<EffectController>();
             effectController.effectApplied = this;
 
             foreach (BattleObject host in list) {
 
-                effectController.affectedBattleObjectList.Add(host);
-                //RESOLVE HERE (host.applystatmods(resolve, mm, am) (look at tenacity command)
-                effectController.stackCountList.Add(stacksApplied);
-                InitEffect(host);
-            }
+                if (effectController.affectedBattleObjectList.Contains(host)) {
+                    effectController.stackCountList[effectController.affectedBattleObjectList.IndexOf(host)] += stacksApplied;
+
+                }
+                else {
+                    effectController.affectedBattleObjectList.Add(host);
+                    //RESOLVE HERE (host.applystatmods(resolve, mm, am) (look at tenacity command)
+                    effectController.stackCountList.Add(stacksApplied);
+                    InitEffect(host);
+                }
+            } //end foreach
 
             effectController.Initialize();
             

@@ -66,8 +66,8 @@ public class EffectController : MonoBehaviour {
                 effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
                 Quaternion.identity
                 );
-            //effectIcon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
-        } 
+
+        } //end if Stacking
         
         effectDisplayController.displayEffectIconList.Add(effectIcon);
         effectIconList.Add(effectIcon);
