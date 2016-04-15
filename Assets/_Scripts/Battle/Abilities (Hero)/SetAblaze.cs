@@ -21,7 +21,7 @@ public class SetAblaze : HeroAbility {
         
         manaCost = 10;
         chargeDuration = 2;
-        cooldownDuration = 5;
+        cooldownDuration = 2;
         
         damageProc.procDamage = 120;
         damageProc.damageType = DamageProc.DamageType.Magical;

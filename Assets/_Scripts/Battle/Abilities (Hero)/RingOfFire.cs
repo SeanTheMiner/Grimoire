@@ -1,4 +1,5 @@
-﻿using Procs;
+﻿using UnityEngine;
+using Procs;
 
 public class RingOfFire : HeroAbility {
 
@@ -20,9 +21,7 @@ public class RingOfFire : HeroAbility {
 
         damageProc.procDamage = 200;
         damageProc.damageType = DamageProc.DamageType.Magical;
-
-        //effectStacksApplied = 8;
-
+        
     } //end Constructor()
 
 
@@ -30,7 +29,6 @@ public class RingOfFire : HeroAbility {
 
         CheckAOETargets();
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
-        //ApplyEffectMultiple(effectApplied);
         ExitAbility();
 
     } //end AbilityMap()

@@ -423,6 +423,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EbbAndFlow.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ErodeArmor.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\FireStorm.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HealBarrage.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroOneAbilityOne.cs" />
@@ -430,6 +431,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroTwoAbilityOne.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroTwoAbilityTwo.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\Inspire.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\Maelstrom.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\MonkKata.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\PiercingFire.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ProcStorm.cs" />
@@ -454,6 +456,7 @@
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\ErodeArmorEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\FlameStackEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\InspireEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\InspireOffEffect.cs" />
@@ -469,6 +472,7 @@
     <Compile Include="Assets\_Scripts\Battle\Managers\BattleDisplayManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\BattleManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\DebugDisplayManager.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Managers\EffectManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\EnemyManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\HeroManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\HitManager.cs" />

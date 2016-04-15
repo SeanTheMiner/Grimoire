@@ -12,8 +12,7 @@ public class Myshka : Hero {
         healthRegen = 3;
         maxMana = 640;
         manaRegen = 6;
-
-
+        
         armor = 10;
         spirit = 70;
 
@@ -22,15 +21,12 @@ public class Myshka : Hero {
 
         abilityOne = new EbbAndFlow();
         abilityTwo = new HealBarrage();
-        abilityThree = new HeroTwoAbilityOne();
+        abilityThree = new ErodeArmor();
         abilityFour = new SetAblaze();
-        abilityFive = new RingOfFire();
+        abilityFive = new Maelstrom();
         abilitySix = new RaiseSpirits();
 
         SetAbilityOwner();
-
-        //this needs to be put on the ability itself.
-        //abilitySix.effectApplied = new RaiseSpiritsEff();
 
     } //end Constructor()
 

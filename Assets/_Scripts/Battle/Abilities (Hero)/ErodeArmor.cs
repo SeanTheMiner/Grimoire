@@ -4,30 +4,30 @@ using Abilities;
 using Procs;
 
 
-public class HeroTwoAbilityOne : HeroAbility {
+public class ErodeArmor : HeroAbility {
 
     public DamageProc damageProc = new DamageProc();
     public EffectProc effectProc = new EffectProc();
 
-    public HeroTwoAbilityOne() {
+    public ErodeArmor() {
 
-        abilityName = "Charge Blast";
+        abilityName = "Erode Armor";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
         primaryDamageType = DamageType.Magical;
-        manaCost = 100;
-        
+        manaCost = 120;
+
         requiresTargeting = false;
 
-        chargeDuration = 2;
-        cooldownDuration = 10.0f;
+        chargeDuration = 6;
+        cooldownDuration = 20;
 
         damageProc.damageType = DamageProc.DamageType.Magical;
-        damageProc.procDamage = 150.0f;
+        damageProc.procDamage = 100.0f;
+        damageProc.magicalFinesse = 80;
 
-        effectProc.effectApplied = new FlameStackEffect();
-        effectProc.stacksApplied = 40;
-       
+        effectProc.effectApplied = new ErodeArmorEff();
+
     } //end Constructor()
 
     public override void AbilityMap() {
@@ -38,6 +38,6 @@ public class HeroTwoAbilityOne : HeroAbility {
         ExitAbility();
 
     } //end AbilityMap()
-    
+
 
 } //end Ability

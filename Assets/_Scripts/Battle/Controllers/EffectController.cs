@@ -7,15 +7,13 @@ using Effects;
 
 public class EffectController : MonoBehaviour {
 
-
+    
     public Effect effectApplied {
         get; set;
     }
 
     public List<BattleObject> affectedBattleObjectList = new List<BattleObject>();
     public List<int> stackCountList = new List<int>();
-
-    public List<GameObject> effectPrefabList = new List<GameObject>();
     public List<GameObject> effectIconList = new List<GameObject>();
 
 
@@ -33,7 +31,26 @@ public class EffectController : MonoBehaviour {
         }
         
 	} //end Initialize
-    
+
+
+    public void InitializeMultipleStacking (List<BattleObject> passedList) {
+
+        if (effectApplied.effectType == Effect.EffectType.Lump) {
+            foreach (BattleObject host in passedList) {
+                StartCoroutine(CheckForExpirationLump(host, SpawnDisplayIcon(host)));
+            }
+        }
+        else if (effectApplied.effectType == Effect.EffectType.Stacking) {
+            foreach (BattleObject host in passedList) {
+                StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host), affectedBattleObjectList.IndexOf(host)));
+            }
+        }
+
+    } //end Initialize
+
+
+
+
 
     public GameObject SpawnDisplayIcon (BattleObject host) {
 
@@ -87,8 +104,7 @@ public class EffectController : MonoBehaviour {
 
 
     public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon, int index) {
-
-        //icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
+        
         icon.GetComponentInChildren<TextMesh>().text = stackCountList[index].ToString();
         
         //update stack effect here? Probably function on the effect that takes in old stacks, new stacks, removes effect of old and applies effect of new

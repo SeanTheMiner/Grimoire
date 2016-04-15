@@ -132,12 +132,27 @@ namespace Effects {
         public virtual void CreateStackingEffectSingle(BattleObject host, int stacksApplied) {
 
             effectManager = GameObject.Find("EffectManager");
-            EffectController effectController = effectManager.AddComponent<EffectController>();
+            EffectController effectController;
 
-            effectController.effectApplied = this;
+            if (CheckForExistingEffectController(effectManager, this) == null) {
+                effectController = effectManager.AddComponent<EffectController>();
+                effectController.effectApplied = this;
+                effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
+            }
+            else {
+                effectController = CheckForExistingEffectController(effectManager, this);
+            }
+
+            if (effectController.affectedBattleObjectList.Contains(host)) {
+                effectController.stackCountList[effectController.affectedBattleObjectList.IndexOf(host)] += stacksApplied;
+                //restartCoroutine? Probably call an interruptor function on EffectController
+                //right now I think it updates at the end of the CRT, but it would be good for it to reset it
+                return;
+            }
+
             effectController.affectedBattleObjectList.Add(host);
+            effectController.stackCountList.Add(stacksApplied);
             effectController.Initialize();
-
             InitEffect(host);
 
         } //endCreateEffectSingle()
@@ -146,34 +161,49 @@ namespace Effects {
         public virtual void CreateStackingEffectMultiple(List<BattleObject> list, int stacksApplied) {
 
             effectManager = GameObject.Find("EffectManager");
+            EffectController effectController;
 
-            //if (effectManager.GetComponentInChildren.effectApplied == this) ;
-            //well that sure doesn't work. I guess effect manager needs a way of 
-            //keeping track of active effects, or I need to figure out another way of searching.
+           
+            if (CheckForExistingEffectController(effectManager, this) == null) {
+                effectController = effectManager.AddComponent<EffectController>();
+                effectController.effectApplied = this;
+                effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
+            }
+            else {
+                effectController = CheckForExistingEffectController(effectManager, this);
+            }
 
-            EffectController effectController = effectManager.AddComponent<EffectController>();
-            effectController.effectApplied = this;
+            List<BattleObject> listToInit = new List<BattleObject>();
 
             foreach (BattleObject host in list) {
-
+                
                 if (effectController.affectedBattleObjectList.Contains(host)) {
                     effectController.stackCountList[effectController.affectedBattleObjectList.IndexOf(host)] += stacksApplied;
-
                 }
                 else {
                     effectController.affectedBattleObjectList.Add(host);
-                    //RESOLVE HERE (host.applystatmods(resolve, mm, am) (look at tenacity command)
                     effectController.stackCountList.Add(stacksApplied);
+                    listToInit.Add(host);
+                    //RESOLVE HERE (host.applystatmods(resolve, mm, am) (look at tenacity command)
                     InitEffect(host);
                 }
             } //end foreach
 
-            effectController.Initialize();
+            effectController.InitializeMultipleStacking(listToInit);
             
         } //end CreateStackingEffectMultiple(2)
 
+        
+        public EffectController CheckForExistingEffectController (GameObject effectManager, Effect effectToCheckFor) {
+            foreach (EffectController effectController in effectManager.GetComponent<EffectManager>().activeEffectControllerList) {
+                if (effectController.effectApplied == this) {
+                    return effectController;
+                } 
+            }
+            return null;
+        } //end CheckForExistingEffectController(2)
 
-
+        
         public virtual void RemoveEffect(BattleObject host) {
 			host.effectList.Remove (this);
         }
