@@ -25,8 +25,8 @@ namespace Effects {
         public float effectDuration {
             get; set;
         }
-			
-        public bool canStack {
+
+        public bool isCoreEffect {
             get; set;
         }
 
@@ -69,7 +69,7 @@ namespace Effects {
         public Effect () {
 
             effectDuration = 0;
-            canStack = false;
+            isCoreEffect = false;
             stackCount = 0;
             resolveScale = 1;
 

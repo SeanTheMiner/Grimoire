@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 using BattleObjects;
 using Abilities;
+using Effects;
 
 namespace Heroes {
 
     public class Hero : BattleObject {
-
-
+        
         public string heroName {
             get; set;
         }
@@ -20,7 +20,6 @@ namespace Heroes {
         public bool canTakeCommands {
             get; set;
         }
-
 
         //any stats that aren't inherited from BattleObject go here. 
         //I don't know what they'd be other than mana.
@@ -79,6 +78,25 @@ namespace Heroes {
 
         } //end SetAbilityOwner(1)
         
+        
+        public void SetCoreEffects() {
+            
+            CheckAbilityForCoreEffect(abilityOne);
+            CheckAbilityForCoreEffect(abilityTwo);
+            CheckAbilityForCoreEffect(abilityThree);
+            CheckAbilityForCoreEffect(abilityFour);
+            CheckAbilityForCoreEffect(abilityFive);
+            CheckAbilityForCoreEffect(abilitySix);
+            
+        } //end SetCoreEffects()
+
+
+        public void CheckAbilityForCoreEffect(HeroAbility ability) {
+            if (ability.appliesCoreEffect) {
+                ability.coreEffectApplied = coreEffect;
+            }
+        } //end CheckAbilityForCoreEffect(1)
+
         
     } //end Hero class
 

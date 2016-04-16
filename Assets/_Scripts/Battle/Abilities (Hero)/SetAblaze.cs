@@ -18,18 +18,25 @@ public class SetAblaze : HeroAbility {
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Magical;
-        
+
+        appliesCoreEffect = true;
+
         manaCost = 10;
         chargeDuration = 2;
         cooldownDuration = 2;
         
         damageProc.procDamage = 120;
         damageProc.damageType = DamageProc.DamageType.Magical;
-
-        effectProc.effectApplied = new FlameStackEffect();   
+        
         effectProc.stacksApplied = 50;
 
     } //end Constructor()
+
+
+    public override void InitAbility() {
+        effectProc.effectApplied = coreEffectApplied;
+        base.InitAbility();
+    } //end InitAbility()
 
 
     public override void AbilityMap() {

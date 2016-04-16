@@ -17,6 +17,11 @@ namespace BattleObjects {
 
         public List<Effect> effectList = new List<Effect>();
 
+        public Effect coreEffect {
+            get; set;
+        }
+
+
         //Health & modifiers
 
         public float maxHealth {
@@ -303,10 +308,6 @@ namespace BattleObjects {
             get; set;
         }
 
-
-        
-       
-        
 
         //Constructor
 

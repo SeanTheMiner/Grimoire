@@ -17,6 +17,7 @@ public class HeroAbility : Ability {
     }
 
     public Hero abilityOwner;
+    public Effect coreEffectApplied;
 
     public GameObject associatedTargeter;
 
@@ -55,6 +56,10 @@ public class HeroAbility : Ability {
         get; set;
     }
     
+    public bool appliesCoreEffect {
+        get; set;
+    }
+
     public AbilityType abilityType {
         get; set;
     }

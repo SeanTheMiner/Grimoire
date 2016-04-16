@@ -11,17 +11,25 @@ public class FlameStackEffect : Effect {
         effectName = "Flame Stack";
         effectIconText = "";
         stackDuration = 1;
+        isCoreEffect = true;
         effectType = EffectType.Stacking;
         statType = StatType.Magical;
 
-    } //end Constructor
+    } //end Constructor ()
 
-    
 
     public override void EffectMap(BattleObject host) {
-        
+
         //eventually it updates stats for effect here
+        //Calls UpdateStacks mostly? UpdateStacks should be on Effect, though
 
     }
+  
+    /*
 
-} //end ArmorBreak class
+    UpdateStacks (int old, int new) {
+        remove effect with old number, reapply effect with new number
+    }
+    */
+
+} //end FlameStackEffect class

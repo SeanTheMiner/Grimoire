@@ -6,6 +6,7 @@ using Procs;
 public class FireStorm : HeroAbility {
 
     public DamageProc damageProc = new DamageProc();
+    public EffectProc effectProc = new EffectProc();
 
     public FireStorm() {
 
@@ -18,6 +19,7 @@ public class FireStorm : HeroAbility {
         costsMana = false;
         requiresTargeting = false;
         hasCooldown = false;
+        appliesCoreEffect = true;
 
         chargeDuration = 2;
         
@@ -25,7 +27,15 @@ public class FireStorm : HeroAbility {
         damageProc.damageType = DamageProc.DamageType.Magical;
         damageProc.procSpacing = 0.4f;
         
+        effectProc.stacksApplied = 3;
+        
     } //end Constructor()
+
+
+    public override void InitAbility() {
+        effectProc.effectApplied = coreEffectApplied;
+        base.InitAbility();
+    } //end InitAbility()
 
 
     public override void AbilityMap() {
@@ -33,6 +43,7 @@ public class FireStorm : HeroAbility {
         if (damageProc.nextProcTimer <= Time.time) {
             targetingManager.TargetRandomEnemy(this);
             DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
+            effectProc.ApplyEffectSingle(effectProc.effectApplied, targetEnemy);
             damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
         }
        

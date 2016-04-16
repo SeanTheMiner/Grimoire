@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Heroes;
+using Effects;
 
 
 public class HeroTwo : Hero {
 
     public HeroTwo() {
 
-        heroName = "Weeetch";
+        heroName = "Fire Mage";
 
         maxHealth = 760;
         healthRegen = 3;
@@ -19,6 +20,8 @@ public class HeroTwo : Hero {
 
         magicalEvasionChance = 30;
         physicalEvasionChance = 20;
+        
+        coreEffect = new FlameStackEffect();
 
         abilityOne = new FireStorm();
         abilityTwo = new EndlessFire();
@@ -28,12 +31,8 @@ public class HeroTwo : Hero {
         abilitySix = new RingOfFire();
 
         SetAbilityOwner();
-
-        //ON ability itself
-        //abilityFour.effectApplied = new SpiritBreak();
-        //abilityFive.effectApplied = new FlameStackEffect();
-        //abilitySix.effectApplied = new FlameStackEffect();
-
+        SetCoreEffects();
+        
     } //end Constructor()
 
 } //end HeroTwo class
