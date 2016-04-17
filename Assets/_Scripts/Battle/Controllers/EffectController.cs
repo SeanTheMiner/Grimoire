@@ -49,7 +49,9 @@ public class EffectController : MonoBehaviour {
     } //end Initialize
 
 
-
+    public void AddHostToExistingEffect (BattleObject host) {
+        StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host), affectedBattleObjectList.IndexOf(host)));
+    } //end AddHostToExistingEffect
 
 
     public GameObject SpawnDisplayIcon (BattleObject host) {

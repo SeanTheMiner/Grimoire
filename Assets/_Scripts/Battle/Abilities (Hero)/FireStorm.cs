@@ -25,9 +25,9 @@ public class FireStorm : HeroAbility {
         
         damageProc.procDamage = 30;
         damageProc.damageType = DamageProc.DamageType.Magical;
-        damageProc.procSpacing = 0.4f;
+        damageProc.procSpacing = 0.2f;
         
-        effectProc.stacksApplied = 3;
+        effectProc.stacksApplied = 5;
         
     } //end Constructor()
 

@@ -133,6 +133,7 @@ namespace Effects {
 
             effectManager = GameObject.Find("EffectManager");
             EffectController effectController;
+            bool effectCreated = false;
 
             if (CheckForExistingEffectController(effectManager, this) == null) {
                 effectController = effectManager.AddComponent<EffectController>();
@@ -141,6 +142,7 @@ namespace Effects {
             }
             else {
                 effectController = CheckForExistingEffectController(effectManager, this);
+                effectCreated = true;
             }
 
             if (effectController.affectedBattleObjectList.Contains(host)) {
@@ -152,7 +154,16 @@ namespace Effects {
 
             effectController.affectedBattleObjectList.Add(host);
             effectController.stackCountList.Add(stacksApplied);
-            effectController.Initialize();
+
+            if (!effectCreated) {
+                effectController.Initialize();
+            }
+            else {
+                effectController.AddHostToExistingEffect(host);
+            }
+            
+            //You may not want this. I think stackers should run through an update function anyway - 
+            //all this does is add the effect to their effect list? eh?
             InitEffect(host);
 
         } //endCreateEffectSingle()
