@@ -147,8 +147,7 @@ namespace Effects {
 
             if (effectController.affectedBattleObjectList.Contains(host)) {
                 effectController.stackCountList[effectController.affectedBattleObjectList.IndexOf(host)] += stacksApplied;
-                //restartCoroutine? Probably call an interruptor function on EffectController
-                //right now I think it updates at the end of the CRT, but it would be good for it to reset it
+                effectController.RestartCheckForExpirationStacking(host);
                 return;
             }
 
@@ -173,8 +172,7 @@ namespace Effects {
 
             effectManager = GameObject.Find("EffectManager");
             EffectController effectController;
-
-           
+            
             if (CheckForExistingEffectController(effectManager, this) == null) {
                 effectController = effectManager.AddComponent<EffectController>();
                 effectController.effectApplied = this;

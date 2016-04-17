@@ -7,7 +7,8 @@ using Effects;
 
 public class EffectController : MonoBehaviour {
 
-    
+    //GameObject effectManager = GameObject.Find("EffectManager");
+
     public Effect effectApplied {
         get; set;
     }
@@ -126,7 +127,17 @@ public class EffectController : MonoBehaviour {
             KillEffect(host, icon);
         }
 
-    } //end CheckForExpiration()
+    } //end CheckForExpiration(3)
+
+
+    public void RestartCheckForExpirationStacking(BattleObject host) {
+
+        int index = affectedBattleObjectList.IndexOf(host);
+        GameObject icon = effectIconList[index];
+        StartCoroutine(CheckForExpirationStacking(host, icon, index));
+
+    } //end RestartCheckForExpirationStacking(1)
+
 
 
     public float ApplyTenacity (BattleObject host, float duration) {
@@ -151,7 +162,8 @@ public class EffectController : MonoBehaviour {
     void Update () {
         if (affectedBattleObjectList.Count <= 0)
         {
-           Destroy(this);
+            //effectManager.GetComponent<EffectManager>().activeEffectControllerList.Remove(this);
+            Destroy(this);
         }
     } //end Update()
 
