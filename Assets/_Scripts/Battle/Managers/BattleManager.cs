@@ -113,11 +113,13 @@ public class BattleManager : MonoBehaviour {
             CheckIfEnemyIsDead(enemy);
         }
 
+        //enemyList.RemoveAll(jigglyhoot => jigglyhoot == null);
+
         if (enemyList.Count <= 0) {
             BattleWon();
         }
 
-
+        
 
         //DEBUG FUNCTIONS
 
@@ -129,6 +131,7 @@ public class BattleManager : MonoBehaviour {
             DebugSelectedHeroDamage();
         }
 
+        
     } //end Update
 
 

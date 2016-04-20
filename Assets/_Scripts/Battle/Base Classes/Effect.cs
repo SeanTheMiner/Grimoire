@@ -141,9 +141,9 @@ namespace Effects {
             }
 
             if (effectCreated) {
-                foreach (EffectController.EffectStruct effectStruct in effectController.effectStructList) {
-                    if (effectStruct.host == host) {
-                        effectController.UpdateStacks(effectStruct, stacksApplied);
+                foreach (EffectController.HostController hostController in effectController.hostControllerList) {
+                    if (hostController.host == host) {
+                        effectController.UpdateStacks(hostController, stacksApplied);
                         return;
                     }
                 } //end foreach - only gets to here if host was not found
@@ -183,9 +183,9 @@ namespace Effects {
 
             foreach (BattleObject existingHost in list) {
 
-                foreach (EffectController.EffectStruct effectStruct in effectController.effectStructList) {
-                    if (effectStruct.host == existingHost) {
-                        effectController.UpdateStacks(effectStruct, stacksApplied);
+                foreach (EffectController.HostController hostController in effectController.hostControllerList) {
+                    if (hostController.host == existingHost) {
+                        effectController.UpdateStacks(hostController, stacksApplied);
                         listToInit.Remove(existingHost);
                     }
                 } //Now you've updated any existing hosts, and removed them from the list to pass if so

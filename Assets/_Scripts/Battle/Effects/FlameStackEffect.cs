@@ -10,7 +10,7 @@ public class FlameStackEffect : Effect {
 
         effectName = "Flame Stack";
         effectIconText = "";
-        stackDuration = 1;
+        stackDuration = 0.5f;
         isCoreEffect = true;
         effectType = EffectType.Stacking;
         statType = StatType.Magical;
@@ -27,9 +27,24 @@ public class FlameStackEffect : Effect {
   
     /*
 
-    UpdateStacks (int old, int new) {
+    ApplyStackEffect (int initialStacks) {
+
+    }
+
+
+    UpdateStackEffect (int old, int new) {
         remove effect with old number, reapply effect with new number
     }
+
+
+    RemoveStackEffect (int remainingStacks) {
+
+    }
+
+
     */
+
+    
+
 
 } //end FlameStackEffect class

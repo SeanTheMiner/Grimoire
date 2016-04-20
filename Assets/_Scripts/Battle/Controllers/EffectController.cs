@@ -13,9 +13,9 @@ public class EffectController : MonoBehaviour {
         get; set;
     }
 
-    public List<EffectStruct> effectStructList = new List<EffectStruct>();
+    public List<HostController> hostControllerList = new List<HostController>();
 
-    public struct EffectStruct {
+    public class HostController {
 
         public BattleObject host;
         public GameObject effectIcon;
@@ -35,88 +35,89 @@ public class EffectController : MonoBehaviour {
 
     void Update () {
         
-        if (effectStructList.Count <= 0) {
+        if (hostControllerList.Count <= 0) {
             //effectManager.GetComponent<EffectManager>().activeEffectControllerList.Remove(this);
             Destroy(this);
         }
 
-        foreach (EffectStruct effectStruct in effectStructList) {
+        foreach (HostController effectStruct in hostControllerList) {
             CheckForExpiration(effectStruct);
-            //Debug.Log(effectStruct.expirationTimer - Time.time);
         }
-        
+
+        hostControllerList.RemoveAll(item => item == null);
+
     } //end Update()
 
 
-    private void CheckForExpiration (EffectStruct effectStruct) {
+    private void CheckForExpiration (HostController hostController) {
 
-        if (effectStruct.expirationTimer < Time.time) {
+        if (hostController.expirationTimer < Time.time) {
             if (effectApplied.effectType == Effect.EffectType.Lump) {
-                KillStruct(effectStruct);
+                KillHostController(hostController);
             }
             else if (effectApplied.effectType == Effect.EffectType.Stacking) {
-                UpdateStacks(effectStruct, -1);
+                if (hostController.stackCount <= 1) {
+                    KillHostController(hostController);
+                }
+                else {
+                    UpdateStacks(hostController, -1);
+                }
             }
         }
 
     } //end CheckForExpiration (1)
 
 
-    public void UpdateStacks(EffectStruct effectStruct, int stacksToApply) {
-
-        Debug.Log("UpdateStacks called");
-
-        effectStruct.stackCount += (stacksToApply);
-        effectStruct.iconTextMesh.text = effectStruct.stackCount.ToString();
-        //effectStruct.expirationTimer += ApplyTenacity(effectStruct.host, effectApplied.stackDuration));
-        Debug.Log(effectStruct.expirationTimer);
-        effectStruct.expirationTimer += 1;
-        Debug.Log(effectStruct.expirationTimer);
-
+    public void UpdateStacks(HostController hostController, int stacksToApply) {
+        
+        hostController.stackCount += (stacksToApply);
+        hostController.iconTextMesh.text = hostController.stackCount.ToString();
+        hostController.expirationTimer = Time.time + ApplyTenacity(hostController.host, effectApplied.stackDuration);
+        
     } //end UpdateStacks (2)
      
 
-    public void KillStruct(EffectStruct effectStruct) {
+    public void KillHostController(HostController hostController) {
 
-        effectStructList.Remove(effectStruct);
-        effectApplied.RemoveEffect(effectStruct.host);
-        effectStruct.effectDisplayController.displayEffectIconList.Remove(effectStruct.effectIcon);
+        hostControllerList.Remove(hostController);
+        effectApplied.RemoveEffect(hostController.host);
+        hostController.effectDisplayController.displayEffectIconList.Remove(hostController.effectIcon);
 
-        Destroy(effectStruct.effectIcon);
-        effectStruct.effectDisplayController.UpdateEffectIconPositions();
+        Destroy(hostController.effectIcon);
+        hostController.effectDisplayController.UpdateEffectIconPositions();
 
     } //end KillEffect (1)
     
 
     public void InitStruct(BattleObject host) {
 
-        EffectStruct effectStruct = new EffectStruct();
+        HostController hostController = new HostController();
 
-        effectStruct.host = host;
-        effectStruct.effectIcon = SpawnDisplayIcon(host);
-        effectStruct.iconTextMesh = effectStruct.effectIcon.GetComponentInChildren<TextMesh>();
-        effectStruct.effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
-        effectStruct.expirationTimer = Time.time + ApplyTenacity(host, effectApplied.effectDuration);
+        hostController.host = host;
+        hostController.effectIcon = SpawnDisplayIcon(host);
+        hostController.iconTextMesh = hostController.effectIcon.GetComponentInChildren<TextMesh>();
+        hostController.effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
+        hostController.expirationTimer = Time.time + ApplyTenacity(host, effectApplied.effectDuration);
 
-        effectStructList.Add(effectStruct);
+        hostControllerList.Add(hostController);
 
     } //end InitStruct (1)
     
 
     public void InitStructStacking(BattleObject host, int initialStacks) {
 
-        EffectStruct effectStruct = new EffectStruct();
+        HostController hostController = new HostController();
 
-        effectStruct.host = host;
-        effectStruct.effectIcon = SpawnDisplayIcon(host);
-        effectStruct.iconTextMesh = effectStruct.effectIcon.GetComponentInChildren<TextMesh>();
-        effectStruct.effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
+        hostController.host = host;
+        hostController.effectIcon = SpawnDisplayIcon(host);
+        hostController.iconTextMesh = hostController.effectIcon.GetComponentInChildren<TextMesh>();
+        hostController.effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
 
-        effectStruct.expirationTimer = Time.time + ApplyTenacity(host, effectApplied.stackDuration);
-        effectStruct.stackCount = initialStacks;
-        effectStruct.iconTextMesh.text = initialStacks.ToString();
+        hostController.expirationTimer = Time.time + ApplyTenacity(host, effectApplied.stackDuration);
+        hostController.stackCount = initialStacks;
+        hostController.iconTextMesh.text = initialStacks.ToString();
 
-        effectStructList.Add(effectStruct);
+        hostControllerList.Add(hostController);
 
     } //end InitStructStacking
 
