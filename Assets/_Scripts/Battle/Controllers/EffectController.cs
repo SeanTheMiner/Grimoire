@@ -34,7 +34,7 @@ public class EffectController : MonoBehaviour {
 
 
     void Update () {
-
+        
         if (effectStructList.Count <= 0) {
             //effectManager.GetComponent<EffectManager>().activeEffectControllerList.Remove(this);
             Destroy(this);
@@ -42,6 +42,7 @@ public class EffectController : MonoBehaviour {
 
         foreach (EffectStruct effectStruct in effectStructList) {
             CheckForExpiration(effectStruct);
+            //Debug.Log(effectStruct.expirationTimer - Time.time);
         }
         
     } //end Update()
@@ -49,7 +50,7 @@ public class EffectController : MonoBehaviour {
 
     private void CheckForExpiration (EffectStruct effectStruct) {
 
-        if (effectStruct.expirationTimer >= Time.time) {
+        if (effectStruct.expirationTimer < Time.time) {
             if (effectApplied.effectType == Effect.EffectType.Lump) {
                 KillStruct(effectStruct);
             }
@@ -61,13 +62,19 @@ public class EffectController : MonoBehaviour {
     } //end CheckForExpiration (1)
 
 
-    public void UpdateStacks (EffectStruct effectStruct, int stacksToApply) {
+    public void UpdateStacks(EffectStruct effectStruct, int stacksToApply) {
+
+        Debug.Log("UpdateStacks called");
 
         effectStruct.stackCount += (stacksToApply);
         effectStruct.iconTextMesh.text = effectStruct.stackCount.ToString();
+        //effectStruct.expirationTimer += ApplyTenacity(effectStruct.host, effectApplied.stackDuration));
+        Debug.Log(effectStruct.expirationTimer);
+        effectStruct.expirationTimer += 1;
+        Debug.Log(effectStruct.expirationTimer);
 
     } //end UpdateStacks (2)
-  
+     
 
     public void KillStruct(EffectStruct effectStruct) {
 
@@ -81,7 +88,7 @@ public class EffectController : MonoBehaviour {
     } //end KillEffect (1)
     
 
-    public void InitStruct(BattleObject host, int initialStacks) {
+    public void InitStruct(BattleObject host) {
 
         EffectStruct effectStruct = new EffectStruct();
 
@@ -90,21 +97,28 @@ public class EffectController : MonoBehaviour {
         effectStruct.iconTextMesh = effectStruct.effectIcon.GetComponentInChildren<TextMesh>();
         effectStruct.effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
         effectStruct.expirationTimer = Time.time + ApplyTenacity(host, effectApplied.effectDuration);
-        effectStruct.stackCount = initialStacks;
 
         effectStructList.Add(effectStruct);
 
     } //end InitStruct (1)
+    
 
-    /*
-    public void InitStructMultiple (List<BattleObject> hostList, int initialStacks) {
+    public void InitStructStacking(BattleObject host, int initialStacks) {
 
-        foreach (BattleObject host in hostList) {
-            InitStruct(host, initialStacks);
-        }
+        EffectStruct effectStruct = new EffectStruct();
 
-    } //end InitStructMultiple (2)
-    */
+        effectStruct.host = host;
+        effectStruct.effectIcon = SpawnDisplayIcon(host);
+        effectStruct.iconTextMesh = effectStruct.effectIcon.GetComponentInChildren<TextMesh>();
+        effectStruct.effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
+
+        effectStruct.expirationTimer = Time.time + ApplyTenacity(host, effectApplied.stackDuration);
+        effectStruct.stackCount = initialStacks;
+        effectStruct.iconTextMesh.text = initialStacks.ToString();
+
+        effectStructList.Add(effectStruct);
+
+    } //end InitStructStacking
 
 
     public GameObject SpawnDisplayIcon(BattleObject host) {

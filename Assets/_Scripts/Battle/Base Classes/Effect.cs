@@ -102,7 +102,7 @@ namespace Effects {
             EffectController effectController = effectManager.AddComponent<EffectController>();
 
             effectController.effectApplied = this;
-            effectController.InitStruct(host, 0);
+            effectController.InitStruct(host);
 
             InitEffect(host);
            
@@ -116,7 +116,7 @@ namespace Effects {
 
             effectController.effectApplied = this;
             foreach (BattleObject host in list) {
-                effectController.InitStruct(host, 0);
+                effectController.InitStruct(host);
                 InitEffect(host);
             }
             
@@ -133,7 +133,7 @@ namespace Effects {
                 effectController = effectManager.AddComponent<EffectController>();
                 effectController.effectApplied = this;
                 effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
-                effectController.InitStruct(host, stacksApplied);
+                effectController.InitStructStacking(host, stacksApplied);
             }
             else {
                 effectController = CheckForExistingEffectController(effectManager, this);
@@ -150,7 +150,7 @@ namespace Effects {
 
                 //if you get here, it means the effectController was previously created, but the host was not found
                 //so you have to add a new host and create a new struct for them.
-                effectController.InitStruct(host, stacksApplied);
+                effectController.InitStructStacking(host, stacksApplied);
                 
             } //end if the effect was created previously
            
@@ -171,7 +171,7 @@ namespace Effects {
                 effectController.effectApplied = this;
                 effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
                 foreach (BattleObject newHost in list) {
-                    effectController.InitStruct(newHost, stacksApplied);
+                    effectController.InitStructStacking(newHost, stacksApplied);
                 }
                 return;
             }
@@ -192,7 +192,7 @@ namespace Effects {
             } //end foreach host in list
 
             foreach (BattleObject newHost in listToInit) {
-                effectController.InitStruct(newHost, stacksApplied);
+                effectController.InitStructStacking(newHost, stacksApplied);
                 InitEffect(newHost);
             }
             
