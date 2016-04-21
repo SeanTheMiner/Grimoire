@@ -156,6 +156,7 @@ namespace Abilities {
 
             if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText(damageProc.damageType);
+                GameObject.Find("EventManager").GetComponent<EventManager>().CheckForEvadeTrigger(attacker, defender, damageProc);
                 return;
             }
             if (hitOutcome == HitManager.HitOutcome.Block) {

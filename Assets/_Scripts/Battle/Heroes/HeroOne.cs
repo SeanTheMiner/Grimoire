@@ -6,6 +6,8 @@ using Effects;
 
 public class HeroOne : Hero {
 
+    public EvadeCounterEff evadeCounterEff = new EvadeCounterEff();
+
     public HeroOne() {
 
         heroName = "Punchie McGee";
@@ -18,10 +20,7 @@ public class HeroOne : Hero {
         armor = 120;
         spirit = 40;
 
-        physicalBlockChance = 25;
-        physicalBlockModifier = 60;
-        magicalBlockChance = 15;
-        magicalBlockModifier = 40;
+        physicalEvasionChance = 90;
 
         abilityOne = new EndlessPunches();
         abilityTwo = new MonkKata();
@@ -33,11 +32,12 @@ public class HeroOne : Hero {
         SetAbilityOwner();
 
 
-        //this needs to be put on the ability itself.
-            //abilityFive.effectApplied = new InspireEffect();
-            //abilitySix.effectApplied = new ArmorBreak();
-
     } //end Constructor()
     
+    void Start () {
+        evadeCounterEff.InitEffect(this);
+        GameObject.Find("EventManager").GetComponent<EventManager>().evadeTriggerList.Add(evadeCounterEff.evadeTrigger);
+    }
+
 
 } //end HeroOne class

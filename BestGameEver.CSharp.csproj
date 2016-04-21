@@ -448,6 +448,7 @@
     <Compile Include="Assets\_Scripts\Battle\Base Classes\Hero.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\HeroAbility.cs" />
     <Compile Include="Assets\_Scripts\Battle\Base Classes\Proc.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Base Classes\ProcTrigger.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\AOETargeterController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\DamageTextController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\DestroyByTime.cs" />
@@ -457,6 +458,7 @@
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ErodeArmorEff.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\EvadeCounterEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\FlameStackEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\InspireEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\InspireOffEffect.cs" />
@@ -474,6 +476,7 @@
     <Compile Include="Assets\_Scripts\Battle\Managers\DebugDisplayManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\EffectManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\EnemyManager.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Managers\EventManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\HeroManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\HitManager.cs" />
     <Compile Include="Assets\_Scripts\Battle\Managers\TargetingManager.cs" />
