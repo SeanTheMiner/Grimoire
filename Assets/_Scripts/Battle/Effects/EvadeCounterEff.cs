@@ -20,6 +20,7 @@ public class EvadeCounterEff : Effect {
         evadeTrigger.triggerObject = ProcTrigger.TriggerObject.Self;
         evadeTrigger.evadeTriggerType = EvadeTrigger.EvadeTriggerType.Evaded;
         evadeTrigger.procTriggered = damageProc;
+        evadeTrigger.procScope = ProcTrigger.ProcScope.OtherParty;
 
         damageProc.procDamage = 100;
         damageProc.damageType = DamageProc.DamageType.Magical;

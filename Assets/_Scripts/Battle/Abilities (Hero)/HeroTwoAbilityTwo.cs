@@ -28,7 +28,7 @@ public class HeroTwoAbilityTwo : HeroAbility {
     public override void AbilityMap() {
         
         targetingManager.TargetAllHeroes(this);
-        healProc.HealProcMultiple(abilityOwner, this);
+        healProc.HealProcMultiple(abilityOwner, targetBattleObjectList);
         ExitAbility();
 
     } //end AbilityMap()

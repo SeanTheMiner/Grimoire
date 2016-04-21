@@ -41,7 +41,7 @@ public class HeroTwoAbilityOne : HeroAbility {
         
         targetingManager.TargetAllEnemies(this);
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
-        effectProc.ApplyEffectMultiple(effectProc.effectApplied, this);
+        effectProc.ApplyEffectMultiple(effectProc.effectApplied, targetBattleObjectList);
         ExitAbility();
 
     } //end AbilityMap()

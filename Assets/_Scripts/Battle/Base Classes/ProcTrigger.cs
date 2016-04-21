@@ -25,6 +25,15 @@ namespace ProcTriggers {
 
         public DamageProc.DamageType damageTypeConstraint;
 
+        public ProcScope procScope;
+
+        public enum ProcScope {
+            Self,
+            OtherParty,
+            AllHeroes,
+            AllEnemies
+        }
+        
         public virtual bool CheckTrigger(BattleObject actor, BattleObject receiver, Proc proc) {
             return false;
         }

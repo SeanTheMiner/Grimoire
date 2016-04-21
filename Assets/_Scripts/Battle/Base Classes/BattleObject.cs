@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Effects;
+using Procs;
+using ProcTriggers;
 
 namespace BattleObjects {
 
@@ -16,6 +18,7 @@ namespace BattleObjects {
     public class BattleObject : MonoBehaviour {
 
         public List<Effect> effectList = new List<Effect>();
+        public List<ProcTrigger> procTriggerList = new List<ProcTrigger>();
 
         public Effect coreEffect {
             get; set;

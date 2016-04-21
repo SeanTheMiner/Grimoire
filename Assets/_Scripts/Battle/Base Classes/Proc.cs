@@ -244,9 +244,9 @@ namespace Procs {
         } //end HealProcSingle
 
 
-        public virtual void HealProcMultiple(BattleObject healer, Ability ability) {
+        public virtual void HealProcMultiple(BattleObject healer, List<BattleObject> list) {
 
-            foreach (BattleObject healee in ability.targetBattleObjectList) {
+            foreach (BattleObject healee in list) {
                 HealProcSingle(healer, healee);
             }
 
@@ -268,10 +268,10 @@ namespace Procs {
 
         } //end InfHealProcSingle(3)
 
-        public virtual void InfHealProcMultiple(BattleObject healer, HeroAbility ability) {
+        public virtual void InfHealProcMultiple(BattleObject healer, HeroAbility ability, List<BattleObject> list) {
 
             ability.isInfCharging = false;
-            foreach (BattleObject healee in ability.targetBattleObjectList) {
+            foreach (BattleObject healee in list) {
                 InfHealProcSingle(healer, healee, ability);
             }
 
@@ -320,13 +320,13 @@ namespace Procs {
         } //end ApplyEffectSingle(2)
 
 
-        public virtual void ApplyEffectMultiple(Effect effect, Ability ability) {
+        public virtual void ApplyEffectMultiple(Effect effect, List<BattleObject> list) {
             if (effect.effectType == Effect.EffectType.Stacking) {
                 effect.stackCount += stacksApplied;
-                effect.CreateStackingEffectMultiple(ability.targetBattleObjectList, stacksApplied);
+                effect.CreateStackingEffectMultiple(list, stacksApplied);
             }
             else {
-                effect.CreateEffectMultiple(ability.targetBattleObjectList);
+                effect.CreateEffectMultiple(list);
             }
         } //end ApplyEffectMultiple(2)
         
