@@ -89,12 +89,26 @@ namespace Effects {
 		//it'll just get called all day.
 
         public virtual void EffectMap(BattleObject host) {}
-
+        
 
         public virtual void InitEffect(BattleObject host) {
             host.effectList.Add(this);
         }
 
+
+        public virtual void RemoveEffect(BattleObject host) {
+            host.effectList.Remove(this);
+        }
+
+
+        public virtual void InitEffectPerStack (BattleObject host, int stacks) {}
+        public virtual void RemoveEffectPerStack(BattleObject host, int stacks) { }
+
+        public virtual void UpdateEffectPerStack (BattleObject host, int currentStacks, int newStacks) {
+            RemoveEffectPerStack(host, currentStacks);
+            InitEffectPerStack(host, newStacks);
+        } 
+        
 
         public virtual void CreateEffectSingle(BattleObject host) {
 
@@ -154,8 +168,6 @@ namespace Effects {
                 
             } //end if the effect was created previously
            
-            //You may not want this. I think stackers should run through an update function anyway - 
-            //all this does is add the effect to their effect list? eh?
             InitEffect(host);
 
         } //endCreateEffectSingle (2)
@@ -207,17 +219,7 @@ namespace Effects {
             }
             return null;
         } //end CheckForExistingEffectController(2)
-
-
-        public virtual void RemoveEffect(BattleObject host) {
-			host.effectList.Remove (this);
-        }
-
-
-        public virtual void InitStacks(int stacks) {
-            stackCount += stacks;
-        }
-
+        
         
     } //end Effect Class
 

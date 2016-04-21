@@ -311,7 +311,7 @@ namespace Procs {
 
         public virtual void ApplyEffectSingle(Effect effect, BattleObject target) {
             if (effect.effectType == Effect.EffectType.Stacking) {
-                effect.InitStacks(stacksApplied);
+                effect.stackCount += stacksApplied;
                 effect.CreateStackingEffectSingle(target, stacksApplied);
             }
             else {
@@ -322,7 +322,7 @@ namespace Procs {
 
         public virtual void ApplyEffectMultiple(Effect effect, Ability ability) {
             if (effect.effectType == Effect.EffectType.Stacking) {
-                effect.InitStacks(stacksApplied);
+                effect.stackCount += stacksApplied;
                 effect.CreateStackingEffectMultiple(ability.targetBattleObjectList, stacksApplied);
             }
             else {

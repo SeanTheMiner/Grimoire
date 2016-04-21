@@ -69,7 +69,9 @@ public class EffectController : MonoBehaviour {
 
 
     public void UpdateStacks(HostController hostController, int stacksToApply) {
-        
+
+        effectApplied.UpdateEffectPerStack(hostController.host, hostController.stackCount, (hostController.stackCount + stacksToApply));
+
         hostController.stackCount += (stacksToApply);
         hostController.iconTextMesh.text = hostController.stackCount.ToString();
         hostController.expirationTimer = Time.time + ApplyTenacity(hostController.host, effectApplied.stackDuration);
@@ -80,7 +82,10 @@ public class EffectController : MonoBehaviour {
     public void KillHostController(HostController hostController) {
 
         hostControllerList.Remove(hostController);
+
+        effectApplied.RemoveEffectPerStack(hostController.host, hostController.stackCount);
         effectApplied.RemoveEffect(hostController.host);
+
         hostController.effectDisplayController.displayEffectIconList.Remove(hostController.effectIcon);
 
         Destroy(hostController.effectIcon);
@@ -118,6 +123,8 @@ public class EffectController : MonoBehaviour {
         hostController.iconTextMesh.text = initialStacks.ToString();
 
         hostControllerList.Add(hostController);
+
+        effectApplied.InitEffectPerStack(host, initialStacks);
 
     } //end InitStructStacking
 

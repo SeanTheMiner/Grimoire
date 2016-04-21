@@ -33,10 +33,9 @@ public class SetAblaze : HeroAbility {
     } //end Constructor()
 
 
-    public override void InitAbility() {
+    public override void SetCoreEffectApplied() {
         effectProc.effectApplied = coreEffectApplied;
-        base.InitAbility();
-    } //end InitAbility()
+    }
 
 
     public override void AbilityMap() {

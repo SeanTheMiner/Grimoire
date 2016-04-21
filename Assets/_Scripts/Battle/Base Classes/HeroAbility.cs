@@ -140,7 +140,12 @@ public class HeroAbility : Ability {
     //Ability navigation functions
 
 
+    public virtual void SetCoreEffectApplied() {}
+    
+
     public virtual void InitAbility() {
+
+        SetCoreEffectApplied();
 
         if (abilityType == AbilityType.InfCharge) {
             infChargeStartTimer = Time.time;
@@ -173,6 +178,8 @@ public class HeroAbility : Ability {
 
     public void InitDefaultAbility() {
 
+        SetCoreEffectApplied();
+
         if (abilityType == AbilityType.InfCharge) {
             infChargeStartTimer = Time.time;
             abilityOwner.currentBattleState = Hero.BattleState.InfCharge;
@@ -188,6 +195,13 @@ public class HeroAbility : Ability {
                 targetingManager.TargetRandomHero(this);
             }
         }
+
+        /*
+        else {
+            targetingManager.SortTargetingType(this);
+        }
+        Debug.Log(targetBattleObjectList.Count);
+       */
 
         if (requiresCharge) {
             InitCharge();

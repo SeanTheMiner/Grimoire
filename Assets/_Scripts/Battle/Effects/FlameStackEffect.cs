@@ -24,27 +24,15 @@ public class FlameStackEffect : Effect {
         //Calls UpdateStacks mostly? UpdateStacks should be on Effect, though
 
     }
-  
-    /*
 
-    ApplyStackEffect (int initialStacks) {
 
+    public override void InitEffectPerStack(BattleObject host, int stacks) {
+        host.spiritAddMod -= (0.75f * stacks);
     }
 
 
-    UpdateStackEffect (int old, int new) {
-        remove effect with old number, reapply effect with new number
+    public override void RemoveEffectPerStack(BattleObject host, int stacks) {
+        host.spiritAddMod += (0.75f * stacks);
     }
-
-
-    RemoveStackEffect (int remainingStacks) {
-
-    }
-
-
-    */
-
     
-
-
 } //end FlameStackEffect class
