@@ -95,7 +95,11 @@ namespace Effects {
             host.effectList.Add(this);
         }
 
-
+        public virtual void InitTrigger(BattleObject host, ProcTriggers.ProcTrigger procTrigger) {
+            procTrigger.triggerOwner = host;
+            host.procTriggerList.Add(procTrigger);
+        }
+        
         public virtual void RemoveEffect(BattleObject host) {
             host.effectList.Remove(this);
         }

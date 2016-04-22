@@ -8,35 +8,33 @@ using BattleObjects;
 
 public class EvadeCounterEff : Effect {
     
-    public EvadeTrigger evadeTrigger = new EvadeTrigger();
+    public ProcTrigger procTrigger = new ProcTrigger();
     public DamageProc damageProc = new DamageProc();
 
     public EvadeCounterEff () {
 
 	    effectName = "Evade and Counter";
         effectType = EffectType.Persistent;
-        
-        evadeTrigger.damageTypeConstraint = DamageProc.DamageType.Physical;
-        evadeTrigger.triggerObject = ProcTrigger.TriggerObject.Self;
-        evadeTrigger.evadeTriggerType = EvadeTrigger.EvadeTriggerType.Evaded;
-        evadeTrigger.procTriggered = damageProc;
-        evadeTrigger.procScope = ProcTrigger.ProcScope.OtherParty;
+
+        procTrigger.procTriggerName = "Evade and Counter";
+
+        procTrigger.triggerType = ProcTrigger.TriggerType.Evasion;
+        procTrigger.objectRole = ProcTrigger.ObjectRole.Receiver;
+        procTrigger.approvedDamageTypeList.Add(DamageProc.DamageType.Physical);
+
+        procTrigger.procTriggered = damageProc;
+        procTrigger.procScope = ProcTrigger.ProcScope.OtherParty;
 
         damageProc.procDamage = 100;
         damageProc.damageType = DamageProc.DamageType.Magical;
         
     } //end Constructor()
 
+
     public override void InitEffect(BattleObject host) {
-        evadeTrigger.triggerOwner = host;
+        InitTrigger(host, procTrigger);
         base.InitEffect(host);
     }
-
-
-
-
-
-
-
+    
 } //end EvadeCounterEff class
 

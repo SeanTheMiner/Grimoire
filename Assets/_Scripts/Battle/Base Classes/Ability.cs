@@ -156,11 +156,14 @@ namespace Abilities {
 
             if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText(damageProc.damageType);
-                GameObject.Find("EventManager").GetComponent<EventManager>().CheckForEvadeTrigger(attacker, defender, damageProc);
+                GameObject.Find("EventManager").GetComponent<EventManager>().
+                    CheckForTriggers(attacker, defender, ProcTriggers.ProcTrigger.TriggerType.Evasion, damageProc.damageType);
                 return;
             }
             if (hitOutcome == HitManager.HitOutcome.Block) {
                 damageProc.ApplyBlockDamageProc(attacker, defender);
+                GameObject.Find("EventManager").GetComponent<EventManager>().
+                    CheckForTriggers(attacker, defender, ProcTriggers.ProcTrigger.TriggerType.Block, damageProc.damageType);
                 return;
             }
 
@@ -168,10 +171,14 @@ namespace Abilities {
 
             if (hitOutcome == HitManager.HitOutcome.Crit) {
                 damageProc.ApplyCritDamageProc(attacker, defender);
+                GameObject.Find("EventManager").GetComponent<EventManager>().
+                    CheckForTriggers(attacker, defender, ProcTriggers.ProcTrigger.TriggerType.Crit, damageProc.damageType);
                 return;
             }
             else {
                 damageProc.ApplyDamageProc(attacker, defender);
+                GameObject.Find("EventManager").GetComponent<EventManager>().
+                    CheckForTriggers(attacker, defender, ProcTriggers.ProcTrigger.TriggerType.Damage, damageProc.damageType);
                 return;
             }
 

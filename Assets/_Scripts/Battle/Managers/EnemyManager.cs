@@ -74,6 +74,7 @@ public class EnemyManager : MonoBehaviour {
             }
 
             enemy.currentEnemyAbility.InitEnemyAbility();
+            Debug.Log(enemy + " using " + enemy.currentEnemyAbility.abilityName);
 
         } //end Inactive
 

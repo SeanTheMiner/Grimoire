@@ -133,6 +133,15 @@ namespace Procs {
         } //end ApplyDamageProc(2)
 
 
+        public virtual void ApplyDamageProcMultiple(BattleObject attacker, List<BattleObject> list) {
+
+            foreach (BattleObject target in list) {
+                ApplyDamageProc(attacker, target);
+            }
+
+        } //end ApplyDamageProcMultiple(2)
+
+
         public virtual void ApplyCritDamageProc(BattleObject attacker, BattleObject defender) {
 
             int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(attacker, defender, this, critMultiplier));

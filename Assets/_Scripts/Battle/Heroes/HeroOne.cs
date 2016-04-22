@@ -36,8 +36,6 @@ public class HeroOne : Hero {
     
     void Start () {
         evadeCounterEff.InitEffect(this);
-        GameObject.Find("EventManager").GetComponent<EventManager>().evadeTriggerList.Add(evadeCounterEff.evadeTrigger);
     }
-
-
+    
 } //end HeroOne class
