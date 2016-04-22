@@ -14,7 +14,7 @@ public class Champion : Hero {
 
     public ChampionStance currentStance;
 
-    void Start() {
+    void BattleStart() {
         heroManager = GameObject.Find("HeroManager").GetComponent<HeroManager>();
         heroManager.activeChampion = this;
     }

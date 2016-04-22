@@ -52,6 +52,10 @@ public class BattleManager : MonoBehaviour {
         PopulateHeroList();
         PopulateEnemyList();
 
+        foreach (Hero hero in heroList) {
+            hero.BattleStart();
+        }
+
         ResetHeroes();
         ResetEnemyHealths();
 

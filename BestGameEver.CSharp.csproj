@@ -414,6 +414,17 @@
     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Conditions\Utility\CheckEvent.cs" />
     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Conditions\Utility\DebugCondition.cs" />
     <Compile Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Conditions\Utility\Probability.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\Ability.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\Artifact.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\BattleObject.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\CustomHeroAbility.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\Effect.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\Enemy.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\EnemyAbility.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\Hero.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\HeroAbility.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\Proc.cs" />
+    <Compile Include="Assets\_Scripts\Base Classes\ProcTrigger.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\ChargePoke.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\HealPoke.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
@@ -439,16 +450,6 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RingOfFire.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SetAblaze.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\Ability.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\BattleObject.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\CustomHeroAbility.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\Effect.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\Enemy.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\EnemyAbility.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\Hero.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\HeroAbility.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\Proc.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Base Classes\ProcTrigger.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\AOETargeterController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\DamageTextController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\DestroyByTime.cs" />
@@ -485,6 +486,8 @@
     <Compile Include="Assets\_Scripts\Overworld\Biome.cs" />
     <Compile Include="Assets\_Scripts\Overworld\BlueBiome.cs" />
     <Compile Include="Assets\_Scripts\Overworld\CameraController.cs" />
+    <Compile Include="Assets\_Scripts\Overworld\ControlManager.cs" />
+    <Compile Include="Assets\_Scripts\Overworld\GlobalInfoKeeper.cs" />
     <Compile Include="Assets\_Scripts\Overworld\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>

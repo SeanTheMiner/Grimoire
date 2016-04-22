@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BattleObjects;
 using Abilities;
 using Effects;
+using Artifacts;
 
 namespace Heroes {
 
@@ -42,6 +43,7 @@ namespace Heroes {
         [HideInInspector]
         public HeroAbility currentAbility, queuedAbility, selectedAbility, targetingAbility, defaultAbility;
         public HeroAbility abilityOne, abilityTwo, abilityThree, abilityFour, abilityFive, abilitySix;
+        public Artifact artifactOne, artifactTwo, artifactThree;
         
         public BattleState currentBattleState {
             get; set;
@@ -65,6 +67,9 @@ namespace Heroes {
             healthIsLocked = false;
             
         } //end constructor
+
+
+        public virtual void BattleStart () {}
 
 
         public void SetAbilityOwner () {
