@@ -25,7 +25,7 @@ public class PokeBlast : EnemyAbility {
 
     public override void EnemyAbilityMap() {
 
-        targetingManager.EnemyTargetAllHeroes(this);
+        targetBattleObjectList = targetingManager.TargetAllHeroes();
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
         ExitEnemyAbility();
 

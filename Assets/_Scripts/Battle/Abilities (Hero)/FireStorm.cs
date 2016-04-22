@@ -2,6 +2,7 @@
 using System.Collections;
 using Abilities;
 using Procs;
+using Enemies;
 
 public class FireStorm : HeroAbility {
 
@@ -40,8 +41,8 @@ public class FireStorm : HeroAbility {
     public override void AbilityMap() {
 
         if (damageProc.nextProcTimer <= Time.time) {
-            targetingManager.TargetRandomEnemy(this);
-            DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
+            targetEnemy = targetingManager.TargetRandomEnemy();
+            DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);
             effectProc.ApplyEffectSingle(effectProc.effectApplied, targetEnemy);
             damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
         }

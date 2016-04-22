@@ -189,10 +189,10 @@ public class HeroAbility : Ability {
 
         if (requiresTargeting) {
             if (targetScope == TargetScope.SingleEnemy) {
-                targetingManager.TargetRandomEnemy(this);
+                targetEnemy = (Enemy)targetingManager.TargetRandomEnemy();
             }
             else if (targetScope == TargetScope.SingleHero) {
-                targetingManager.TargetRandomHero(this);
+                targetHero = (Hero)targetingManager.TargetRandomHero();
             }
         }
 
@@ -323,10 +323,10 @@ public class HeroAbility : Ability {
     public virtual void CheckTarget() {
 
         if ((targetScope == TargetScope.SingleEnemy) && (targetEnemy == null)) {
-            targetingManager.TargetRandomEnemy(this);
+            targetEnemy = (Enemy)targetingManager.TargetRandomEnemy();
         }
         else if ((targetScope == TargetScope.SingleHero) && (targetHero == null)) {
-            targetingManager.TargetRandomHero(this);
+            targetHero = (Hero)targetingManager.TargetRandomHero();
         }
         else if (targetScope == TargetScope.FreeTargetAOE) {
             CheckAOETargets();

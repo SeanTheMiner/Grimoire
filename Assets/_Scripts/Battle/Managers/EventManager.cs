@@ -11,7 +11,7 @@ public class EventManager : MonoBehaviour {
     public List<EvadeTrigger> evadeTriggerList = new List<EvadeTrigger>();
     public TargetingManager targetingManager;
 
-
+    /*
     public void CheckEvaderForTriggers(BattleObject evader, BattleObject misser, DamageProc proc) {
         foreach (ProcTrigger trigger in evader.procTriggerList) {
             if ((trigger is EvadeTrigger) && ((trigger as EvadeTrigger).evadeTriggerType == EvadeTrigger.EvadeTriggerType.Evaded)) {
@@ -27,7 +27,7 @@ public class EventManager : MonoBehaviour {
         }
     } //end CheckEvaderForTriggers
 
-
+    */
 
     public void ActivateDamageTrigger(BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
         if (trigger.procScope == ProcTrigger.ProcScope.OtherParty) {

@@ -48,13 +48,11 @@ public class EbbAndFlow : HeroAbility {
     public override void AbilityMap() {
 
         if (damageProc.nextProcTimer <= Time.time) {
-            targetingManager.TargetRandomEnemy(this);
-            DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
+            DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);
             damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
         } //end if damageProc time
         else if (healProc.nextProcTimer <= Time.time) {
-            targetingManager.TargetRandomHero(this);
-            healProc.HealProcSingle(abilityOwner, targetHero);
+            healProc.HealProcSingle(abilityOwner, targetingManager.TargetRandomHero());
             healProc.nextProcTimer = Time.time + healProc.procSpacing;
         } //end if healProc time
         

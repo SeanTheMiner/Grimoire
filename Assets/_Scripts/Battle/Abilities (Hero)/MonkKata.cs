@@ -71,7 +71,7 @@ public class MonkKata : HeroAbility {
         if (isChaining != true) {
             if (interProcTimer <= Time.time) {
                 isChaining = true;
-                targetingManager.TargetRandomEnemy(this);
+                targetEnemy = targetingManager.TargetRandomEnemy();
             }
             else {
                 return;

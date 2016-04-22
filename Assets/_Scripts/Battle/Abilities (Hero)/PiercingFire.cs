@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Abilities;
-using Enemies;
 using Procs;
 
 public class PiercingFire : HeroAbility {
@@ -32,7 +30,7 @@ public class PiercingFire : HeroAbility {
     
     public override void AbilityMap() {
 
-        targetingManager.TargetAllEnemies(this);
+        targetBattleObjectList = targetingManager.TargetAllEnemies();
         effectProc.ApplyEffectMultiple(effectProc.effectApplied, targetBattleObjectList);
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
         ExitAbility();

@@ -24,9 +24,8 @@ public class HealPoke : EnemyAbility {
 
 
     public override void EnemyAbilityMap() {
-
-        targetingManager.EnemyTargetAllEnemies(this);
-        healProc.HealProcMultiple(abilityOwner, targetBattleObjectList);
+        
+        healProc.HealProcMultiple(abilityOwner, targetingManager.TargetAllEnemies());
         ExitEnemyAbility();
 
     } //end AbilityMap()

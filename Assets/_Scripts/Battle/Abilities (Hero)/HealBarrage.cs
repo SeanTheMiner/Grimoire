@@ -32,8 +32,7 @@ public class HealBarrage : HeroAbility {
     public override void AbilityMap() {
         
         if (healProc.nextProcTimer <= Time.time) {
-            targetingManager.TargetRandomHero(this);
-            healProc.HealProcSingle(abilityOwner, targetHero);
+            healProc.HealProcSingle(abilityOwner, targetingManager.TargetRandomHero());
             healProc.nextProcTimer = Time.time + healProc.procSpacing;
         }
 
