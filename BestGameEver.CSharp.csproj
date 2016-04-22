@@ -457,6 +457,7 @@
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\BlockAndHealEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ErodeArmorEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\EvadeCounterEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\FlameStackEffect.cs" />

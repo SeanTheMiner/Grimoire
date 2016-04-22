@@ -20,7 +20,7 @@ public class HeroOne : Hero {
         armor = 120;
         spirit = 40;
 
-        physicalEvasionChance = 90;
+        physicalEvasionChance = 50;
 
         abilityOne = new EndlessPunches();
         abilityTwo = new MonkKata();
@@ -30,10 +30,10 @@ public class HeroOne : Hero {
         abilitySix = new ArmorBreakAbility();
 
         SetAbilityOwner();
-
-
+        
     } //end Constructor()
     
+
     void Start () {
         evadeCounterEff.InitEffect(this);
     }

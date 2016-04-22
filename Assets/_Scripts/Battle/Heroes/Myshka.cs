@@ -4,6 +4,8 @@ using Heroes;
 
 public class Myshka : Hero {
 
+    public BlockAndHealEff blockAndHealEff = new BlockAndHealEff();
+
     public Myshka() {
 
         heroName = "Myshka";
@@ -16,8 +18,8 @@ public class Myshka : Hero {
         armor = 10;
         spirit = 70;
 
-        magicalEvasionChance = 60;
-        physicalEvasionChance = 50;
+        magicalBlockChance = 50;
+        physicalEvasionChance = 30;
 
         abilityOne = new EbbAndFlow();
         abilityTwo = new HealBarrage();
@@ -29,6 +31,10 @@ public class Myshka : Hero {
         SetAbilityOwner();
 
     } //end Constructor()
+
+    void Start () {
+        blockAndHealEff.InitEffect(this);
+    }
 
 
 } //end Myshka class

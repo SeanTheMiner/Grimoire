@@ -10,7 +10,7 @@ using ProcTriggers;
 
 public class EventManager : MonoBehaviour {
 
-    public TargetingManager targetingManager;
+    public TargetingManager targetingManager = new TargetingManager();
     
     public void CheckForTriggers (BattleObject actor, BattleObject receiver, ProcTrigger.TriggerType triggerType, DamageProc.DamageType damageType) {
 
