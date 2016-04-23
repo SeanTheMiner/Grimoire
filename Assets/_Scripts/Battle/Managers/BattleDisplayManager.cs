@@ -14,6 +14,7 @@ public class BattleDisplayManager : MonoBehaviour {
         heroOneHealthText, heroTwoHealthText, heroThreeHealthText, heroFourHealthText, 
         heroOneManaText, heroTwoManaText, heroThreeManaText, heroFourManaText,
         abilityOneText, abilityTwoText, abilityThreeText, abilityFourText, abilityFiveText, abilitySixText,
+        abilityOneManaText, abilityTwoManaText, abilityThreeManaText, abilityFourManaText, abilityFiveManaText, abilitySixManaText,
         enemyOneHealthText, enemyTwoHealthText, enemyThreeHealthText
         ;
 
@@ -38,6 +39,13 @@ public class BattleDisplayManager : MonoBehaviour {
         abilityTextList.Add(abilityFiveText);
         abilityTextList.Add(abilitySixText);
 
+        abilityTextList.Add(abilityOneManaText);
+        abilityTextList.Add(abilityTwoManaText);
+        abilityTextList.Add(abilityThreeManaText);
+        abilityTextList.Add(abilityFourManaText);
+        abilityTextList.Add(abilityFiveManaText);
+        abilityTextList.Add(abilitySixManaText);
+
         heroOneHealthSlider.maxValue = battleManager.heroObjectOne.maxHealth;
         heroTwoHealthSlider.maxValue = battleManager.heroObjectTwo.maxHealth;
         heroThreeHealthSlider.maxValue = battleManager.heroObjectThree.maxHealth;
@@ -60,7 +68,7 @@ public class BattleDisplayManager : MonoBehaviour {
         heroThreeNameText.text = battleManager.heroObjectThree.heroName;
         heroFourNameText.text = battleManager.heroObjectFour.heroName;
         
-    }
+    } //end InitNameText()
 
 
     public void SetRelativeSliderLengths() {
@@ -110,8 +118,7 @@ public class BattleDisplayManager : MonoBehaviour {
         SetBarLength(heroTwoManaSlider, highestMaxValue);
         SetBarLength(heroThreeManaSlider, highestMaxValue);
         SetBarLength(heroFourManaSlider, highestMaxValue);
-
-
+        
     } //end SetRelativeSliderLengths()
 
     
@@ -136,7 +143,7 @@ public class BattleDisplayManager : MonoBehaviour {
         enemyTwoHealthText.text = (Mathf.Round(battleManager.enemyObjectTwo.currentHealth)).ToString() + " / " + battleManager.enemyObjectTwo.maxHealth.ToString();
         enemyThreeHealthText.text = (Mathf.Round(battleManager.enemyObjectThree.currentHealth)).ToString() + " / " + battleManager.enemyObjectThree.maxHealth.ToString();
 
-    }
+    } //end UpdateHealthText()
 
 
     public void UpdateManaText() {
@@ -151,7 +158,7 @@ public class BattleDisplayManager : MonoBehaviour {
         heroThreeManaSlider.value = (Mathf.Round(battleManager.heroObjectThree.currentMana));
         heroFourManaSlider.value = (Mathf.Round(battleManager.heroObjectFour.currentMana));
 
-    }
+    } //end UpdateManaText()
 
 
     public void UpdateSelectedHeroText() {
@@ -160,12 +167,12 @@ public class BattleDisplayManager : MonoBehaviour {
 
             selectedHeroNameText.text = battleManager.selectedHero.heroName;
 
-            UpdateAbilityButtonText(abilityOneText, battleManager.selectedHero.abilityOne);
-            UpdateAbilityButtonText(abilityTwoText, battleManager.selectedHero.abilityTwo);
-            UpdateAbilityButtonText(abilityThreeText, battleManager.selectedHero.abilityThree);
-            UpdateAbilityButtonText(abilityFourText, battleManager.selectedHero.abilityFour);
-            UpdateAbilityButtonText(abilityFiveText, battleManager.selectedHero.abilityFive);
-            UpdateAbilityButtonText(abilitySixText, battleManager.selectedHero.abilitySix);
+            UpdateAbilityButtonText(abilityOneText, abilityOneManaText, battleManager.selectedHero.abilityOne);
+            UpdateAbilityButtonText(abilityTwoText, abilityTwoManaText, battleManager.selectedHero.abilityTwo);
+            UpdateAbilityButtonText(abilityThreeText, abilityThreeManaText, battleManager.selectedHero.abilityThree);
+            UpdateAbilityButtonText(abilityFourText, abilityFourManaText, battleManager.selectedHero.abilityFour);
+            UpdateAbilityButtonText(abilityFiveText, abilityFiveManaText, battleManager.selectedHero.abilityFive);
+            UpdateAbilityButtonText(abilitySixText, abilitySixManaText, battleManager.selectedHero.abilitySix);
             
         } //end if there is a selected hero
         else {
@@ -175,23 +182,25 @@ public class BattleDisplayManager : MonoBehaviour {
     } //end UpdateSelectedHeroText()
 
 
-    public void UpdateAbilityButtonText(Text text, HeroAbility ability) {
+    public void UpdateAbilityButtonText(Text abilityNameText, Text manaCostText, HeroAbility ability) {
 
         if (ability.cooldownEndTimer > Time.time) {
-            text.text = (Mathf.CeilToInt(ability.cooldownEndTimer - Time.time)).ToString();
+            abilityNameText.text = (Mathf.CeilToInt(ability.cooldownEndTimer - Time.time)).ToString();
         }
         else if (ability.chargeEndTimer > Time.time) {
-            text.text = (Mathf.CeilToInt(ability.chargeEndTimer - Time.time)).ToString();
+            abilityNameText.text = (Mathf.CeilToInt(ability.chargeEndTimer - Time.time)).ToString();
         }
         else if (ability.abilityEndTimer > Time.time) {
-            text.text = (Mathf.CeilToInt(ability.abilityEndTimer - Time.time)).ToString();
+            abilityNameText.text = (Mathf.CeilToInt(ability.abilityEndTimer - Time.time)).ToString();
         }
         else if (ability.isInfCharging) {
-            text.text = (Mathf.FloorToInt(Time.time - ability.infChargeStartTimer)).ToString();
+            abilityNameText.text = (Mathf.FloorToInt(Time.time - ability.infChargeStartTimer)).ToString();
         }
         else {
-            text.text = ability.abilityName;
+            abilityNameText.text = ability.abilityName;
         }
+
+        manaCostText.text = ability.manaCost.ToString();
 
     } //end UpdateAbilityButtonText(2)
 

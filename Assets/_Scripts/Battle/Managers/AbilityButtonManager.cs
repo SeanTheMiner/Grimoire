@@ -261,7 +261,7 @@ public class AbilityButtonManager : MonoBehaviour {
         SetAbilitySelecterColor(hero);
 
 
-    } //end CheckAbilitySelecterPosition (Hero)
+    } //end CheckAbilitySelecterPosition(1)
 
 
     public void SetAbilitySelecterColor (Hero hero) {
@@ -276,7 +276,7 @@ public class AbilityButtonManager : MonoBehaviour {
             abilitySelecterImage.color = Color.blue;
         }
 
-    } //end SetAbilitySelecterColor (hero)
+    } //end SetAbilitySelecterColor(1)
 
 
     public void CheckDefaultAbilityMarkerPosition(Hero hero) {
