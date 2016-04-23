@@ -9,7 +9,6 @@ public class RaiseSpiritsEff : Effect {
     public RaiseSpiritsEff() {
 
         effectName = "Raise Spirits";
-        effectDisplayText = "Spirit Up";
         effectIconText = "S+";
         effectDuration = 10;
         effectType = EffectType.Lump;

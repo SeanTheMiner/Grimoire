@@ -14,7 +14,7 @@ public class Champion : Hero {
 
     public ChampionStance currentStance;
 
-    void BattleStart() {
+    public override void BattleStart() {
         heroManager = GameObject.Find("HeroManager").GetComponent<HeroManager>();
         heroManager.activeChampion = this;
     }
@@ -38,7 +38,7 @@ public class Champion : Hero {
 
         currentStance = ChampionStance.Defensive;
 
-        abilityOne = new EndlessPunches();
+        abilityOne = new StandardSlashing();
         abilityTwo= new ChangeStance();
         abilityThree = new SwordBarrage();
         abilityFour = new Inspire();
@@ -46,8 +46,9 @@ public class Champion : Hero {
         abilitySix = new ArmorBreakAbility();
 
         SetAbilityOwner();
-        
+
         //eventually SetOwnerChampion just calls all 6, when they are all ChampionAbilities
+        SetOwnerChampion((ChampionAbility)abilityOne);
         SetOwnerChampion((ChampionAbility)abilityTwo);
         SetOwnerChampion((ChampionAbility)abilityThree);
         SetOwnerChampion((ChampionAbility)abilityFour);

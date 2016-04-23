@@ -430,6 +430,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBlast.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ArmorBreakAbility.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\BlessWeapon.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ChangeStance.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EbbAndFlow.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
@@ -449,6 +450,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RaiseSpirits.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\RingOfFire.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SetAblaze.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\StandardSlashing.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\SwordBarrage.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\AOETargeterController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\DamageTextController.cs" />
@@ -458,6 +460,7 @@
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\BlessWeaponEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\BlockAndHealEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ErodeArmorEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\EvadeCounterEff.cs" />

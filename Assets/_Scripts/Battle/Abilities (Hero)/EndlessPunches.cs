@@ -10,9 +10,11 @@ public class EndlessPunches : HeroAbility {
     public EndlessPunches() {
 
         abilityName = "Endless Punches";
+
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
+
         costsMana = false;
         hasCooldown = false;
 

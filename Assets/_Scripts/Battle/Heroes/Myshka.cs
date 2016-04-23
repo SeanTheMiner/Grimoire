@@ -24,7 +24,7 @@ public class Myshka : Hero {
         abilityOne = new EbbAndFlow();
         abilityTwo = new HealBarrage();
         abilityThree = new ErodeArmor();
-        abilityFour = new SetAblaze();
+        abilityFour = new BlessWeapon();
         abilityFive = new Maelstrom();
         abilitySix = new RaiseSpirits();
 

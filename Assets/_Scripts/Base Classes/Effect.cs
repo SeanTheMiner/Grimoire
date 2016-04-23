@@ -94,14 +94,21 @@ namespace Effects {
         public virtual void InitEffect(BattleObject host) {
             host.effectList.Add(this);
         }
+        
+
+        public virtual void RemoveEffect(BattleObject host) {
+            host.effectList.Remove(this);
+        }
+
 
         public virtual void InitTrigger(BattleObject host, ProcTriggers.ProcTrigger procTrigger) {
             procTrigger.triggerOwner = host;
             host.procTriggerList.Add(procTrigger);
         }
-        
-        public virtual void RemoveEffect(BattleObject host) {
-            host.effectList.Remove(this);
+
+
+        public virtual void RemoveTrigger(BattleObject host, ProcTriggers.ProcTrigger procTrigger) {
+            host.procTriggerList.Remove(procTrigger);
         }
 
 
