@@ -10,6 +10,7 @@ using Enemies;
 using Effects;
 using Procs;
 
+
 public class HeroAbility : Ability {
 
     public int manaCost {
@@ -214,7 +215,7 @@ public class HeroAbility : Ability {
             }
             AbilityMap();
         }
-
+        
     } //end InitDefaultAbility()
 
 
@@ -230,7 +231,7 @@ public class HeroAbility : Ability {
 
 
     public virtual void ActivateAOETargeter() {
-        associatedTargeter = (GameObject)MonoBehaviour.Instantiate(Resources.Load("AOEFreetargeterPrefab"), Input.mousePosition, Quaternion.identity);
+        associatedTargeter = (GameObject)Object.Instantiate(Resources.Load("AOEFreetargeterPrefab"), Input.mousePosition, Quaternion.identity);
         associatedTargeter.transform.localScale = new Vector3(radiusOfAOE, 0.05f, radiusOfAOE);
     }
 
@@ -246,13 +247,26 @@ public class HeroAbility : Ability {
     }
 
 
-    public virtual void CheckAOETargets() {
-        foreach (BattleObject enemy in associatedTargeter.GetComponent<AOETargeterController>().battleObjectList) {
-            targetBattleObjectList.Add(enemy);
-        }
+    public List<BattleObject> CheckAOETargets() {
+        return associatedTargeter.GetComponent<AOETargeterController>().battleObjectList;
     }
 
-    
+
+    public List<BattleObject> CheckAOETargetsOnCenter(BattleObject centerTarget) {
+        
+        List<BattleObject> listToReturn = new List<BattleObject>();
+        Collider[] gameObjectsFound = Physics.OverlapSphere(centerTarget.transform.position, (radiusOfAOE/2));
+
+        foreach (Collider collider in gameObjectsFound) {
+            if (collider.gameObject.tag == "Enemy") {
+                listToReturn.Add(collider.gameObject.GetComponent<Enemy>());
+            }
+        }
+     
+        return listToReturn;
+
+    } //end CheckAOETargetsOnCenter(1)
+
 
     public virtual void InitCharge() {
         abilityOwner.canTakeCommands = false;

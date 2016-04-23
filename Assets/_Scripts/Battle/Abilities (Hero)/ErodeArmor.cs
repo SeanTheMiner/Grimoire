@@ -32,9 +32,8 @@ public class ErodeArmor : HeroAbility {
 
     public override void AbilityMap() {
 
-        targetBattleObjectList = targetingManager.TargetAllEnemies();
-        DetermineHitOutcomeMultiple(abilityOwner, damageProc);
-        effectProc.ApplyEffectMultiple(effectProc.effectApplied, targetBattleObjectList);
+        DetermineHitOutcomeMultiple(abilityOwner, targetingManager.TargetAllEnemies(), damageProc);
+        effectProc.ApplyEffectMultiple(effectProc.effectApplied, targetingManager.TargetAllEnemies());
         ExitAbility();
 
     } //end AbilityMap()

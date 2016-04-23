@@ -34,9 +34,7 @@ public class RingOfFire : HeroAbility {
 
 
     public override void AbilityMap() {
-
-        CheckAOETargets();
-
+        
         EffectController effectController = FindEffectController(effectToCheckFor);
 
         if (effectController != null) {
@@ -44,7 +42,7 @@ public class RingOfFire : HeroAbility {
             damageProc.procDamage += (0.1f * modifierStacks);
         }
 
-        DetermineHitOutcomeMultiple(abilityOwner, damageProc);
+        DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargets(), damageProc);
         damageProc.procDamage = 200;
 
         if (effectController != null) {

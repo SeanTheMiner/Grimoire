@@ -4,35 +4,40 @@ using Procs;
 
 public class PiercingFire : HeroAbility {
 
-    public DamageProc damageProc = new DamageProc();
-    public EffectProc effectProc = new EffectProc();
+    public DamageProc centerDamageProc = new DamageProc();
+    public DamageProc AOEDamageProc = new DamageProc();
+    
 
     public PiercingFire() {
 
         abilityName = "Piercing Fire";
         abilityType = AbilityType.Burst;
-        targetScope = TargetScope.AllEnemies;
+        targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Magical;
-
-        requiresTargeting = false;
         
-        manaCost = 200;
-        chargeDuration = 5.0f;
-        cooldownDuration = 20;
+        manaCost = 100;
+        chargeDuration = 1;
+        cooldownDuration = 18;
 
-        damageProc.procDamage = 100;
-        damageProc.damageType = DamageProc.DamageType.Magical;
+        centerDamageProc.procDamage = 120;
+        centerDamageProc.damageType = DamageProc.DamageType.Physical;
 
-        effectProc.effectApplied = new SpiritBreak();
+        AOEDamageProc.procDamage = 120;
+        AOEDamageProc.damageType = DamageProc.DamageType.Magical;
+
+        radiusOfAOE = 6;
 
     } //end Constructor()
 
     
     public override void AbilityMap() {
 
-        targetBattleObjectList = targetingManager.TargetAllEnemies();
-        effectProc.ApplyEffectMultiple(effectProc.effectApplied, targetBattleObjectList);
-        DetermineHitOutcomeMultiple(abilityOwner, damageProc);
+        CheckTarget();
+        DetermineHitOutcomeSingle(abilityOwner, targetEnemy, centerDamageProc);
+        
+        Debug.Log(CheckAOETargetsOnCenter(targetEnemy).Count);
+
+        DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargetsOnCenter(targetEnemy), AOEDamageProc);
         ExitAbility();
 
     } //end AbilityMap()

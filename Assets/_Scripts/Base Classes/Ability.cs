@@ -185,9 +185,9 @@ namespace Abilities {
         } //End DetermineHitOutComeSingle (3)
 
 
-        public virtual void DetermineHitOutcomeMultiple(BattleObject attacker, DamageProc damageProc) {
+        public virtual void DetermineHitOutcomeMultiple(BattleObject attacker, List<BattleObject> targetList, DamageProc damageProc) {
 
-            foreach (BattleObject defender in targetBattleObjectList) {
+            foreach (BattleObject defender in targetList) {
                 DetermineHitOutcomeSingle(attacker, defender, damageProc);
             } //end foreach
 

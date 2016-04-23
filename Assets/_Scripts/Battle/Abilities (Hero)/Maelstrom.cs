@@ -33,16 +33,14 @@ public class Maelstrom : HeroAbility {
     public override void AbilityMap() {
 
         if (magicalDamageProc.nextProcTimer <= Time.time) {
-            CheckAOETargets();
-            DetermineHitOutcomeMultiple(abilityOwner, magicalDamageProc);
+            DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargets(), magicalDamageProc);
             ClearTargeting();
             magicalDamageProc.nextProcTimer = Time.time + magicalDamageProc.procSpacing;
         }
 
         if (abilityEndTimer <= Time.time) {
-            CheckAOETargets();
             physicalDamageProc.procDamage *= targetBattleObjectList.Count;
-            DetermineHitOutcomeMultiple(abilityOwner, physicalDamageProc);
+            DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargets(), physicalDamageProc);
             ExitAbility();
         }
         
