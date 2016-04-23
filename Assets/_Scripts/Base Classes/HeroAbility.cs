@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,6 +20,8 @@ public class HeroAbility : Ability {
     public Effect coreEffectApplied;
 
     public GameObject associatedTargeter;
+    public AbilityButtonManager abilityButtonManager;
+    public BattleManager battleManager;
 
     //ability-defining vools
 
@@ -145,6 +148,8 @@ public class HeroAbility : Ability {
     public virtual void InitAbility() {
 
         SetCoreEffectApplied();
+        abilityButtonManager = GameObject.Find("AbilityButtonManager").GetComponent<AbilityButtonManager>();
+        battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
 
         if (abilityType == AbilityType.InfCharge) {
             infChargeStartTimer = Time.time;
@@ -178,6 +183,8 @@ public class HeroAbility : Ability {
     public void InitDefaultAbility() {
 
         SetCoreEffectApplied();
+        abilityButtonManager = GameObject.Find("AbilityButtonManager").GetComponent<AbilityButtonManager>();
+        battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
 
         if (abilityType == AbilityType.InfCharge) {
             infChargeStartTimer = Time.time;
@@ -194,13 +201,6 @@ public class HeroAbility : Ability {
                 targetHero = (Hero)targetingManager.TargetRandomHero();
             }
         }
-
-        /*
-        else {
-            targetingManager.SortTargetingType(this);
-        }
-        Debug.Log(targetBattleObjectList.Count);
-       */
 
         if (requiresCharge) {
             InitCharge();
@@ -284,6 +284,43 @@ public class HeroAbility : Ability {
     public virtual void ApplyManaCost() {
         abilityOwner.currentMana -= manaCost;
     } //end ApplyManaCost()
+
+
+    public void UpdateInfBarrageMask(float nextProcTimer, float spacing) {
+
+        if (abilityOwner != battleManager.selectedHero) {
+            return;
+        }
+        DetermineInfBarrageMask().fillAmount = (1 - ((nextProcTimer - Time.time)/ spacing));
+    } 
+
+
+    public Image DetermineInfBarrageMask() {
+
+        Image maskToUpdate;
+
+        if (abilityOwner.abilityOne == this) {
+            maskToUpdate = abilityButtonManager.infBarrageMaskOne;
+        }
+        else if (abilityOwner.abilityTwo == this) {
+            maskToUpdate = abilityButtonManager.infBarrageMaskTwo;
+        }
+        else if (abilityOwner.abilityThree == this) {
+            maskToUpdate = abilityButtonManager.infBarrageMaskThree;
+        }
+        else if (abilityOwner.abilityFour == this) {
+            maskToUpdate = abilityButtonManager.infBarrageMaskFour;
+        }
+        else if (abilityOwner.abilityFive == this) {
+            maskToUpdate = abilityButtonManager.infBarrageMaskFive;
+        }
+        else {
+            maskToUpdate = abilityButtonManager.infBarrageMaskSix;
+        }
+
+        return maskToUpdate;
+
+    } //end UpdateInfBarrageMask()
 
 
     public virtual void AbilityMap() {

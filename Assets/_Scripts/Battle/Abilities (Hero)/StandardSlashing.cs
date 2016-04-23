@@ -35,8 +35,15 @@ public class StandardSlashing : ChampionAbility {
 
     public override void AbilityMap() {
         
+        if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
+            UpdateInfBarrageMask(nextProcTimer, offensiveProc.procSpacing);
+        }
+        else {
+            UpdateInfBarrageMask(nextProcTimer, defensiveProc.procSpacing);
+        }
+        
         if (nextProcTimer <= Time.time) {
-
+            
             CheckTarget();
             if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
                 offensiveProc.ApplyDamageProc(abilityOwner, targetEnemy);

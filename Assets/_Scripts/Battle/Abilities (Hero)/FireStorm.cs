@@ -40,6 +40,8 @@ public class FireStorm : HeroAbility {
 
     public override void AbilityMap() {
 
+        UpdateInfBarrageMask(damageProc.nextProcTimer, damageProc.procSpacing);
+
         if (damageProc.nextProcTimer <= Time.time) {
             targetEnemy = targetingManager.TargetRandomEnemy();
             DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);

@@ -32,6 +32,8 @@ public class EndlessPunches : HeroAbility {
 
     public override void AbilityMap() {
 
+        UpdateInfBarrageMask(damageProc.nextProcTimer, damageProc.procSpacing);
+
         if(damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);

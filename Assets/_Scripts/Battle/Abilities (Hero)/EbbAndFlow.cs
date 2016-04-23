@@ -47,6 +47,13 @@ public class EbbAndFlow : HeroAbility {
 
     public override void AbilityMap() {
 
+        if (damageProc.nextProcTimer < healProc.nextProcTimer) {
+            UpdateInfBarrageMask(damageProc.nextProcTimer, (damageProc.procSpacing / 2));
+        }
+        else {
+            UpdateInfBarrageMask(healProc.nextProcTimer, (healProc.procSpacing / 2));
+        }
+
         if (damageProc.nextProcTimer <= Time.time) {
             DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);
             damageProc.nextProcTimer = Time.time + damageProc.procSpacing;

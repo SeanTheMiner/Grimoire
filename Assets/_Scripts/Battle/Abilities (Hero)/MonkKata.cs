@@ -69,6 +69,9 @@ public class MonkKata : HeroAbility {
     public override void AbilityMap() {
 
         if (isChaining != true) {
+
+            UpdateInfBarrageMask(interProcTimer, interProcSpacing);
+
             if (interProcTimer <= Time.time) {
                 isChaining = true;
                 targetEnemy = targetingManager.TargetRandomEnemy();
@@ -77,6 +80,8 @@ public class MonkKata : HeroAbility {
                 return;
             }
         } //end if isChaining = false
+
+        UpdateInfBarrageMask(nextProcTimer, procSpacing);
 
         if (nextProcTimer <= Time.time) {
 
