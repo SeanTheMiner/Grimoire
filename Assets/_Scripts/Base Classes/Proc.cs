@@ -82,6 +82,10 @@ namespace Procs {
             get; set;
         }
 
+        public float lifeSteal {
+            get; set;
+        }
+
 
         //nuts & bolts
 
@@ -127,12 +131,15 @@ namespace Procs {
         public virtual void ApplyDamageProc(BattleObject attacker, BattleObject defender) {
 
             int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(attacker, defender, this, 1));
+
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply, damageType);
 
+            ApplyLifeSteal(attacker, damageToApply);
+            
         } //end ApplyDamageProc(2)
 
-
+        
         public virtual void ApplyDamageProcMultiple(BattleObject attacker, List<BattleObject> list) {
 
             foreach (BattleObject target in list) {
@@ -148,6 +155,8 @@ namespace Procs {
             defender.currentHealth -= damageToApply;
             defender.SpawnDamageText(damageToApply, damageType);
             //could call SpawnCritText, or not
+
+            ApplyLifeSteal(attacker, damageToApply);
 
         } //end ApplyCritDamageProc(2)
 
@@ -167,17 +176,51 @@ namespace Procs {
             defender.currentHealth -= damageToApply;
             defender.SpawnBlockText(damageToApply, damageType);
 
+            ApplyLifeSteal(attacker, damageToApply);
+
         } //end ApplyBlockDamageProc(2)
 
 
         public virtual void ApplyInfDamageProc(BattleObject attacker, BattleObject defender, HeroAbility ability) {
 
             ability.isInfCharging = false;
-            int damage = Mathf.RoundToInt(ability.infProcMultiplier * (Time.time - ability.infChargeStartTimer));
-            defender.currentHealth -= damage;
-            defender.SpawnDamageText(damage, damageType);
+            int damageToApply = Mathf.RoundToInt(ability.infProcMultiplier * (Time.time - ability.infChargeStartTimer));
+            defender.currentHealth -= damageToApply;
+            defender.SpawnDamageText(damageToApply, damageType);
+
+            ApplyLifeSteal(attacker, damageToApply);
 
         } //end ApplyInfDamageProc(2)
+
+
+        public virtual void ApplyLifeSteal(BattleObject attacker, int damage) {
+
+            //int lifestealToApply = Mathf.RoundToInt(attacker.ApplyLifeSteal(damage, damageType));
+
+            int lifeStealToApply = 0;
+
+            if (damageType == DamageType.Physical) {
+                lifeStealToApply = Mathf.RoundToInt(((attacker.ApplyStatModifications
+                    ((lifeSteal + attacker.physicalLifeSteal), attacker.physicalLifeStealMultMod, attacker.physicalLifeStealAddMod))
+                    /100) * damage);
+            }
+            else if (damageType == DamageType.Magical) {
+                lifeStealToApply = Mathf.RoundToInt(((attacker.ApplyStatModifications
+                    ((lifeSteal + attacker.magicalLifeSteal), attacker.magicalLifeStealMultMod, attacker.magicalLifeStealAddMod))
+                    / 100) * damage);
+            }
+            
+            if ((attacker.currentHealth + lifeStealToApply) >= attacker.maxHealth) {
+                lifeStealToApply = Mathf.RoundToInt(attacker.maxHealth - attacker.currentHealth);
+            }
+            
+            if (lifeStealToApply > 0) {
+                attacker.currentHealth += lifeStealToApply;
+                attacker.SpawnHealText(lifeStealToApply);
+            }
+
+        } //end ApplyLifeSteal(2)
+
         
     } //end DamageProc class
 
@@ -247,8 +290,11 @@ namespace Procs {
             else {
                 heal = Mathf.RoundToInt(healee.maxHealth - healee.currentHealth);
             }
-            healee.currentHealth += heal;
-            healee.SpawnHealText(heal);
+
+            if (heal > 0) {
+                healee.currentHealth += heal;
+                healee.SpawnHealText(heal);
+            }
 
         } //end HealProcSingle
 

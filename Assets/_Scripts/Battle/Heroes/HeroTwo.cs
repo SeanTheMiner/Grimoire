@@ -20,7 +20,9 @@ public class HeroTwo : Hero {
 
         magicalEvasionChance = 30;
         physicalEvasionChance = 20;
-        
+
+        magicalLifeSteal = 30;
+
         coreEffect = new FlameStackEffect();
 
         abilityOne = new FireStorm();

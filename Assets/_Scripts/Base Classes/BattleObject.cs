@@ -286,28 +286,28 @@ namespace BattleObjects {
             get; set;
         }
         
-        public float physicalLifesteal {
+        public float physicalLifeSteal {
             get; set;
         }
         
-        public float physicalLifestealMultMod {
+        public float physicalLifeStealMultMod {
             get; set;
         }
 
-        public float physicalLifestealAddMod {
+        public float physicalLifeStealAddMod {
             get; set;
         }
 
 
-        public float magicalLifesteal {
+        public float magicalLifeSteal {
             get; set;
         }
         
-        public float magicalLifestealMultMod {
+        public float magicalLifeStealMultMod {
             get; set;
         }
 
-        public float magicalLifestealAddMod {
+        public float magicalLifeStealAddMod {
             get; set;
         }
 
@@ -391,13 +391,13 @@ namespace BattleObjects {
             resolveMultMod = 1;
             resolveAddMod = 0;
 
-            physicalLifesteal = 0;
-            physicalLifestealMultMod = 1;
-            physicalLifestealAddMod = 0;
+            physicalLifeSteal = 0;
+            physicalLifeStealMultMod = 1;
+            physicalLifeStealAddMod = 0;
 
-            magicalLifesteal = 0;
-            magicalLifestealMultMod = 1;
-            magicalLifestealAddMod = 0;
+            magicalLifeSteal = 0;
+            magicalLifeStealMultMod = 1;
+            magicalLifeStealAddMod = 0;
             
         } //end Constructor
 
@@ -407,12 +407,10 @@ namespace BattleObjects {
         public float ApplyStatModifications(float baseStat, float multMod, float addMod) {
             return ((baseStat * multMod) + addMod);
         }
-
+        
 
         //Spawning functions
-
-        //eventually this guy will include (int damage, Ability.DamageType damageType)
-        public virtual void SpawnDamageText(int damage, Procs.DamageProc.DamageType damageType) {
+        public virtual void SpawnDamageText(int damage, DamageProc.DamageType damageType) {
 
             GameObject damageTextPrefab = (GameObject)Instantiate(Resources.Load("DamageTextPrefab"),
                 transform.position,

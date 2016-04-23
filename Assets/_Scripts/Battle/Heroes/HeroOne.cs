@@ -22,6 +22,8 @@ public class HeroOne : Hero {
 
         physicalEvasionChance = 50;
 
+        physicalLifeSteal = 25;
+
         abilityOne = new EndlessPunches();
         abilityTwo = new MonkKata();
         abilityThree = new HeroOneAbilityTwo();
