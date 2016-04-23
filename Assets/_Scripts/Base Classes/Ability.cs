@@ -152,7 +152,7 @@ namespace Abilities {
 
         public virtual void DetermineHitOutcomeSingle(BattleObject attacker, BattleObject defender, DamageProc damageProc) {
 
-            HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
+            HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this, damageProc);
 
             if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText(damageProc.damageType);

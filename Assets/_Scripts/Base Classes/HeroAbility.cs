@@ -341,9 +341,9 @@ public class HeroAbility : Ability {
     //Hit functions
 
 
-    public virtual void InfDetermineHitOutcomeSingle(BattleObject attacker, BattleObject defender, DamageProc damageProc, HeroAbility ability) {
+    public virtual void InfDetermineHitOutcomeSingle(BattleObject attacker, BattleObject defender, HeroAbility ability, DamageProc damageProc) {
 
-        HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this);
+        HitManager.HitOutcome hitOutcome = HitManager.DetermineEvasionAndBlock(attacker, defender, this, damageProc);
 
         if (hitOutcome == HitManager.HitOutcome.Evade) {
             defender.SpawnMissText(damageProc.damageType);
@@ -372,7 +372,7 @@ public class HeroAbility : Ability {
     public virtual void InfDetermineHitOutcomeMultiple(BattleObject attacker, DamageProc damageProc, HeroAbility ability) {
 
         foreach (BattleObject defender in targetBattleObjectList) {
-            InfDetermineHitOutcomeSingle(attacker, defender, damageProc, ability);
+            InfDetermineHitOutcomeSingle(attacker, defender, ability, damageProc);
         } //end foreach
 
     } //end DamageProcMultiple()

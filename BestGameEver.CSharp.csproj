@@ -436,6 +436,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessFire.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\EndlessPunches.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ErodeArmor.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\Eviscerate.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\FireStorm.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HealBarrage.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\HeroOneAbilityOne.cs" />

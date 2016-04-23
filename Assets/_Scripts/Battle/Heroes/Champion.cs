@@ -42,7 +42,7 @@ public class Champion : Hero {
         abilityTwo= new ChangeStance();
         abilityThree = new SwordBarrage();
         abilityFour = new Inspire();
-        abilityFive = new HeroTwoAbilityTwo();
+        abilityFive = new Eviscerate();
         abilitySix = new ArmorBreakAbility();
 
         SetAbilityOwner();
@@ -52,6 +52,7 @@ public class Champion : Hero {
         SetOwnerChampion((ChampionAbility)abilityTwo);
         SetOwnerChampion((ChampionAbility)abilityThree);
         SetOwnerChampion((ChampionAbility)abilityFour);
+        SetOwnerChampion((ChampionAbility)abilityFive);
 
     } //end Constructor()
 

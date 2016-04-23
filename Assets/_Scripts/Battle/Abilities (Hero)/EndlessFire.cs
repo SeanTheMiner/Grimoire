@@ -29,7 +29,7 @@ public class EndlessFire : HeroAbility {
     public override void AbilityMap() {
 
         targetingManager.SortTargetingType(this);
-        InfDetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc, this);
+        InfDetermineHitOutcomeSingle(abilityOwner, targetEnemy, this, damageProc);
         ExitAbility();
 
     } //end AbilityMap()

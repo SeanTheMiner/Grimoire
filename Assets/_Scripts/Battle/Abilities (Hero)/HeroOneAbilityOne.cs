@@ -5,7 +5,7 @@ using Procs;
 
 public class HeroOneAbilityOne : HeroAbility {
 
-    public DamageProc soleProc = new DamageProc();
+    public DamageProc damageProc = new DamageProc();
 
     public HeroOneAbilityOne() {
         
@@ -17,12 +17,11 @@ public class HeroOneAbilityOne : HeroAbility {
 
         chargeDuration = 4.0f;
         cooldownDuration = 10.0f;
-        procDamage = 250.0f;
 
-        soleProc.damageType = DamageProc.DamageType.Physical;
-        soleProc.procDamage = 250;
-        soleProc.critChance = 50;
-        soleProc.critMultiplier = 1.5f;
+        damageProc.damageType = DamageProc.DamageType.Physical;
+        damageProc.procDamage = 250;
+        damageProc.critChance = 50;
+        damageProc.critMultiplier = 1.5f;
         
     } //end constructor
     
@@ -30,7 +29,7 @@ public class HeroOneAbilityOne : HeroAbility {
     public override void AbilityMap() {
 
         CheckTarget();
-        DetermineHitOutcomeSingle(abilityOwner, targetEnemy, soleProc);
+        DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
         ExitAbility();
 
     } //end AbilityType
