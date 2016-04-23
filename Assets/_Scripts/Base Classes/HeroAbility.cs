@@ -20,8 +20,10 @@ public class HeroAbility : Ability {
     public Effect coreEffectApplied;
 
     public GameObject associatedTargeter;
+
     public AbilityButtonManager abilityButtonManager;
     public BattleManager battleManager;
+    public EffectManager effectManager;
 
     //ability-defining vools
 
@@ -412,6 +414,20 @@ public class HeroAbility : Ability {
         } //end foreach
 
     } //end DamageProcMultiple()
+
+
+    public EffectController FindEffectController (Effect effectToCheckFor) {
+
+        effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+
+        foreach (EffectController effectController in effectManager.activeEffectControllerList) {
+            if (effectController.effectApplied == effectToCheckFor) {
+                return effectController;
+            }
+        }
+        return null;
+
+    } //end FindEffectController(1)
 
     
 } //end HeroAbility class

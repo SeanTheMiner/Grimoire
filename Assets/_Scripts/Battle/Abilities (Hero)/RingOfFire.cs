@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using Procs;
+using Effects;
 
 public class RingOfFire : HeroAbility {
 
     public DamageProc damageProc = new DamageProc();
+    public Effect effectToCheckFor;
 
     public RingOfFire() {
 
@@ -14,6 +16,7 @@ public class RingOfFire : HeroAbility {
         manaCost = 120;
 
         canBeDefault = false;
+        appliesCoreEffect = true;
 
         chargeDuration = 4.0f;
         cooldownDuration = 12.0f;
@@ -25,10 +28,31 @@ public class RingOfFire : HeroAbility {
     } //end Constructor()
 
 
+    public override void SetCoreEffectApplied() {
+        effectToCheckFor = coreEffectApplied;
+    }
+
+
     public override void AbilityMap() {
 
         CheckAOETargets();
+
+        EffectController effectController = FindEffectController(effectToCheckFor);
+
+        if (effectController != null) {
+            int modifierStacks = effectController.CountAllStacks();
+            damageProc.procDamage += (0.1f * modifierStacks);
+        }
+
         DetermineHitOutcomeMultiple(abilityOwner, damageProc);
+        damageProc.procDamage = 200;
+
+        if (effectController != null) {
+            foreach (EffectController.HostController hostController in effectController.hostControllerList) {
+                effectController.UpdateStacks(hostController, Mathf.RoundToInt(hostController.stackCount / -2));
+            }
+        }
+
         ExitAbility();
 
     } //end AbilityMap()

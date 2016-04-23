@@ -175,118 +175,21 @@ public class EffectController : MonoBehaviour {
 
     } //end ApplyTenacity (2)
 
-
-
-
-
-
-    /*
-
-    public void KillEffect(BattleObject host, GameObject icon) {
-
-        affectedBattleObjectList.Remove(host);
-        effectApplied.RemoveEffect(host);
-
-        EffectDisplayController effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
-
-        effectDisplayController.displayEffectIconList.Remove(icon);
-        Destroy(icon);
-        effectDisplayController.UpdateEffectIconPositions();
-
-    } //end KillEffect(2)
-
-
-    public void Initialize () {
-
-        if (effectApplied.effectType == Effect.EffectType.Lump) {
-            foreach (BattleObject host in affectedBattleObjectList) {        
-                StartCoroutine(CheckForExpirationLump(host, SpawnDisplayIcon(host)));
-            }
-        }
-        else if (effectApplied.effectType == Effect.EffectType.Stacking) {
-            foreach (BattleObject host in affectedBattleObjectList) {
-                StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host), affectedBattleObjectList.IndexOf(host)));
-            }
-        }
-        
-	} //end Initialize
     
+    //Misc. functions
 
-    public void InitializeMultipleStacking (List<BattleObject> passedList) {
 
-        if (effectApplied.effectType == Effect.EffectType.Lump) {
-            foreach (BattleObject host in passedList) {
-                StartCoroutine(CheckForExpirationLump(host, SpawnDisplayIcon(host)));
-            }
-        }
-        else if (effectApplied.effectType == Effect.EffectType.Stacking) {
-   
-            foreach (BattleObject host in passedList) {
-                StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host), affectedBattleObjectList.IndexOf(host)));
-            }
+    public int CountAllStacks () {
+
+        int count = 0;
+
+        foreach (HostController hostController in hostControllerList) {
+            count += hostController.stackCount;
         }
 
-    } //end Initialize
+        return count;
 
-    //became InitStruct
-    public void AddHostToExistingEffect (BattleObject host) {
-        StartCoroutine(CheckForExpirationStacking(host, SpawnDisplayIcon(host), affectedBattleObjectList.IndexOf(host)));
-    } //end AddHostToExistingEffect
+    } //end CountAllStacks()
 
-
-
-
-
-    public IEnumerator CheckForExpirationLump(BattleObject host, GameObject icon) {
-        
-        yield return new WaitForSeconds(ApplyTenacity(host, effectApplied.effectDuration));
-        KillEffect(host, icon);
-        
-    } //end CheckForExpiration()
-
-
-
-
-
-
-    public IEnumerator CheckForExpirationStacking(BattleObject host, GameObject icon, int index) {
-        
-        icon.GetComponentInChildren<TextMesh>().text = stackCountList[index].ToString();
-        
-        //update stack effect here? Probably function on the effect that takes in old stacks, new stacks, removes effect of old and applies effect of new
-       
-        yield return new WaitForSeconds(ApplyTenacity(host, effectApplied.stackDuration));
-
-        //effectApplied.stackCount--;
-        //icon.GetComponentInChildren<TextMesh>().text = effectApplied.stackCount.ToString();
-        
-        stackCountList[index]--;
-        icon.GetComponentInChildren<TextMesh>().text = stackCountList[index].ToString();
-
-        if (stackCountList[index] > 0) {
-            StartCoroutine(CheckForExpirationStacking(host, icon, index));
-        }
-        else {
-            KillEffect(host, icon);
-        }
-
-    } //end CheckForExpiration(3)
-
-
-    public void RestartCheckForExpirationStacking(BattleObject host) {
-
-        int index = affectedBattleObjectList.IndexOf(host);
-        GameObject icon = effectIconList[index];
-        StartCoroutine(CheckForExpirationStacking(host, icon, index));
-
-    } //end RestartCheckForExpirationStacking(1)
-
-
-
-    */
-
-   
-
-
-
+    
 } //end EffectController class
