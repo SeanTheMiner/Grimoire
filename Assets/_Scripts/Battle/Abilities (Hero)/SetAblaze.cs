@@ -21,7 +21,7 @@ public class SetAblaze : HeroAbility {
 
         appliesCoreEffect = true;
 
-        manaCost = 10;
+        manaCost = 125;
         chargeDuration = 2;
         cooldownDuration = 2;
         

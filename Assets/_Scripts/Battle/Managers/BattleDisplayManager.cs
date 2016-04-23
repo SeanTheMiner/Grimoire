@@ -201,6 +201,7 @@ public class BattleDisplayManager : MonoBehaviour {
         }
 
         manaCostText.text = ability.manaCost.ToString();
+        ApplyManaCostColor(battleManager.selectedHero, ability, manaCostText);
 
     } //end UpdateAbilityButtonText(2)
 
@@ -227,5 +228,17 @@ public class BattleDisplayManager : MonoBehaviour {
             Destroy(enemyThreeHealthText);
         }
     } //end CheckForEnemyHealthRemoval()
+
+
+    public void ApplyManaCostColor (Hero hero, HeroAbility ability, Text manaText) {
+
+        if (ability.manaCost >= hero.currentMana) {
+            manaText.color = Color.red;
+        }
+        else {
+            manaText.color = Color.black;
+        }
+
+    } //end ApplyManaCostColor(3)
 
 } //end BattleDisplayManager()
