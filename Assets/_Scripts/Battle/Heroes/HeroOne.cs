@@ -15,7 +15,7 @@ public class HeroOne : Hero {
         maxHealth = 1120;
         maxMana = 400;
         healthRegen = 5;
-        manaRegen = 3;
+        manaRegen = 12;
 
         armor = 120;
         spirit = 40;

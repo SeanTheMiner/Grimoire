@@ -9,19 +9,21 @@ public class HeroOneAbilityOne : HeroAbility {
 
     public HeroOneAbilityOne() {
         
-        abilityName = "Charge Punch";
+        abilityName = "Sapping Punch";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
         primaryDamageType = DamageType.Physical;
-        manaCost = 80;
+        manaCost = 120;
 
-        chargeDuration = 4.0f;
-        cooldownDuration = 10.0f;
+        chargeDuration = 5.0f;
+        cooldownDuration = 18;
 
         damageProc.damageType = DamageProc.DamageType.Physical;
-        damageProc.procDamage = 250;
-        damageProc.critChance = 50;
-        damageProc.critMultiplier = 1.5f;
+        damageProc.procDamage = 300;
+        damageProc.physicalAccuracy = 50;
+        damageProc.physicalFinesse = 50;
+        damageProc.physicalPenetration = 50;
+        damageProc.lifeSteal = 50;
         
     } //end constructor
     

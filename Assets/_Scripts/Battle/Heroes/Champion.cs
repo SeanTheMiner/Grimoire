@@ -26,7 +26,7 @@ public class Champion : Hero {
         maxHealth = 1000;
         maxMana = 500;
         healthRegen = 4;
-        manaRegen = 4;
+        manaRegen = 10;
 
         armor = 90;
         spirit = 60;

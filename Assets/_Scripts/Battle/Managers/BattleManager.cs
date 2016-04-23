@@ -31,8 +31,7 @@ public class BattleManager : MonoBehaviour {
     public Champion champion;
 
     public Ability targetingAbility;
-
-
+    
     public Enemy enemyObjectOne;
     public Enemy enemyObjectTwo;
     public Enemy enemyObjectThree;
@@ -73,7 +72,6 @@ public class BattleManager : MonoBehaviour {
     } //end Start()
 
 
-    // Update is called once per frame. It does everything.
     void Update() {
 
         //Every-frame maintenance
@@ -83,7 +81,6 @@ public class BattleManager : MonoBehaviour {
         battleDisplayManager.UpdateManaText();
         battleDisplayManager.UpdateSelectedHeroText();
         
-
         debugDisplayManager.UpdateDebugText();
         battleTimer += Time.deltaTime;
 
@@ -99,7 +96,6 @@ public class BattleManager : MonoBehaviour {
                 CheckForAbilitySelectionInput();
             }
             if (Input.GetKey(KeyCode.LeftShift)) {
-
                 CheckForDefaultAbilitySelectionInput();
             }
 
@@ -117,14 +113,11 @@ public class BattleManager : MonoBehaviour {
             CheckIfEnemyIsDead(enemy);
         }
 
-        //enemyList.RemoveAll(jigglyhoot => jigglyhoot == null);
-
         if (enemyList.Count <= 0) {
             BattleWon();
         }
 
-        
-
+     
         //DEBUG FUNCTIONS
 
         if(Input.GetKeyDown(KeyCode.Z)) {
@@ -135,9 +128,15 @@ public class BattleManager : MonoBehaviour {
             DebugSelectedHeroDamage();
         }
 
+        if(Input.GetKeyDown(KeyCode.C)) {
+            if (selectedHero != null) {
+                DebugResetSelectedHeroCooldowns(selectedHero);
+            }
+        }
         
     } //end Update
 
+    
 
     //BattleState switch. Not actually a switch, but this  decides what a hero does in every frame based on their battlestate.
         //Some notes - Target only applies if a target is being chosen. 
@@ -152,7 +151,7 @@ public class BattleManager : MonoBehaviour {
         }
 
         else if (hero.currentBattleState == Hero.BattleState.Wait) {
-            if ((hero.defaultAbility != null) && (hero.defaultAbility.cooldownEndTimer < Time.time)) {
+            if ((hero.defaultAbility != null) && (hero.defaultAbility.cooldownEndTimer < Time.time) && (hero.currentMana >= hero.defaultAbility.manaCost)) {
                 hero.currentAbility = hero.defaultAbility;
                 hero.currentAbility.InitDefaultAbility();
             }
@@ -211,7 +210,7 @@ public class BattleManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && (!Input.GetKey(KeyCode.LeftShift))) {
             CancelAbility(selectedHero);
         }
-
+        
     } //end CheckForHeroSelectionInput()
 
 
@@ -219,22 +218,22 @@ public class BattleManager : MonoBehaviour {
 
         HeroAbility abilityToApply = null;
 
-        if ((Input.GetKeyDown(KeyCode.Q)) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time)) {
+        if ((Input.GetKeyDown(KeyCode.Q)) && (selectedHero.abilityOne.cooldownEndTimer <= Time.time) && (selectedHero.currentMana >= selectedHero.abilityOne.manaCost)) {
             abilityToApply = selectedHero.abilityOne;
         }
-        else if ((Input.GetKeyDown(KeyCode.W)) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time)) {
+        else if ((Input.GetKeyDown(KeyCode.W)) && (selectedHero.abilityTwo.cooldownEndTimer <= Time.time) && (selectedHero.currentMana >= selectedHero.abilityTwo.manaCost)) {
             abilityToApply = selectedHero.abilityTwo;
         }
-        else if ((Input.GetKeyDown(KeyCode.E)) && (selectedHero.abilityThree.cooldownEndTimer <= Time.time)) {
+        else if ((Input.GetKeyDown(KeyCode.E)) && (selectedHero.abilityThree.cooldownEndTimer <= Time.time) && (selectedHero.currentMana >= selectedHero.abilityThree.manaCost)) {
             abilityToApply = selectedHero.abilityThree;
         }
-        else if ((Input.GetKeyDown(KeyCode.A)) && (selectedHero.abilityFour.cooldownEndTimer <= Time.time)) {
+        else if ((Input.GetKeyDown(KeyCode.A)) && (selectedHero.abilityFour.cooldownEndTimer <= Time.time) && (selectedHero.currentMana >= selectedHero.abilityFour.manaCost)) {
             abilityToApply = selectedHero.abilityFour;
         }
-        else if ((Input.GetKeyDown(KeyCode.S)) && (selectedHero.abilityFive.cooldownEndTimer <= Time.time)) {
+        else if ((Input.GetKeyDown(KeyCode.S)) && (selectedHero.abilityFive.cooldownEndTimer <= Time.time) && (selectedHero.currentMana >= selectedHero.abilityFive.manaCost)) {
             abilityToApply = selectedHero.abilityFive;
         }
-        else if ((Input.GetKeyDown(KeyCode.D)) && (selectedHero.abilitySix.cooldownEndTimer <= Time.time)) {
+        else if ((Input.GetKeyDown(KeyCode.D)) && (selectedHero.abilitySix.cooldownEndTimer <= Time.time) && (selectedHero.currentMana >= selectedHero.abilitySix.manaCost)) {
             abilityToApply = selectedHero.abilitySix;
         }
         
@@ -283,7 +282,7 @@ public class BattleManager : MonoBehaviour {
         if ((defaultAbilityToApply != null) && (defaultAbilityToApply.canBeDefault)) {
             selectedHero.defaultAbility = defaultAbilityToApply;
         }
-        else if (Input.GetKeyDown(KeyCode.Space)) {
+        else if (Input.GetKeyDown(KeyCode.Tab)) {
             selectedHero.defaultAbility = null;
         }
 
@@ -463,7 +462,7 @@ public class BattleManager : MonoBehaviour {
 
 
 
-//Testing functions
+//Debug functions
 
     void DebugAllHeroDamage() {
 
@@ -473,6 +472,7 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+
     void DebugSelectedHeroDamage () {
 
         if(selectedHero != null) {
@@ -481,7 +481,20 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+
+    private void DebugResetSelectedHeroCooldowns(Hero hero) {
+
+        hero.abilityOne.cooldownEndTimer = 0;
+        hero.abilityTwo.cooldownEndTimer = 0;
+        hero.abilityThree.cooldownEndTimer = 0;
+        hero.abilityFour.cooldownEndTimer = 0;
+        hero.abilityFive.cooldownEndTimer = 0;
+        hero.abilitySix.cooldownEndTimer = 0;
+
+    } //end DebugResetSelectedHeroCooldowns(1)
+
+
 } //end BattleManager
 
 
-    
+

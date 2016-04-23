@@ -13,7 +13,7 @@ public class Myshka : Hero {
         maxHealth = 720;
         healthRegen = 3;
         maxMana = 640;
-        manaRegen = 6;
+        manaRegen = 22;
         
         armor = 10;
         spirit = 70;
