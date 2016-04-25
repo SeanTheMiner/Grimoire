@@ -48,6 +48,14 @@ namespace Enemies {
             
         } //end SetAbilityOwner(1)
 
+        void LateUpdate() {
+            if (currentHealth <= 0) {
+                Destroy(gameObject);
+            }
+        }
+
+
+
     } //end Enemy class
 
 } //end Enemies namespace

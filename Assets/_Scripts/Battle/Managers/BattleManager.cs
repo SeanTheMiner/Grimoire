@@ -38,6 +38,7 @@ public class BattleManager : MonoBehaviour {
 
     public List<Hero> heroList = new List<Hero>();
     public List<Enemy> enemyList = new List<Enemy>();
+    public List<Enemy> enemyToRemoveList = new List<Enemy>();
    
     public GameObject[] allHeroes;
     public GameObject[] allEnemies;
@@ -108,11 +109,17 @@ public class BattleManager : MonoBehaviour {
         foreach (Hero hero in heroList) {
             CheckBattleState(hero);
         }
-
+        
         foreach (Enemy enemy in enemyList) {
             CheckIfEnemyIsDead(enemy);
         }
-
+        
+        foreach (Enemy enemy in enemyToRemoveList) {
+            enemyList.Remove(enemy);
+        }
+        
+        enemyToRemoveList.Clear();
+        
         if (enemyList.Count <= 0) {
             BattleWon();
         }
@@ -433,16 +440,14 @@ public class BattleManager : MonoBehaviour {
     void CheckIfEnemyIsDead(Enemy enemy) {
 
         if(enemy.currentHealth <= 0) {
-            RemoveEnemy(enemy);
+            enemyToRemoveList.Add(enemy);
         }
     }
 
-    void RemoveEnemy(Enemy enemy) {
 
-        enemy.currentHealth = 0;
-        enemyList.Remove(enemy);
+    void RemoveEnemy(Enemy enemy) {
         Destroy(enemy.gameObject);
-    }
+  }
 
     void CheckIfHeroIsDead(Hero hero) {
 

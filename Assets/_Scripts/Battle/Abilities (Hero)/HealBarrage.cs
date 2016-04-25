@@ -34,6 +34,7 @@ public class HealBarrage : HeroAbility {
         UpdateInfBarrageMask(healProc.nextProcTimer, healProc.procSpacing);
 
         if (healProc.nextProcTimer <= Time.time) {
+            CheckTarget();
             healProc.HealProcSingle(abilityOwner, targetingManager.TargetRandomHero());
             healProc.nextProcTimer = Time.time + healProc.procSpacing;
         }
