@@ -139,12 +139,12 @@ public class EffectController : MonoBehaviour {
 
     public GameObject SpawnDisplayIcon(BattleObject host) {
 
-        GameObject effectIcon = new GameObject();
+        //GameObject effectIcon = new GameObject();
         EffectDisplayController effectDisplayController = host.GetComponentInChildren<EffectDisplayController>();
 
         if (effectApplied.effectType == Effect.EffectType.Lump) {
 
-            effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconLump"),
+            GameObject effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconLump"),
                 effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
                 Quaternion.identity
                 );
@@ -160,20 +160,22 @@ public class EffectController : MonoBehaviour {
 
             effectIcon.GetComponentInChildren<TextMesh>().text = effectApplied.effectIconText;
 
-        } //end if lump
-        else if (effectApplied.effectType == Effect.EffectType.Stacking) {
+            effectDisplayController.displayEffectIconList.Add(effectIcon);
+            return effectIcon;
 
-            effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconStacking"),
+        } //end if lump
+        else { // (effectApplied.effectType == Effect.EffectType.Stacking) { 
+
+            GameObject effectIcon = (GameObject)Instantiate(Resources.Load("EffectIconStacking"),
                 effectDisplayController.displayPositionList[effectDisplayController.displayEffectIconList.Count],
                 Quaternion.identity
                 );
 
+            effectDisplayController.displayEffectIconList.Add(effectIcon);
+            return effectIcon;
+
         } //end if Stacking
-
-        effectDisplayController.displayEffectIconList.Add(effectIcon);
         
-        return effectIcon;
-
     } //end SpawnDisplayIcon (1)
 
 
