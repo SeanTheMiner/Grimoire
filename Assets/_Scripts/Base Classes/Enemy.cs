@@ -39,7 +39,7 @@ namespace Enemies {
 
         public List<EnemyAbility> enemyAbilityList = new List<EnemyAbility>();
 
-
+        
         public void SetAbilityOwner() {
 
             enemyAbilityOne.abilityOwner = this;
@@ -48,12 +48,16 @@ namespace Enemies {
             
         } //end SetAbilityOwner(1)
 
+
         void LateUpdate() {
+
             if (currentHealth <= 0) {
-                //destroy icons here?
+
+                effectDisplayController.KillAllEffects(this);
                 Destroy(gameObject);
             }
-        }
+
+        } //end LateUpdate()
 
 
 

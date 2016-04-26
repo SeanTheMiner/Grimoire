@@ -7,7 +7,7 @@ public class BlueEnemy : Enemy {
 
     public BlueEnemy ()
     {
-        maxHealth = 400;
+        maxHealth = 600;
         healthRegen = 3;
         homeBiome = Biome.BlueBiome;
 

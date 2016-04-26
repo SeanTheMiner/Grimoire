@@ -125,6 +125,7 @@ namespace Effects {
 
             effectManager = GameObject.Find("EffectManager");
             EffectController effectController = effectManager.AddComponent<EffectController>();
+            effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
 
             effectController.effectApplied = this;
             effectController.InitHostController(host);
@@ -138,6 +139,7 @@ namespace Effects {
             
             effectManager = GameObject.Find("EffectManager");
             EffectController effectController = effectManager.AddComponent<EffectController>();
+            effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
 
             effectController.effectApplied = this;
             foreach (BattleObject host in list) {

@@ -20,6 +20,8 @@ namespace BattleObjects {
         public List<Effect> effectList = new List<Effect>();
         public List<ProcTrigger> procTriggerList = new List<ProcTrigger>();
 
+        public EffectDisplayController effectDisplayController;
+
         public Effect coreEffect {
             get; set;
         }

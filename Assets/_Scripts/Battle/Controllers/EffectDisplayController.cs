@@ -37,6 +37,8 @@ public class EffectDisplayController : MonoBehaviour {
         hoverSpacing = 0.5f;
 
         hostPosition = displayHost.transform.position;
+        displayHost.effectDisplayController = this;
+
 
         if (displayHost is Enemy) {
 
@@ -81,4 +83,16 @@ public class EffectDisplayController : MonoBehaviour {
 
     } //end UpdateEffectIconPositions()
     
-}
+
+    public void KillAllEffects (BattleObject hostToRemove) {
+
+        EffectManager effectManager = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+        
+        foreach (EffectController effectController in effectManager.activeEffectControllerList) {
+            effectController.KillHostControllerOfGivenHost(hostToRemove);
+        }
+
+    } //end KillAllEffects()
+
+    
+} //end EffectDisplayController class

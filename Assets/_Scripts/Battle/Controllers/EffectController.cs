@@ -201,5 +201,16 @@ public class EffectController : MonoBehaviour {
 
     } //end CountAllStacks()
 
-    
+
+    public void KillHostControllerOfGivenHost(BattleObject hostToRemove) {
+
+        foreach (HostController hostController in hostControllerList) {
+            if (hostController.host == hostToRemove) {
+                SetHostControllerForRemoval(hostController);
+            } 
+        }
+
+    } //end KillHostControllerOfGivenHost(1)
+
+
 } //end EffectController class
