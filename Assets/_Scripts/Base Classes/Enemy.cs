@@ -50,6 +50,7 @@ namespace Enemies {
 
         void LateUpdate() {
             if (currentHealth <= 0) {
+                //destroy icons here?
                 Destroy(gameObject);
             }
         }

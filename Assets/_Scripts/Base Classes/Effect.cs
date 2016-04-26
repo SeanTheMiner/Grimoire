@@ -127,7 +127,7 @@ namespace Effects {
             EffectController effectController = effectManager.AddComponent<EffectController>();
 
             effectController.effectApplied = this;
-            effectController.InitStruct(host);
+            effectController.InitHostController(host);
 
             InitEffect(host);
            
@@ -141,7 +141,7 @@ namespace Effects {
 
             effectController.effectApplied = this;
             foreach (BattleObject host in list) {
-                effectController.InitStruct(host);
+                effectController.InitHostController(host);
                 InitEffect(host);
             }
             
@@ -158,7 +158,7 @@ namespace Effects {
                 effectController = effectManager.AddComponent<EffectController>();
                 effectController.effectApplied = this;
                 effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
-                effectController.InitStructStacking(host, stacksApplied);
+                effectController.InitHostControllerStacking(host, stacksApplied);
             }
             else {
                 effectController = CheckForExistingEffectController(effectManager, this);
@@ -175,7 +175,7 @@ namespace Effects {
 
                 //if you get here, it means the effectController was previously created, but the host was not found
                 //so you have to add a new host and create a new struct for them.
-                effectController.InitStructStacking(host, stacksApplied);
+                effectController.InitHostControllerStacking(host, stacksApplied);
                 
             } //end if the effect was created previously
            
@@ -194,7 +194,7 @@ namespace Effects {
                 effectController.effectApplied = this;
                 effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
                 foreach (BattleObject newHost in list) {
-                    effectController.InitStructStacking(newHost, stacksApplied);
+                    effectController.InitHostControllerStacking(newHost, stacksApplied);
                 }
                 return;
             }
@@ -215,7 +215,7 @@ namespace Effects {
             } //end foreach host in list
 
             foreach (BattleObject newHost in listToInit) {
-                effectController.InitStructStacking(newHost, stacksApplied);
+                effectController.InitHostControllerStacking(newHost, stacksApplied);
                 InitEffect(newHost);
             }
             
@@ -235,141 +235,3 @@ namespace Effects {
     } //end Effect Class
 
 } //end Effects namespace
-
-
-
-
-
-
-
-
-
-
-/*
- public virtual void CreateEffectSingle(BattleObject host) {
-
-            effectManager = GameObject.Find("EffectManager");
-            EffectController effectController = effectManager.AddComponent<EffectController>();
-
-            effectController.effectApplied = this;
-            effectController.affectedBattleObjectList.Add(host);
-            effectController.Initialize();
-
-            InitEffect(host);
-           
-        } //endCreateEffectSingle()
-
-
-        public virtual void CreateEffectMultiple(List<BattleObject> list) {
-
-            //EffectController effectController = GameObject.FindGameObjectWithTag("EffectManager").AddComponent<EffectController>();
-
-            effectManager = GameObject.Find("EffectManager");
-            EffectController effectController = effectManager.AddComponent<EffectController>();
-
-            effectController.effectApplied = this;
-            foreach (BattleObject host in list) {
-
-                effectController.affectedBattleObjectList.Add(host);
-                InitEffect(host);
-            }
-
-            effectController.Initialize();
-            
-        } //end CreateEffectMultiple()
-
-
-        public virtual void CreateStackingEffectSingle(BattleObject host, int stacksApplied) {
-
-            effectManager = GameObject.Find("EffectManager");
-            EffectController effectController;
-            bool effectCreated = false;
-
-            if (CheckForExistingEffectController(effectManager, this) == null) {
-                effectController = effectManager.AddComponent<EffectController>();
-                effectController.effectApplied = this;
-                effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
-            }
-            else {
-                effectController = CheckForExistingEffectController(effectManager, this);
-                effectCreated = true;
-            }
-
-            if (effectController.affectedBattleObjectList.Contains(host)) {
-                effectController.stackCountList[effectController.affectedBattleObjectList.IndexOf(host)] += stacksApplied;
-                effectController.RestartCheckForExpirationStacking(host);
-                return;
-            }
-
-            effectController.affectedBattleObjectList.Add(host);
-            effectController.stackCountList.Add(stacksApplied);
-
-            if (!effectCreated) {
-                effectController.Initialize();
-            }
-            else {
-                effectController.AddHostToExistingEffect(host);
-            }
-            
-            //You may not want this. I think stackers should run through an update function anyway - 
-            //all this does is add the effect to their effect list? eh?
-            InitEffect(host);
-
-        } //endCreateEffectSingle()
-
-
-        public virtual void CreateStackingEffectMultiple(List<BattleObject> list, int stacksApplied) {
-
-            effectManager = GameObject.Find("EffectManager");
-            EffectController effectController;
-            
-            if (CheckForExistingEffectController(effectManager, this) == null) {
-                effectController = effectManager.AddComponent<EffectController>();
-                effectController.effectApplied = this;
-                effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
-            }
-            else {
-                effectController = CheckForExistingEffectController(effectManager, this);
-            }
-
-            List<BattleObject> listToInit = new List<BattleObject>();
-
-            foreach (BattleObject host in list) {
-                
-                if (effectController.affectedBattleObjectList.Contains(host)) {
-                    effectController.stackCountList[effectController.affectedBattleObjectList.IndexOf(host)] += stacksApplied;
-                }
-                else {
-                    effectController.affectedBattleObjectList.Add(host);
-                    effectController.stackCountList.Add(stacksApplied);
-                    listToInit.Add(host);
-                    //RESOLVE HERE (host.applystatmods(resolve, mm, am) (look at tenacity command)
-                    InitEffect(host);
-                }
-            } //end foreach
-
-            effectController.InitializeMultipleStacking(listToInit);
-            
-        } //end CreateStackingEffectMultiple(2)
-
-        
-        public EffectController CheckForExistingEffectController (GameObject effectManager, Effect effectToCheckFor) {
-            foreach (EffectController effectController in effectManager.GetComponent<EffectManager>().activeEffectControllerList) {
-                if (effectController.effectApplied == this) {
-                    return effectController;
-                } 
-            }
-            return null;
-        } //end CheckForExistingEffectController(2)
-
-        
-        public virtual void RemoveEffect(BattleObject host) {
-			host.effectList.Remove (this);
-        }
-
-
-        public virtual void InitStacks(int stacks) {
-            stackCount += stacks;
-        }
-
-    */

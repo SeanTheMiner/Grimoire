@@ -14,6 +14,7 @@ public class EffectController : MonoBehaviour {
     }
 
     public List<HostController> hostControllerList = new List<HostController>();
+    public List<HostController> hostControllerToRemoveList = new List<HostController>();
 
     public class HostController {
 
@@ -40,11 +41,17 @@ public class EffectController : MonoBehaviour {
             Destroy(this);
         }
 
-        foreach (HostController effectStruct in hostControllerList) {
-            CheckForExpiration(effectStruct);
+        foreach (HostController hostController in hostControllerList) {
+            CheckForExpiration(hostController);
         }
 
-        hostControllerList.RemoveAll(item => item == null);
+        foreach (HostController hostController in hostControllerToRemoveList) {
+            hostControllerList.Remove(hostController);
+        }
+
+        hostControllerToRemoveList.Clear();
+
+        //hostControllerList.RemoveAll(item => item == null);
 
     } //end Update()
 
@@ -53,11 +60,11 @@ public class EffectController : MonoBehaviour {
 
         if (hostController.expirationTimer < Time.time) {
             if (effectApplied.effectType == Effect.EffectType.Lump) {
-                KillHostController(hostController);
+                SetHostControllerForRemoval(hostController);
             }
             else if (effectApplied.effectType == Effect.EffectType.Stacking) {
                 if (hostController.stackCount <= 1) {
-                    KillHostController(hostController);
+                    SetHostControllerForRemoval(hostController);
                 }
                 else {
                     UpdateStacks(hostController, -1);
@@ -79,22 +86,23 @@ public class EffectController : MonoBehaviour {
     } //end UpdateStacks (2)
      
 
-    public void KillHostController(HostController hostController) {
+    public void SetHostControllerForRemoval(HostController hostController) {
 
-        hostControllerList.Remove(hostController);
+        hostControllerToRemoveList.Add(hostController);
+        hostController.effectDisplayController.displayEffectIconList.Remove(hostController.effectIcon);
 
         effectApplied.RemoveEffectPerStack(hostController.host, hostController.stackCount);
         effectApplied.RemoveEffect(hostController.host);
 
-        hostController.effectDisplayController.displayEffectIconList.Remove(hostController.effectIcon);
-
         Destroy(hostController.effectIcon);
         hostController.effectDisplayController.UpdateEffectIconPositions();
 
-    } //end KillEffect (1)
-    
+        //Remove from reallist
 
-    public void InitStruct(BattleObject host) {
+    } //end SetHostControllerForRemoval(1)
+
+
+    public void InitHostController(BattleObject host) {
 
         HostController hostController = new HostController();
 
@@ -109,7 +117,7 @@ public class EffectController : MonoBehaviour {
     } //end InitStruct (1)
     
 
-    public void InitStructStacking(BattleObject host, int initialStacks) {
+    public void InitHostControllerStacking(BattleObject host, int initialStacks) {
 
         HostController hostController = new HostController();
 
