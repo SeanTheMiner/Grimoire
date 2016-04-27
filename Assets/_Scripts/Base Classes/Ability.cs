@@ -23,17 +23,16 @@ namespace Abilities {
         public Effect effectApplied;
 
         public Proc primaryProc;
-
-
+        
         public int effectStacksApplied {
             get; set;
         }
 
-        public DamageType primaryDamageType {
+        public AbilityDamageType abilityDamageType {
             get; set;
         }
-
-        public enum DamageType {
+        
+        public enum AbilityDamageType {
             Physical,
             Magical,
             Healing,
@@ -193,6 +192,7 @@ namespace Abilities {
 
         } //end DamageProcMultiple()
         
+
     } //end Ability class
 
 

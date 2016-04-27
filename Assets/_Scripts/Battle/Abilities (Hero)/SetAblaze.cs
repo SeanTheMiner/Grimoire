@@ -17,7 +17,7 @@ public class SetAblaze : HeroAbility {
         abilityName = "Set Ablaze";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
 
         appliesCoreEffect = true;
 

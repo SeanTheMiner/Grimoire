@@ -13,7 +13,7 @@ public class Inspire : ChampionAbility {
         abilityName = "Inspire";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleHero;
-        primaryDamageType = DamageType.Healing;
+        abilityDamageType = AbilityDamageType.Healing;
         manaCost = 100;
         
         chargeDuration = 3.0f;

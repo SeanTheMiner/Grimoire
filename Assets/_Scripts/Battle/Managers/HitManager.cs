@@ -25,7 +25,7 @@ public class HitManager : MonoBehaviour {
         float finesse = 0;
         float maxRange = 100;
 
-        if (ability.primaryDamageType == Ability.DamageType.Physical) {
+        if (ability.abilityDamageType == Ability.AbilityDamageType.Physical) {
 
             evasionChance = defender.ApplyStatModifications(defender.physicalEvasionChance, defender.physicalEvasionChanceMultMod, defender.physicalEvasionChanceAddMod);
             accuracy = attacker.ApplyStatModifications((proc.physicalAccuracy + attacker.physicalAccuracy), attacker.physicalAccuracyMultMod, attacker.physicalAccuracyAddMod);
@@ -34,7 +34,7 @@ public class HitManager : MonoBehaviour {
             finesse = attacker.ApplyStatModifications((proc.physicalFinesse + attacker.physicalFinesse), attacker.physicalFinesseMultMod, attacker.physicalFinesseAddMod);
 
         }
-        else if (ability.primaryDamageType == Ability.DamageType.Magical) {
+        else if (ability.abilityDamageType == Ability.AbilityDamageType.Magical) {
 
             evasionChance = defender.ApplyStatModifications(defender.magicalEvasionChance, defender.magicalEvasionChanceMultMod, defender.magicalEvasionChanceAddMod);
             accuracy = attacker.ApplyStatModifications((proc.magicalAccuracy + attacker.magicalAccuracy), attacker.magicalAccuracyMultMod, attacker.magicalAccuracyAddMod);
@@ -105,7 +105,6 @@ public class HitManager : MonoBehaviour {
                 + attacker.ApplyStatModifications(attacker.magicalPenetration, attacker.magicalPenetrationMultMod, attacker.magicalPenetrationAddMod);
         }
         
-
         resist *= (1 - (penetration / 100));
         finalDamage = ((damageProc.procDamage * modifier) * (100 / (resist + 100)));
         return finalDamage;

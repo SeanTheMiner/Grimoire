@@ -13,7 +13,7 @@ public class Eviscerate : ChampionAbility {
         abilityName = "Eviscerate";
         abilityType = AbilityType.Barrage;
         targetScope = TargetScope.Untargeted;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
         manaCost = 150;
 
         requiresTargeting = false;
@@ -43,11 +43,11 @@ public class Eviscerate : ChampionAbility {
             
             if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
                 DetermineHitOutcomeSingle(abilityOwner, targetEnemy, offensiveDamageProc);
-                nextProcTimer = Time.time + offensiveDamageProc.procSpacing;
+                ApplySpacing(nextProcTimer, offensiveDamageProc.procSpacing);
             }
             else if (ownerChampion.currentStance == Champion.ChampionStance.Defensive) {
                 DetermineHitOutcomeSingle(abilityOwner, targetEnemy, defensiveDamageProc);
-                nextProcTimer = Time.time + defensiveDamageProc.procSpacing;
+                ApplySpacing(nextProcTimer, defensiveDamageProc.procSpacing);
                 abilityOwner.currentMana += 30;
             }
             

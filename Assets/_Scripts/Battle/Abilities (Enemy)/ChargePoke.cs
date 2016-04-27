@@ -18,7 +18,7 @@ public class ChargePoke : EnemyAbility {
         damageProc.critMultiplier = 1.5f;
         damageProc.damageType = DamageProc.DamageType.Physical;
 
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
         targetScope = TargetScope.SingleHero;
         enemyAbilityType = EnemyAbilityType.Burst;
 

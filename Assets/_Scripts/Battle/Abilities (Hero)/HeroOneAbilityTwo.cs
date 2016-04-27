@@ -12,7 +12,7 @@ public class HeroOneAbilityTwo : HeroAbility {
         abilityName = "Punch Barrage";
         abilityType = AbilityType.Barrage;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
         manaCost = 120;
 
         chargeDuration = 3.0f;
@@ -33,7 +33,7 @@ public class HeroOneAbilityTwo : HeroAbility {
         if(damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
-            damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
+            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
         }
 
         if(abilityEndTimer <= Time.time) {

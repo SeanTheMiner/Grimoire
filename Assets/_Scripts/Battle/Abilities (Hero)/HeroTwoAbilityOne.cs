@@ -8,14 +8,13 @@ public class HeroTwoAbilityOne : HeroAbility {
 
     public DamageProc damageProc = new DamageProc();
     public EffectProc effectProc = new EffectProc();
-
     
     public HeroTwoAbilityOne() {
 
         abilityName = "Charge Blast";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
         manaCost = 100;
         
         requiresTargeting = false;

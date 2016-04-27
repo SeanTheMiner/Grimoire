@@ -13,7 +13,7 @@ public class PiercingFire : HeroAbility {
         abilityName = "Piercing Fire";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
         
         manaCost = 100;
         chargeDuration = 1;
@@ -34,9 +34,6 @@ public class PiercingFire : HeroAbility {
 
         CheckTarget();
         DetermineHitOutcomeSingle(abilityOwner, targetEnemy, centerDamageProc);
-        
-        Debug.Log(CheckAOETargetsOnCenter(targetEnemy).Count);
-
         DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargetsOnCenter(targetEnemy), AOEDamageProc);
         ExitAbility();
 

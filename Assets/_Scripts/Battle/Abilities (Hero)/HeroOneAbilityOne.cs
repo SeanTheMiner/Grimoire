@@ -12,7 +12,7 @@ public class HeroOneAbilityOne : HeroAbility {
         abilityName = "Sapping Punch";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
         manaCost = 120;
 
         chargeDuration = 5.0f;

@@ -11,7 +11,7 @@ public class BlessWeapon : HeroAbility {
         abilityName = "Bless Weapon";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleHero;
-        primaryDamageType = DamageType.None;
+        abilityDamageType = AbilityDamageType.None;
         manaCost = 60;
 
         chargeDuration = 4;

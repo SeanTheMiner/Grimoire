@@ -157,6 +157,39 @@ namespace BattleObjects {
         }
 
 
+        public float physicalAttackSpeedMultMod {
+            get; set;
+        }
+
+        public float magicalAttackSpeedMultMod {
+            get; set;
+        }
+        
+
+        public float physicalLifeSteal {
+            get; set;
+        }
+
+        public float physicalLifeStealMultMod {
+            get; set;
+        }
+
+        public float physicalLifeStealAddMod {
+            get; set;
+        }
+
+
+        public float magicalLifeSteal {
+            get; set;
+        }
+
+        public float magicalLifeStealMultMod {
+            get; set;
+        }
+
+        public float magicalLifeStealAddMod {
+            get; set;
+        }
 
 
         //Defensive stats & modifiers
@@ -264,6 +297,7 @@ namespace BattleObjects {
             get; set;
         }
 
+
         public float tenacity {
             get; set;
         }
@@ -275,6 +309,7 @@ namespace BattleObjects {
         public float tenacityMultMod {
             get; set;
         }
+
 
         public float resolve {
             get; set;
@@ -288,30 +323,19 @@ namespace BattleObjects {
             get; set;
         }
         
-        public float physicalLifeSteal {
-            get; set;
-        }
-        
-        public float physicalLifeStealMultMod {
+
+        public float incomingHealMultMod {
             get; set;
         }
 
-        public float physicalLifeStealAddMod {
+        public float outgoingHealMultMod {
             get; set;
         }
 
-
-        public float magicalLifeSteal {
-            get; set;
-        }
-        
-        public float magicalLifeStealMultMod {
+        public float healSpeedMultMod {
             get; set;
         }
 
-        public float magicalLifeStealAddMod {
-            get; set;
-        }
 
 
         //Constructor
@@ -352,7 +376,19 @@ namespace BattleObjects {
             magicalFinesse = 0;
             magicalFinesseMultMod = 1;
             magicalFinesseAddMod = 0;
-            
+
+            physicalAttackSpeedMultMod = 1;
+            magicalAttackSpeedMultMod = 1;
+
+            physicalLifeSteal = 0;
+            physicalLifeStealMultMod = 1;
+            physicalLifeStealAddMod = 0;
+
+            magicalLifeSteal = 0;
+            magicalLifeStealMultMod = 1;
+            magicalLifeStealAddMod = 0;
+
+
             armor = 0;
             armorMultMod = 1;
             armorAddMod = 0;
@@ -392,14 +428,10 @@ namespace BattleObjects {
             resolve = 0;
             resolveMultMod = 1;
             resolveAddMod = 0;
-
-            physicalLifeSteal = 0;
-            physicalLifeStealMultMod = 1;
-            physicalLifeStealAddMod = 0;
-
-            magicalLifeSteal = 0;
-            magicalLifeStealMultMod = 1;
-            magicalLifeStealAddMod = 0;
+            
+            incomingHealMultMod = 1;
+            outgoingHealMultMod = 1;
+            healSpeedMultMod = 1;
             
         } //end Constructor
 

@@ -14,7 +14,7 @@ public class HealPoke : EnemyAbility {
         
         enemyAbilityWeight = 10;
 
-        primaryDamageType = DamageType.Healing;
+        abilityDamageType = AbilityDamageType.Healing;
         targetScope = TargetScope.AllEnemies;
         enemyAbilityType = EnemyAbilityType.Burst;
 

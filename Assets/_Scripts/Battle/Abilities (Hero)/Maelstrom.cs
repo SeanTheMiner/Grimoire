@@ -11,7 +11,7 @@ public class Maelstrom : HeroAbility {
         abilityName = "Maelstrom";
         abilityType = AbilityType.Barrage;
         targetScope = TargetScope.FreeTargetAOE;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
         manaCost = 200;
 
         canBeDefault = false;
@@ -35,7 +35,7 @@ public class Maelstrom : HeroAbility {
         if (magicalDamageProc.nextProcTimer <= Time.time) {
             DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargets(), magicalDamageProc);
             ClearTargeting();
-            magicalDamageProc.nextProcTimer = Time.time + magicalDamageProc.procSpacing;
+            ApplySpacing(magicalDamageProc.nextProcTimer, magicalDamageProc.procSpacing);
         }
 
         if (abilityEndTimer <= Time.time) {

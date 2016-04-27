@@ -13,7 +13,7 @@ public class RaiseSpirits : HeroAbility {
 
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllHeroes;
-        primaryDamageType = DamageType.Healing;
+        abilityDamageType = AbilityDamageType.Healing;
 
         requiresTargeting = false;
 

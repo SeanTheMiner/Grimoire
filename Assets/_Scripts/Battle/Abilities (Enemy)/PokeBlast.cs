@@ -13,7 +13,7 @@ public class PokeBlast : EnemyAbility {
         chargeDuration = 5.0f;
         enemyAbilityWeight = 200;
 
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
         targetScope = TargetScope.AllHeroes;
         enemyAbilityType = EnemyAbilityType.Burst;
 

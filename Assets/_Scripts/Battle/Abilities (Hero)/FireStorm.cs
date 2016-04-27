@@ -15,7 +15,7 @@ public class FireStorm : HeroAbility {
 
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.Untargeted;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
 
         costsMana = false;
         requiresTargeting = false;
@@ -46,7 +46,7 @@ public class FireStorm : HeroAbility {
             targetEnemy = targetingManager.TargetRandomEnemy();
             DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);
             effectProc.ApplyEffectSingle(effectProc.effectApplied, targetEnemy);
-            damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
+            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
         }
        
     } //end Ability Map()

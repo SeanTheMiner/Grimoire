@@ -12,7 +12,7 @@ public class StandardSlashing : ChampionAbility {
         abilityName = "Standard Slashing";
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
 
         costsMana = false;
         hasCooldown = false;
@@ -47,14 +47,13 @@ public class StandardSlashing : ChampionAbility {
             CheckTarget();
             if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
                 offensiveProc.ApplyDamageProc(abilityOwner, targetEnemy);
-                nextProcTimer = Time.time + offensiveProc.procSpacing;
+                ApplySpacing(nextProcTimer, offensiveProc.procSpacing);
             }
             else if (ownerChampion.currentStance == Champion.ChampionStance.Defensive) {
                 defensiveProc.ApplyDamageProc(abilityOwner, targetEnemy);
-                nextProcTimer = Time.time + defensiveProc.procSpacing;
+                ApplySpacing(nextProcTimer, defensiveProc.procSpacing);
             }
             
-
         } //end if time to proc
 
     } //end AbilityMap()

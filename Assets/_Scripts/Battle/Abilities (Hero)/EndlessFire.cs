@@ -14,7 +14,7 @@ public class EndlessFire : HeroAbility {
 
         abilityType = AbilityType.InfCharge;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
 
         requiresTargeting = true;
 

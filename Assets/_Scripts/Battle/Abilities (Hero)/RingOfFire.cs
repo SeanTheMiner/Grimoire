@@ -12,7 +12,7 @@ public class RingOfFire : HeroAbility {
         abilityName = "Ring of Fire";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.FreeTargetAOE;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
         manaCost = 120;
 
         canBeDefault = false;

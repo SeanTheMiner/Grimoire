@@ -160,7 +160,25 @@ namespace EnemyAbilities {
             }
 
         } //end CheckTarget()
-        
+
+
+        public void ApplySpacing(float timerToModify, float spacingToApply) {
+
+            if (abilityDamageType == AbilityDamageType.Physical) {
+                timerToModify = Time.time + (spacingToApply * abilityOwner.physicalAttackSpeedMultMod);
+            }
+            else if (abilityDamageType == AbilityDamageType.Magical) {
+                timerToModify = Time.time + (spacingToApply * abilityOwner.magicalAttackSpeedMultMod);
+            }
+            else if (abilityDamageType == AbilityDamageType.Healing) {
+                timerToModify = Time.time + (spacingToApply * abilityOwner.healSpeedMultMod);
+            }
+            else {
+                timerToModify = Time.time + spacingToApply;
+            }
+
+        } //end ApplySpacing(2)
+
 
     } //end EnemyAbility class
 

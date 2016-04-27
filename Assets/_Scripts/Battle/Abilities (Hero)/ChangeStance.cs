@@ -8,6 +8,7 @@ public class ChangeStance : ChampionAbility {
         abilityName = "Change Stance";
         abilityType = AbilityType.Toggle;
         targetScope = TargetScope.Untargeted;
+        abilityDamageType = AbilityDamageType.None;
 
         requiresTargeting = false;
         costsMana = false;

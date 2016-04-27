@@ -13,7 +13,7 @@ public class EndlessPunches : HeroAbility {
 
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
 
         costsMana = false;
         hasCooldown = false;
@@ -37,7 +37,7 @@ public class EndlessPunches : HeroAbility {
         if(damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetEnemy, damageProc);
-            damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
+            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
         }
         
     } //end AbilityMap()

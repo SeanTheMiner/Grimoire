@@ -14,7 +14,7 @@ public class ErodeArmor : HeroAbility {
         abilityName = "Erode Armor";
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.AllEnemies;
-        primaryDamageType = DamageType.Magical;
+        abilityDamageType = AbilityDamageType.Magical;
         manaCost = 120;
 
         requiresTargeting = false;

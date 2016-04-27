@@ -15,7 +15,7 @@ public class HealBarrage : HeroAbility {
 
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.Untargeted;
-        primaryDamageType = DamageType.Healing;
+        abilityDamageType = AbilityDamageType.Healing;
 
         costsMana = false;
         requiresTargeting = false;
@@ -36,7 +36,7 @@ public class HealBarrage : HeroAbility {
         if (healProc.nextProcTimer <= Time.time) {
             CheckTarget();
             healProc.HealProcSingle(abilityOwner, targetingManager.TargetRandomHero());
-            healProc.nextProcTimer = Time.time + healProc.procSpacing;
+            ApplySpacing(healProc.nextProcTimer, healProc.procSpacing);
         }
 
     } //end AbilityMap()

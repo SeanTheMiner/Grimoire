@@ -15,7 +15,7 @@ public class SwordBarrage : ChampionAbility {
         abilityName = "Sword Barrage";
         abilityType = AbilityType.Barrage;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
         manaCost = 80;
 
         chargeDuration = 3.0f;
@@ -52,7 +52,7 @@ public class SwordBarrage : ChampionAbility {
                 secondaryDamageProc.ApplyDamageProc(abilityOwner, targetEnemy);
             }
 
-            nextProcTimer = Time.time + procSpacing;
+            ApplySpacing(nextProcTimer, procSpacing);
 
         } //end if time to proc
         

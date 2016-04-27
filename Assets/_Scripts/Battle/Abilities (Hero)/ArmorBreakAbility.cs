@@ -14,7 +14,7 @@ public class ArmorBreakAbility : HeroAbility {
 
         abilityType = AbilityType.Burst;
         targetScope = TargetScope.SingleEnemy;
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
 
         manaCost = 80;
         chargeDuration = 4;

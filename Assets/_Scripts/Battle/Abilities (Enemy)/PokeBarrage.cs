@@ -11,7 +11,7 @@ public class PokeBarrage : EnemyAbility {
 
         abilityName = "Poke Barrage";
 
-        primaryDamageType = DamageType.Physical;
+        abilityDamageType = AbilityDamageType.Physical;
         targetScope = TargetScope.SingleHero;
         enemyAbilityType = EnemyAbilityType.Barrage;
         
@@ -31,7 +31,7 @@ public class PokeBarrage : EnemyAbility {
         if (damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetHero, damageProc);
-            damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
+            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
         }
 
         if (abilityEndTimer <= Time.time) {
