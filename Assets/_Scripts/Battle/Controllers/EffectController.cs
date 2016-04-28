@@ -7,14 +7,13 @@ using Effects;
 
 public class EffectController : MonoBehaviour {
 
-    //GameObject effectManager = GameObject.Find("EffectManager");
-
     public Effect effectApplied {
         get; set;
     }
 
     public List<HostController> hostControllerList = new List<HostController>();
     public List<HostController> hostControllerToRemoveList = new List<HostController>();
+
 
     public class HostController {
 
@@ -25,13 +24,7 @@ public class EffectController : MonoBehaviour {
         public float expirationTimer;
         public int stackCount;
 
-    } //end effectStruct
-
-  
-    //public List<BattleObject> affectedBattleObjectList = new List<BattleObject>();
-    //public List<int> stackCountList = new List<int>();
-    //public List<GameObject> effectIconList = new List<GameObject>();
-
+    } //end HostController class
 
 
     void Update () {

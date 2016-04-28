@@ -167,13 +167,13 @@ namespace EnemyAbilities {
             float timerToReturn;
 
             if (abilityDamageType == AbilityDamageType.Physical) {
-                timerToReturn = Time.time + (spacingToApply * abilityOwner.physicalAttackSpeedMultMod);
+                timerToReturn = Time.time + (spacingToApply / abilityOwner.physicalAttackSpeedMultMod);
             }
             else if (abilityDamageType == AbilityDamageType.Magical) {
-                timerToReturn = Time.time + (spacingToApply * abilityOwner.magicalAttackSpeedMultMod);
+                timerToReturn = Time.time + (spacingToApply / abilityOwner.magicalAttackSpeedMultMod);
             }
             else if (abilityDamageType == AbilityDamageType.Healing) {
-                timerToReturn = Time.time + (spacingToApply * abilityOwner.healSpeedMultMod);
+                timerToReturn = Time.time + (spacingToApply / abilityOwner.healSpeedMultMod);
             }
             else {
                 timerToReturn = Time.time + spacingToApply;

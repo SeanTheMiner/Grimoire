@@ -75,18 +75,8 @@ namespace Effects {
 
         } //end constructor
 
-        //public GameObject effectManager = GameObject.FindGameObjectWithTag("EffectManager");
-
 		
 		//Virtual functions, to be overridden on child classes as needed
-
-		//I feel like most effects won't need a map.
-		//But, for those that decay over time or do anything special,
-		//orrr are triggered by events, I think they'll need that?
-		//InvokeRepeating won't work for something that needs to check every frame.
-		//Might need to research if there's a way to suppress update or something,
-		//because if there is an effect script on a hero's ability like there needs to be,
-		//it'll just get called all day.
 
         public virtual void EffectMap(BattleObject host) {}
         
@@ -160,7 +150,7 @@ namespace Effects {
                 effectController = effectManager.AddComponent<EffectController>();
                 effectController.effectApplied = this;
                 effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
-                effectController.InitHostControllerStacking(host, stacksApplied);
+                effectController.InitHostControllerStacking(host, ApplyResolveToStacks(host, stacksApplied));
             }
             else {
                 effectController = CheckForExistingEffectController(effectManager, this);
@@ -170,14 +160,14 @@ namespace Effects {
             if (effectCreated) {
                 foreach (EffectController.HostController hostController in effectController.hostControllerList) {
                     if (hostController.host == host) {
-                        effectController.UpdateStacks(hostController, stacksApplied);
+                        effectController.UpdateStacks(hostController, ApplyResolveToStacks(hostController.host, stacksApplied));
                         return;
                     }
                 } //end foreach - only gets to here if host was not found
 
                 //if you get here, it means the effectController was previously created, but the host was not found
                 //so you have to add a new host and create a new struct for them.
-                effectController.InitHostControllerStacking(host, stacksApplied);
+                effectController.InitHostControllerStacking(host, ApplyResolveToStacks(host, stacksApplied));
                 
             } //end if the effect was created previously
            
@@ -196,7 +186,7 @@ namespace Effects {
                 effectController.effectApplied = this;
                 effectManager.GetComponent<EffectManager>().activeEffectControllerList.Add(effectController);
                 foreach (BattleObject newHost in list) {
-                    effectController.InitHostControllerStacking(newHost, stacksApplied);
+                    effectController.InitHostControllerStacking(newHost, ApplyResolveToStacks(newHost, stacksApplied));
                 }
                 return;
             }
@@ -210,14 +200,14 @@ namespace Effects {
 
                 foreach (EffectController.HostController hostController in effectController.hostControllerList) {
                     if (hostController.host == existingHost) {
-                        effectController.UpdateStacks(hostController, stacksApplied);
+                        effectController.UpdateStacks(hostController, ApplyResolveToStacks(hostController.host, stacksApplied));
                         listToInit.Remove(existingHost);
                     }
                 } //Now you've updated any existing hosts, and removed them from the list to pass if so
             } //end foreach host in list
 
             foreach (BattleObject newHost in listToInit) {
-                effectController.InitHostControllerStacking(newHost, stacksApplied);
+                effectController.InitHostControllerStacking(newHost, ApplyResolveToStacks(newHost, stacksApplied));
                 InitEffect(newHost);
             }
             
@@ -233,6 +223,11 @@ namespace Effects {
             return null;
         } //end CheckForExistingEffectController(2)
         
+
+        public int ApplyResolveToStacks (BattleObject host, int initialStacks) {
+            return initialStacks = Mathf.RoundToInt(initialStacks * (1-((host.ApplyStatModifications(host.resolve, host.resolveMultMod, host.resolveAddMod)/(100/resolveScale)))));
+        } //end ApplyResolveToStacks(2)
+
         
     } //end Effect Class
 

@@ -17,6 +17,8 @@ public class BlueEnemy : Enemy {
         physicalEvasionChance = 12;
         physicalBlockChance = 50;
         physicalBlockModifier = 40;
+
+        resolve = 35;
         
         enemyAbilityOne = new ChargePoke();
         enemyAbilityTwo = new PokeBarrage();
