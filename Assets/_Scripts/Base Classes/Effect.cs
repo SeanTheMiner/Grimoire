@@ -65,7 +65,13 @@ namespace Effects {
             get; set;
         }
 
-
+        public enum EffectClass {
+            Buff,
+            Debuff
+        }
+        
+        public EffectClass effectClass;
+        
         public Effect () {
 
             effectDuration = 0;
@@ -166,7 +172,7 @@ namespace Effects {
                 } //end foreach - only gets to here if host was not found
 
                 //if you get here, it means the effectController was previously created, but the host was not found
-                //so you have to add a new host and create a new struct for them.
+                //so you have to add a new host and create a new hostController for them.
                 effectController.InitHostControllerStacking(host, ApplyResolveToStacks(host, stacksApplied));
                 
             } //end if the effect was created previously
@@ -225,7 +231,14 @@ namespace Effects {
         
 
         public int ApplyResolveToStacks (BattleObject host, int initialStacks) {
-            return initialStacks = Mathf.RoundToInt(initialStacks * (1-((host.ApplyStatModifications(host.resolve, host.resolveMultMod, host.resolveAddMod)/(100/resolveScale)))));
+
+            if (effectClass == EffectClass.Debuff) {
+                return initialStacks = Mathf.RoundToInt(initialStacks * (1-(((host.ApplyStatModifications(host.resolve, host.resolveMultMod, host.resolveAddMod)/100) * resolveScale))));
+            }
+            else {
+                return initialStacks;
+            }
+
         } //end ApplyResolveToStacks(2)
 
         

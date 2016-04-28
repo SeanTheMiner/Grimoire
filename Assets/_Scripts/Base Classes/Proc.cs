@@ -283,17 +283,21 @@ namespace Procs {
 
         public virtual void HealProcSingle(BattleObject healer, BattleObject healee) {
 
-            int heal;
-            if ((healee.currentHealth + procHeal) <= healee.maxHealth) {
-                heal = Mathf.RoundToInt(procHeal);
-            }
-            else {
-                heal = Mathf.RoundToInt(healee.maxHealth - healee.currentHealth);
+            int heal = Mathf.RoundToInt(procHeal * healer.outgoingHealMultMod * healee.incomingHealMultMod);
+            int overflow = 0;
+
+            if ((healee.currentHealth + heal) > healee.maxHealth) {
+                overflow = Mathf.RoundToInt(heal - (healee.maxHealth - healee.currentHealth));
+                heal -= overflow;
             }
 
             if (heal > 0) {
                 healee.currentHealth += heal;
                 healee.SpawnHealText(heal);
+            }
+
+            if (overflow > 0) {
+                ApplyHealOverFlow(overflow);
             }
 
         } //end HealProcSingle
@@ -311,17 +315,25 @@ namespace Procs {
         public virtual void InfHealProcSingle(BattleObject healer, BattleObject healee, HeroAbility ability) {
 
             ability.isInfCharging = false;
-            int heal;
-            if (healee.currentHealth + (ability.infProcMultiplier * (Time.time - ability.infChargeStartTimer)) <= healee.maxHealth) {
-                heal = Mathf.RoundToInt(ability.infProcMultiplier * (Time.time - ability.infChargeStartTimer));
+            int heal = Mathf.RoundToInt((ability.infProcMultiplier * (Time.time - ability.infChargeStartTimer)) * healer.outgoingHealMultMod * healee.incomingHealMultMod);
+            int overflow = 0;
+
+            if ((healee.currentHealth + heal) > healee.maxHealth) {
+                overflow = Mathf.RoundToInt(heal - (healee.maxHealth - healee.currentHealth));
+                heal -= overflow;
             }
-            else {
-                heal = Mathf.RoundToInt(healee.maxHealth - healee.currentHealth);
+
+            if (heal > 0) {
+                healee.currentHealth += heal;
+                healee.SpawnHealText(heal);
             }
-            healee.currentHealth += heal;
-            healee.SpawnHealText(heal);
+
+            if (overflow > 0) {
+                ApplyHealOverFlow(overflow);
+            }
 
         } //end InfHealProcSingle(3)
+
 
         public virtual void InfHealProcMultiple(BattleObject healer, HeroAbility ability, List<BattleObject> list) {
 
@@ -332,6 +344,10 @@ namespace Procs {
 
         } //end InfHealProcMultiple
         
+
+        public virtual void ApplyHealOverFlow(int overFlowAmount) { }
+
+
     } //end HealProc class
 
 
