@@ -24,8 +24,6 @@ public class AOETargeterController : MonoBehaviour {
 
     void OnTriggerEnter (Collider touchedCollider) {
 
-        Debug.Log("contact made");
-
         GameObject touchedObject = touchedCollider.gameObject;
         if (touchedObject.tag == "Enemy") {
             battleObjectList.Add(touchedObject.GetComponent<BattleObject>());

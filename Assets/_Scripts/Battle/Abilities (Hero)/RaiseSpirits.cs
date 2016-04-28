@@ -19,10 +19,10 @@ public class RaiseSpirits : HeroAbility {
 
         manaCost = 250;
 
-        chargeDuration = 2.0f;
-        cooldownDuration = 20;
+        chargeDuration = 4.0f;
+        cooldownDuration = 25;
 
-        healProc.procHeal = 90;
+        healProc.procHeal = 120;
         effectProc.effectApplied = new RaiseSpiritsEff();
         
     } //end Constructor()

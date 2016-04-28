@@ -16,7 +16,7 @@ public class Inspire : ChampionAbility {
         abilityDamageType = AbilityDamageType.Healing;
         manaCost = 100;
         
-        chargeDuration = 3.0f;
+        chargeDuration = 3.5f;
         cooldownDuration = 17;
        
         healProc.procHeal = 220;

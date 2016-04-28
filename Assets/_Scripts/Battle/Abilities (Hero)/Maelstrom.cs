@@ -35,7 +35,7 @@ public class Maelstrom : HeroAbility {
         if (magicalDamageProc.nextProcTimer <= Time.time) {
             DetermineHitOutcomeMultiple(abilityOwner, CheckAOETargets(), magicalDamageProc);
             ClearTargeting();
-            ApplySpacing(magicalDamageProc.nextProcTimer, magicalDamageProc.procSpacing);
+            magicalDamageProc.nextProcTimer = ApplySpacing(magicalDamageProc.procSpacing);
         }
 
         if (abilityEndTimer <= Time.time) {

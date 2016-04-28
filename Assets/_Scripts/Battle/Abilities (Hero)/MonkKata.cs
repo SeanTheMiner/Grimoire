@@ -116,7 +116,7 @@ public class MonkKata : HeroAbility {
 
     private void ProcessProc (DamageProc proc) {
         DetermineHitOutcomeSingle(abilityOwner, targetEnemy, proc);
-        ApplySpacing(nextProcTimer, procSpacing);
+        nextProcTimer = ApplySpacing(procSpacing);
         procCounter++;
         chainContinueChance -= chainDecayRate;
     } //end ProcessProc(1)
@@ -127,7 +127,7 @@ public class MonkKata : HeroAbility {
         procCounter = 0;
         chainContinueChance = 100;
         procDamage = 100;
-        ApplySpacing(interProcTimer, interProcSpacing);
+        interProcTimer = ApplySpacing(interProcSpacing);
     } //end ExitChain()
 
 

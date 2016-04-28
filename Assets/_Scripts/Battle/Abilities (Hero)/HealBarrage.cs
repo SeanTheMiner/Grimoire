@@ -36,7 +36,7 @@ public class HealBarrage : HeroAbility {
         if (healProc.nextProcTimer <= Time.time) {
             CheckTarget();
             healProc.HealProcSingle(abilityOwner, targetingManager.TargetRandomHero());
-            ApplySpacing(healProc.nextProcTimer, healProc.procSpacing);
+            healProc.nextProcTimer = ApplySpacing(healProc.procSpacing);
         }
 
     } //end AbilityMap()

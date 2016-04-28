@@ -46,7 +46,7 @@ public class FireStorm : HeroAbility {
             targetEnemy = targetingManager.TargetRandomEnemy();
             DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);
             effectProc.ApplyEffectSingle(effectProc.effectApplied, targetEnemy);
-            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
+            damageProc.nextProcTimer = ApplySpacing(damageProc.procSpacing);
         }
        
     } //end Ability Map()

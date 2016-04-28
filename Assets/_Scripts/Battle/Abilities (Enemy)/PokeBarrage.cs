@@ -31,7 +31,7 @@ public class PokeBarrage : EnemyAbility {
         if (damageProc.nextProcTimer <= Time.time) {
             CheckTarget();
             DetermineHitOutcomeSingle(abilityOwner, targetHero, damageProc);
-            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
+            damageProc.nextProcTimer = ApplySpacing(damageProc.procSpacing);
         }
 
         if (abilityEndTimer <= Time.time) {

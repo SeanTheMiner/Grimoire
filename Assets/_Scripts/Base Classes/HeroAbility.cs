@@ -431,20 +431,24 @@ public class HeroAbility : Ability {
     } //end DamageProcMultiple()
     
 
-    public void ApplySpacing(float timerToModify, float spacingToApply) {
+    public float ApplySpacing(float spacingToApply) {
+
+        float timerToReturn;
 
         if (abilityDamageType == AbilityDamageType.Physical) {
-            timerToModify = Time.time + (spacingToApply * abilityOwner.physicalAttackSpeedMultMod);
+            timerToReturn = Time.time + (spacingToApply / abilityOwner.physicalAttackSpeedMultMod);
         }
         else if (abilityDamageType == AbilityDamageType.Magical) {
-            timerToModify = Time.time + (spacingToApply * abilityOwner.magicalAttackSpeedMultMod);
+            timerToReturn = Time.time + (spacingToApply / abilityOwner.magicalAttackSpeedMultMod);
         }
         else if (abilityDamageType == AbilityDamageType.Healing) {
-            timerToModify = Time.time + (spacingToApply * abilityOwner.healSpeedMultMod);
+            timerToReturn = Time.time + (spacingToApply / abilityOwner.healSpeedMultMod);
         }
         else {
-            timerToModify = Time.time + spacingToApply;
+            timerToReturn = Time.time + spacingToApply;
         }
+
+        return timerToReturn;
 
     } //end ApplySpacing(2)
     

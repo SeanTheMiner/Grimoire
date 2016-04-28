@@ -47,11 +47,11 @@ public class StandardSlashing : ChampionAbility {
             CheckTarget();
             if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
                 offensiveProc.ApplyDamageProc(abilityOwner, targetEnemy);
-                ApplySpacing(nextProcTimer, offensiveProc.procSpacing);
+                nextProcTimer = ApplySpacing(offensiveProc.procSpacing);
             }
             else if (ownerChampion.currentStance == Champion.ChampionStance.Defensive) {
                 defensiveProc.ApplyDamageProc(abilityOwner, targetEnemy);
-                ApplySpacing(nextProcTimer, defensiveProc.procSpacing);
+                nextProcTimer = ApplySpacing(defensiveProc.procSpacing);
             }
             
         } //end if time to proc

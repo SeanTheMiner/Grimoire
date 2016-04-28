@@ -43,11 +43,11 @@ public class Eviscerate : ChampionAbility {
             
             if (ownerChampion.currentStance == Champion.ChampionStance.Offensive) {
                 DetermineHitOutcomeSingle(abilityOwner, targetEnemy, offensiveDamageProc);
-                ApplySpacing(nextProcTimer, offensiveDamageProc.procSpacing);
+                nextProcTimer = ApplySpacing(offensiveDamageProc.procSpacing);
             }
             else if (ownerChampion.currentStance == Champion.ChampionStance.Defensive) {
                 DetermineHitOutcomeSingle(abilityOwner, targetEnemy, defensiveDamageProc);
-                ApplySpacing(nextProcTimer, defensiveDamageProc.procSpacing);
+                nextProcTimer = ApplySpacing(defensiveDamageProc.procSpacing);
                 abilityOwner.currentMana += 30;
             }
             

@@ -52,7 +52,7 @@ public class SwordBarrage : ChampionAbility {
                 secondaryDamageProc.ApplyDamageProc(abilityOwner, targetEnemy);
             }
 
-            ApplySpacing(nextProcTimer, procSpacing);
+            nextProcTimer = ApplySpacing(procSpacing);
 
         } //end if time to proc
         

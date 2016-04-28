@@ -16,6 +16,7 @@ public class RaiseSpiritsEff : Effect {
 
     } //end Constructor
 
+
     public override void InitEffect(BattleObject host) {
         base.InitEffect(host);
         host.spiritMultMod += 0.7f;

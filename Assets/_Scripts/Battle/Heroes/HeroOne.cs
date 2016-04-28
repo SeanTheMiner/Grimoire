@@ -29,7 +29,7 @@ public class HeroOne : Hero {
         abilityThree = new HeroOneAbilityTwo();
         abilityFour = new HeroOneAbilityOne();
         abilityFive = new RaiseSpirits();
-        abilitySix = new ArmorBreakAbility();
+        abilitySix = new Bloodlust();
 
         SetAbilityOwner();
         

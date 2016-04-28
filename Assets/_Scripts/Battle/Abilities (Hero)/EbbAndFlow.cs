@@ -38,7 +38,7 @@ public class EbbAndFlow : HeroAbility {
         if (chargeEndTimer <= Time.time) {
             abilityOwner.currentBattleState = Heroes.Hero.BattleState.InfBarrage;
             abilityOwner.canTakeCommands = true;
-            ApplySpacing(healProc.nextProcTimer, healProc.procStartDelay);
+            healProc.nextProcTimer = ApplySpacing(healProc.procStartDelay);
             AbilityMap();
         } //end if chargeEndTimer <= Time.time
 
@@ -56,11 +56,11 @@ public class EbbAndFlow : HeroAbility {
 
         if (damageProc.nextProcTimer <= Time.time) {
             DetermineHitOutcomeSingle(abilityOwner, targetingManager.TargetRandomEnemy(), damageProc);
-            ApplySpacing(damageProc.nextProcTimer, damageProc.procSpacing);
+            damageProc.nextProcTimer = ApplySpacing(damageProc.procSpacing);
         } //end if damageProc time
         else if (healProc.nextProcTimer <= Time.time) {
             healProc.HealProcSingle(abilityOwner, targetingManager.TargetRandomHero());
-            ApplySpacing(healProc.nextProcTimer, healProc.procSpacing);
+            healProc.nextProcTimer = ApplySpacing(healProc.procSpacing);
         } //end if healProc time
         
     } //end AbilityMap()
