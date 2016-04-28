@@ -37,7 +37,7 @@ public class TargetingManager {
                 ability.targetEnemy = objectHit.collider.gameObject.GetComponent<Enemy>();
             } 
 
-            else if((objectHit.collider.tag == "Hero") && (ability.targetScope == HeroAbility.TargetScope.SingleHero)) {
+            else if((objectHit.collider.tag == "Hero") && (ability.targetScope == HeroAbility.TargetScope.SingleHero) && (!objectHit.collider.gameObject.GetComponent<Hero>().isDead)) {
                 ability.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
             } 
 

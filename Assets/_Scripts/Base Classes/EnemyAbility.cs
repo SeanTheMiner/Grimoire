@@ -155,7 +155,7 @@ namespace EnemyAbilities {
             if ((targetScope == TargetScope.SingleEnemy) && (targetEnemy == null)) {
                 targetEnemy = targetingManager.TargetRandomEnemy();
             }
-            else if ((targetScope == TargetScope.SingleHero) && (targetHero == null)) {
+            else if ((targetScope == TargetScope.SingleHero) && (targetHero == null) && (!targetHero.isDead)) {
                 targetHero = targetingManager.TargetRandomHero();
             }
 

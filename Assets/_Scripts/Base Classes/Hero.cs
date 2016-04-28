@@ -113,6 +113,9 @@ namespace Heroes {
             currentHealth = 0;
             currentMana = 0;
             currentBattleState = BattleState.Dead;
+            gameObject.tag = "DeadHero";
+
+            effectDisplayController.KillAllEffects(this);
 
             isDead = true;
             healthIsLocked = true;
@@ -129,6 +132,7 @@ namespace Heroes {
 
             currentMana = maxMana;
             currentBattleState = BattleState.Wait;
+            gameObject.tag = "Hero";
 
             isDead = false;
             healthIsLocked = false;
@@ -156,7 +160,16 @@ namespace Heroes {
 
         } //end ReviveHeroFlat(1)
 
-        
+
+        void LateUpdate() {
+
+            if ((currentHealth <= 0) && (!isDead)) { 
+                SetHeroToDead();
+            }
+
+        } //end LateUpdate()
+
+
     } //end Hero class
 
 } //end Heroes namespace

@@ -10,6 +10,8 @@ namespace Procs {
 
     public class Proc {
 
+        public TargetingManager targetingManager = new TargetingManager();
+
         public bool isDependent {
             get; set;
         }
@@ -129,6 +131,10 @@ namespace Procs {
         //Application functions
 
         public virtual void ApplyDamageProc(BattleObject attacker, BattleObject defender) {
+
+            if (defender.tag == "DeadHero") {
+                defender = targetingManager.TargetRandomHero();
+            }
 
             int damageToApply = Mathf.RoundToInt(HitManager.ApplyResist(attacker, defender, this, 1));
 

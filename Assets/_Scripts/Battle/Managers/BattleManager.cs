@@ -474,8 +474,10 @@ public class BattleManager : MonoBehaviour {
     void DebugAllHeroDamage() {
 
         foreach(Hero hero in heroList) {
-            hero.currentHealth -= 120;
-            hero.SpawnDamageText(120, Procs.DamageProc.DamageType.Physical);
+            if (!hero.isDead) {
+                hero.currentHealth -= 120;
+                hero.SpawnDamageText(120, Procs.DamageProc.DamageType.Physical);
+            }
         }
     }
 
