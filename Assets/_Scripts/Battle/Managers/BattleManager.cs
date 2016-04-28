@@ -132,7 +132,7 @@ public class BattleManager : MonoBehaviour {
         }
 
         if(Input.GetKeyDown(KeyCode.X)) {
-            DebugSelectedHeroDamage();
+            DebugSelectedHeroKill();
         }
 
         if(Input.GetKeyDown(KeyCode.C)) {
@@ -426,11 +426,13 @@ public class BattleManager : MonoBehaviour {
         } //end foreach enemy
 
         foreach (Hero hero in heroList) {
-            if(hero.currentHealth < hero.maxHealth) {
-                hero.currentHealth += (hero.healthRegen / 5);
-            }
-            if (hero.currentMana < hero.maxMana) {
-                hero.currentMana += (hero.manaRegen / 5);
+            if (!hero.isDead) {
+                if (hero.currentHealth < hero.maxHealth) {
+                    hero.currentHealth += (hero.healthRegen / 5);
+                }
+                if (hero.currentMana < hero.maxMana) {
+                    hero.currentMana += (hero.manaRegen / 5);
+                }
             }
         } //end foreach hero
 
@@ -478,11 +480,15 @@ public class BattleManager : MonoBehaviour {
     }
 
 
-    void DebugSelectedHeroDamage () {
+    void DebugSelectedHeroKill () {
 
         if(selectedHero != null) {
-            selectedHero.currentHealth -= 177;
-            selectedHero.SpawnDamageText(177, Procs.DamageProc.DamageType.Magical);
+            if (!selectedHero.isDead) {
+                selectedHero.SetHeroToDead();
+            }
+            else {
+                selectedHero.ReviveHeroPercentage(50);
+            }
         }
     }
 
