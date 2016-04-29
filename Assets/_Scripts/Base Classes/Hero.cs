@@ -42,6 +42,18 @@ namespace Heroes {
             get; set;
         }
 
+        public float reviveChannelDuration {
+            get; set;
+        }
+
+        public float reviveChannelEndTimer {
+            get; set;
+        }
+
+        public float reviveCostScale {
+            get; set;
+        }
+
 
         //Under the hood
 
@@ -49,7 +61,9 @@ namespace Heroes {
         public HeroAbility currentAbility, queuedAbility, selectedAbility, targetingAbility, defaultAbility;
         public HeroAbility abilityOne, abilityTwo, abilityThree, abilityFour, abilityFive, abilitySix;
         public Artifact artifactOne, artifactTwo, artifactThree;
-        
+        public Hero revivalTarget;
+        public TargetingManager targetingManager = new TargetingManager();
+
         public BattleState currentBattleState {
             get; set;
         }
@@ -62,7 +76,9 @@ namespace Heroes {
             InfBarrage,
             Ability,
             Uncharge,
-            Dead
+            Dead,
+            Reviving,
+            RevTarget
         }
 
 
@@ -70,6 +86,9 @@ namespace Heroes {
 
             canTakeCommands = true;
             healthIsLocked = false;
+
+            reviveChannelDuration = 5;
+            reviveCostScale = 1;
             
         } //end constructor
 
@@ -125,6 +144,10 @@ namespace Heroes {
             transform.position -= Vector3.right * 0.7f;
             transform.Rotate(0, 90, 0);
 
+            selectedAbility = null;
+            currentAbility = null;
+            defaultAbility = null;
+
         } //end SetHeroToDead()
 
 
@@ -168,6 +191,31 @@ namespace Heroes {
             }
 
         } //end LateUpdate()
+
+
+        public void InitRevival () {
+
+            currentBattleState = BattleState.Reviving;
+
+            currentAbility = null;
+            selectedAbility = null;
+
+            reviveChannelEndTimer = Time.time + reviveChannelDuration;
+
+        } //end InitRevival()
+
+
+        public void CheckRevivalCharge () {
+
+            if (reviveChannelEndTimer <= Time.time) {
+                revivalTarget.ReviveHeroPercentage(30);
+                currentHealth -= 150;
+                //will need to refer to whereve the actual dynamic cost is,
+                //This calling a virtual ReviveHero function will be the way to go.
+                currentBattleState = BattleState.Wait;
+            }
+
+        } //end CheckRevivalCharge()
 
 
     } //end Hero class

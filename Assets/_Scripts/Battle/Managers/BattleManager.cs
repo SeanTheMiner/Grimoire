@@ -95,6 +95,7 @@ public class BattleManager : MonoBehaviour {
 
             if (selectedHero.canTakeCommands) {
                 CheckForAbilitySelectionInput();
+                CheckForRevivalInput();
             }
             if (Input.GetKey(KeyCode.LeftShift)) {
                 CheckForDefaultAbilitySelectionInput();
@@ -188,6 +189,16 @@ public class BattleManager : MonoBehaviour {
 
         else if((hero.currentBattleState == Hero.BattleState.Ability) | (hero.currentBattleState == Hero.BattleState.InfBarrage)) {
             hero.currentAbility.AbilityMap();
+        }
+
+        else if (hero.currentBattleState == Hero.BattleState.RevTarget) {
+            if (Input.GetMouseButtonDown(0)) {
+                selectedHero.targetingManager.CastRevivalSelecterRay(selectedHero);
+            }
+        }
+
+        else if (hero.currentBattleState == Hero.BattleState.Reviving) {
+            hero.CheckRevivalCharge();
         }
 
     } //end CheckBattleState()
@@ -296,6 +307,29 @@ public class BattleManager : MonoBehaviour {
     } //end CheckForDefaultAbilitySelectionInput()
 
 
+    bool CheckForDeadHeroes () {
+
+        GameObject[] allHeroes = GameObject.FindGameObjectsWithTag("DeadHero");
+        if (allHeroes.Length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    } //end CheckForDeadHeroes()
+
+
+    void CheckForRevivalInput () {
+        
+        if ((CheckForDeadHeroes()) && (selectedHero.tag != "DeadHero")) {
+            if (Input.GetKeyDown(KeyCode.R)) {
+                selectedHero.currentBattleState = Hero.BattleState.RevTarget;
+            }
+        }
+
+    } //end CheckForRevivalInput()
+
     
 //Ability handling functions
 
@@ -305,6 +339,7 @@ public class BattleManager : MonoBehaviour {
 
         hero.selectedAbility = null;
         hero.targetingAbility = null;
+        hero.revivalTarget = null;
 
         if (hero.currentAbility != null) {
 

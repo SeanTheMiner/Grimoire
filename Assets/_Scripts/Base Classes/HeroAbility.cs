@@ -65,6 +65,10 @@ public class HeroAbility : Ability {
         get; set;
     }
 
+    public bool isRevive {
+        get; set;
+    }
+
     public AbilityType abilityType {
         get; set;
     }
@@ -123,6 +127,8 @@ public class HeroAbility : Ability {
         hasCooldown = true;
         isInfCharging = false;
         canBeDefault = true;
+        appliesCoreEffect = false;
+        isRevive = false;
 
         chargeDuration = 0.0f;
         chargeEndTimer = 0.0f;

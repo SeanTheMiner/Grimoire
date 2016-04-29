@@ -41,10 +41,21 @@ public class DebugDisplayManager : MonoBehaviour {
 
     public void UpdateDebugText() {
 
-        textOne.text = "E1S: " + battleManager.enemyObjectOne.spiritAddMod;
-        textTwo.text = "E2S: " + battleManager.enemyObjectTwo.ApplyStatModifications(battleManager.enemyObjectTwo.spirit, battleManager.enemyObjectTwo.spiritMultMod, battleManager.enemyObjectTwo.spiritAddMod);
-        textThree.text = "E3S: " + battleManager.enemyObjectThree.ApplyStatModifications(battleManager.enemyObjectThree.spirit, battleManager.enemyObjectThree.spiritMultMod, battleManager.enemyObjectThree.spiritAddMod); ;
-        //textFour.text = "H4A: " + battleManager.heroObjectFour.ApplyStatModifications(battleManager.heroObjectFour.armor, battleManager.heroObjectFour.armorMultMod, battleManager.heroObjectFour.armorAddMod);
+        if (battleManager.selectedHero != null) {
+            
+            textOne.text = battleManager.selectedHero.currentBattleState.ToString();
+            if (battleManager.selectedHero.revivalTarget != null) {
+                textTwo.text = battleManager.selectedHero.revivalTarget.heroName;
+            }
+            if (battleManager.selectedHero.reviveChannelEndTimer > Time.time) {
+                textThree.text = (battleManager.selectedHero.reviveChannelEndTimer - Time.time).ToString();
+            }      
+
+        }
+
+
+
+
 
         //textFive.text = "H1S: " + battleManager.heroObjectOne.ApplyStatModifications(battleManager.heroObjectOne.spirit, battleManager.heroObjectOne.spiritMultMod, battleManager.heroObjectOne.spiritAddMod);
         //textSix.text = "H2S: " + battleManager.heroObjectTwo.ApplyStatModifications(battleManager.heroObjectTwo.spirit, battleManager.heroObjectTwo.spiritMultMod, battleManager.heroObjectTwo.spiritAddMod);

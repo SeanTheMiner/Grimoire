@@ -41,6 +41,10 @@ public class TargetingManager {
                 ability.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
             } 
 
+            else if ((objectHit.collider.tag == "DeadHero") && (ability.isRevive)) {
+                ability.targetHero = objectHit.collider.gameObject.GetComponent<Hero>();
+            }
+
             else {
                 return;
             }
@@ -55,6 +59,25 @@ public class TargetingManager {
         }  //end if objectHit
 
     } //end CastSelecterRay(1)
+
+
+    public void CastRevivalSelecterRay(Hero reviver) {
+
+        RaycastHit objectHit;
+        Ray selectingRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(selectingRay, out objectHit)) {
+
+            if (objectHit.collider.tag == "DeadHero") {
+                reviver.revivalTarget = objectHit.collider.gameObject.GetComponent<Hero>();
+                reviver.InitRevival();
+            }
+            else {
+                return;
+            }
+        }
+
+    } //end CastRevivalSelecterRay(1)
 
 
     public Enemy TargetRandomEnemy() {
