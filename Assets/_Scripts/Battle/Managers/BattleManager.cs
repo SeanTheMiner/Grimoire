@@ -142,6 +142,10 @@ public class BattleManager : MonoBehaviour {
             }
         }
         
+        if ((selectedHero != null) && (selectedHero.tag == "DeadHero")) {
+            selectedHero = null;
+        }
+
     } //end Update
 
     
@@ -208,24 +212,24 @@ public class BattleManager : MonoBehaviour {
 //Input checking functions
 
     void CheckForHeroSelectionInput() {
-
-        if(Input.GetKeyDown(KeyCode.Alpha1)) {
+        
+        if((Input.GetKeyDown(KeyCode.Alpha1)) && (heroObjectOne.tag != "DeadHero")) {
             selectedHero = heroObjectOne;
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha2)) {
+        if((Input.GetKeyDown(KeyCode.Alpha2)) && (heroObjectTwo.tag != "DeadHero")) {
             selectedHero = heroObjectTwo;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+        if ((Input.GetKeyDown(KeyCode.Alpha3)) && (heroObjectThree.tag != "DeadHero")) {
             selectedHero = heroObjectThree;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+        if ((Input.GetKeyDown(KeyCode.Alpha4)) && (heroObjectFour.tag != "DeadHero")) {
             selectedHero = heroObjectFour;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && (!Input.GetKey(KeyCode.LeftShift))) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             CancelAbility(selectedHero);
         }
         
