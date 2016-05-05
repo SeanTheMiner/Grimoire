@@ -4,7 +4,7 @@ using System.Collections;
 using BattleObjects;
 using Abilities;
 using Procs;
-using EnemyAbilities;
+using Effects;
 
 public class HitManager : MonoBehaviour {
     
@@ -106,10 +106,33 @@ public class HitManager : MonoBehaviour {
         }
         
         resist *= (1 - (penetration / 100));
+
         finalDamage = ((damageProc.procDamage * modifier) * (100 / (resist + 100)));
+        finalDamage = ApplyNonResistReductions(defender, finalDamage, damageProc);
+
         return finalDamage;
         
     } //end ApplyResist(3)
 
 
+    public static float ApplyNonResistReductions (BattleObject defender, float passedDamage, DamageProc damageProc) {
+
+        float returnDamage = passedDamage;
+
+        foreach (Effect effect in defender.effectList) {
+
+            if ((effect.isDamageReduction)
+                && (((effect.statType == Effect.StatType.Physical) && (damageProc.damageType == DamageProc.DamageType.Physical)) 
+                | ((effect.statType == Effect.StatType.Magical) && (damageProc.damageType == DamageProc.DamageType.Magical))) 
+                | (effect.statType == Effect.StatType.None)) { 
+
+                returnDamage = effect.ApplyDamageReduction(returnDamage);
+            }
+
+        } //end foreach
+        
+        return returnDamage;
+        
+    } //end ApplyNonResistReductions ()
+    
 } //end HitManager class 

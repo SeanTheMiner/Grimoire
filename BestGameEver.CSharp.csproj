@@ -472,6 +472,7 @@
     <Compile Include="Assets\_Scripts\Battle\Effects\InspireOffEffect.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\RaiseSpiritsEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\SpiritBreak.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\ThickSkinEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Enemies\BlueEnemy.cs" />
     <Compile Include="Assets\_Scripts\Battle\Enemies\RedEnemy.cs" />
     <Compile Include="Assets\_Scripts\Battle\Heroes\Champion.cs" />

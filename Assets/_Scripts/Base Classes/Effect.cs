@@ -26,12 +26,18 @@ namespace Effects {
             get; set;
         }
 
+        public bool hasIcon {
+            get; set;
+        }
+
         public bool isCoreEffect {
             get; set;
         }
 
-        //this might just be counting the list? 
-        //This is simpler if they're permanent or something.
+        public bool isDamageReduction {
+            get; set;
+        }
+
         public int stackCount {
             get; set;
         }
@@ -45,6 +51,23 @@ namespace Effects {
             get; set;
         }
 
+        public enum EffectType {
+            Lump,
+            Stacking,
+            Persistent
+        }
+
+        public EffectType effectType {
+            get; set;
+        }
+        
+        public enum EffectClass {
+            Buff,
+            Debuff
+        }
+        
+        public EffectClass effectClass;
+        
         public enum StatType {
             Physical,
             Magical,
@@ -55,27 +78,15 @@ namespace Effects {
             get; set;
         }
 
-        public enum EffectType {
-            Lump,
-            Stacking,
-            Persistent
-        }
 
-        public EffectType effectType {
-            get; set;
-        }
 
-        public enum EffectClass {
-            Buff,
-            Debuff
-        }
-        
-        public EffectClass effectClass;
-        
+
         public Effect () {
 
             effectDuration = 0;
+            hasIcon = true;
             isCoreEffect = false;
+            isDamageReduction = false;
             stackCount = 0;
             resolveScale = 1;
 
@@ -240,6 +251,11 @@ namespace Effects {
             }
 
         } //end ApplyResolveToStacks(2)
+
+
+        public virtual float ApplyDamageReduction (float passedDamage) {
+            return passedDamage;
+        }
 
         
     } //end Effect Class

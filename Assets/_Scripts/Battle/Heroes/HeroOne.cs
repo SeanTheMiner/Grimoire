@@ -7,6 +7,7 @@ using Effects;
 public class HeroOne : Hero {
 
     public EvadeCounterEff evadeCounterEff = new EvadeCounterEff();
+    public ThickSkinEff thickSkinEff = new ThickSkinEff();
 
     public HeroOne() {
 
@@ -17,12 +18,12 @@ public class HeroOne : Hero {
         healthRegen = 5;
         manaRegen = 12;
 
-        armor = 120;
-        spirit = 40;
+        armor = 20;
+        spirit = 50;
 
         physicalEvasionChance = 50;
 
-        physicalLifeSteal = 25;
+        physicalLifeSteal = 12;
 
         abilityOne = new EndlessPunches();
         abilityTwo = new MonkKata();
@@ -38,6 +39,7 @@ public class HeroOne : Hero {
 
     void Start () {
         evadeCounterEff.InitEffect(this);
+        thickSkinEff.InitEffect(this);
     }
     
 } //end HeroOne class
