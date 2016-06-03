@@ -54,6 +54,10 @@ namespace Heroes {
             get; set;
         }
 
+        public float stunStartTimer {
+            get; set;
+        }
+
 
         //Under the hood
 
@@ -68,8 +72,13 @@ namespace Heroes {
             get; set;
         }
 
+        public BattleState priorBattleState {
+            get; set;
+        }
+
         public enum BattleState {
             Wait,
+            Stunned,
             Target,
             Charge,
             InfCharge,
@@ -216,6 +225,36 @@ namespace Heroes {
             }
 
         } //end CheckRevivalCharge()
+
+
+        public void InitStun () {
+
+            priorBattleState = currentBattleState;
+            currentBattleState = BattleState.Stunned;
+            canTakeCommands = false;
+
+            stunStartTimer = Time.time;
+            
+        } //End PrepForStun()
+
+
+        public void ExitStun () {
+
+            currentBattleState = priorBattleState;
+            priorBattleState = BattleState.Stunned;
+            canTakeCommands = true;
+
+            if (currentBattleState == BattleState.Charge) {
+                currentAbility.chargeEndTimer += (Time.time - stunStartTimer);
+            }
+            if (currentBattleState == BattleState.Reviving) {
+                reviveChannelEndTimer += (Time.time - stunStartTimer);
+            } 
+
+            //things using stunStartTimer
+
+        }
+
 
 
     } //end Hero class

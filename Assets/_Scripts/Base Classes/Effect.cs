@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 using BattleObjects;
+using Heroes;
+using Enemies;
 
 namespace Effects {
 
@@ -10,7 +12,7 @@ namespace Effects {
 
         public GameObject effectManager;
 
-       	public string effectName {
+        public string effectName {
             get; set;
         }
 
@@ -19,12 +21,14 @@ namespace Effects {
         }
 
         public string effectIconText {
-			get; set;
-		}
+            get; set;
+        }
 
         public float effectDuration {
             get; set;
         }
+
+
 
         public bool hasIcon {
             get; set;
@@ -37,6 +41,20 @@ namespace Effects {
         public bool isDamageReduction {
             get; set;
         }
+
+        public bool isStun {
+            get; set;
+        }
+
+        public bool isDisarm {
+            get; set;
+        }
+
+        public bool isSilence {
+            get; set;
+        }
+
+
 
         public int stackCount {
             get; set;
@@ -84,9 +102,14 @@ namespace Effects {
         public Effect () {
 
             effectDuration = 0;
+
             hasIcon = true;
             isCoreEffect = false;
             isDamageReduction = false;
+            isStun = false;
+            isDisarm = false;
+            isSilence = false;
+
             stackCount = 0;
             resolveScale = 1;
 
@@ -100,11 +123,36 @@ namespace Effects {
 
         public virtual void InitEffect(BattleObject host) {
             host.effectList.Add(this);
+            if (isStun) {
+                host.stunEffectList.Add(this);
+                if ((host is Hero) && (((Hero)host).currentBattleState != Hero.BattleState.Stunned)) {
+                    ((Hero)host).InitStun();
+                    
+                }
+                if ((host is Enemy) && (((Enemy)host).currentEnemyState != Enemy.EnemyState.Stunned)) {
+                    ((Enemy)host).currentEnemyState = Enemy.EnemyState.Stunned;
+                }
+            }
+            if (isDisarm) {
+                host.disarmEffectList.Add(this);
+            }
+            if (isSilence) {
+                host.silenceEffectList.Add(this);
+            }
         }
         
 
         public virtual void RemoveEffect(BattleObject host) {
             host.effectList.Remove(this);
+            if (isStun) {
+                host.stunEffectList.Remove(this);
+            }
+            if (isDisarm) {
+                host.disarmEffectList.Remove(this);
+            }
+            if (isSilence) {
+                host.silenceEffectList.Remove(this);
+            }
         }
 
 

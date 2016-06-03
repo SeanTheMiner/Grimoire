@@ -30,6 +30,7 @@ namespace Enemies {
 
         public enum EnemyState {
             Inactive,
+            Stunned,
             Charge,
             Barrage,
         }

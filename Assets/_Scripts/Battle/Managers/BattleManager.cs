@@ -162,6 +162,15 @@ public class BattleManager : MonoBehaviour {
             return;
         }
 
+        else if (hero.currentBattleState == Hero.BattleState.Stunned) {
+            if (hero.stunEffectList.Count < 1) {
+                hero.ExitStun();
+            }
+            else {
+                return;
+            }
+        } //End Stunned
+
         else if (hero.currentBattleState == Hero.BattleState.Wait) {
             if ((hero.defaultAbility != null) && (hero.defaultAbility.cooldownEndTimer < Time.time) && (hero.currentMana >= hero.defaultAbility.manaCost)) {
                 hero.currentAbility = hero.defaultAbility;
@@ -230,7 +239,9 @@ public class BattleManager : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-            CancelAbility(selectedHero);
+            if (selectedHero.currentBattleState != Hero.BattleState.Stunned) {
+                CancelAbility(selectedHero);
+            }
         }
         
     } //end CheckForHeroSelectionInput()
@@ -340,7 +351,7 @@ public class BattleManager : MonoBehaviour {
         
         
     public void CancelAbility(Hero hero) {
-
+        
         hero.selectedAbility = null;
         hero.targetingAbility = null;
         hero.revivalTarget = null;

@@ -20,6 +20,10 @@ namespace BattleObjects {
         public List<Effect> effectList = new List<Effect>();
         public List<ProcTrigger> procTriggerList = new List<ProcTrigger>();
 
+        public List<Effect> stunEffectList = new List<Effect>();
+        public List<Effect> disarmEffectList = new List<Effect>();
+        public List<Effect> silenceEffectList = new List<Effect>();
+
         public EffectDisplayController effectDisplayController;
 
         public Effect coreEffect {

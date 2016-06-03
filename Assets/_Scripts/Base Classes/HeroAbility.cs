@@ -69,6 +69,11 @@ public class HeroAbility : Ability {
         get; set;
     }
 
+    public bool canBreakStun {
+        get; set;
+    }
+
+
     public AbilityType abilityType {
         get; set;
     }
@@ -129,6 +134,7 @@ public class HeroAbility : Ability {
         canBeDefault = true;
         appliesCoreEffect = false;
         isRevive = false;
+        canBreakStun = false;
 
         chargeDuration = 0.0f;
         chargeEndTimer = 0.0f;

@@ -12,6 +12,7 @@ public class BloodlustEff : Effect {
         effectDuration = 12;
         statType = StatType.None;
         effectType = EffectType.Lump;
+        isStun = true;
         
     } //end Constructor()
 
