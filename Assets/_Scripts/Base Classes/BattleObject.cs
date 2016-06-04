@@ -30,6 +30,9 @@ namespace BattleObjects {
             get; set;
         }
 
+        public Vector3 particleSource {
+            get; set;
+        }
 
         //Health & modifiers
 

@@ -27,6 +27,8 @@ public class FireStorm : HeroAbility {
         damageProc.procDamage = 30;
         damageProc.damageType = DamageProc.DamageType.Magical;
         damageProc.procSpacing = 0.4f;
+
+        damageProc.particlePrefabName = "fireShot";
         
         effectProc.stacksApplied = 4;
         
@@ -50,5 +52,6 @@ public class FireStorm : HeroAbility {
         }
        
     } //end Ability Map()
-    
+
+
 } //end FireStorm class

@@ -10,6 +10,10 @@ namespace Procs {
 
     public class Proc {
 
+        public string particlePrefabName {
+            get; set;
+        }
+
         public TargetingManager targetingManager = new TargetingManager();
 
         public bool isDependent {
@@ -20,8 +24,29 @@ namespace Procs {
             get; set;
         }
 
+        public bool hasParticle {
+            get; set;
+        }
+
         public Proc dependentProc;
         public Proc dependentUponProc;
+
+        public virtual void ActivateParticle(BattleObject particleHost) {
+
+            Vector3 particleSource = new Vector3(
+                particleHost.transform.position.x,
+                particleHost.transform.position.y + 6,
+                particleHost.transform.position.z
+                );
+
+            string prefabLocation = "Particles/" + particlePrefabName;
+
+            GameObject particlePrefab = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation),
+                particleSource,
+                Quaternion.Euler(90, 0, 0)
+                );
+            
+        } //End ActivateParticle(1)
 
     } //end AbilityProc class
 
@@ -142,7 +167,9 @@ namespace Procs {
             defender.SpawnDamageText(damageToApply, damageType);
 
             ApplyLifeSteal(attacker, damageToApply);
-            
+
+            ActivateParticle(defender);
+
         } //end ApplyDamageProc(2)
 
         
