@@ -498,7 +498,8 @@
     <Compile Include="Assets\_Scripts\Overworld\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
+    <None Include="Assets\ZZ_Fantasy SFX for Particle Distort Texture effect library\readme_Fantasy SFX for Particle Distort Texture effect library.txt" />
+    <None Include="Assets\ZZ_KY_effects\MagicEffectsPackFree\ReadMe.txt" />
     <None Include="Assets\Z_Toolkits\NodeCanvas\!ReadMe!.txt" />
     <None Include="Assets\Z_Toolkits\NodeCanvas\Framework\_ParadoxNotion (shared)\Runtime\Serialization\_LICENSE - FULL SERIALIZER.txt" />
     <None Include="Assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween.XML" />
