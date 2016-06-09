@@ -83,7 +83,8 @@ public class HeroAbility : Ability {
         Barrage,
         InfCharge,
         InfBarrage,
-        Toggle
+        Toggle,
+        ObjectCreation
     }
     
     public TargetScope targetScope;

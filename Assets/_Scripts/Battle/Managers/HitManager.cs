@@ -2,6 +2,7 @@
 using System.Collections;
 
 using BattleObjects;
+using AuxiliaryObjects;
 using Abilities;
 using Procs;
 using Effects;
@@ -66,6 +67,56 @@ public class HitManager : MonoBehaviour {
     } //end DetermineEvasionAndBlock (3)
 
 
+    public static HitOutcome DetermineEvasionAndBlockAuxiliary(AuxiliaryObject auxiliaryObject, BattleObject defender, DamageProc proc) {
+
+        float evasionChance = 0;
+        float blockChance = 0;
+        float accuracy = 0;
+        float finesse = 0;
+        float maxRange = 100;
+
+        if (auxiliaryObject.sourceAbility.abilityDamageType == Ability.AbilityDamageType.Physical) {
+
+            evasionChance = defender.ApplyStatModifications(defender.physicalEvasionChance, defender.physicalEvasionChanceMultMod, defender.physicalEvasionChanceAddMod);
+            accuracy = proc.physicalAccuracy;
+
+            blockChance = defender.ApplyStatModifications(defender.physicalBlockChance, defender.physicalBlockChanceMultMod, defender.physicalBlockChanceAddMod);
+            finesse = proc.physicalFinesse;
+
+        }
+        else if (auxiliaryObject.sourceAbility.abilityDamageType == Ability.AbilityDamageType.Magical) {
+
+            evasionChance = defender.ApplyStatModifications(defender.magicalEvasionChance, defender.magicalEvasionChanceMultMod, defender.magicalEvasionChanceAddMod);
+            accuracy = proc.magicalAccuracy;
+
+            blockChance = defender.ApplyStatModifications(defender.magicalBlockChance, defender.magicalBlockChanceMultMod, defender.magicalBlockChanceAddMod);
+            finesse = proc.magicalFinesse;
+
+        }
+
+        float evasionCeiling = (evasionChance * (1 - (accuracy / 100)));
+        float blockCeiling = evasionCeiling + (blockChance * (1 - (finesse / 100)));
+
+        if ((blockChance + evasionChance) > 100) {
+            maxRange = Mathf.CeilToInt(blockChance + evasionChance);
+        }
+
+        float checker = Random.Range(1, maxRange);
+
+        if (checker <= evasionCeiling) {
+            return HitOutcome.Evade;
+        }
+        if (checker <= blockCeiling) {
+            return HitOutcome.Block;
+        }
+        else {
+            return HitOutcome.Hit;
+        }
+
+    } //end DetermineEvasionAndBlockAuxiliary (3)
+
+
+
     public static HitOutcome DetermineCrit(BattleObject attacker, BattleObject defender, DamageProc damageProc) {
 
         float critChance = 0;
@@ -87,6 +138,28 @@ public class HitManager : MonoBehaviour {
 
     } //end DetermineCrit(3)
 
+
+    public static HitOutcome DetermineCritAuxiliary(AuxiliaryObject auxiliaryObject, BattleObject defender, DamageProc damageProc) {
+
+        float critChance = 0;
+
+        if (damageProc.damageType == DamageProc.DamageType.Physical) {
+            critChance = auxiliaryObject.physicalCritChance;
+        }
+        else if (damageProc.damageType == DamageProc.DamageType.Magical) {
+            critChance = auxiliaryObject.magicalCritChance;
+        }
+
+        int critCheck = Random.Range(1, 100);
+        if (critCheck <= critChance) {
+            return HitOutcome.Crit;
+        }
+        else {
+            return HitOutcome.Hit;
+        }
+
+    } //end DetermineCrit(3)
+    
 
     public static float ApplyResist(BattleObject attacker, BattleObject defender, DamageProc damageProc, float modifier) {
 

@@ -26,7 +26,7 @@ public class Myshka : Hero {
         abilityThree = new ErodeArmor();
         abilityFour = new BlessWeapon();
         abilityFive = new Maelstrom();
-        abilitySix = new RaiseSpirits();
+        abilitySix = new LightningStorm();
 
         SetAbilityOwner();
 

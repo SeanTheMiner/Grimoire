@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using BattleObjects;
+using AuxiliaryObjects;
 using Heroes;
 using Enemies;
 using Effects;
@@ -28,6 +29,8 @@ namespace Abilities {
             get; set;
         }
 
+        public string auxiliaryObjectCreatedName;
+        
         public AbilityDamageType abilityDamageType {
             get; set;
         }
@@ -193,6 +196,16 @@ namespace Abilities {
         } //end DamageProcMultiple()
         
 
+        public virtual void CreateAuxiliaryObject(string auxiliaryObjectPrefabName) {
+            
+            string prefabLocation = "AuxiliaryObjects/" + auxiliaryObjectPrefabName;
+            GameObject auxiliaryObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation));
+
+            //Need to set SourceAbility somehow
+
+            //(AuxiliaryObject)auxiliaryObject.sourceAbility = this;
+
+        } //End CreateAuxiliaryObject(1)
        
 
 
