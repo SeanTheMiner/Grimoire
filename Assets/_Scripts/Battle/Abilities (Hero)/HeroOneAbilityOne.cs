@@ -14,7 +14,7 @@ public class HeroOneAbilityOne : HeroAbility {
         targetScope = TargetScope.SingleEnemy;
         abilityDamageType = AbilityDamageType.Physical;
         manaCost = 120;
-
+        
         chargeDuration = 5.0f;
         cooldownDuration = 18;
 

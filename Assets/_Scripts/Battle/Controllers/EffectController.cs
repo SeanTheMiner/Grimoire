@@ -51,6 +51,8 @@ public class EffectController : MonoBehaviour {
 
     private void CheckForExpiration (HostController hostController) {
 
+        effectApplied.EffectUpdate(hostController.host);
+
         if (hostController.expirationTimer < Time.time) {
             if (effectApplied.effectType == Effect.EffectType.Lump) {
                 SetHostControllerForRemoval(hostController);

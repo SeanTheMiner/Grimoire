@@ -16,7 +16,7 @@ public class FireStorm : HeroAbility {
         abilityType = AbilityType.InfBarrage;
         targetScope = TargetScope.Untargeted;
         abilityDamageType = AbilityDamageType.Magical;
-
+        
         costsMana = false;
         requiresTargeting = false;
         hasCooldown = false;

@@ -28,7 +28,7 @@ public class HeroOne : Hero {
         abilityOne = new EndlessPunches();
         abilityTwo = new MonkKata();
         abilityThree = new HeroOneAbilityTwo();
-        abilityFour = new HeroOneAbilityOne();
+        abilityFour = new AxeCleave();
         abilityFive = new RaiseSpirits();
         abilitySix = new Bloodlust();
 

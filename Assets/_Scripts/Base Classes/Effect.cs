@@ -305,6 +305,9 @@ namespace Effects {
             return passedDamage;
         }
 
+
+        public virtual void EffectUpdate(BattleObject host) { }
+
         
     } //end Effect Class
 

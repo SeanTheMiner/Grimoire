@@ -31,8 +31,12 @@ namespace Procs {
         public Proc dependentProc;
         public Proc dependentUponProc;
 
+
+        //You broke everything just to have pretty fire
+
         public virtual void ActivateParticle(BattleObject particleHost) {
 
+        /*
             Vector3 particleSource = new Vector3(
                 particleHost.transform.position.x,
                 particleHost.transform.position.y + 6,
@@ -45,8 +49,13 @@ namespace Procs {
                 particleSource,
                 Quaternion.Euler(90, 0, 0)
                 );
+    */
             
         } //End ActivateParticle(1)
+
+
+
+
 
     } //end AbilityProc class
 
@@ -171,6 +180,13 @@ namespace Procs {
             ActivateParticle(defender);
 
         } //end ApplyDamageProc(2)
+
+
+        public virtual void ApplyActorlessDamageProc(BattleObject defender) {
+
+
+
+        }
 
         
         public virtual void ApplyDamageProcMultiple(BattleObject attacker, List<BattleObject> list) {

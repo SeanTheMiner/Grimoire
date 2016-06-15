@@ -30,6 +30,7 @@ public class ErodeArmor : HeroAbility {
 
     } //end Constructor()
 
+
     public override void AbilityMap() {
 
         DetermineHitOutcomeMultiple(abilityOwner, targetingManager.TargetAllEnemies(), damageProc);

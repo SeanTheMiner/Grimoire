@@ -431,6 +431,7 @@
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBarrage.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Enemy)\PokeBlast.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ArmorBreakAbility.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\AxeCleave.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\BlessWeapon.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\Bloodlust.cs" />
     <Compile Include="Assets\_Scripts\Battle\Abilities (Hero)\ChangeStance.cs" />
@@ -466,6 +467,7 @@
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Controllers\EnemyHealthSliderController.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\ArmorBreak.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\AxeCleaveEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\BlessWeaponEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\BlockAndHealEff.cs" />
     <Compile Include="Assets\_Scripts\Battle\Effects\BloodlustEff.cs" />
