@@ -13,11 +13,11 @@ public class EffectController : MonoBehaviour {
 
     public List<HostController> hostControllerList = new List<HostController>();
     public List<HostController> hostControllerToRemoveList = new List<HostController>();
-
-
+    
     public class HostController {
 
         public BattleObject host;
+        public float hostNextProcTimer;
         public GameObject effectIcon;
         public TextMesh iconTextMesh;
         public EffectDisplayController effectDisplayController;
@@ -30,12 +30,14 @@ public class EffectController : MonoBehaviour {
     void Update () {
         
         if (hostControllerList.Count <= 0) {
-            //effectManager.GetComponent<EffectManager>().activeEffectControllerList.Remove(this);
             Destroy(this);
         }
 
         foreach (HostController hostController in hostControllerList) {
             CheckForExpiration(hostController);
+            if (effectApplied.hasProcs) {
+                CheckForNextProc(hostController);
+            }
         }
 
         foreach (HostController hostController in hostControllerToRemoveList) {
@@ -43,15 +45,21 @@ public class EffectController : MonoBehaviour {
         }
 
         hostControllerToRemoveList.Clear();
+        
+    } //End Update()
 
-        //hostControllerList.RemoveAll(item => item == null);
 
-    } //end Update()
+    private void CheckForNextProc (HostController hostController) {
+
+        if (hostController.hostNextProcTimer <= Time.time) {
+            effectApplied.ProcMap(hostController.host);
+            hostController.hostNextProcTimer = Time.time + effectApplied.procSpacing;
+        }
+        
+    } //End CheckForNextProc(1)
 
 
     private void CheckForExpiration (HostController hostController) {
-
-        effectApplied.EffectUpdate(hostController.host);
 
         if (hostController.expirationTimer < Time.time) {
             if (effectApplied.effectType == Effect.EffectType.Lump) {

@@ -7,7 +7,7 @@ using Procs;
 
 public class AxeCleaveEff : Effect {
 
-    public DamageProc bleedDamageProc = new DamageProc();
+    public DamageProc damageProc = new DamageProc();
     
     public AxeCleaveEff() {
 
@@ -16,27 +16,20 @@ public class AxeCleaveEff : Effect {
         effectDuration = 15;
         effectType = EffectType.Lump;
         statType = StatType.None;
+        hasProcs = true;
 
-        bleedDamageProc.procSpacing = 1;
+        procSpacing = 1;
+
+        damageProc.procDamage = 30;
+        damageProc.damageType = DamageProc.DamageType.Magical;
 
     } //End Constructor()
 
+    public override void ProcMap(BattleObject host) {
 
-    public override void EffectUpdate(BattleObject host) {
+       damageProc.ApplyActorlessDamageProc(host);
 
-        Debug.Log(bleedDamageProc.nextProcTimer);
-
-
-        if (bleedDamageProc.nextProcTimer <= Time.time) {
-
-            Debug.Log("timer");
-
-            bleedDamageProc.ApplyDamageProc(null, host);
-            bleedDamageProc.nextProcTimer = Time.time + bleedDamageProc.procSpacing;
-        }
-        
-    } //End EffectUpdate(1)
-
-
+    } //End ProcMap(1)
+    
 
 } //End AxeCleaveEff class

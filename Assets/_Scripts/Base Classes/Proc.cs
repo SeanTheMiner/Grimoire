@@ -182,13 +182,6 @@ namespace Procs {
         } //end ApplyDamageProc(2)
 
 
-        public virtual void ApplyActorlessDamageProc(BattleObject defender) {
-
-
-
-        }
-
-        
         public virtual void ApplyDamageProcMultiple(BattleObject attacker, List<BattleObject> list) {
 
             foreach (BattleObject target in list) {
@@ -196,6 +189,31 @@ namespace Procs {
             }
 
         } //end ApplyDamageProcMultiple(2)
+
+
+        public virtual void ApplyActorlessDamageProc(BattleObject defender) {
+
+            if (defender.tag == "DeadHero") {
+                defender = targetingManager.TargetRandomHero();
+            }
+
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResistActorless(defender, this, 1));
+
+            defender.currentHealth -= damageToApply;
+            defender.SpawnDamageText(damageToApply, damageType);
+
+            ActivateParticle(defender);
+
+        } //End ApplyActorlessDamageProc(1)
+
+       
+        public virtual void ApplyActorlessDamageProcMultiple(List<BattleObject> list) {
+
+            foreach (BattleObject target in list) {
+                ApplyActorlessDamageProc(target);
+            }
+
+        } //End ApplyActorlessDamageProcMultiple(1)
 
 
         public virtual void ApplyCritDamageProc(BattleObject attacker, BattleObject defender) {

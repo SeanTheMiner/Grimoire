@@ -11,7 +11,7 @@ namespace Effects {
     public class Effect {
 
         public GameObject effectManager;
-
+        
         public string effectName {
             get; set;
         }
@@ -54,6 +54,13 @@ namespace Effects {
             get; set;
         }
 
+        public bool hasProcs {
+            get; set;
+        }
+
+        public float procSpacing {
+            get; set;
+        }
 
 
         public int stackCount {
@@ -109,6 +116,7 @@ namespace Effects {
             isStun = false;
             isDisarm = false;
             isSilence = false;
+            hasProcs = false;
 
             stackCount = 0;
             resolveScale = 1;
@@ -118,8 +126,10 @@ namespace Effects {
 		
 		//Virtual functions, to be overridden on child classes as needed
 
-        public virtual void EffectMap(BattleObject host) {}
-        
+        public virtual void EffectMap(BattleObject host) { }
+
+        public virtual void ProcMap(BattleObject host) { }
+
 
         public virtual void InitEffect(BattleObject host) {
             host.effectList.Add(this);
@@ -304,9 +314,6 @@ namespace Effects {
         public virtual float ApplyDamageReduction (float passedDamage) {
             return passedDamage;
         }
-
-
-        public virtual void EffectUpdate(BattleObject host) { }
 
         
     } //end Effect Class

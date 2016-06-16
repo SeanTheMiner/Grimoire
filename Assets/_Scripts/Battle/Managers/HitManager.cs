@@ -116,7 +116,6 @@ public class HitManager : MonoBehaviour {
     } //end DetermineEvasionAndBlockAuxiliary (3)
 
 
-
     public static HitOutcome DetermineCrit(BattleObject attacker, BattleObject defender, DamageProc damageProc) {
 
         float critChance = 0;
@@ -185,7 +184,27 @@ public class HitManager : MonoBehaviour {
 
         return finalDamage;
         
-    } //end ApplyResist(3)
+    } //end ApplyResist(4)
+
+
+    public static float ApplyResistActorless(BattleObject defender, DamageProc damageProc, float modifier) {
+
+        float resist = 0;
+        float finalDamage = 0;
+
+        if (damageProc.damageType == DamageProc.DamageType.Physical) {
+            resist = defender.ApplyStatModifications(defender.armor, defender.armorMultMod, defender.armorAddMod);
+        }
+        else if (damageProc.damageType == DamageProc.DamageType.Magical) {
+            resist = defender.ApplyStatModifications(defender.spirit, defender.spiritMultMod, defender.spiritAddMod);
+        }
+
+        finalDamage = ((damageProc.procDamage * modifier) * (100 / (resist + 100)));
+        finalDamage = ApplyNonResistReductions(defender, finalDamage, damageProc);
+
+        return finalDamage;
+
+    } //end ApplyResistActorless(3)
 
 
     public static float ApplyNonResistReductions (BattleObject defender, float passedDamage, DamageProc damageProc) {
