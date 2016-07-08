@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/*
+
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Abilities;
@@ -45,7 +48,7 @@ public class BattleDisplayManager : MonoBehaviour {
         abilityTextList.Add(abilityFourManaText);
         abilityTextList.Add(abilityFiveManaText);
         abilityTextList.Add(abilitySixManaText);
-
+        
         heroOneHealthSlider.maxValue = battleManager.heroObjectOne.maxHealth;
         heroTwoHealthSlider.maxValue = battleManager.heroObjectTwo.maxHealth;
         heroThreeHealthSlider.maxValue = battleManager.heroObjectThree.maxHealth;
@@ -242,3 +245,6 @@ public class BattleDisplayManager : MonoBehaviour {
     } //end ApplyManaCostColor(3)
 
 } //end BattleDisplayManager()
+
+
+*/

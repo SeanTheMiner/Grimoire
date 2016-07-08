@@ -34,6 +34,8 @@ namespace BattleObjects {
             get; set;
         }
 
+        public string prefabName;
+
         //Health & modifiers
 
         public float maxHealth {

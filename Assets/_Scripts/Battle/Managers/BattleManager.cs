@@ -12,8 +12,9 @@ using Biomes;
 
 public class BattleManager : MonoBehaviour {
 
-    public BattleDisplayManager battleDisplayManager;
-    public DebugDisplayManager debugDisplayManager;
+    //public BattleDisplayManager battleDisplayManager;
+    //public DebugDisplayManager debugDisplayManager;
+
     public EnemyManager enemyManager;
     public AbilityButtonManager abilityButtonManager;
     
@@ -24,18 +25,12 @@ public class BattleManager : MonoBehaviour {
 
     //Hero variables
 
-    public Hero heroObjectOne, heroObjectTwo, heroObjectThree, heroObjectFour,
-        selectedHero, queuedHero
-        ;
+    public Hero selectedHero;
+    public Ability targetingAbility;
 
     public Champion champion;
 
-    public Ability targetingAbility;
     
-    public Enemy enemyObjectOne;
-    public Enemy enemyObjectTwo;
-    public Enemy enemyObjectThree;
-
     public List<Hero> heroList = new List<Hero>();
     public List<Enemy> enemyList = new List<Enemy>();
     public List<Enemy> enemyToRemoveList = new List<Enemy>();
@@ -49,6 +44,9 @@ public class BattleManager : MonoBehaviour {
     //LET'S GET IT STARTED IN HERE
     void Start() {
 
+        //BattleInit.SpawnBattleObjects();
+
+
         PopulateHeroList();
         PopulateEnemyList();
 
@@ -61,12 +59,12 @@ public class BattleManager : MonoBehaviour {
 
         InvokeRepeating("ApplyHealthAndManaRegen", 0, 0.2f);
         
-        battleDisplayManager.UpdateHealthText();
-        battleDisplayManager.NoHeroSelected();
-        battleDisplayManager.InitNameText();
+        //battleDisplayManager.UpdateHealthText();
+        //battleDisplayManager.NoHeroSelected();
+        //battleDisplayManager.InitNameText();
         
-        debugDisplayManager.InitDebugText();
-        debugDisplayManager.UpdateDebugText();
+        //debugDisplayManager.InitDebugText();
+        //debugDisplayManager.UpdateDebugText();
 
         //AOETargeter.SetActive(false);
 
@@ -77,12 +75,12 @@ public class BattleManager : MonoBehaviour {
 
         //Every-frame maintenance
 
-        battleDisplayManager.CheckForEnemyHealthRemoval();
-        battleDisplayManager.UpdateHealthText();
-        battleDisplayManager.UpdateManaText();
-        battleDisplayManager.UpdateSelectedHeroText();
+        //battleDisplayManager.CheckForEnemyHealthRemoval();
+        //battleDisplayManager.UpdateHealthText();
+        //battleDisplayManager.UpdateManaText();
+        //battleDisplayManager.UpdateSelectedHeroText();
         
-        debugDisplayManager.UpdateDebugText();
+        //debugDisplayManager.UpdateDebugText();
         battleTimer += Time.deltaTime;
 
         //Checking for input
@@ -222,20 +220,20 @@ public class BattleManager : MonoBehaviour {
 
     void CheckForHeroSelectionInput() {
         
-        if((Input.GetKeyDown(KeyCode.Alpha1)) && (heroObjectOne.tag != "DeadHero")) {
-            selectedHero = heroObjectOne;
+        if((Input.GetKeyDown(KeyCode.Alpha1)) && (heroList[0].tag != "DeadHero")) {
+            selectedHero = heroList[0];
         }
 
-        if((Input.GetKeyDown(KeyCode.Alpha2)) && (heroObjectTwo.tag != "DeadHero")) {
-            selectedHero = heroObjectTwo;
+        if((Input.GetKeyDown(KeyCode.Alpha2)) && (heroList[1].tag != "DeadHero")) {
+            selectedHero = heroList[1];
         }
 
-        if ((Input.GetKeyDown(KeyCode.Alpha3)) && (heroObjectThree.tag != "DeadHero")) {
-            selectedHero = heroObjectThree;
+        if ((Input.GetKeyDown(KeyCode.Alpha3)) && (heroList[2].tag != "DeadHero")) {
+            selectedHero = heroList[2];
         }
 
-        if ((Input.GetKeyDown(KeyCode.Alpha4)) && (heroObjectFour.tag != "DeadHero")) {
-            selectedHero = heroObjectFour;
+        if ((Input.GetKeyDown(KeyCode.Alpha4)) && (heroList[3].tag != "DeadHero")) {
+            selectedHero = heroList[3];
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {

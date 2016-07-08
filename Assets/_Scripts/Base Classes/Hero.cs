@@ -98,6 +98,8 @@ namespace Heroes {
 
             reviveChannelDuration = 5;
             reviveCostScale = 1;
+
+            prefabName = "HeroPrefab";
             
         } //end constructor
 

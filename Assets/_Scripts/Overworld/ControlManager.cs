@@ -43,26 +43,26 @@ public class ControlManager : MonoBehaviour {
 
     void UpdateButtonTexts () {
 
-        SetHeroButtonText(heroButtonOne, globalInfoKeeper.heroOne);
-        SetHeroButtonText(heroButtonTwo, globalInfoKeeper.heroTwo);
-        SetHeroButtonText(heroButtonThree, globalInfoKeeper.heroThree);
-        SetHeroButtonText(heroButtonFour, globalInfoKeeper.heroFour);
+        SetHeroButtonText(heroButtonOne, globalInfoKeeper.activeHeroList[1]);
+        SetHeroButtonText(heroButtonTwo, globalInfoKeeper.activeHeroList[2]);
+        SetHeroButtonText(heroButtonThree, globalInfoKeeper.activeHeroList[3]);
+        SetHeroButtonText(heroButtonFour, globalInfoKeeper.activeHeroList[4]);
 
-        SetArtifactButtonText(artifactButtonOne, globalInfoKeeper.heroOne.artifactOne);
-        SetArtifactButtonText(artifactButtonTwo, globalInfoKeeper.heroOne.artifactTwo);
-        SetArtifactButtonText(artifactButtonThree, globalInfoKeeper.heroOne.artifactThree);
+        SetArtifactButtonText(artifactButtonOne, globalInfoKeeper.activeHeroList[1].artifactOne);
+        SetArtifactButtonText(artifactButtonTwo, globalInfoKeeper.activeHeroList[1].artifactTwo);
+        SetArtifactButtonText(artifactButtonThree, globalInfoKeeper.activeHeroList[1].artifactThree);
 
-        SetArtifactButtonText(artifactButtonFour, globalInfoKeeper.heroTwo.artifactOne);
-        SetArtifactButtonText(artifactButtonFive, globalInfoKeeper.heroTwo.artifactTwo);
-        SetArtifactButtonText(artifactButtonSix, globalInfoKeeper.heroTwo.artifactThree);
+        SetArtifactButtonText(artifactButtonFour, globalInfoKeeper.activeHeroList[2].artifactOne);
+        SetArtifactButtonText(artifactButtonFive, globalInfoKeeper.activeHeroList[2].artifactTwo);
+        SetArtifactButtonText(artifactButtonSix, globalInfoKeeper.activeHeroList[2].artifactThree);
 
-        SetArtifactButtonText(artifactButtonSeven, globalInfoKeeper.heroThree.artifactOne);
-        SetArtifactButtonText(artifactButtonEight, globalInfoKeeper.heroThree.artifactTwo);
-        SetArtifactButtonText(artifactButtonNine, globalInfoKeeper.heroThree.artifactThree);
+        SetArtifactButtonText(artifactButtonSeven, globalInfoKeeper.activeHeroList[3].artifactOne);
+        SetArtifactButtonText(artifactButtonEight, globalInfoKeeper.activeHeroList[3].artifactTwo);
+        SetArtifactButtonText(artifactButtonNine, globalInfoKeeper.activeHeroList[3].artifactThree);
 
-        SetArtifactButtonText(artifactButtonTen, globalInfoKeeper.heroFour.artifactOne);
-        SetArtifactButtonText(artifactButtonEleven, globalInfoKeeper.heroFour.artifactTwo);
-        SetArtifactButtonText(artifactButtonTwelve, globalInfoKeeper.heroFour.artifactThree);
+        SetArtifactButtonText(artifactButtonTen, globalInfoKeeper.activeHeroList[4].artifactOne);
+        SetArtifactButtonText(artifactButtonEleven, globalInfoKeeper.activeHeroList[4].artifactTwo);
+        SetArtifactButtonText(artifactButtonTwelve, globalInfoKeeper.activeHeroList[4].artifactThree);
 
     } //end UpdateButtonTexts()
 

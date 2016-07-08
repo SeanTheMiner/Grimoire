@@ -5,17 +5,34 @@ using Heroes;
 
 public class GlobalInfoKeeper : MonoBehaviour {
 
-    public int partyLevel;
-
-    public Hero heroOne;
-    public Hero heroTwo;
-    public Hero heroThree;
-    public Hero heroFour;
-
-    public List<Hero> heroList = new List<Hero>();
+    public int partyLevel, partyCount, partyExperience,
+        playerGold;
+    
+    public List<Hero> availableHeroList = new List<Hero>();
+    public List<Hero> activeHeroList = new List<Hero>();
     
 	void Awake () {
         DontDestroyOnLoad(this);
 	}
 	
+
+
+
+
+
+    /*
+
+    public void MakeHeroActive(Hero heroToActivate, int ListPosition) {
+        
+        if (activeHeroSlot != null) {
+            activeHeroSlot = heroToActivate;
+            activeHeroList.Add()
+        }
+
+    } //End MakeHeroActive(2)
+
+    */
+
+
+
 } //end GlobalInfoKeeper class
