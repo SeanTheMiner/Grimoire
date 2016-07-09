@@ -2,90 +2,154 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using BattleObjects;
-using Heroes;
-using Enemies;
+using StringData;
+
 
 public class BattleInit : MonoBehaviour {
-
-    //eventually this takes from GIK
-
-    List<Hero> heroesToSpawn = new List<Hero>();
-    List<Enemy> enemiesToSpawn = new List<Enemy>();
-
-    HeroOne punchie = new HeroOne();
-    HeroTwo flamie = new HeroTwo();
-    Champion champion = new Champion();
-    Myshka myshka = new Myshka();
-
-    BlueEnemy enemyOne = new BlueEnemy();
-    RedEnemy enemyTwo = new RedEnemy();
-    RedEnemy enemyThree = new RedEnemy();
-
-    static int heroCount, enemyCount;
-    static float heroHorizontalPosition;
-
     
+
+    public PrefabIDCodex codex = new PrefabIDCodex();
+    
+    int heroCount, enemyCount;
+    float heroHorizontalPosition, heroSpacing,
+        enemyHorizontalPosition;
+
+    Vector3 heroOrigin;
+
+    // Eventually, this takes from GIK
+    List<int> heroesToSpawnByID = new List<int>();
+    List<int> enemiesToSpawnByID = new List<int>();
+
+
     void Start () {
+        
+        // Again, eventually fed from GIK
+        heroesToSpawnByID.Add(1);
+        heroesToSpawnByID.Add(2);
+        heroesToSpawnByID.Add(3);
+        heroesToSpawnByID.Add(4);
 
-        heroesToSpawn.Add(punchie);
-        heroesToSpawn.Add(flamie);
-        heroesToSpawn.Add(champion);
-        heroesToSpawn.Add(myshka);
+        enemiesToSpawnByID.Add(1);
+        enemiesToSpawnByID.Add(2);
+        enemiesToSpawnByID.Add(2);
+        
+        // From here should be fine
 
-        enemiesToSpawn.Add(enemyOne);
-        enemiesToSpawn.Add(enemyTwo);
-        enemiesToSpawn.Add(enemyThree);
-
-        heroHorizontalPosition = 3;
-
-        enemyCount = 3;
-
-        SpawnBattleObjects(heroesToSpawn, enemiesToSpawn);
+        heroCount = heroesToSpawnByID.Count;
+        enemyCount = enemiesToSpawnByID.Count;
+        
+        heroHorizontalPosition = -8;
+        heroSpacing = 2;
+        heroOrigin = new Vector3(heroHorizontalPosition, 0, 0);
+        
+        SpawnBattleObjects(heroesToSpawnByID, enemiesToSpawnByID);
 
     } // end Start()
 	
+    
+    public void SpawnBattleObjects(List<int> heroIDList, List<int> enemyIDList) {
 
-    public static void SpawnBattleObjects(List<Hero> heroList, List<Enemy> enemyList) {
+        // Spawn heroes
 
-        foreach (Hero hero in heroList) {
-            SpawnHero(hero, heroList.IndexOf(hero));
+        if (heroCount == 1) {
+            SpawnOneHero(heroIDList[0]);
         }
 
-        List<Vector3> enemyPositionList = GenerateBattlePositionList();
+        else if (heroCount == 2) {
+            SpawnTwoHeroes(heroIDList);
+        }
 
-        foreach (Enemy enemy in enemyList) {
+        else if (heroCount == 3) {
+            SpawnThreeHeroes(heroIDList);
+        }
+
+        else if (heroCount == 4) {
+            SpawnFourHeroes(heroIDList);
+        }
+
+
+        // Spawn enemies
+        
+        List<Vector3> enemyPositionList = GenerateBattlePositionList();
+        
+        foreach (int enemyID in enemyIDList) {
             
-            LoadBattleObjectPrefab(enemy, enemyPositionList[enemyList.IndexOf(enemy)]);
+            LoadEnemyPrefab(codex.enemyDictionary[enemyIDList.IndexOf(enemyID) + 1], 
+                enemyPositionList[enemyIDList.IndexOf(enemyID)]);
             
         } // end foreach
-
+        
     } // end SpawnBattleObjects(2)
 
 
-    static void SpawnHero(Hero hero, int position) {
+    void SpawnOneHero (int heroID) {
+        LoadHeroPrefab(codex.heroDictionary[heroID], heroOrigin);
+    } // end SpawnOneHero(1)
 
-        Vector3 origin = new Vector3(heroHorizontalPosition, 0, 0.5f);
 
-        if (heroCount == 1) {
-            LoadBattleObjectPrefab(hero, origin);
-        }
+    void SpawnTwoHeroes (List<int> heroIDList) {
+
+        Vector3 positionOne = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z + heroSpacing);
+        Vector3 positionTwo = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z - heroSpacing);
+
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[0]], positionOne);
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[1]], positionTwo);
         
-    } // end SpawnHero(2)
+    } // end SpawnTwoHeroes(1)
 
 
-    static void LoadBattleObjectPrefab(BattleObject battleObject, Vector3 position) {
+    void SpawnThreeHeroes (List<int> heroIDList) {
 
-        string prefabLocation = "BattleObjectPrefabs/" + battleObject.prefabName;
+        Vector3 positionOne = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z + (2 * heroSpacing));
+        Vector3 positionThree = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z - (2 * heroSpacing));
+
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[0]], positionOne);
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[1]], heroOrigin);
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[2]], positionThree);
+
+    } // end SpawnThreeHeroes(1)
+
+
+    void SpawnFourHeroes (List<int> heroIDList) {
+
+        Vector3 positionOne = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z + (3 * heroSpacing));
+        Vector3 positionTwo = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z + heroSpacing);
+        Vector3 positionThree = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z - heroSpacing);
+        Vector3 positionFour = new Vector3(heroOrigin.x, heroOrigin.y, heroOrigin.z - (3 * heroSpacing));
+
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[0]], positionOne);
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[1]], positionTwo);
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[2]], positionThree);
+        LoadHeroPrefab(codex.heroDictionary[heroIDList[3]], positionFour);
+
+    } // end SpawnFourHeroes(1)
+
+   
+    void LoadHeroPrefab(string prefabName, Vector3 position) {
+
+        string prefabLocation = "BattleObjectPrefabs/Heroes/" + prefabName;
         GameObject BattleObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation),
             position,
-            Quaternion.identity
+            Quaternion.Euler(0, 90, 0)
             );
 
     } // end LoadBattleObjectPrefab(2)
 
 
-    static List<Vector3> GenerateBattlePositionList() {
+    void LoadEnemyPrefab(string prefabName, Vector3 position) {
+
+        Debug.Log("loading" + prefabName);
+
+        string prefabLocation = "BattleObjectPrefabs/Enemies/" + prefabName;
+        GameObject BattleObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation),
+            position,
+            Quaternion.Euler(90, 0, 0)
+            );
+
+    } // end LoadBattleObjectPrefab(2)
+
+
+    List<Vector3> GenerateBattlePositionList() {
 
         List<Vector3> battlePositionList = new List<Vector3>();
 
@@ -116,13 +180,16 @@ public class BattleInit : MonoBehaviour {
 
     static List<Vector3> GeneratePositionRing(int ringEnemyCount, float minRadius, float maxRadius) {
 
+        Debug.Log("position ring called");
+
         List<Vector3> positionList = new List<Vector3>();
 
         // Generate ring and first coordinate
         float ringRadius = Random.Range(minRadius, maxRadius);
         float horizontalCoordinate = Random.Range((7 - ringRadius), (7 + ringRadius));
-        Vector3 firstPosition = new Vector3(horizontalCoordinate, 0, (Mathf.Sqrt((Mathf.Pow(ringRadius, 2) - (Mathf.Pow(horizontalCoordinate, 2))))));
-
+        
+        Vector3 firstPosition = new Vector3(horizontalCoordinate, 0, Mathf.Sqrt(Mathf.Pow(ringRadius, 2) - Mathf.Pow((horizontalCoordinate - 7), 2)));
+        
         positionList.Add(firstPosition);
 
         float ringAngle = 360 / ringEnemyCount;
@@ -130,6 +197,8 @@ public class BattleInit : MonoBehaviour {
 
         // Calculate remaining coordinates, evenly spaced around the ring
         while (remainingCount > 0) {
+
+            Debug.Log("while loop");
 
             Vector3 lastPosition = positionList[positionList.Count - 1];
 
@@ -144,14 +213,15 @@ public class BattleInit : MonoBehaviour {
             positionList.Add(positionToAdd);
             remainingCount--;
 
-        } //end while
+        } // end while
+
+        Debug.Log(positionList[0]);
+        Debug.Log(positionList[1]);
+        Debug.Log(positionList[2]);
 
         return positionList;
 
-    } //End GeneratePositionRing(3)
+    } // end GeneratePositionRing(3)
 
-
-
-
-
-}
+    
+} // end BattleInit class

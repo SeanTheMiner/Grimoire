@@ -61,8 +61,8 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>Assets\Z_Imported assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween50.dll</HintPath>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Z_Imported assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTween43">
       <HintPath>Assets\Z_Imported assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween43.dll</HintPath>
@@ -70,8 +70,8 @@
     <Reference Include="DOTween46">
       <HintPath>Assets\Z_Imported assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween46.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Z_Imported assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween.dll</HintPath>
+    <Reference Include="DOTween50">
+      <HintPath>Assets\Z_Imported assets\Z_Toolkits\NodeCanvas\Tasks\Actions\Tween\DOTWeen\DOTween50.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -502,6 +502,7 @@
     <Compile Include="Assets\_Scripts\Overworld\ControlManager.cs" />
     <Compile Include="Assets\_Scripts\Overworld\GlobalInfoKeeper.cs" />
     <Compile Include="Assets\_Scripts\Overworld\PlayerController.cs" />
+    <Compile Include="Assets\_Scripts\StringData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Z_Imported assets\ZZ_Fantasy SFX for Particle Distort Texture effect library\readme_Fantasy SFX for Particle Distort Texture effect library.txt" />

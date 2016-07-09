@@ -11,6 +11,7 @@ public class HeroOne : Hero {
 
     public HeroOne() {
 
+        heroID = 1;
         heroName = "Punchie McGee";
 
         maxHealth = 1120;

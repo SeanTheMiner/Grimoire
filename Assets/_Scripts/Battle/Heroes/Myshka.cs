@@ -8,6 +8,7 @@ public class Myshka : Hero {
 
     public Myshka() {
 
+        heroID = 4;
         heroName = "Myshka";
 
         maxHealth = 720;

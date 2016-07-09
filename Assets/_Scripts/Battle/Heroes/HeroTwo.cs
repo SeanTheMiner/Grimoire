@@ -8,6 +8,7 @@ public class HeroTwo : Hero {
 
     public HeroTwo() {
 
+        heroID = 2;
         heroName = "Fire Mage";
 
         maxHealth = 760;

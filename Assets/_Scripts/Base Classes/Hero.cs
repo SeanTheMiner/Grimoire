@@ -10,6 +10,10 @@ namespace Heroes {
 
     public class Hero : BattleObject {
         
+        public int heroID {
+            get; set;
+        }
+
         public string heroName {
             get; set;
         }

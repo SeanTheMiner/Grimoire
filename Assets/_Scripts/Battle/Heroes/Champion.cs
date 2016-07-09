@@ -21,6 +21,7 @@ public class Champion : Hero {
 
     public Champion() {
 
+        heroID = 3;
         heroName = "The Best Around";
 
         maxHealth = 1000;
