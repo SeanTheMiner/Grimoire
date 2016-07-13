@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 using StringData;
+using Enemies;
+using Heroes;
 
 
 public class BattleInit : MonoBehaviour {
@@ -66,19 +68,26 @@ public class BattleInit : MonoBehaviour {
         else if (heroCount == 4) {
             SpawnFourHeroes(heroIDList);
         }
-
-
+        
         // Spawn enemies
         
         List<Vector3> enemyPositionList = GenerateBattlePositionList();
+
         
+
+
+            
+
         foreach (int enemyID in enemyIDList) {
             
+
+
             LoadEnemyPrefab(codex.enemyDictionary[enemyIDList.IndexOf(enemyID) + 1], 
                 enemyPositionList[enemyIDList.IndexOf(enemyID)]);
-            
+
         } // end foreach
-        
+     
+
     } // end SpawnBattleObjects(2)
 
 
@@ -143,8 +152,10 @@ public class BattleInit : MonoBehaviour {
         string prefabLocation = "BattleObjectPrefabs/Enemies/" + prefabName;
         GameObject BattleObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation),
             position,
-            Quaternion.Euler(90, 0, 0)
+            Quaternion.Euler(0, 0, 0)
             );
+
+        BattleObject.GetComponent<Enemy>().BattleStart();
 
     } // end LoadBattleObjectPrefab(2)
 

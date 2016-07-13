@@ -106,10 +106,7 @@ namespace Heroes {
             prefabName = "HeroPrefab";
             
         } //end constructor
-
-
-        public virtual void BattleStart () {}
-
+        
 
         public void SetAbilityOwner () {
 

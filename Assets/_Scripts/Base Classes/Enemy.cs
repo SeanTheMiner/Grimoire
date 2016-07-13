@@ -61,6 +61,10 @@ namespace Enemies {
         } //end LateUpdate()
 
 
+        public override void BattleStart() {
+            currentHealth = maxHealth;
+        }
+
 
     } //end Enemy class
 

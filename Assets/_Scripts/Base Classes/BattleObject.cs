@@ -447,6 +447,11 @@ namespace BattleObjects {
 
         //Native functions
        
+        public virtual void BattleStart() {
+
+        }
+
+
         public float ApplyStatModifications(float baseStat, float multMod, float addMod) {
             return ((baseStat * multMod) + addMod);
         }
