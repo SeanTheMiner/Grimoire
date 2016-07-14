@@ -50,10 +50,6 @@ public class BattleManager : MonoBehaviour {
         PopulateHeroList();
         PopulateEnemyList();
 
-        Debug.Log(heroList.Count);
-        Debug.Log(enemyList.Count);
-
-
         foreach (Hero hero in heroList) {
             hero.BattleStart();
         }
@@ -113,8 +109,6 @@ public class BattleManager : MonoBehaviour {
             CheckBattleState(hero);
         }
         
-        /*
-
         foreach (Enemy enemy in enemyList) {
             CheckIfEnemyIsDead(enemy);
         }
@@ -130,9 +124,7 @@ public class BattleManager : MonoBehaviour {
         if (enemyList.Count <= 0) {
             BattleWon();
         }
-
-        */
-     
+        
         //DEBUG FUNCTIONS
 
         if(Input.GetKeyDown(KeyCode.Z)) {
@@ -415,8 +407,6 @@ public class BattleManager : MonoBehaviour {
 
         allHeroes = GameObject.FindGameObjectsWithTag("Hero");
 
-        Debug.Log(allHeroes.Length);
-
         foreach(GameObject heroObject in allHeroes) {
             if(heroObject.activeInHierarchy) {
                 heroList.Add(heroObject.GetComponent<Hero>());
@@ -429,8 +419,6 @@ public class BattleManager : MonoBehaviour {
     public void PopulateEnemyList() {
 
         allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        Debug.Log(allEnemies.Length);
 
         foreach (GameObject enemyObject in allEnemies) {
             if(enemyObject.activeInHierarchy) {
@@ -532,8 +520,6 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    /*
-
     void BattleWon() {
         SceneManager.LoadScene(sceneName: "Overworld");
     }
@@ -541,8 +527,6 @@ public class BattleManager : MonoBehaviour {
     void BattleLost() {
         SceneManager.LoadScene(sceneName: "Overworld");
     }
-    */
-
 
 
 //Debug functions
