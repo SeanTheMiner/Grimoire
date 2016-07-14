@@ -14,9 +14,10 @@ public class BattleInit : MonoBehaviour {
     
     int heroCount, enemyCount;
     float heroHorizontalPosition, heroSpacing,
-        enemyHorizontalPosition;
+        enemyHorizontalPosition,
+        ringRadiusLimit;
 
-    Vector3 heroOrigin;
+    Vector3 heroOrigin, enemyOrigin;
 
     // Eventually, this takes from GIK
     List<int> heroesToSpawnByID = new List<int>();
@@ -33,7 +34,11 @@ public class BattleInit : MonoBehaviour {
 
         enemiesToSpawnByID.Add(1);
         enemiesToSpawnByID.Add(2);
+        enemiesToSpawnByID.Add(1);
         enemiesToSpawnByID.Add(2);
+        enemiesToSpawnByID.Add(1);
+        enemiesToSpawnByID.Add(2);
+
         
         // From here should be fine
 
@@ -43,6 +48,11 @@ public class BattleInit : MonoBehaviour {
         heroHorizontalPosition = -8;
         heroSpacing = 2;
         heroOrigin = new Vector3(heroHorizontalPosition, 0, 0);
+
+        enemyHorizontalPosition = 7;
+        enemyOrigin = new Vector3(enemyHorizontalPosition, 0, 0);
+
+        ringRadiusLimit = 7;
         
         SpawnBattleObjects(heroesToSpawnByID, enemiesToSpawnByID);
 
@@ -72,27 +82,21 @@ public class BattleInit : MonoBehaviour {
         // Spawn enemies
         
         List<Vector3> enemyPositionList = GenerateBattlePositionList();
-
         
+        for (int i = 0; i < enemyCount; i++) {
 
-
+            LoadEnemyPrefab(codex.enemyDictionary[enemyIDList[i]],
+                enemyPositionList[i]);
             
-
-        foreach (int enemyID in enemyIDList) {
+        } // end for
             
-
-
-            LoadEnemyPrefab(codex.enemyDictionary[enemyIDList.IndexOf(enemyID) + 1], 
-                enemyPositionList[enemyIDList.IndexOf(enemyID)]);
-
-        } // end foreach
-     
-
     } // end SpawnBattleObjects(2)
 
 
     void SpawnOneHero (int heroID) {
+
         LoadHeroPrefab(codex.heroDictionary[heroID], heroOrigin);
+
     } // end SpawnOneHero(1)
 
 
@@ -146,9 +150,7 @@ public class BattleInit : MonoBehaviour {
 
 
     void LoadEnemyPrefab(string prefabName, Vector3 position) {
-
-        Debug.Log("loading" + prefabName);
-
+        
         string prefabLocation = "BattleObjectPrefabs/Enemies/" + prefabName;
         GameObject BattleObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation),
             position,
@@ -165,71 +167,53 @@ public class BattleInit : MonoBehaviour {
         List<Vector3> battlePositionList = new List<Vector3>();
 
         if (enemyCount == 1) {
+
             battlePositionList.Add(new Vector3(Random.Range(3, 11), 0, Random.Range(-4, 4)));
             return battlePositionList;
-        }
-        
-        if (enemyCount == 2) {
-           return GeneratePositionRing(2, 2, 5);
-        }
-        
-        if (enemyCount == 3) {
-            return GeneratePositionRing(3, 3, 6);
-        }
 
-        if (enemyCount == 4) {
-            return GeneratePositionRing(4, 3, 7);
-        }
-
+        } // end if
         else {
-            Debug.Log("Enemy count 0");
-            return battlePositionList;
-        }
+
+            return GeneratePositionRing(enemyCount, enemyCount, enemyCount + 2);
+
+        } // end else
+        
 
     } // end GenerateBattlePositionList()
 
 
-    static List<Vector3> GeneratePositionRing(int ringEnemyCount, float minRadius, float maxRadius) {
-
-        Debug.Log("position ring called");
-
+    List<Vector3> GeneratePositionRing(int ringEnemyCount, float minRadius, float maxRadius) {
+        
         List<Vector3> positionList = new List<Vector3>();
 
         // Generate ring and first coordinate
-        float ringRadius = Random.Range(minRadius, maxRadius);
-        float horizontalCoordinate = Random.Range((7 - ringRadius), (7 + ringRadius));
-        
-        Vector3 firstPosition = new Vector3(horizontalCoordinate, 0, Mathf.Sqrt(Mathf.Pow(ringRadius, 2) - Mathf.Pow((horizontalCoordinate - 7), 2)));
-        
+        float ringRadius = Mathf.Min(Random.Range(minRadius, maxRadius), ringRadiusLimit);
+
+        float horizontalCoordinate = Random.Range((enemyHorizontalPosition - ringRadius), (enemyHorizontalPosition + ringRadius));
+        Vector3 firstPosition = new Vector3(horizontalCoordinate, 0, Mathf.Sqrt(Mathf.Pow(ringRadius, 2) - Mathf.Pow((horizontalCoordinate - enemyHorizontalPosition), 2)));
         positionList.Add(firstPosition);
 
-        float ringAngle = 360 / ringEnemyCount;
+        float ringAngle = 2 * Mathf.PI / ringEnemyCount;
         int remainingCount = ringEnemyCount - 1;
 
         // Calculate remaining coordinates, evenly spaced around the ring
-        while (remainingCount > 0) {
 
-            Debug.Log("while loop");
+        for (int i = 0; i < remainingCount; i++) {
 
-            Vector3 lastPosition = positionList[positionList.Count - 1];
+            Vector3 lastPosition = positionList[i];
 
-            float newHorizontalCoordinate = (lastPosition.x - 7) * (Mathf.Cos(ringAngle))
-                - (lastPosition.y) * (Mathf.Sin(ringAngle));
+            float newHorizontalCoordinate = ((lastPosition.x - enemyHorizontalPosition) * Mathf.Cos(ringAngle)
+                - (lastPosition.z) * (Mathf.Sin(ringAngle))) + enemyHorizontalPosition;
 
-            float newVerticalCoordinate = (lastPosition.y) * (Mathf.Cos(ringAngle))
-                + (lastPosition.x - 7) * (Mathf.Sin(ringAngle));
+            float newVerticalCoordinate = (lastPosition.z) * (Mathf.Cos(ringAngle))
+                + (lastPosition.x - enemyHorizontalPosition) * (Mathf.Sin(ringAngle));
 
-            Vector3 positionToAdd = new Vector3((newHorizontalCoordinate + 7), 0, newVerticalCoordinate);
+            Vector3 positionToAdd = new Vector3((newHorizontalCoordinate), 0, newVerticalCoordinate);
 
             positionList.Add(positionToAdd);
-            remainingCount--;
 
-        } // end while
-
-        Debug.Log(positionList[0]);
-        Debug.Log(positionList[1]);
-        Debug.Log(positionList[2]);
-
+        } // end for
+        
         return positionList;
 
     } // end GeneratePositionRing(3)
