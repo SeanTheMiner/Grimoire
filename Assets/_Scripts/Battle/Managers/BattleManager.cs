@@ -50,6 +50,10 @@ public class BattleManager : MonoBehaviour {
         PopulateHeroList();
         PopulateEnemyList();
 
+        Debug.Log(heroList.Count);
+        Debug.Log(enemyList.Count);
+
+
         foreach (Hero hero in heroList) {
             hero.BattleStart();
         }
@@ -109,6 +113,8 @@ public class BattleManager : MonoBehaviour {
             CheckBattleState(hero);
         }
         
+        /*
+
         foreach (Enemy enemy in enemyList) {
             CheckIfEnemyIsDead(enemy);
         }
@@ -117,12 +123,15 @@ public class BattleManager : MonoBehaviour {
             enemyList.Remove(enemy);
         }
         
+
         enemyToRemoveList.Clear();
+            
         
         if (enemyList.Count <= 0) {
             BattleWon();
         }
 
+        */
      
         //DEBUG FUNCTIONS
 
@@ -405,22 +414,30 @@ public class BattleManager : MonoBehaviour {
     public void PopulateHeroList() {
 
         allHeroes = GameObject.FindGameObjectsWithTag("Hero");
+
+        Debug.Log(allHeroes.Length);
+
         foreach(GameObject heroObject in allHeroes) {
             if(heroObject.activeInHierarchy) {
                 heroList.Add(heroObject.GetComponent<Hero>());
             } //end if active in hierarchy
         } //end foreach
+
     } //end PopulateHeroList()
 
 
     public void PopulateEnemyList() {
 
         allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject enemyObject in allEnemies) {
+
+        Debug.Log(allEnemies.Length);
+
+        foreach (GameObject enemyObject in allEnemies) {
             if(enemyObject.activeInHierarchy) {
                 enemyList.Add(enemyObject.GetComponent<Enemy>());
             }//end if active in hierarchy
         } //end foreach
+
     } //end PopulateEnemyList()
 
 
@@ -428,33 +445,41 @@ public class BattleManager : MonoBehaviour {
         
         ResetHeroHealth();
         ResetHeroMana();
+
         foreach(Hero hero in heroList) {
             hero.currentBattleState = Hero.BattleState.Wait;
             hero.selectedAbility = null;
             hero.currentAbility = null;
             hero.targetingAbility = null;
         }
+
     } //end ResetHeroes()
 
 
     public void ResetHeroHealth() {
+
         foreach(Hero hero in heroList) {
             hero.currentHealth = hero.maxHealth;
         }
+
     } //endResetHeroHealth()
     
 
     public void ResetHeroMana() {
+
         foreach (Hero hero in heroList) {
             hero.currentMana = hero.maxMana;
         }
+
     } //endResetHeroMana()
 
 
     public void ResetEnemyHealths() {
+
         foreach(Enemy enemy in enemyList) {
             enemy.currentHealth = enemy.maxHealth;
         } //end foreach
+
     } //endResetEnemyHealth()
 
 
@@ -486,7 +511,7 @@ public class BattleManager : MonoBehaviour {
 
     } //end ApplyHealthRegen()
 
-
+    
     void CheckIfEnemyIsDead(Enemy enemy) {
 
         if(enemy.currentHealth <= 0) {
@@ -507,6 +532,8 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    /*
+
     void BattleWon() {
         SceneManager.LoadScene(sceneName: "Overworld");
     }
@@ -514,6 +541,7 @@ public class BattleManager : MonoBehaviour {
     void BattleLost() {
         SceneManager.LoadScene(sceneName: "Overworld");
     }
+    */
 
 
 
@@ -556,6 +584,3 @@ public class BattleManager : MonoBehaviour {
 
 
 } //end BattleManager
-
-
-

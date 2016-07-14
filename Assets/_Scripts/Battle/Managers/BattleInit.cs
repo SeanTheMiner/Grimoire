@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using StringData;
 using Enemies;
 using Heroes;
+using BattleObjects;
 
 
 public class BattleInit : MonoBehaviour {
@@ -143,8 +144,10 @@ public class BattleInit : MonoBehaviour {
         string prefabLocation = "BattleObjectPrefabs/Heroes/" + prefabName;
         GameObject BattleObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation),
             position,
-            Quaternion.Euler(0, 90, 0)
+            Quaternion.Euler(0, 0, 0)
             );
+
+        BattleObject.GetComponent<BattleObject>().BattleStart();
 
     } // end LoadBattleObjectPrefab(2)
 
@@ -157,7 +160,7 @@ public class BattleInit : MonoBehaviour {
             Quaternion.Euler(0, 0, 0)
             );
 
-        BattleObject.GetComponent<Enemy>().BattleStart();
+        BattleObject.GetComponent<BattleObject>().BattleStart();
 
     } // end LoadBattleObjectPrefab(2)
 

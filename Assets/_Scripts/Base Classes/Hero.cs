@@ -258,6 +258,10 @@ namespace Heroes {
 
         }
 
+        public override void BattleStart() {
+            currentHealth = maxHealth;
+        }
+
 
 
     } //end Hero class
