@@ -12,7 +12,7 @@ using Biomes;
 
 public class BattleManager : MonoBehaviour {
 
-    //public BattleDisplayManager battleDisplayManager;
+    public BattleDisplayManager battleDisplayManager;
     //public DebugDisplayManager debugDisplayManager;
 
     public EnemyManager enemyManager;
@@ -72,6 +72,10 @@ public class BattleManager : MonoBehaviour {
 
 
     void Update() {
+
+        if (selectedHero != null) {
+            Debug.Log(selectedHero.heroName);
+        }
 
         //Every-frame maintenance
 
@@ -220,21 +224,28 @@ public class BattleManager : MonoBehaviour {
 //Input checking functions
 
     void CheckForHeroSelectionInput() {
-        
+
+        Hero heroToSelect = null;
+
         if((Input.GetKeyDown(KeyCode.Alpha1)) && (heroList[0].tag != "DeadHero")) {
-            selectedHero = heroList[0];
+            heroToSelect = heroList[0];
         }
 
         if((Input.GetKeyDown(KeyCode.Alpha2)) && (heroList[1].tag != "DeadHero")) {
-            selectedHero = heroList[1];
+            heroToSelect = heroList[1];
         }
 
         if ((Input.GetKeyDown(KeyCode.Alpha3)) && (heroList[2].tag != "DeadHero")) {
-            selectedHero = heroList[2];
+            heroToSelect = heroList[2];
         }
 
         if ((Input.GetKeyDown(KeyCode.Alpha4)) && (heroList[3].tag != "DeadHero")) {
-            selectedHero = heroList[3];
+            heroToSelect = heroList[3];
+        }
+
+        if (heroToSelect != null) {
+            selectedHero = heroToSelect;
+            battleDisplayManager.ChangeAbilityDisplayControllers();
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -243,7 +254,7 @@ public class BattleManager : MonoBehaviour {
             }
         }
         
-    } //end CheckForHeroSelectionInput()
+    } // end CheckForHeroSelectionInput()
 
 
     void CheckForAbilitySelectionInput() {
