@@ -20,10 +20,11 @@ namespace Abilities {
             get; set;
         }
 
-        //eventually delete this, since it'll be on a proc
+        //eventually delete these, since it'll be on a proc
         public Effect effectApplied;
-
         public Proc primaryProc;
+
+        public AuxiliaryObject objectCreated;
         
         public int effectStacksApplied {
             get; set;
@@ -196,14 +197,28 @@ namespace Abilities {
         } //end DamageProcMultiple()
         
 
-        public virtual void CreateAuxiliaryObject(string auxiliaryObjectPrefabName) {
+        public virtual void CreateAuxiliaryObject() {
+
+            GameObject auxiliaryObject = new GameObject();
+
+            AuxiliaryObject controllerToAdd = new AuxiliaryObject();
+
+            System.Type type = typeof(this.objectCreated);
+            controllerToAdd.GetType = 
+
+
+            objectController = (objectCreated)auxiliaryObject.AddComponent<this.objectCreated>();
+            objectController = objectCreated;
             
+            //Needs to set destroy, could addcomponent<destroybytime>
+
+
+            /*
             string prefabLocation = "AuxiliaryObjects/" + auxiliaryObjectPrefabName;
-            GameObject auxiliaryObject = (GameObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation));
-
-            //Need to set SourceAbility somehow
-
-            //(AuxiliaryObject)auxiliaryObject.sourceAbility = this;
+            AuxiliaryObject auxiliaryObject = (AuxiliaryObject)MonoBehaviour.Instantiate(Resources.Load(prefabLocation));
+            auxiliaryObject.sourceAbility = this;
+            Debug.Log(auxiliaryObject.sourceAbility.abilityName);
+            */
 
         } //End CreateAuxiliaryObject(1)
        
