@@ -58,15 +58,17 @@ public class BattleManager : MonoBehaviour {
         ResetEnemyHealths();
 
         InvokeRepeating("ApplyHealthAndManaRegen", 0, 0.2f);
-        
+
         //battleDisplayManager.UpdateHealthText();
         //battleDisplayManager.NoHeroSelected();
         //battleDisplayManager.InitNameText();
-        
+
         //debugDisplayManager.InitDebugText();
         //debugDisplayManager.UpdateDebugText();
 
         //AOETargeter.SetActive(false);
+
+        
 
     } //end Start()
 
@@ -104,6 +106,9 @@ public class BattleManager : MonoBehaviour {
             }
 
         } //end if hero is selected
+        else {
+            abilityButtonManager.NoHeroSelected();
+        }
 
         
         //Hero BattleState switch
@@ -245,7 +250,6 @@ public class BattleManager : MonoBehaviour {
 
         if (heroToSelect != null) {
             selectedHero = heroToSelect;
-            battleDisplayManager.ChangeAbilityDisplayControllers();
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {

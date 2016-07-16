@@ -7,27 +7,15 @@ using Heroes;
 
 public class BattleDisplayManager : MonoBehaviour {
 
-    //AbilityButtonDisplayControllers have to be linked up in Start()
-
-
-
 
     public BattleManager battleManager;
     public GameObject heroDisplayPanel;
 
     public Vector3 displayOrigin;
     public float displaySpacing;
-
-    public List<Text> abilityTextList = new List<Text>();
-    public List<HeroDisplayController> heroDisplayControllerList = new List<HeroDisplayController>();
-
-    public Text selectedHeroNameText,
-        abilityOneText, abilityTwoText, abilityThreeText, abilityFourText, abilityFiveText, abilitySixText,
-        abilityOneManaText, abilityTwoManaText, abilityThreeManaText, abilityFourManaText, abilityFiveManaText, abilitySixManaText;
-
-
-    public AbilityButtonDisplayController abilityOneController, abilityTwoController, abilityThreeController, abilityFourController, abilityFiveController, abilitySixController;
     
+    public List<HeroDisplayController> heroDisplayControllerList = new List<HeroDisplayController>();
+  
 
     public class HeroDisplayController : MonoBehaviour {
 
@@ -37,18 +25,9 @@ public class BattleDisplayManager : MonoBehaviour {
 
     } // end HeroDisplayPackage class
 
-    
-    public class AbilityButtonDisplayController : MonoBehaviour {
-
-        public HeroAbility ability;
-        public Text abilityNameText, manaCostText;
-
-    } // end AbilityButtonDisplayController class
-
 
     public void Start() {
-
-
+        
         displaySpacing = 25;
         displayOrigin = new Vector3 (heroDisplayPanel.transform.position.x, heroDisplayPanel.transform.position.y + displaySpacing);
 
@@ -59,13 +38,7 @@ public class BattleDisplayManager : MonoBehaviour {
             heroDisplayControllerList.Add(CreateHeroDisplayPackage(battleManager.heroList[i], position));
         }
 
-
-        LinkAbilityDisplayText();
-        
-        PopulateAbilityTextList();
         //SetRelativeSliderLengths();
-
-        NoHeroSelected();
 
     } // end Start()
 
@@ -73,13 +46,9 @@ public class BattleDisplayManager : MonoBehaviour {
     void Update() {
 
         foreach (HeroDisplayController controller in heroDisplayControllerList) {
-
             UpdateHeroDisplayController(controller);
-
         } // end foreach
-
-        UpdateSelectedHeroText();
-
+        
     } // end Update()
 
 
@@ -119,49 +88,7 @@ public class BattleDisplayManager : MonoBehaviour {
         controller.manaSlider.maxValue = controller.hero.maxMana;
         
     } // end InitHeroDisplay(1)
-
-
-    public void ChangeAbilityDisplayControllers() {
-
-        ChangeAbilityDisplayController(abilityOneController, battleManager.selectedHero.abilityOne);
-        ChangeAbilityDisplayController(abilityTwoController, battleManager.selectedHero.abilityTwo);
-        ChangeAbilityDisplayController(abilityThreeController, battleManager.selectedHero.abilityThree);
-        ChangeAbilityDisplayController(abilityFourController, battleManager.selectedHero.abilityFour);
-        ChangeAbilityDisplayController(abilityFiveController, battleManager.selectedHero.abilityFive);
-        ChangeAbilityDisplayController(abilitySixController, battleManager.selectedHero.abilitySix);
-
-    } // end ChangeAbilityDisplayControllers()
-
-
-    private void ChangeAbilityDisplayController(AbilityButtonDisplayController controller, HeroAbility ability) {
-
-        controller.ability = ability;
-        controller.abilityNameText.text = ability.abilityName.ToString();
-        controller.manaCostText.text = ability.manaCost.ToString();
-
-    } // end ChangeAbilityDisplayController(2)
-
-
-    private void LinkAbilityDisplayText() {
-
-        InitAbilityDisplayController(abilityOneController, abilityOneText, abilityOneManaText);
-        InitAbilityDisplayController(abilityTwoController, abilityTwoText, abilityTwoManaText);
-        InitAbilityDisplayController(abilityThreeController, abilityThreeText, abilityThreeManaText);
-        InitAbilityDisplayController(abilityFourController, abilityFourText, abilityFourManaText);
-        InitAbilityDisplayController(abilityFiveController, abilityFiveText, abilityFiveManaText);
-        InitAbilityDisplayController(abilitySixController, abilitySixText, abilitySixManaText);
-
-    } // end LinkAbilityDisplayText()
-
-
-    private void InitAbilityDisplayController (AbilityButtonDisplayController controller, Text abilityNameText, Text manaCostText) {
-
-        controller.abilityNameText = abilityNameText;
-        controller.manaCostText = manaCostText;
-
-    } // end InitAbilityDisplayController(3)
-
-
+    
 
     private void UpdateHeroDisplayController(HeroDisplayController controller) {
 
@@ -173,93 +100,7 @@ public class BattleDisplayManager : MonoBehaviour {
 
     } // end UpdateHeroDisplayController(1)
 
-
     
-
-    
-    private void PopulateAbilityTextList() {
-
-        abilityTextList.Add(abilityOneText);
-        abilityTextList.Add(abilityTwoText);
-        abilityTextList.Add(abilityThreeText);
-        abilityTextList.Add(abilityFourText);
-        abilityTextList.Add(abilityFiveText);
-        abilityTextList.Add(abilitySixText);
-
-        abilityTextList.Add(abilityOneManaText);
-        abilityTextList.Add(abilityTwoManaText);
-        abilityTextList.Add(abilityThreeManaText);
-        abilityTextList.Add(abilityFourManaText);
-        abilityTextList.Add(abilityFiveManaText);
-        abilityTextList.Add(abilitySixManaText);
-
-    } // end AddAbilityTexts()
-
-
-    public void UpdateSelectedHeroText() {
-
-        if (battleManager.selectedHero != null) {
-
-            selectedHeroNameText.text = battleManager.selectedHero.heroName;
-
-            UpdateAbilityButtonText(abilityOneController, battleManager.selectedHero.abilityOne);
-            UpdateAbilityButtonText(abilityTwoController, battleManager.selectedHero.abilityTwo);
-            UpdateAbilityButtonText(abilityThreeController, battleManager.selectedHero.abilityThree);
-            UpdateAbilityButtonText(abilityFourController, battleManager.selectedHero.abilityFour);
-            UpdateAbilityButtonText(abilityFiveController, battleManager.selectedHero.abilityFive);
-            UpdateAbilityButtonText(abilitySixController, battleManager.selectedHero.abilitySix);
-
-        } // end if there is a selected hero
-
-        else {
-            NoHeroSelected();
-        }
-
-    } // end UpdateSelectedHeroText()
-
-
-    public void UpdateAbilityButtonText(AbilityButtonDisplayController controller, HeroAbility ability) {
-
-        controller.ability = ability;
-        
-        if (controller.ability.cooldownEndTimer > Time.time) {
-            controller.abilityNameText.text = (Mathf.CeilToInt(controller.ability.cooldownEndTimer - Time.time)).ToString();
-        }
-        else if (controller.ability.chargeEndTimer > Time.time) {
-            controller.abilityNameText.text = (Mathf.CeilToInt(controller.ability.chargeEndTimer - Time.time)).ToString();
-        }
-        else if (controller.ability.abilityEndTimer > Time.time) {
-            controller.abilityNameText.text = (Mathf.CeilToInt(controller.ability.abilityEndTimer - Time.time)).ToString();
-        }
-        else if (controller.ability.isInfCharging) {
-            controller.abilityNameText.text = (Mathf.FloorToInt(Time.time - controller.ability.infChargeStartTimer)).ToString();
-        }
-        else {
-            controller.abilityNameText.text = controller.ability.abilityName;
-        }
-
-        controller.manaCostText.text = controller.ability.manaCost.ToString();
-
-        if (controller.ability.manaCost >= battleManager.selectedHero.currentMana) {
-            controller.manaCostText.color = Color.red;
-        }
-        else {
-            controller.manaCostText.color = Color.black;
-        }
-
-    } // end UpdateAbilityButtonText(1)
-
-
-    public void NoHeroSelected() {
-
-        selectedHeroNameText.text = "Select hero.";
-
-        foreach (Text abilityText in abilityTextList) {
-            abilityText.text = "";
-        }
-
-    } //end NoHeroSelected()
-
 
     /*
 
@@ -317,22 +158,6 @@ public class BattleDisplayManager : MonoBehaviour {
     public void SetBarLength(Slider slider, float highestValue) {
         slider.transform.localScale = new Vector3((slider.maxValue / highestValue), 1, 1);
     } //end SetBarLength(2)
-
-
-
-
-
-    public void CheckForEnemyHealthRemoval() {
-        if (battleManager.enemyObjectOne == null) {
-            Destroy(enemyOneHealthText);
-        }
-        if(battleManager.enemyObjectTwo == null) {
-            Destroy(enemyTwoHealthText);
-        }
-        if(battleManager.enemyObjectThree == null) {
-            Destroy(enemyThreeHealthText);
-        }
-    } //end CheckForEnemyHealthRemoval()
 
 
     */

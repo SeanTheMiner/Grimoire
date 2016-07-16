@@ -17,11 +17,20 @@ public class AbilityButtonManager : MonoBehaviour {
         abilitySelecterImage, defaultAbilityMarkerImage
         ;
 
+    public Text selectedHeroNameText,
+        abilityOneNameText, abilityTwoNameText, abilityThreeNameText, abilityFourNameText, abilityFiveNameText, abilitySixNameText,
+        abilityOneManaText, abilityTwoManaText, abilityThreeManaText, abilityFourManaText, abilityFiveManaText, abilitySixManaText;
+
     public Vector3 defaultAbilityMarkerOffset;
 
     public GameObject abilitySelecter, defaultAbilityMarker;
-    
+
+
+    public List<Text> abilityNameTextList = new List<Text>();
+    public List<Text> abilityManaCostTextList = new List<Text>();
+
     public List<Button> buttonList = new List<Button>();
+
     public List<Image> cooldownMaskList = new List<Image>();
     public List<Image> chargingMaskList = new List<Image>();
     public List<Image> infChargingMaskList = new List<Image>();
@@ -73,12 +82,21 @@ public class AbilityButtonManager : MonoBehaviour {
         infBarrageMaskList.Add(infBarrageMaskFive);
         infBarrageMaskList.Add(infBarrageMaskSix);
 
-        ClearCooldownMasks();
-        ClearChargingMasks();
-        ClearInfChargingMasks();
-        ClearDurationMasks();
-        ClearInfBarrageMasks();
+        abilityNameTextList.Add(abilityOneNameText);
+        abilityNameTextList.Add(abilityTwoNameText);
+        abilityNameTextList.Add(abilityThreeNameText);
+        abilityNameTextList.Add(abilityFourNameText);
+        abilityNameTextList.Add(abilityFiveNameText);
+        abilityNameTextList.Add(abilitySixNameText);
 
+        abilityManaCostTextList.Add(abilityOneManaText);
+        abilityManaCostTextList.Add(abilityTwoManaText);
+        abilityManaCostTextList.Add(abilityThreeManaText);
+        abilityManaCostTextList.Add(abilityFourManaText);
+        abilityManaCostTextList.Add(abilityFiveManaText);
+        abilityManaCostTextList.Add(abilitySixManaText);
+
+        
         abilitySelecterImage = abilitySelecter.GetComponent<Image>();
         defaultAbilityMarkerImage = defaultAbilityMarker.GetComponent<Image>();
 
@@ -87,18 +105,29 @@ public class AbilityButtonManager : MonoBehaviour {
 
         defaultAbilityMarkerOffset = new Vector3(-0.4f, 0, -0.5f);
 
+        NoHeroSelected();
+        
     } //end Awake()
-
-
+    
 
     public void UpdateSelectedHeroButtons (Hero hero) {
 
+        selectedHeroNameText.text = hero.heroName;
+
+        SetAbilityButtonText(hero, hero.abilityOne, abilityOneNameText, abilityOneManaText);
+        SetAbilityButtonText(hero, hero.abilityTwo, abilityTwoNameText, abilityTwoManaText);
+        SetAbilityButtonText(hero, hero.abilityThree, abilityThreeNameText, abilityThreeManaText);
+        SetAbilityButtonText(hero, hero.abilityFour, abilityFourNameText, abilityFourManaText);
+        SetAbilityButtonText(hero, hero.abilityFive, abilityFiveNameText, abilityFiveManaText);
+        SetAbilityButtonText(hero, hero.abilitySix, abilitySixNameText, abilitySixManaText);
+        
         CheckCooldownMask(hero.abilityOne, cooldownMaskOne);
         CheckCooldownMask(hero.abilityTwo, cooldownMaskTwo);
         CheckCooldownMask(hero.abilityThree, cooldownMaskThree);
         CheckCooldownMask(hero.abilityFour, cooldownMaskFour);
         CheckCooldownMask(hero.abilityFive, cooldownMaskFive);
         CheckCooldownMask(hero.abilitySix, cooldownMaskSix);
+
 
         if (hero.currentAbility != null) {
             abilitySelecterImage.enabled = true;
@@ -115,8 +144,7 @@ public class AbilityButtonManager : MonoBehaviour {
         else {
             defaultAbilityMarkerImage.enabled = false;
         }
-
-
+        
 
         if (hero.currentBattleState == Hero.BattleState.Charge) {
             
@@ -175,8 +203,60 @@ public class AbilityButtonManager : MonoBehaviour {
             ClearInfBarrageMasks();
         }
         
-    } //end UpdateSelectedHeroButtons (Hero)
+    } // end UpdateSelectedHeroButtons (Hero)
 
+
+    public void SetAbilityButtonText(Hero hero, HeroAbility ability, Text nameText, Text manaCostText) {
+
+        if (ability.cooldownEndTimer > Time.time) {
+            nameText.text = (Mathf.CeilToInt(ability.cooldownEndTimer - Time.time)).ToString();
+        }
+        else if (ability.chargeEndTimer > Time.time) {
+            nameText.text = (Mathf.CeilToInt(ability.chargeEndTimer - Time.time)).ToString();
+        }
+        else if (ability.abilityEndTimer > Time.time) {
+            nameText.text = (Mathf.CeilToInt(ability.abilityEndTimer - Time.time)).ToString();
+        }
+        else if (ability.isInfCharging) {
+            nameText.text = (Mathf.FloorToInt(Time.time - ability.infChargeStartTimer)).ToString();
+        }
+        else {
+            nameText.text = ability.abilityName;
+        }
+
+
+        manaCostText.text = ability.manaCost.ToString();
+
+        if (ability.manaCost >= hero.currentMana) {
+            manaCostText.color = Color.red;
+        }
+        else {
+            manaCostText.color = Color.black;
+        }
+        
+    } // end SetAbilityButtonText(3)
+
+
+    public void NoHeroSelected() {
+
+        selectedHeroNameText.text = "Select hero.";
+
+        foreach (Text nameText in abilityNameTextList) {
+            nameText.text = "";
+        }
+
+        foreach (Text manaText in abilityManaCostTextList) {
+            manaText.text = "";
+        }
+
+        ClearCooldownMasks();
+        ClearChargingMasks();
+        ClearInfChargingMasks();
+        ClearDurationMasks();
+        ClearInfBarrageMasks();
+
+    } // end NoHeroSelected()
+    
 
     public void CheckCooldownMask(HeroAbility ability, Image cooldownMask) {
 
@@ -187,7 +267,7 @@ public class AbilityButtonManager : MonoBehaviour {
             cooldownMask.fillAmount = 0;
         }
 
-    } //end CheckCooldownMask (2)
+    } // end CheckCooldownMask (2)
 
 
     public void CheckChargingMask(HeroAbility ability, Image chargingMask) {
@@ -302,44 +382,43 @@ public class AbilityButtonManager : MonoBehaviour {
         
     } //end CheckDefaultAbilityMarkerPosition (Hero)
 
-
-
+    
     //Clearing functions
-
-
+    
 
     public void ClearCooldownMasks() {
         foreach (Image cooldownMask in cooldownMaskList) {
             cooldownMask.fillAmount = 0;
         }
-    }
+    } // end ClearCooldownMasks()
 
 
     public void ClearChargingMasks() {
         foreach (Image chargingMask in chargingMaskList) {
             chargingMask.fillAmount = 0;
         }
-    }
+    } // end ClearChargingMasks()
 
 
     public void ClearInfChargingMasks() {
         foreach (Image infChargingMask in infChargingMaskList) {
             infChargingMask.fillAmount = 0;
         }
-    }
-    
+    } // end ClearInfChargingMasks()
+
 
     public void ClearDurationMasks() {
         foreach (Image durationMask in durationMaskList) {
             durationMask.fillAmount = 0;
         }
-    }
+    } // end ClearDurationMasks()
 
 
     public void ClearInfBarrageMasks() {
         foreach (Image infBarrageMask in infBarrageMaskList) {
             infBarrageMask.fillAmount = 0;
         }
-    }
-    
+    } // end ClearInfBarrageMasks()
+
+
 } //end AbilityButtonManager class
