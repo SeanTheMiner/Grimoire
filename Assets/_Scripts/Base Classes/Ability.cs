@@ -184,7 +184,7 @@ namespace Abilities {
                 return;
             }
 
-        } //End DetermineHitOutComeSingle (3)
+        } // end DetermineHitOutComeSingle (3)
 
 
         public virtual void DetermineHitOutcomeMultiple(BattleObject attacker, List<BattleObject> targetList, DamageProc damageProc) {

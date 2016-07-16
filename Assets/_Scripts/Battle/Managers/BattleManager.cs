@@ -59,25 +59,15 @@ public class BattleManager : MonoBehaviour {
 
         InvokeRepeating("ApplyHealthAndManaRegen", 0, 0.2f);
 
-        //battleDisplayManager.UpdateHealthText();
-        //battleDisplayManager.NoHeroSelected();
-        //battleDisplayManager.InitNameText();
-
         //debugDisplayManager.InitDebugText();
         //debugDisplayManager.UpdateDebugText();
 
         //AOETargeter.SetActive(false);
 
-        
-
     } //end Start()
 
 
     void Update() {
-
-        if (selectedHero != null) {
-            Debug.Log(selectedHero.heroName);
-        }
 
         //Every-frame maintenance
 

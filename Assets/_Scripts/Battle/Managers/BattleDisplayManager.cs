@@ -31,7 +31,7 @@ public class BattleDisplayManager : MonoBehaviour {
         displaySpacing = 25;
         displayOrigin = new Vector3 (heroDisplayPanel.transform.position.x, heroDisplayPanel.transform.position.y + displaySpacing);
 
-        //note that the positioning should be figured to take count and i and figure out the spacing from the center based on both. I just suck at math.
+        //note that the positioning could/should be figured to take count and i and figure out the spacing from the center based on both. I just suck at math.
 
         for (int i = 0; i < battleManager.heroList.Count; i++) {
             Vector3 position = new Vector3(displayOrigin.x, displayOrigin.y - (i * battleManager.heroList.Count * displaySpacing));
@@ -52,7 +52,7 @@ public class BattleDisplayManager : MonoBehaviour {
     } // end Update()
 
 
-    public HeroDisplayController CreateHeroDisplayPackage(Hero hero, Vector3 position) {
+    private HeroDisplayController CreateHeroDisplayPackage(Hero hero, Vector3 position) {
 
         GameObject heroDisplay = (GameObject)MonoBehaviour.Instantiate(Resources.Load("HeroDisplay"),
             position,
@@ -84,13 +84,11 @@ public class BattleDisplayManager : MonoBehaviour {
 
 
     private void InitHeroDisplayController(HeroDisplayController controller) {
-
-        Debug.Log(controller.healthSlider.maxValue);
+        
         controller.nameText.text = controller.hero.heroName;
         controller.healthSlider.maxValue = controller.hero.maxHealth;
         controller.manaSlider.maxValue = controller.hero.maxMana;
-        Debug.Log(controller.healthSlider.maxValue);
-
+        
     } // end InitHeroDisplay(1)
     
 
@@ -105,7 +103,7 @@ public class BattleDisplayManager : MonoBehaviour {
     } // end UpdateHeroDisplayController(1)
 
 
-    public void SetRelativeSliderLengths() {
+    private void SetRelativeSliderLengths() {
         
         List<float> valueList = new List<float>();
 

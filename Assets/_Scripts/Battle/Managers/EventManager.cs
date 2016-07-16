@@ -21,9 +21,9 @@ public class EventManager : MonoBehaviour {
                     && (trigger.approvedDamageTypeList.Contains(damageType))
                     ) {
                     SortActivationType(actor, receiver, trigger);
-                } //end if(3) for actor
-            } //end actor foreach
-        } //end actor list count check
+                } // end if(3) for actor
+            } // end actor foreach
+        } // end actor list count check
 
         if (receiver.procTriggerList.Count > 0) {
             foreach (ProcTrigger trigger in receiver.procTriggerList) {
@@ -32,11 +32,11 @@ public class EventManager : MonoBehaviour {
                     && (trigger.approvedDamageTypeList.Contains(damageType))
                     ) {
                     SortActivationType(receiver, actor, trigger);
-                } //end if(3) for receiver
-            } //end receiver foreach
-        } //end receiver list count check
+                } // end if(3) for receiver
+            } // end receiver foreach
+        } // end receiver list count check
 
-    } //end CheckActorForTriggers(4)
+    } // end CheckActorForTriggers(4)
 
     
     public void SortActivationType (BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
@@ -51,7 +51,7 @@ public class EventManager : MonoBehaviour {
             ActivateEffectTrigger(host, otherParty, trigger);
         }
 
-    } //end SortActivationType(3)
+    } // end SortActivationType(3)
     
 
     public void ActivateDamageTrigger(BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
@@ -68,7 +68,7 @@ public class EventManager : MonoBehaviour {
         //Other procScopes can go here, but these are the two that make the most sense, 
         //and other ones would probably need more information on the trigger itself (like a linked battleobject to proc toward)
 
-    } //end ActivateDamageTrigger(3)
+    } // end ActivateDamageTrigger(3)
 
 
     public void ActivateHealTrigger (BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
@@ -82,7 +82,7 @@ public class EventManager : MonoBehaviour {
             return;
         }
 
-    } //end ActivateHealTrigger(3)
+    } // end ActivateHealTrigger(3)
 
    
     public void ActivateEffectTrigger(BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
@@ -103,7 +103,7 @@ public class EventManager : MonoBehaviour {
             (trigger.procTriggered as EffectProc).ApplyEffectMultiple((trigger.procTriggered as EffectProc).effectApplied, targetingManager.TargetAllHeroes());
         }
 
-    } //end ActivateEffectTrigger(3)
+    } // end ActivateEffectTrigger(3)
     
 
 } //end EventManager class
