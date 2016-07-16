@@ -38,7 +38,7 @@ public class BattleDisplayManager : MonoBehaviour {
             heroDisplayControllerList.Add(CreateHeroDisplayPackage(battleManager.heroList[i], position));
         }
 
-        //SetRelativeSliderLengths();
+        SetRelativeSliderLengths();
 
     } // end Start()
 
@@ -74,8 +74,10 @@ public class BattleDisplayManager : MonoBehaviour {
         heroDisplayController.healthSlider = sliderComponents[0];
         heroDisplayController.manaSlider = sliderComponents[1];
 
-        heroDisplayControllerList.Add(heroDisplayController);
+        InitHeroDisplayController(heroDisplayController);
 
+        heroDisplayControllerList.Add(heroDisplayController);
+        
         return heroDisplayController;
 
     } // end CreateHeroDisplayPackage(1)
@@ -83,10 +85,12 @@ public class BattleDisplayManager : MonoBehaviour {
 
     private void InitHeroDisplayController(HeroDisplayController controller) {
 
+        Debug.Log(controller.healthSlider.maxValue);
         controller.nameText.text = controller.hero.heroName;
         controller.healthSlider.maxValue = controller.hero.maxHealth;
         controller.manaSlider.maxValue = controller.hero.maxMana;
-        
+        Debug.Log(controller.healthSlider.maxValue);
+
     } // end InitHeroDisplay(1)
     
 
@@ -97,69 +101,34 @@ public class BattleDisplayManager : MonoBehaviour {
 
         controller.healthSlider.value = (Mathf.Round(controller.hero.currentHealth));
         controller.manaSlider.value = (Mathf.Round(controller.hero.currentMana));
-
+        
     } // end UpdateHeroDisplayController(1)
 
-    
-
-    /*
 
     public void SetRelativeSliderLengths() {
-
-        //really this needs to check for if a mana bar is the highest bar. I don't really expect that to happen, but yeah.
-        //Otherwise, frankly, the League system of having ticks every 100 could work...
-        //Or vertical health bars?
-
-        float highestMaxValue = heroOneHealthSlider.maxValue;
-        int highestHeroPosition = 1;
-
-        if (heroTwoHealthSlider.maxValue > highestMaxValue) {
-            highestMaxValue = heroTwoHealthSlider.maxValue;
-            highestHeroPosition = 2;
-        }
-        if (heroThreeHealthSlider.maxValue > highestMaxValue) {
-            highestMaxValue = heroThreeHealthSlider.maxValue;
-            highestHeroPosition = 3;
-        }
-        if (heroFourHealthSlider.maxValue > highestMaxValue) {
-            highestMaxValue = heroFourHealthSlider.maxValue;
-            highestHeroPosition = 4;
-        }
-
-        if (highestHeroPosition == 1) {
-            SetBarLength(heroTwoHealthSlider, highestMaxValue);
-            SetBarLength(heroThreeHealthSlider, highestMaxValue);
-            SetBarLength(heroFourHealthSlider, highestMaxValue);
-        }
-        else if (highestHeroPosition == 2) {
-            SetBarLength(heroOneHealthSlider, highestMaxValue);
-            SetBarLength(heroThreeHealthSlider, highestMaxValue);
-            SetBarLength(heroFourHealthSlider, highestMaxValue);
-        }
-        else if (highestHeroPosition == 3) {
-            SetBarLength(heroOneHealthSlider, highestMaxValue);
-            SetBarLength(heroTwoHealthSlider, highestMaxValue);
-            SetBarLength(heroFourHealthSlider, highestMaxValue);
-        }
-        else if (highestHeroPosition == 4) {
-            SetBarLength(heroOneHealthSlider, highestMaxValue);
-            SetBarLength(heroTwoHealthSlider, highestMaxValue);
-            SetBarLength(heroThreeHealthSlider, highestMaxValue);
-        }
-
-        SetBarLength(heroOneManaSlider, highestMaxValue);
-        SetBarLength(heroTwoManaSlider, highestMaxValue);
-        SetBarLength(heroThreeManaSlider, highestMaxValue);
-        SetBarLength(heroFourManaSlider, highestMaxValue);
         
-    } //end SetRelativeSliderLengths()
+        List<float> valueList = new List<float>();
 
-    
-    public void SetBarLength(Slider slider, float highestValue) {
-        slider.transform.localScale = new Vector3((slider.maxValue / highestValue), 1, 1);
-    } //end SetBarLength(2)
+        foreach (HeroDisplayController controller in heroDisplayControllerList) {
+            valueList.Add(controller.healthSlider.maxValue);
+            valueList.Add(controller.manaSlider.maxValue);
+        }
 
+        float highestValue = Mathf.Max(valueList.ToArray());
 
-    */
+        foreach (HeroDisplayController controller in heroDisplayControllerList) {
+            SetControllerSliderScales(controller, highestValue);
+        }
+        
+    } // end SetRelativeSliderLenghts
+   
+
+    private void SetControllerSliderScales(HeroDisplayController controller, float highestValue) {
+
+        controller.healthSlider.transform.localScale = new Vector3((controller.healthSlider.maxValue / highestValue), 1, 1);
+        controller.manaSlider.transform.localScale = new Vector3((controller.manaSlider.maxValue / highestValue), 1, 1);
+
+    } // end SetControllerSliderScales()
+
 
 } //end BattleDisplayManager()
