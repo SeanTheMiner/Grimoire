@@ -195,10 +195,20 @@ namespace Abilities {
             } //end foreach
 
         } //end DamageProcMultiple()
-        
 
-        public virtual void CreateAuxiliaryObject() {
 
+        public GameObject FindAuxiliaryObjectManager() {
+
+            return GameObject.Find("AuxiliaryObjectManager");
+
+        } // end FindAuxiliaryObjectManager()
+
+
+        public virtual void CreateAuxiliaryObject(AuxiliaryObject objectToCreate) {
+
+            AuxiliaryObject auxiliaryObject = MonoBehaviour.Instantiate(objectToCreate);
+
+            /*
             GameObject auxiliaryObject = new GameObject();
 
             AuxiliaryObject controllerToAdd = new AuxiliaryObject();
@@ -210,6 +220,8 @@ namespace Abilities {
             objectController = (objectCreated)auxiliaryObject.AddComponent<this.objectCreated>();
             objectController = objectCreated;
             
+            */
+
             //Needs to set destroy, could addcomponent<destroybytime>
 
 

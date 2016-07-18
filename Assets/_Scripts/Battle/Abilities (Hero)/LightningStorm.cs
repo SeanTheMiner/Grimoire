@@ -12,7 +12,9 @@ public class LightningStorm : HeroAbility {
 
         public DamageProc damageProc = new DamageProc();
 
-        LightningStormAO () {
+        public LightningStormAO () {
+
+            sourceAbility = new LightningStorm();
 
             objectDuration = 8;
 
@@ -62,8 +64,10 @@ public class LightningStorm : HeroAbility {
 
 
     public override void AbilityMap() {
-        CreateAuxiliaryObject();
+
+        FindAuxiliaryObjectManager().AddComponent<LightningStormAO>();
         ExitAbility();
+
     }
 
 
