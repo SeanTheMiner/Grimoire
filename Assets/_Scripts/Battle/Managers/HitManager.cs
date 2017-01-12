@@ -140,14 +140,7 @@ public class HitManager : MonoBehaviour {
 
     public static HitOutcome DetermineCritAuxiliary(AuxiliaryObject auxiliaryObject, BattleObject defender, DamageProc damageProc) {
 
-        float critChance = 0;
-
-        if (damageProc.damageType == DamageProc.DamageType.Physical) {
-            critChance = auxiliaryObject.physicalCritChance;
-        }
-        else if (damageProc.damageType == DamageProc.DamageType.Magical) {
-            critChance = auxiliaryObject.magicalCritChance;
-        }
+        float critChance = damageProc.critChance;
 
         int critCheck = Random.Range(1, 100);
         if (critCheck <= critChance) {
@@ -156,7 +149,7 @@ public class HitManager : MonoBehaviour {
         else {
             return HitOutcome.Hit;
         }
-
+        
     } //end DetermineCrit(3)
     
 

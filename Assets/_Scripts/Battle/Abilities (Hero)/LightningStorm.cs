@@ -16,30 +16,33 @@ public class LightningStorm : HeroAbility {
 
             sourceAbility = new LightningStorm();
 
-            objectDuration = 8;
+            objectDuration = 10;
 
-            damageProc.procDamage = 50;
+            damageProc.procDamage = 120;
             damageProc.damageType = DamageProc.DamageType.Magical;
-            damageProc.procSpacing = 0.8f;
-            damageProc.magicalPenetration = 50;
+            damageProc.procSpacing = 1;
 
-        } // end constructor()
+            damageProc.magicalPenetration = 50;
+            damageProc.magicalAccuracy = 50;
+            damageProc.magicalFinesse = 50;
+            damageProc.critChance = 30;
+            damageProc.critMultiplier = 1.5f;
+
+        } // End constructor()
 
         void Update() {
-
-            Debug.Log("updated");
-
-
+         
             if (damageProc.nextProcTimer <= Time.time) {
 
                 DetermineHitOutcomeSingleAuxiliary((targetingManager.TargetRandomEnemy()), damageProc);
                 damageProc.nextProcTimer = Time.time + damageProc.procSpacing;
 
-            } // end if
+            } // End if
 
-        } // end Update()
+        } // End Update()
         
-    } // end LightningStormAO class
+    } // End LightningStormAO class
+
 
     public LightningStormAO lightningStormAO;
 
@@ -55,20 +58,20 @@ public class LightningStorm : HeroAbility {
 
         requiresTargeting = false;
 
-        chargeDuration = 1;
-        cooldownDuration = 2;
-
-        
+        chargeDuration = 4;
+        cooldownDuration = 12;
+       
         
     } //End Constructor()
 
 
     public override void AbilityMap() {
 
-        FindAuxiliaryObjectManager().AddComponent<LightningStormAO>();
+        AuxiliaryObject aO = FindAuxiliaryObjectManager().AddComponent<LightningStormAO>();
+        aO.InitAuxiliaryObject();
         ExitAbility();
 
-    }
+    } // End AbilityMap()
 
 
 } //End LightningStorm class

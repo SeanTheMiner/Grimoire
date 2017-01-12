@@ -228,6 +228,16 @@ namespace Procs {
         } //end ApplyCritDamageProc(2)
 
 
+        public virtual void ApplyCritDamageProcActorless(BattleObject defender) {
+
+           int damageToApply = Mathf.RoundToInt(HitManager.ApplyResistActorless(defender, this, critMultiplier));
+            defender.currentHealth -= damageToApply;
+            defender.SpawnDamageText(damageToApply, damageType);
+            //could call SpawnCritText, or not
+
+        } // End ApplyCritDamageProcActorless(1)
+
+
         public virtual void ApplyBlockDamageProc(BattleObject attacker, BattleObject defender) {
 
             float blockModifier = 0;
@@ -245,6 +255,24 @@ namespace Procs {
 
             ApplyLifeSteal(attacker, damageToApply);
 
+        } //end ApplyBlockDamageProc(2)
+
+
+        public virtual void ApplyBlockDamageProcActorless(BattleObject defender) {
+
+            float blockModifier = 0;
+
+            if (damageType == DamageType.Physical) {
+                blockModifier = defender.physicalBlockModifier;
+            }
+            else if (damageType == DamageType.Magical) {
+                blockModifier = defender.magicalBlockModifier;
+            }
+
+            int damageToApply = Mathf.RoundToInt(HitManager.ApplyResistActorless(defender, this, 1));
+            defender.currentHealth -= damageToApply;
+            defender.SpawnBlockText(damageToApply, damageType);
+            
         } //end ApplyBlockDamageProc(2)
 
 

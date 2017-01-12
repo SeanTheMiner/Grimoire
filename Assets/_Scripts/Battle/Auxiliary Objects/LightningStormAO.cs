@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
 
 using UnityEngine;
 using System.Collections;
@@ -18,6 +19,8 @@ public class LightningStormAO : AuxiliaryObject {
         damageProc.damageType = DamageProc.DamageType.Magical;
         damageProc.procSpacing = 0.8f;
         damageProc.magicalPenetration = 50;
+        damageProc.critChance = 30;
+        damageProc.critMultiplier = 2;
         
     } // end Constructor()
 

@@ -54,7 +54,6 @@ namespace AuxiliaryObjects {
             hasDuration = true;
             canMultiply = false;
             needsController = false;
-
             
         } //End Constructor()
 
@@ -62,7 +61,7 @@ namespace AuxiliaryObjects {
         public virtual void InitAuxiliaryObject() {
 
             if (hasDuration) {
-                Destroy(gameObject, objectDuration);
+                Destroy(this, objectDuration);
             }
             
         } //End InitAuxiliaryObject()
@@ -77,34 +76,35 @@ namespace AuxiliaryObjects {
             if (hitOutcome == HitManager.HitOutcome.Evade) {
                 defender.SpawnMissText(damageProc.damageType);
                 GameObject.Find("EventManager").GetComponent<EventManager>().
-                    CheckForTriggers(null, defender, ProcTriggers.ProcTrigger.TriggerType.Evasion, damageProc.damageType);
+                    CheckForTriggersActorless(defender, ProcTriggers.ProcTrigger.TriggerType.Evasion, damageProc.damageType);
                 return;
             }
             if (hitOutcome == HitManager.HitOutcome.Block) {
-                damageProc.ApplyBlockDamageProc(null, defender);
+                damageProc.ApplyBlockDamageProcActorless(defender);
                 GameObject.Find("EventManager").GetComponent<EventManager>().
-                    CheckForTriggers(null, defender, ProcTriggers.ProcTrigger.TriggerType.Block, damageProc.damageType);
+                    CheckForTriggersActorless(defender, ProcTriggers.ProcTrigger.TriggerType.Block, damageProc.damageType);
                 return;
             }
 
             hitOutcome = HitManager.DetermineCritAuxiliary(this, defender, damageProc);
 
             if (hitOutcome == HitManager.HitOutcome.Crit) {
-                damageProc.ApplyCritDamageProc(null, defender);
+                damageProc.ApplyCritDamageProcActorless(defender);
                 GameObject.Find("EventManager").GetComponent<EventManager>().
-                    CheckForTriggers(null, defender, ProcTriggers.ProcTrigger.TriggerType.Crit, damageProc.damageType);
+                    CheckForTriggersActorless(defender, ProcTriggers.ProcTrigger.TriggerType.Crit, damageProc.damageType);
                 return;
             }
             else {
-                damageProc.ApplyDamageProc(null, defender);
+
+                damageProc.ApplyActorlessDamageProc(defender);
                 GameObject.Find("EventManager").GetComponent<EventManager>().
-                    CheckForTriggers(null, defender, ProcTriggers.ProcTrigger.TriggerType.Damage, damageProc.damageType);
+                    CheckForTriggersActorless(defender, ProcTriggers.ProcTrigger.TriggerType.Damage, damageProc.damageType);
                 return;
             }
 
-        }
+        } // End DetermineHitOutcomeSingleAuxiliary (2)
 
 
-    } //End AuxiliaryObject class
+    } // End AuxiliaryObject class
     
-} //End AuxiliaryObjects namespace
+} // End AuxiliaryObjects namespace

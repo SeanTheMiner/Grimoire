@@ -36,7 +36,23 @@ public class EventManager : MonoBehaviour {
             } // end receiver foreach
         } // end receiver list count check
 
-    } // end CheckActorForTriggers(4)
+    } // End CheckForTriggers(4)
+
+
+    public void CheckForTriggersActorless (BattleObject receiver, ProcTrigger.TriggerType triggerType, DamageProc.DamageType damageType) {
+
+         if (receiver.procTriggerList.Count > 0) {
+            foreach (ProcTrigger trigger in receiver.procTriggerList) {
+                if ((trigger.triggerType == triggerType)
+                    && (trigger.objectRole == ProcTrigger.ObjectRole.Receiver)
+                    && (trigger.approvedDamageTypeList.Contains(damageType))
+                    ) {
+                    SortActivationTypeActorless(receiver, trigger);
+                } // end if(3) for receiver
+            } // end receiver foreach
+        } // end receiver list count check
+
+    } // End CheckForTriggersActorless(3)
 
     
     public void SortActivationType (BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
@@ -45,7 +61,7 @@ public class EventManager : MonoBehaviour {
             ActivateDamageTrigger(host, otherParty, trigger);
         }
         else if (trigger.procTriggered is HealProc) {
-            ActivateHealTrigger(host, otherParty, trigger);
+            ActivateHealTrigger(host, trigger);
         }
         else if (trigger.procTriggered is EffectProc) {
             ActivateEffectTrigger(host, otherParty, trigger);
@@ -54,6 +70,21 @@ public class EventManager : MonoBehaviour {
     } // end SortActivationType(3)
     
 
+    public void SortActivationTypeActorless (BattleObject battleObject, ProcTrigger trigger) {
+
+        if (trigger.procTriggered is DamageProc) {
+            return;
+        }
+        else if (trigger.procTriggered is HealProc) {
+            ActivateHealTrigger(battleObject, trigger);
+        }
+        else if (trigger.procTriggered is EffectProc) {
+            ActivateEffectTriggerActorless(battleObject, trigger);
+        }
+
+    } // End SortActivationTypeActorless(2)
+
+    
     public void ActivateDamageTrigger(BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
 
         if (trigger.procScope == ProcTrigger.ProcScope.OtherParty) {
@@ -71,14 +102,14 @@ public class EventManager : MonoBehaviour {
     } // end ActivateDamageTrigger(3)
 
 
-    public void ActivateHealTrigger (BattleObject host, BattleObject otherParty, ProcTrigger trigger) {
+    public void ActivateHealTrigger (BattleObject battleObject, ProcTrigger trigger) {
 
         if (trigger.procScope == ProcTrigger.ProcScope.Self) {
-            (trigger.procTriggered as HealProc).HealProcSingle(host, host);
+            (trigger.procTriggered as HealProc).HealProcSingle(battleObject, battleObject);
             return;
         }
         else if (trigger.procScope == ProcTrigger.ProcScope.AllHeroes) {
-            (trigger.procTriggered as HealProc).HealProcMultiple(host, targetingManager.TargetAllHeroes());
+            (trigger.procTriggered as HealProc).HealProcMultiple(battleObject, targetingManager.TargetAllHeroes());
             return;
         }
 
@@ -105,6 +136,26 @@ public class EventManager : MonoBehaviour {
 
     } // end ActivateEffectTrigger(3)
     
+
+    public void ActivateEffectTriggerActorless(BattleObject battleObject, ProcTrigger trigger) {
+
+        if (trigger.procScope == ProcTrigger.ProcScope.Self) {
+            (trigger.procTriggered as EffectProc).ApplyEffectSingle((trigger.procTriggered as EffectProc).effectApplied, battleObject);
+            return;
+        }
+        else if (trigger.procScope == ProcTrigger.ProcScope.OtherParty) {
+            return;
+        }
+        else if (trigger.procScope == ProcTrigger.ProcScope.AllEnemies) {
+            (trigger.procTriggered as EffectProc).ApplyEffectMultiple((trigger.procTriggered as EffectProc).effectApplied, targetingManager.TargetAllEnemies());
+            return;
+        }
+        else if (trigger.procScope == ProcTrigger.ProcScope.AllHeroes) {
+            (trigger.procTriggered as EffectProc).ApplyEffectMultiple((trigger.procTriggered as EffectProc).effectApplied, targetingManager.TargetAllHeroes());
+        }
+
+    } // end ActivateEffectTrigger(3)
+
 
 } //end EventManager class
 
